@@ -1,12 +1,14 @@
 package com._2491nomythic.helios.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Drivetrain extends Subsystem {
-	Motor frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
+	TalonSRX frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
 	Encoder encoderLeft, encoderCenter, encoderRight;
 	
 	Drivetrain() {
