@@ -1,7 +1,6 @@
 package com._2491nomythic.helios;
 
 import edu.wpi.first.wpilibj.buttons.Button;
-import com._2491nomythic.helios.commands.ExampleCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
