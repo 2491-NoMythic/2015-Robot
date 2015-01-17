@@ -1,9 +1,9 @@
 
-package com._2491nomythic.commands;
+package com._2491nomythic.helios.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import com._2491nomythic.Robot;
+import com._2491nomythic.helios.Robot;
 
 /**
  *

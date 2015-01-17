@@ -1,12 +1,12 @@
 
-package com._2491nomythic;
+package com._2491nomythic.helios;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import com._2491nomythic.commands.ExampleCommand;
-import com._2491nomythic.subsystems.ExampleSubsystem;
+import com._2491nomythic.helios.commands.ExampleCommand;
+import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
