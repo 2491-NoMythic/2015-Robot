@@ -19,4 +19,11 @@ public class Constants {
 	public static final boolean driveEncoderCenterReversed = false;
 	public static final boolean driveEncoderRightReversed = false;
 	public static final double driveEncoderToFeet = 0;
+	
+	//Arm
+	public static final int armTalonArmMotorLeftChannel = 0;
+	public static final int armTalonArmMotorRightChannel = 0;
+	public static final int armEncoderAChannel = 0;
+	public static final int armEncoderBChannel = 0;
+	public static final boolean armEncoderReversed = false;
 }
