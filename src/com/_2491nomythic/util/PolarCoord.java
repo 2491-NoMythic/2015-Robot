@@ -57,5 +57,4 @@ public class PolarCoord {
 		double y = Math.sin(theta)*r;
 		return new CartesianCoord(x, y);
 	}
-	
 }
