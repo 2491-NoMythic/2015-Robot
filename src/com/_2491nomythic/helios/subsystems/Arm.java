@@ -12,11 +12,19 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  *
  */
 public class Arm extends PIDSubsystem {
-	CANTalon armMotorLeft, armMotorRight;
-	Encoder armEncoder;
+	private CANTalon armMotorLeft, armMotorRight;
+	private Encoder armEncoder;
+	private Arm instance;
     // Initialize your subsystem here
 	
-    public Arm() {
+	public Arm getInstance() {
+		if (instance == null) {
+			instance = new Arm();
+		}
+		return instance;
+	}
+	
+    private Arm() {
     	super(Variables.armPID_P, Variables.armPID_I, Variables.armPID_D);
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
@@ -42,7 +50,8 @@ public class Arm extends PIDSubsystem {
     }
     
     protected void usePIDOutput(double output) {
-    	
+    	armMotorLeft.set(output);
+    	armMotorRight.set(-1.0 * output);
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
     }
