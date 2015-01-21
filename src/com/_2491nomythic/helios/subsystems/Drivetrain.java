@@ -1,6 +1,8 @@
 package com._2491nomythic.helios.subsystems;
 
 import com._2491nomythic.helios.settings.Constants;
+import com._2491nomythic.util.CartesianCoord;
+import com._2491nomythic.util.PolarCoord;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
@@ -50,6 +52,52 @@ public class Drivetrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
+	
+	public void drive(double leftSpeed, double rightSpeed, double frontSpeed, double backSpeed){
+		frontLeft.set(leftSpeed);
+		frontCenter.set(frontSpeed);
+		frontRight.set(-1.0 * rightSpeed);
+		backLeft.set(leftSpeed);
+		backCenter.set(-1.0 * backSpeed);
+		backRight.set(-1.0 * rightSpeed);
+	}
+	
+	public void driveCartesian(double x, double y, double rotation) {
+		double left = y + rotation;
+		double right = y - rotation;
+		
+		if(left > 1){left = 1;}
+		if(left < -1){left = -1;}
+		if(right > 1){right = 1;}
+		if(right < -1){right = -1;}
+		
+		drive(left, right, x, x);
+	}
+	
+	public void driveCartesian(CartesianCoord coords, double rotation) {
+		driveCartesian(coords.getX(), coords.getY(), rotation);
+	}
+	
+	public void drivePolar(PolarCoord coords, double rotation) {
+		driveCartesian(coords.getCartesian(), rotation);
+	}
+	
+	public void drivePolar(double r, double theta, double rotation) {
+		PolarCoord polarCoords = new PolarCoord(r, theta);
+		drivePolar(polarCoords, rotation);
+	}
+	
+	public Encoder getLeftEncoder() {
+		return encoderLeft;
+	}
+	
+	public Encoder getCenterEncoder() {
+		return encoderCenter;
+	}
+	
+	public Encoder getRightEncoder() {
+		return encoderRight;
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
