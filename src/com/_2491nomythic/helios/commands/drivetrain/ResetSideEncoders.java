@@ -1,10 +1,10 @@
 package com._2491nomythic.helios.commands.drivetrain;
 
-import edu.wpi.first.wpilibj.command.Command;
+import com._2491nomythic.helios.commands.CommandBase;
 /**
  *
  */
-public class ResetSideEncoders extends Command {
+public class ResetSideEncoders extends CommandBase {
 	
 
     public ResetSideEncoders() {
