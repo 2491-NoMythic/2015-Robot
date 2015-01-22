@@ -22,7 +22,7 @@ public class OI {
 	private final Joystick[] controllers = new Joystick[2];
 	
 	public void init() {
-		controllers[0] = new  Joystick(Constants.ControllerOnePort);
+		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);
 	
 	}
