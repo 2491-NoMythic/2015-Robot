@@ -18,7 +18,7 @@ public class Constants {
 	public static final boolean driveEncoderLeftReversed = false;
 	public static final boolean driveEncoderCenterReversed = false;
 	public static final boolean driveEncoderRightReversed = false;
-	public static final double driveEncoderToFeet = 0;
+	public static final double driveEncoderToFeet = 1.0;
 	
 	//Arm
 	public static final int armTalonArmMotorLeftChannel = 0;
@@ -26,4 +26,7 @@ public class Constants {
 	public static final int armEncoderAChannel = 0;
 	public static final int armEncoderBChannel = 0;
 	public static final boolean armEncoderReversed = false;
+	public static final double armEncoderToDegrees = 1.0;
+	public static final double armMinPosition = 0.0;
+	public static final double armMaxPosition = 180.0;
 }

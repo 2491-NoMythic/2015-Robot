@@ -14,10 +14,12 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class Arm extends PIDSubsystem {
 	private CANTalon armMotorLeft, armMotorRight;
 	private Encoder armEncoder;
-	private Arm instance;
+	private static Arm instance;
+	private boolean usingPID = false;
+	private double currentSpeed = 0.0;
     // Initialize your subsystem here
 	
-	public Arm getInstance() {
+	public static Arm getInstance() {
 		if (instance == null) {
 			instance = new Arm();
 		}
@@ -34,6 +36,8 @@ public class Arm extends PIDSubsystem {
     	armMotorRight = new CANTalon(Constants.armTalonArmMotorRightChannel);
     	
     	armEncoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k1X);
+    	armEncoder.setDistancePerPulse(Constants.armEncoderToDegrees);
+    	this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
     }
     
     public void initDefaultCommand() {
@@ -52,7 +56,29 @@ public class Arm extends PIDSubsystem {
     protected void usePIDOutput(double output) {
     	armMotorLeft.set(output);
     	armMotorRight.set(-1.0 * output);
+    	currentSpeed = output;
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
+    }
+    
+    public void set(double speed) {
+    	if (usingPID) {
+    		this.disable();
+    		usingPID = false;
+    	}
+    	armMotorLeft.set(speed);
+    	armMotorRight.set(-1.0 * speed);
+    }
+    
+    public void setPID(double position) {
+    	if (!usingPID) {
+    		this.enable();
+    		usingPID = true;
+    	}
+    	this.setSetpoint(position);
+    }
+    
+    public double get() {
+    	return currentSpeed;
     }
 }

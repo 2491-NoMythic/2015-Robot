@@ -17,9 +17,9 @@ public class Drivetrain extends Subsystem {
 	CANTalon frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
 	Encoder encoderLeft, encoderCenter, encoderRight;
 	Gyro gyro;
-	Drivetrain instance;
+	private static Drivetrain instance;
 	
-	public Drivetrain getInstance() {
+	public static Drivetrain getInstance() {
 		if (instance == null) {
 			instance = new Drivetrain();
 		}
