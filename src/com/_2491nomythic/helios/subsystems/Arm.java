@@ -17,6 +17,7 @@ public class Arm extends PIDSubsystem {
 	private static Arm instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
+	private double currentTarget = 0.0;
     // Initialize your subsystem here
 	
 	public static Arm getInstance() {
@@ -75,10 +76,19 @@ public class Arm extends PIDSubsystem {
     		this.enable();
     		usingPID = true;
     	}
+    	currentTarget = position;
     	this.setSetpoint(position);
     }
     
     public double get() {
     	return currentSpeed;
+    }
+    
+    public double getPID() {
+    	return currentTarget;
+    }
+    
+    public boolean isUsingPID() {
+    	return usingPID;
     }
 }
