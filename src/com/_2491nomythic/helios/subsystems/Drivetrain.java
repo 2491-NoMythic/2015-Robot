@@ -98,6 +98,12 @@ public class Drivetrain extends Subsystem {
 	public Encoder getRightEncoder() {
 		return encoderRight;
 	}
+	
+	public void stop() {
+		
+		drive(0.0,0.0,0.0,0.0);
+			
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
