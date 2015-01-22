@@ -3,12 +3,12 @@ package com._2491nomythic.helios.commands;
 import edu.wpi.first.wpilibj.command.Command; 
 
 import com._2491nomythic.helios.Robot;
-import com._2491nomythic.helios.settings.HandheldControllerMap;
+import com._2491nomythic.helios.settings.ControllerMap;
 
 /**
  *
  */
-public class Drive extends Command {
+public class Drive extends CommandBase {
 
     public Drive() {
         // Use requires() here to declare subsystem dependencies
@@ -21,7 +21,7 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.driveCartesian(oi.getAxis(HandheldControllerMap.DriveController, HandheldControllerMap.DriveAxisX), oi.getAxis(HandheldControllerMap.DriveController, HandheldControllerMap.DriveAxisY), );
+    	drivetrain.driveCartesian(oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisY), oi.getAxis(ControllerMap.TurnController, ControllerMap.TurnAxis));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,10 +31,12 @@ public class Drive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

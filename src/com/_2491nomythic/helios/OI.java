@@ -31,7 +31,7 @@ public class OI {
 		return controllers[0];
 	}
 	
-	double getAxis(int joystickID, int axisID) {
+	public double getAxis(int joystickID, int axisID) {
 		return controllers[joystickID].getRawAxis(axisID);
 	}
 	
