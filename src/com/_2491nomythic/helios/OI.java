@@ -4,7 +4,7 @@ package com._2491nomythic.helios;
 import edu.wpi.first.wpilibj.Joystick; 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import com._2491nomythic.helios.settings.*;
+import com._2491nomythic.helios.settings.Constants;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,8 +22,8 @@ public class OI {
 	private final Joystick[] controllers = new Joystick[2];
 	
 	public void init() {
-		controllers[0] = new  Joystick(ControllerMap.ControllerOnePort);
-		controllers[1] = new Joystick(ControllerMap.ControllerTwoPort);
+		controllers[0] = new  Joystick(Constants.ControllerOnePort);
+		controllers[1] = new Joystick(Constants.ControllerTwoPort);
 	
 	}
 	

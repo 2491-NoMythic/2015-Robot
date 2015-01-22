@@ -1,6 +1,9 @@
 package com._2491nomythic.helios.settings;
 
 public class Constants {
+	//Joysticks
+	public static final int ControllerOnePort = 1;
+	public static final int ControllerTwoPort = 2;
 	
 	//Drive
 	public static final int driveTalonFrontLeftChannel = 0;
