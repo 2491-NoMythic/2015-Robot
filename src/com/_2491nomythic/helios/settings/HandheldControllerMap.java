@@ -3,7 +3,10 @@ package com._2491nomythic.helios.settings;
 public class HandheldControllerMap {
 
 	public static final String controllerType = "HandheldController";
-
+	//Controller ports
+	public static final int ControllerOnePort = 1;
+	public static final int ControllerTwoPort = 2;
+	
 	//Axes
 	//Left Joystick on Controller 0: Drive
 	public static final int DriveController = 0;
