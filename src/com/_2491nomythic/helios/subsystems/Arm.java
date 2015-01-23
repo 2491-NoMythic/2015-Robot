@@ -60,6 +60,8 @@ public class Arm extends PIDSubsystem {
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
 	}
 	
+
+	
 	protected void usePIDOutput(double output) {
 		motorLeft.set(output);
 		motorRight.set(-1.0 * output);
@@ -117,5 +119,10 @@ public class Arm extends PIDSubsystem {
 	
 	public boolean isUsingPID() {
 		return usingPID;
+	}
+	
+	public double getERate() {
+		return armEncoder.getRate();
+	}
 	}
 }

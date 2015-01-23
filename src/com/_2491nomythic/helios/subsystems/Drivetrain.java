@@ -102,7 +102,7 @@ public class Drivetrain extends Subsystem {
 	
 	public void stop() {
 		
-		drive(0.0,0.0,0.0,0.0);
+		drive(0.0, 0.0, 0.0, 0.0);
 			
 	}
 
