@@ -16,11 +16,11 @@ public class HandheldControllerMap {
 	public static final int ElevatorController = 1;
 	public static final int ElevatorAxis = 4;
 	//Left Y Axis on Controller 1: DreamBelt Manual
-	public static final int DreamBeltController = 1;
-	public static final int DreamBeltAxis = 2;
+	public static final int ArmController = 1;
+	public static final int ArmAxis = 2;
 	//Up-Down Dpad on Controller 1: DreamBelt Turn
-	public static final int DreamBeltTurnController = 1;
-	public static final int DreamBeltTurnAxis = 6;
+	public static final int ArmTurnController = 1;
+	public static final int ArmTurnAxis = 6;
 	
 
 	//Buttons
