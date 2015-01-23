@@ -27,6 +27,8 @@ public class Constants {
 	//Arm
 	public static final int armTalonArmMotorLeftChannel = 0;
 	public static final int armTalonArmMotorRightChannel = 0;
+	public static final int ArmBrakeOnChannel = 0;
+	public static final int ArmBrakeOffChannel = 0;
 	public static final int armEncoderAChannel = 0;
 	public static final int armEncoderBChannel = 0;
 	public static final boolean armEncoderReversed = false;
