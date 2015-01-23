@@ -7,14 +7,15 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  *
  */
 public class Arm extends PIDSubsystem {
-	private CANTalon armMotorLeft, armMotorRight;
-	private Encoder armEncoder;
+	private CANTalon motorLeft, motorRight;
+	private Encoder encoder;
 	private Solenoid brakeOn, brakeOff;
 	private static Arm instance;
 	private boolean usingPID = false;
@@ -35,14 +36,14 @@ public class Arm extends PIDSubsystem {
 		// setSetpoint() -  Sets where the PID controller should move the system
 		//                  to
 		// enable() - Enables the PID controller.
-		armMotorLeft = new CANTalon(Constants.armTalonArmMotorLeftChannel);
-		armMotorRight = new CANTalon(Constants.armTalonArmMotorRightChannel);
+		motorLeft = new CANTalon(Constants.armTalonArmMotorLeftChannel);
+		motorRight = new CANTalon(Constants.armTalonArmMotorRightChannel);
 		
 		brakeOn = new Solenoid(Constants.ArmBrakeOnChannel);
 		brakeOff = new Solenoid(Constants.ArmBrakeOffChannel);
 		
-		armEncoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k1X);
-		armEncoder.setDistancePerPulse(Constants.armEncoderToDegrees);
+		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k1X);
+		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
 	}
 	
@@ -53,27 +54,28 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	protected double returnPIDInput() {
-		return armEncoder.getDistance();
+		return encoder.getDistance();
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
 	}
 	
 	protected void usePIDOutput(double output) {
-		armMotorLeft.set(output);
-		armMotorRight.set(-1.0 * output);
+		motorLeft.set(output);
+		motorRight.set(-1.0 * output);
 		currentSpeed = output;
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
 	}
 	
 	public void set(double speed) {
+		disengageBrake();
 		if (usingPID) {
 			this.disable();
 			usingPID = false;
 		}
-		armMotorLeft.set(speed);
-		armMotorRight.set(-1.0 * speed);
+		motorLeft.set(speed);
+		motorRight.set(-1.0 * speed);
 	}
 	
 	public void setPID(double position) {
@@ -86,14 +88,23 @@ public class Arm extends PIDSubsystem {
 		this.setSetpoint(position);
 	}
 	
-	public void engageBrake() {
+	private void engageBrake() {
+		motorLeft.set(0.0);
+		motorRight.set(0.0);
+		while (encoder.getRate() > Constants.ArmBrakeMaxSpeed) {
+			Timer.delay(0.01);
+		}
 		brakeOff.set(false);
 		brakeOn.set(true);
 	}
 	
-	public void disengageBrake() {
+	private void disengageBrake() {
 		brakeOn.set(false);
 		brakeOff.set(true);
+	}
+	
+	public void stop() {
+		engageBrake();
 	}
 	
 	public double get() {
