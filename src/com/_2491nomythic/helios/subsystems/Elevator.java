@@ -29,14 +29,20 @@ public class Elevator extends PIDSubsystem {
 	}
 
 	public Elevator() {
-		super(Variables.elevatorPID_P, Variables.elevatorPID_I, Variables.elevatorPID_D);
+		super(Variables.elevatorPID_P, Variables.elevatorPID_I,
+				Variables.elevatorPID_D);
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
 		motorElevator = new CANTalon(Constants.elevatorTalonMotorChannel);
-		
-		encoder = new Encoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k1X);
+
+		encoder = new Encoder(Constants.elevatorEncoderAChannel,
+				Constants.elevatorEncoderBChannel,
+				Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
+		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
+		this.setInputRange(Constants.elevatorMinPosition,
+				Constants.elevatorMaxPosition);
 	}
 
 	public void initDefaultCommand() {
@@ -56,5 +62,42 @@ public class Elevator extends PIDSubsystem {
 		currentSpeed = output;
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
+	}
+
+	public void set(double speed) {
+		if (usingPID) {
+			this.disable();
+			usingPID = false;
+		}
+		motorElevator.set(speed);
+	}
+
+	public void setPID(double position) {
+		if (!usingPID) {
+			this.enable();
+			usingPID = true;
+		}
+		currentTarget = position;
+		this.setSetpoint(position);
+	}
+
+	public double get() {
+		return currentSpeed;
+	}
+
+	public double getPID() {
+		return currentTarget;
+	}
+
+	public boolean isUsingPID() {
+		return usingPID;
+	}
+
+	public double getERate() {
+		return encoder.getRate();
+	}
+
+	public void resetEncoder() {
+		encoder.reset();
 	}
 }

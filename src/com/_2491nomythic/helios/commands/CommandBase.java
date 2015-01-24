@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com._2491nomythic.helios.OI;
 import com._2491nomythic.helios.subsystems.Arm;
 import com._2491nomythic.helios.subsystems.Drivetrain;
+import com._2491nomythic.helios.subsystems.Elevator;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -18,6 +19,7 @@ public abstract class CommandBase extends Command {
 	protected static OI oi;
 	protected static Drivetrain drivetrain;
 	protected static Arm arm;
+	protected static Elevator elevator;
 
 	public static void init() {
 		drivetrain = Drivetrain.getInstance();
