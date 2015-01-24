@@ -40,10 +40,31 @@ public class OI {
 		zeroArmEncoder.whenPressed(new ZeroEncoder());
 	}
 	
-	public Joystick controller(int joystickID) {
-		return controllers[joystickID];
+	/**
+	 * Get a controller
+	 * @param id the ID of the controller.  0 = left or driver, 1 = right or codriver.
+	 * @return the instance of the controller requested
+	 */
+	public Joystick getController(int id) {
+		return controllers[id];
 	}
 	
+	/**
+	 * Get a button from a controller
+	 * @param joystickID The id of the controller.  0 = left or driver, 1 = right or codriver.
+	 * @param axisID The id of the button (for use in getRawButton)
+	 * @return the result from running getRawButton(button)
+	 */
+	public boolean getButton(int joystickID, int buttonID) {
+		return controllers[joystickID].getRawButton(buttonID);
+	}
+	
+	/**
+	 * Get an axis from a controller
+	 * @param joystickID The id of the controller.  0 = left or driver, 1 = right or codriver.
+	 * @param axisID The id of the axis (for use in getRawAxis)
+	 * @return the result from running getRawAxis(axis)
+	 */
 	public double getAxis(int joystickID, int axisID) {
 		return controllers[joystickID].getRawAxis(axisID);
 	}
