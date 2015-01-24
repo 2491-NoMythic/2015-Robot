@@ -22,16 +22,16 @@ public class Arm extends PIDSubsystem {
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
 	private double currentTarget = 0.0;
-
+	
 	// Initialize your subsystem here
-
+	
 	public static Arm getInstance() {
 		if (instance == null) {
 			instance = new Arm();
 		}
 		return instance;
 	}
-
+	
 	private Arm() {
 		super(Variables.armPID_P, Variables.armPID_I, Variables.armPID_D);
 		// Use these to get going:
@@ -40,30 +40,30 @@ public class Arm extends PIDSubsystem {
 		// enable() - Enables the PID controller.
 		motorLeft = new CANTalon(Constants.armTalonArmMotorLeftChannel);
 		motorRight = new CANTalon(Constants.armTalonArmMotorRightChannel);
-
+		
 		brakeOn = new Solenoid(Constants.ArmBrakeOnChannel);
 		brakeOff = new Solenoid(Constants.ArmBrakeOffChannel);
-
+		
 		encoder = new Encoder(Constants.armEncoderAChannel,
 				Constants.armEncoderBChannel, Constants.armEncoderReversed,
 				CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
 	}
-
+	
 	public void initDefaultCommand() {
-
+		
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new ArmPositionSet());
 	}
-
+	
 	protected double returnPIDInput() {
 		return encoder.getDistance();
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
 	}
-
+	
 	protected void usePIDOutput(double output) {
 		motorLeft.set(output);
 		motorRight.set(-1.0 * output);
@@ -71,7 +71,7 @@ public class Arm extends PIDSubsystem {
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
 	}
-
+	
 	public void set(double speed) {
 		disengageBrake();
 		if (usingPID) {
@@ -81,7 +81,7 @@ public class Arm extends PIDSubsystem {
 		motorLeft.set(speed);
 		motorRight.set(-1.0 * speed);
 	}
-
+	
 	public void setPID(double position) {
 		disengageBrake();
 		if (!usingPID) {
@@ -91,7 +91,7 @@ public class Arm extends PIDSubsystem {
 		currentTarget = position;
 		this.setSetpoint(position);
 	}
-
+	
 	private void engageBrake() {
 		motorLeft.set(0.0);
 		motorRight.set(0.0);
@@ -101,32 +101,32 @@ public class Arm extends PIDSubsystem {
 		brakeOff.set(false);
 		brakeOn.set(true);
 	}
-
+	
 	private void disengageBrake() {
 		brakeOn.set(false);
 		brakeOff.set(true);
 	}
-
+	
 	public void stop() {
 		engageBrake();
 	}
-
+	
 	public double get() {
 		return currentSpeed;
 	}
-
+	
 	public double getPID() {
 		return currentTarget;
 	}
-
+	
 	public boolean isUsingPID() {
 		return usingPID;
 	}
-
+	
 	public double getERate() {
 		return encoder.getRate();
 	}
-
+	
 	public void resetEncoder() {
 		encoder.reset();
 	}
