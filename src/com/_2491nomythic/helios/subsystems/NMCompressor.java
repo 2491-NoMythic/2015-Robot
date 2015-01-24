@@ -1,6 +1,7 @@
 package com._2491nomythic.helios.subsystems;
 
 import com._2491nomythic.helios.commands.RunCompressor;
+import com._2491nomythic.helios.settings.Constants;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,7 +19,8 @@ public class NMCompressor extends Subsystem {
 	}
 	
 	private NMCompressor() {
-		compressor = new Compressor();
+		super("Compressor");
+		compressor = new Compressor(Constants.CompressorChannel);
 	}
 	
 	public void startCompressor() {
