@@ -1,10 +1,12 @@
 package com._2491nomythic.helios;
 
 
-import edu.wpi.first.wpilibj.Joystick; 
+import edu.wpi.first.wpilibj.Joystick;  
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import com._2491nomythic.helios.settings.Constants;
+import com._2491nomythic.helios.settings.ControllerMap;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -20,10 +22,13 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
+	Button zeroArmEncoder;
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);
+		
+		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ZeroArmEncoderButton], ControllerMap.ElevatorController);
 	
 	}
 	
