@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.ExampleCommand;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		CommandBase.init();
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
     }
