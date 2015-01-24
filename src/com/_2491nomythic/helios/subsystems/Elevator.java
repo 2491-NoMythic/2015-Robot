@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
+import com._2491nomythic.helios.commands.elevator.Elevate;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
@@ -47,7 +48,7 @@ public class Elevator extends PIDSubsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new Elevate());
 	}
 	
 	protected double returnPIDInput() {
