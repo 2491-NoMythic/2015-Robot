@@ -100,6 +100,30 @@ public class Drivetrain extends Subsystem {
 		return encoderRight;
 	}
 	
+	public CANTalon getFrontLeftMotor() {
+		return frontLeft;
+	}
+	
+	public CANTalon getBackLeftMotor() {
+		return backLeft;
+	}
+	
+	public CANTalon getFrontRightMotor() {
+		return frontRight;
+	}
+	
+	public CANTalon getBackRightMotor() {
+		return backRight;
+	}
+	
+	public CANTalon getFrontCenterMotor() {
+		return frontCenter;
+	}
+	
+	public CANTalon getBackCenterMotor() {
+		return backCenter;
+	}
+	
 	public void stop() {
 		drive(0.0, 0.0, 0.0, 0.0);
 	}

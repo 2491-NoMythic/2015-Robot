@@ -1,4 +1,4 @@
-package com._2491nomythic.helios.commands;
+package com._2491nomythic.helios.commands.arm;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;

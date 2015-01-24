@@ -7,20 +7,20 @@ public class HandheldControllerMap {
 	//Axes
 	//Left Joystick on Controller 0: Drive
 	public static final int DriveController = 0;
-	public static final int DriveAxisX = 1;
-	public static final int DriveAxisY = 2;
+	public static final int DriveAxisX = 0;
+	public static final int DriveAxisY = 1;
 	//Right X Axis on Controller 0: Turn
 	public static final int TurnController = 0;
-	public static final int TurnAxis = 3;
+	public static final int TurnAxis = 2;
 	//Right Y Axis on Controller 1: Elevator
 	public static final int ElevatorController = 1;
-	public static final int ElevatorAxis = 4;
+	public static final int ElevatorAxis = 3;
 	//Left Y Axis on Controller 1: DreamBelt Manual
 	public static final int ArmController = 1;
-	public static final int ArmAxis = 2;
+	public static final int ArmAxis = 1;
 	//Up-Down Dpad on Controller 1: DreamBelt Turn
 	public static final int ArmTurnController = 1;
-	public static final int ArmTurnAxis = 6;
+	public static final int ArmTurnAxis = 5;
 	
 
 	//Buttons
