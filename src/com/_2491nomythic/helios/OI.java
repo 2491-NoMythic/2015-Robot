@@ -40,10 +40,9 @@ public class OI {
 		zeroArmEncoder.whenPressed(new ZeroEncoder());
 	}
 	
-<<<<<<< Updated upstream
 	public Joystick controller(int joystickID) {
 		return controllers[joystickID];
-=======
+	}
 	/**
 	 * Get a controller
 	 * @param id the ID of the controller.  0 = left or driver, 1 = right or codriver.
@@ -51,7 +50,6 @@ public class OI {
 	 */
 	public Joystick getController(int id) {
 		return controllers[id];
->>>>>>> Stashed changes
 	}
 	
 	/**
