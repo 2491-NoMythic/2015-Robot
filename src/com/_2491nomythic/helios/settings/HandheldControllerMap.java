@@ -31,5 +31,6 @@ public class HandheldControllerMap {
 	public static final int Tote2or5HeightButton = 2;
 	public static final int Tote3or6HeightButton = 4;
 	public static final int ZeroArmEncoderButton = 3;
+	public static final int SetToTargetButton = 8;
 	
 }

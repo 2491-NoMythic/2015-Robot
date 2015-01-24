@@ -8,6 +8,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 
+import com._2491nomythic.helios.commands.arm.RunWithPID;
+//Command imports
+import com._2491nomythic.helios.commands.arm.ZeroEncoder;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -22,14 +26,17 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	Button zeroArmEncoder;
+	Button zeroArmEncoder, moveArmToPoint;
+	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);
 		
-		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ZeroArmEncoderButton], ControllerMap.ElevatorController);
-	
+		moveArmToPoint = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.SetToTargetButton);
+		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
+		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.ZeroArmEncoderButton);
+		zeroArmEncoder.whenPressed(new ZeroEncoder());
 	}
 	
 	public Joystick controller(int joystickID) {

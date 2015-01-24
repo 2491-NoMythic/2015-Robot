@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
+import com._2491nomythic.helios.commands.ArmPositionSet;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
@@ -42,7 +43,7 @@ public class Arm extends PIDSubsystem {
 		brakeOn = new Solenoid(Constants.ArmBrakeOnChannel);
 		brakeOff = new Solenoid(Constants.ArmBrakeOffChannel);
 		
-		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k1X);
+		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
 	}
@@ -50,7 +51,7 @@ public class Arm extends PIDSubsystem {
 	public void initDefaultCommand() {
 		
 		// Set the default command for a subsystem here.
-		//setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new ArmPositionSet());
 	}
 	
 	protected double returnPIDInput() {
