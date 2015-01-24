@@ -1,8 +1,8 @@
 package com._2491nomythic.helios.commands.drivetrain;
 
-import edu.wpi.first.wpilibj.command.Command; 
+ 
 
-import com._2491nomythic.helios.Robot;
+
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
@@ -13,7 +13,7 @@ public class Drive extends CommandBase {
 
     public Drive() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+        requires(drivetrain);
     }
 
     // Called just before this Command runs the first time

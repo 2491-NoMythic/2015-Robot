@@ -35,6 +35,7 @@ public class OI {
 		
 		moveArmToPoint = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.SetToTargetButton);
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
+		
 		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.ZeroArmEncoderButton);
 		zeroArmEncoder.whenPressed(new ZeroEncoder());
 	}
