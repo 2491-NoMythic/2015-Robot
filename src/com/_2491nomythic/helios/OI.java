@@ -40,9 +40,6 @@ public class OI {
 		zeroArmEncoder.whenPressed(new ZeroEncoder());
 	}
 	
-	public Joystick controller(int joystickID) {
-		return controllers[joystickID];
-	}
 	/**
 	 * Get a controller
 	 * @param id the ID of the controller.  0 = left or driver, 1 = right or codriver.
