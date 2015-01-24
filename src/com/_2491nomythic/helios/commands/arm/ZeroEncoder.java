@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ZeroEncoder extends CommandBase {
 	int state = 0;
 	Timer timer = new Timer();
-	double timeHolder;
+	double currentTime;
     public ZeroEncoder() {
         // Use requires() here to declare subsystem dependencies
         requires(arm);
@@ -25,35 +25,43 @@ public class ZeroEncoder extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(arm.onTarget()) {
-    		state = 1;
-    	}
     	
-    	if(state == 1) {
+    	switch(state) {
+    	case 0:
+    		if(arm.onTarget()) {
+        		state = 1;
+        	}
+    	case 1:
     		arm.set(-0.25);
-    		state++;
-    		timeHolder = timer.get();
+    		currentTime = timer.get();
+    		state = 2;
+    	case 2:
+    		if(timer.get() >= currentTime + 0.2) {
+    			state = 3;
+    		}
+    	default:
+    		//Do nothing
     	}
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if((state == 1) && arm.returnPIDRate() != 0) {
-    		return false;
-    	}
-    	if((state == 1) && arm.returnPIDRate() == 0) {
-    		return true;
-    	}
+    	return ((state == 3) && arm.getERate() == 0);
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	state = 0;
+    	arm.resetEncoder();
+    	arm.set(0.0);
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	state = 0;
+    	arm.set(0.0);
     }
 }

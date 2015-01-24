@@ -27,8 +27,8 @@ public class OI {
 	
 	}
 	
-	public Joystick getLeftController() {
-		return controllers[0];
+	public Joystick controller(int joystickID) {
+		return controllers[joystickID];
 	}
 	
 	public double getAxis(int joystickID, int axisID) {

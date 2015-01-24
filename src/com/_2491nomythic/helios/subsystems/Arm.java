@@ -122,7 +122,11 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	public double getERate() {
-		return armEncoder.getRate();
+		return encoder.getRate();
+	}
+	
+	public void resetEncoder() {
+		encoder.reset();
 	}
 	}
-}
+	}
