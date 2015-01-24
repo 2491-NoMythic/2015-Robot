@@ -2,6 +2,10 @@ package com._2491nomythic.helios.commands;
 
 public class RunCompressor extends CommandBase {
 
+	public RunCompressor() {
+		requires(compressor);
+	}
+	
 	protected void initialize() {
 		compressor.startCompressor();		
 	}
