@@ -36,4 +36,12 @@ public class Constants {
 	public static final double armEncoderToDegrees = 1.0;
 	public static final double armMinPosition = 0.0;
 	public static final double armMaxPosition = 180.0;
+	
+	//Elevator
+	public static final int elevatorTalonMotorChannel = 0;
+	public static final int elevatorEncoderAChannel = 0;
+	public static final int elevatorEncoderBChannel = 0;
+	public static final boolean elevatorEncoderReversed = false;
+	public static final double elevatorMinPosition = 0.0;
+	public static final double elevatorMaxPosition = 5.0;
 }
