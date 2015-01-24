@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import com._2491nomythic.helios.commands.ExampleCommand;
-
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
 /**
