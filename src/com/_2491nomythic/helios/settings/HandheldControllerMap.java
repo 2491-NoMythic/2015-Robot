@@ -24,12 +24,6 @@ public class HandheldControllerMap {
 	
 
 	//Buttons
-	//Controller 1: Lift Bin To Specific Heights
-	public static final int ToteHeightController = 1;
-	public static final int Tote456HeightToggleButton = 6;
-	public static final int Tote1or4HeightButton = 1;
-	public static final int Tote2or5HeightButton = 2;
-	public static final int Tote3or6HeightButton = 4;
 	//Controller 1: Encoder Zero Button
 	public static final int ZeroArmEncoderButton = 3;
 	//Controller 1: Move To A Target Position Button
