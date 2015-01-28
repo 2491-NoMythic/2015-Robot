@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.OI;
-import com._2491nomythic.helios.subsystems.Arm;
-import com._2491nomythic.helios.subsystems.Drivetrain;
-import com._2491nomythic.helios.subsystems.Elevator;
+import com._2491nomythic.helios.subsystems.*;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -19,11 +17,16 @@ public abstract class CommandBase extends Command {
 	protected static OI oi;
 	protected static Drivetrain drivetrain;
 	protected static Arm arm;
+	protected static NMCompressor compressor;
 	protected static Elevator elevator;
-
+	protected static ExtraSensors extraSensors;
+	
 	public static void init() {
 		drivetrain = Drivetrain.getInstance();
 		arm = Arm.getInstance();
+		compressor = NMCompressor.getInstance();
+		elevator = Elevator.getInstance();
+		extraSensors = ExtraSensors.getInstance();
 		// This MUST be here. If the OI creates Commands (which it very likely
 		// will), constructing it during the construction of CommandBase (from
 		// which commands extend), subsystems are not guaranteed to be
@@ -35,6 +38,7 @@ public abstract class CommandBase extends Command {
 		// Show what command your subsystem is running on the SmartDashboard
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(arm);
+		SmartDashboard.putData(compressor);
 	}
 
 	public CommandBase(String name) {

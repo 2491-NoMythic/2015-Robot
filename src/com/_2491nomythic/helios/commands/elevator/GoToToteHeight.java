@@ -1,29 +1,26 @@
-package com._2491nomythic.helios.commands;
+package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.settings.ControllerMap;
+import com._2491nomythic.helios.settings.Constants;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ArmPositionSet extends CommandBase {
-	
-	private double armStickPos;
-    public ArmPositionSet() {
-    	requires(arm);
+public class GoToToteHeight extends CommandBase {
+	int toteHeightInput;
+    public GoToToteHeight() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(elevator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	armStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
-    	arm.setPID(armStickPos);
     	
     }
 
@@ -34,12 +31,10 @@ public class ArmPositionSet extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	arm.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

@@ -1,21 +1,23 @@
-package com._2491nomythic.helios.commands.drivetrain;
+package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.Variables;
+
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  */
-public class ResetSideEncoders extends CommandBase {
-	
+public class IncrementToteHeightCounter extends CommandBase {
 
-    public ResetSideEncoders() {
+    public IncrementToteHeightCounter() {
         // Use requires() here to declare subsystem dependencies
-        requires(drivetrain);
+    	//Just reading from OI, no need to require anything
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	drivetrain.getLeftEncoder().reset();
-    	drivetrain.getRightEncoder().reset();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,7 +26,7 @@ public class ResetSideEncoders extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -1,21 +1,17 @@
-package com._2491nomythic.helios.commands.drivetrain;
-
- 
-
+package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class Drive extends CommandBase {
+public class Elevate extends CommandBase {
 
-    public Drive() {
+    public Elevate() {
         // Use requires() here to declare subsystem dependencies
-        requires(drivetrain);
+        requires(elevator);
     }
 
     // Called just before this Command runs the first time
@@ -24,10 +20,7 @@ public class Drive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.driveCartesian(oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisY), oi.getAxis(ControllerMap.TurnController, ControllerMap.TurnAxis));
-    	SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
-    	SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
-    	SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
+    	elevator.set(oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +30,7 @@ public class Drive extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	drivetrain.stop();
+    	elevator.set(0.0);
     }
 
     // Called when another command which requires one or more of the same
