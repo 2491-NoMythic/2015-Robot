@@ -19,13 +19,14 @@ public class IncrementToteHeightCounter extends CommandBase {
     protected void initialize() {
     	if(oi.buttonIncrementer > 0 && oi.buttonIncrementer < 7) {
     	oi.buttonIncrementer++;
-    }
+    	}
     	else if(oi.buttonIncrementer < 0) {
     		oi.buttonIncrementer = 0;
     	}
     	else if(oi.buttonIncrementer > 6) {
     		oi.buttonIncrementer = 6;
     	}
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
