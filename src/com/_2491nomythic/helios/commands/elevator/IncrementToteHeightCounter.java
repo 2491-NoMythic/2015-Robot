@@ -17,8 +17,15 @@ public class IncrementToteHeightCounter extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	if(oi.buttonIncrementer > 0 && oi.buttonIncrementer < 7) {
+    	oi.buttonIncrementer++;
     }
+    	else if(oi.buttonIncrementer < 0) {
+    		oi.buttonIncrementer = 0;
+    	}
+    	else if(oi.buttonIncrementer > 6) {
+    		oi.buttonIncrementer = 6;
+    	}
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -26,7 +33,7 @@ public class IncrementToteHeightCounter extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

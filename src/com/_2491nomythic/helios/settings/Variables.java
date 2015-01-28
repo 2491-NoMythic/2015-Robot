@@ -9,6 +9,6 @@ public class Variables {
 	public static double elevatorPID_D = 0.0;
 	
 	//Tote Height Integers
-	public static int toteHeight[] = {0,1,2,3,4,5,6};
+	public static int toteHeight[] = new int[8];
 	public static int toteHeightCounter = 0;
 }
