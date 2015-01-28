@@ -1,9 +1,6 @@
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.settings.Constants;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
