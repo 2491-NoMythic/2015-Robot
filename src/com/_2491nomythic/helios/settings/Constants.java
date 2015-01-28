@@ -6,7 +6,7 @@ public class Constants {
 	public static final int ControllerTwoPort = 2;
 	
 	//Drive
-	public static final int driveTalonFrontLeftChannel = 0;
+	public static final int driveTalonFrontLeftChannel = 10;
 	public static final int driveTalonFrontCenterChannel = 0;
 	public static final int driveTalonFrontRightChannel = 0;
 	public static final int driveTalonBackLeftChannel = 0;
