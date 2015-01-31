@@ -6,9 +6,9 @@ import com._2491nomythic.helios.settings.Variables;
 /**
  *
  */
-public class DecrementToteHeightButton extends Command {
+public class DecrementToteHeightHelper extends Command {
 
-    public DecrementToteHeightButton() {
+    public DecrementToteHeightHelper() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
