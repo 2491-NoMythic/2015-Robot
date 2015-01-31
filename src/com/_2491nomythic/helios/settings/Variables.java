@@ -8,7 +8,7 @@ public class Variables {
 	public static double elevatorPID_I = 0.0;
 	public static double elevatorPID_D = 0.0;
 	
-	//Tote Height Integers
-	public static  double toteHeight[] = {8, 24.6, 36.7, 48.8, 50.9};
+	// Tote Height Integers
+	public static double toteHeight[] = { 8, 24.6, 36.7, 48.8, 50.9 };
 	public static int elevatorTarget = 0;
 }
