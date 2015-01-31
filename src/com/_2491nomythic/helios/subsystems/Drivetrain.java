@@ -91,7 +91,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void driveAbsolute(PolarCoord coords, double rotation) {
-		coords.setTheta(coords.getTheta() + gyro.getAngle() * 180 / Math.PI);
+		coords.setTheta(coords.getTheta() + gyro.getAngle() * Math.PI / 180);
 		drivePolar(coords, rotation);
 	}
 	
