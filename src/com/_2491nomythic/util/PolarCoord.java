@@ -2,12 +2,12 @@ package com._2491nomythic.util;
 
 public class PolarCoord {
 	private double r, theta;
-
+	
 	public PolarCoord(double r, double theta) {
 		this.r = r;
 		this.theta = theta;
 	}
-
+	
 	/**
 	 * Get the r value
 	 * 
@@ -16,7 +16,7 @@ public class PolarCoord {
 	public double getR() {
 		return r;
 	}
-
+	
 	/**
 	 * Set the r value
 	 * 
@@ -26,7 +26,7 @@ public class PolarCoord {
 	public void setR(double newR) {
 		r = newR;
 	}
-
+	
 	/**
 	 * Get the theta value
 	 * 
@@ -35,7 +35,7 @@ public class PolarCoord {
 	public double getTheta() {
 		return theta;
 	}
-
+	
 	/**
 	 * Set the theta value using radians
 	 * 
@@ -45,7 +45,7 @@ public class PolarCoord {
 	public void setTheta(double newTheta) {
 		theta = newTheta;
 	}
-
+	
 	/**
 	 * Set the theta value using degrees
 	 * 
@@ -55,7 +55,7 @@ public class PolarCoord {
 	public void setThetaDeg(double newTheta) {
 		theta = newTheta / 180 * Math.PI;
 	}
-
+	
 	/**
 	 * Get a cartesian version of the coordinate
 	 * 
