@@ -7,12 +7,12 @@ public class Constants {
 	public static final int CompressorChannel = 1;
 	
 	//Drive
-	public static final int driveTalonFrontLeftChannel = 10;
-	public static final int driveTalonFrontCenterChannel = 11;
-	public static final int driveTalonFrontRightChannel = 12;
-	public static final int driveTalonBackLeftChannel = 15;
-	public static final int driveTalonBackCenterChannel = 16;
-	public static final int driveTalonBackRightChannel = 17;
+	public static final int driveTalonFrontLeftChannel = 12;
+	public static final int driveTalonFrontCenterChannel = 16;
+	public static final int driveTalonFrontRightChannel = 17;
+	public static final int driveTalonBackLeftChannel = 10;
+	public static final int driveTalonBackCenterChannel = 11;
+	public static final int driveTalonBackRightChannel = 15;
 	public static final int driveEncoderLeftAChannel = 0;
 	public static final int driveEncoderLeftBChannel = 1;
 	public static final int driveEncoderCenterAChannel = 4;

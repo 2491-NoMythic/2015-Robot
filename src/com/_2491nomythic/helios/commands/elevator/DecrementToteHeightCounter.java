@@ -1,24 +1,24 @@
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class IncrementToteHeightCounter extends CommandBase {
+public class DecrementToteHeightCounter extends CommandBase {
 
-    public IncrementToteHeightCounter() {
+    public DecrementToteHeightCounter() {
         // Use requires() here to declare subsystem dependencies
-    	//Just reading from OI, no need to require anything
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(oi.buttonIncrementer >= 0 && oi.buttonIncrementer < 7) {
-    	oi.buttonIncrementer++;
+    	if(oi.buttonIncrementer > 0 && oi.buttonIncrementer < 7) {
+    		oi.buttonIncrementer--;
+    		
     	}
     	else if(oi.buttonIncrementer < 0) {
     		oi.buttonIncrementer = 0;
