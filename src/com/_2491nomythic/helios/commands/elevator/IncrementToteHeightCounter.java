@@ -17,9 +17,15 @@ public class IncrementToteHeightCounter extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	oi.incrementCounter++;
-    	Variables.toteH
-    	
+    	if(oi.buttonIncrementer > 0 && oi.buttonIncrementer < 7) {
+    	oi.buttonIncrementer++;
+    	}
+    	else if(oi.buttonIncrementer < 0) {
+    		oi.buttonIncrementer = 0;
+    	}
+    	else if(oi.buttonIncrementer > 6) {
+    		oi.buttonIncrementer = 6;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

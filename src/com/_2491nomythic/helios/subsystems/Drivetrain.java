@@ -56,10 +56,10 @@ public class Drivetrain extends Subsystem {
 	
 	public void drive(double leftSpeed, double rightSpeed, double frontSpeed, double backSpeed){
 		frontLeft.set(leftSpeed);
-		frontCenter.set(frontSpeed);
+		frontCenter.set(-1.0 * frontSpeed);
 		frontRight.set(-1.0 * rightSpeed);
 		backLeft.set(leftSpeed);
-		backCenter.set(-1.0 * backSpeed);
+		backCenter.set(backSpeed);
 		backRight.set(-1.0 * rightSpeed);
 	}
 	

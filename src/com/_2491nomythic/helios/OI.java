@@ -27,7 +27,7 @@ public class OI {
     
 	private final Joystick[] controllers = new Joystick[2];
 	Button zeroArmEncoder, moveArmToPoint;
-	public int incrementCounter = 0;
+	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
 	public void init() {

@@ -1,29 +1,46 @@
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.Variables;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GoToToteHeight extends CommandBase {
-	int toteHeightInput;
-    public GoToToteHeight() {
+public class IncrementToteHeightCounter extends CommandBase {
+
+    public IncrementToteHeightCounter() {
         // Use requires() here to declare subsystem dependencies
-        requires(elevator);
+    	//Just reading from OI, no need to require anything
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+<<<<<<< HEAD
+    	oi.incrementCounter++;
+    	Variables.toteH
+    	
+=======
+    	if(oi.buttonIncrementer > 0 && oi.buttonIncrementer < 7) {
+    	oi.buttonIncrementer++;
+    	}
+    	else if(oi.buttonIncrementer < 0) {
+    		oi.buttonIncrementer = 0;
+    	}
+    	else if(oi.buttonIncrementer > 6) {
+    		oi.buttonIncrementer = 6;
+    	}
+>>>>>>> origin/master
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
