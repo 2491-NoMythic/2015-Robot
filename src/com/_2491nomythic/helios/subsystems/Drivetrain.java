@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drivetrain extends Subsystem {
-	CANTalon frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
+	CANTalon frontRight, frontCenter, frontLeft, backRight, backCenter,
+			backLeft;
 	Encoder encoderLeft, encoderCenter, encoderRight;
 	Gyro gyro;
 	private static Drivetrain instance;
@@ -35,9 +36,18 @@ public class Drivetrain extends Subsystem {
 		backCenter = new CANTalon(Constants.driveTalonBackCenterChannel);
 		backRight = new CANTalon(Constants.driveTalonBackRightChannel);
 		
-		encoderLeft = new Encoder(Constants.driveEncoderLeftAChannel, Constants.driveEncoderLeftBChannel, Constants.driveEncoderLeftReversed, CounterBase.EncodingType.k1X);
-		encoderCenter = new Encoder(Constants.driveEncoderCenterAChannel, Constants.driveEncoderCenterBChannel, Constants.driveEncoderCenterReversed, CounterBase.EncodingType.k1X);
-		encoderRight = new Encoder(Constants.driveEncoderRightAChannel, Constants.driveEncoderRightBChannel, Constants.driveEncoderRightReversed, CounterBase.EncodingType.k1X);
+		encoderLeft = new Encoder(Constants.driveEncoderLeftAChannel,
+				Constants.driveEncoderLeftBChannel,
+				Constants.driveEncoderLeftReversed,
+				CounterBase.EncodingType.k1X);
+		encoderCenter = new Encoder(Constants.driveEncoderCenterAChannel,
+				Constants.driveEncoderCenterBChannel,
+				Constants.driveEncoderCenterReversed,
+				CounterBase.EncodingType.k1X);
+		encoderRight = new Encoder(Constants.driveEncoderRightAChannel,
+				Constants.driveEncoderRightBChannel,
+				Constants.driveEncoderRightReversed,
+				CounterBase.EncodingType.k1X);
 		encoderLeft.setDistancePerPulse(Constants.driveEncoderToFeet);
 		encoderCenter.setDistancePerPulse(Constants.driveEncoderToFeet);
 		encoderRight.setDistancePerPulse(Constants.driveEncoderToFeet);
@@ -49,14 +59,12 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 	
 	
-    
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
-	
-	public void drive(double leftSpeed, double rightSpeed, double frontSpeed, double backSpeed){
+	public void drive(double leftSpeed, double rightSpeed, double frontSpeed,
+			double backSpeed) {
 		frontLeft.set(leftSpeed);
 		frontCenter.set(frontSpeed);
 		frontRight.set(-1.0 * rightSpeed);
@@ -69,10 +77,18 @@ public class Drivetrain extends Subsystem {
 		double left = y + rotation;
 		double right = y - rotation;
 		
-		if(left > 1){left = 1;}
-		if(left < -1){left = -1;}
-		if(right > 1){right = 1;}
-		if(right < -1){right = -1;}
+		if (left > 1) {
+			left = 1;
+		}
+		if (left < -1) {
+			left = -1;
+		}
+		if (right > 1) {
+			right = 1;
+		}
+		if (right < -1) {
+			right = -1;
+		}
 		
 		drive(left, right, x, x);
 	}
@@ -134,12 +150,11 @@ public class Drivetrain extends Subsystem {
 	public void stop() {
 		drive(0.0, 0.0, 0.0, 0.0);
 	}
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new Drive());
-    }
-    
-    
+	
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		setDefaultCommand(new Drive());
+	}
+	
+	
 }
-
