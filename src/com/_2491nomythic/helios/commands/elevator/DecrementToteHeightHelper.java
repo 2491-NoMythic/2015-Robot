@@ -10,12 +10,11 @@ public class DecrementToteHeightHelper extends Command {
 
     public DecrementToteHeightHelper() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Variables.elevatorPosition >= 0 && Variables.elevatorPosition <4) {
+    	if(Variables.elevatorPosition > 0 && Variables.elevatorPosition <= 4) {
     		Variables.elevatorPosition--;
     	}
     }

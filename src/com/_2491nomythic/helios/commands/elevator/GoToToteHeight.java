@@ -7,16 +7,15 @@ import com._2491nomythic.helios.settings.Variables;
  *
  */
 public class GoToToteHeight extends CommandBase {
-	int toteHeightInput;
-    public GoToToteHeight(int heightInput) {
+	
+    public GoToToteHeight() {
         // Use requires() here to declare subsystem dependencies
         requires(elevator);
-        toteHeightInput = heightInput;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	elevator.setPID(Variables.toteHeight[toteHeightInput]);
+    	elevator.setPID(Variables.toteHeight[Variables.elevatorPosition]);
     }
 
     // Called repeatedly when this Command is scheduled to run
