@@ -14,8 +14,8 @@ public class DecrementToteHeightHelper extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Variables.elevatorPosition > 0 && Variables.elevatorPosition <= 4) {
-    		Variables.elevatorPosition--;
+    	if(Variables.elevatorTarget > 0 && Variables.elevatorTarget <= 4) {
+    		Variables.elevatorTarget--;
     	}
     }
 

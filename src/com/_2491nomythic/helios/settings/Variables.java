@@ -10,6 +10,5 @@ public class Variables {
 	
 	//Tote Height Integers
 	public static  double toteHeight[] = {8, 24.6, 36.7, 48.8, 50.9};
-	public static int toteHeightCounter = 0;
-	public static int elevatorPosition = 0;
+	public static int elevatorTarget = 0;
 }

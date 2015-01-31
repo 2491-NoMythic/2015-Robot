@@ -15,7 +15,7 @@ public class GoToToteHeight extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	elevator.setPID(Variables.toteHeight[Variables.elevatorPosition]);
+    	elevator.setPID(Variables.toteHeight[Variables.elevatorTarget]);
     }
 
     // Called repeatedly when this Command is scheduled to run
