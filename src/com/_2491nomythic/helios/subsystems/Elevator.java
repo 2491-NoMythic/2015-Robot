@@ -104,6 +104,10 @@ public class Elevator extends PIDSubsystem {
 		return encoder.getRate();
 	}
 	
+	public Encoder getEncoder() {
+		return encoder;
+	}
+	
 	public void resetEncoder() {
 		encoder.reset();
 	}
