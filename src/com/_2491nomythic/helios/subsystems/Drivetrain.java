@@ -44,6 +44,8 @@ public class Drivetrain extends Subsystem {
 		encoderLeft.reset();
 		encoderCenter.reset();
 		encoderRight.reset();
+		
+		gyro.initGyro();
 	}
 	
 	
@@ -86,6 +88,11 @@ public class Drivetrain extends Subsystem {
 	public void drivePolar(double r, double theta, double rotation) {
 		PolarCoord polarCoords = new PolarCoord(r, theta);
 		drivePolar(polarCoords, rotation);
+	}
+	
+	public void driveAbsolute(PolarCoord coords, double rotation) {
+		coords.setTheta(coords.getTheta() + gyro.getAngle() * 180 / Math.PI);
+		drivePolar(coords, rotation);
 	}
 	
 	public Encoder getLeftEncoder() {

@@ -23,6 +23,7 @@ public class Constants {
 	public static final boolean driveEncoderCenterReversed = false;
 	public static final boolean driveEncoderRightReversed = false;
 	public static final double driveEncoderToFeet = 1.0;
+	public static final double gyroChannel = 1;
 	
 	
 	//Arm
