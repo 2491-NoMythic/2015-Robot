@@ -82,6 +82,12 @@ public class Elevator extends PIDSubsystem {
 		this.setSetpoint(position);
 	}
 	
+	public void setPosition(int numTotes){
+		if(numTotes >= 1 && numTotes <= 4){
+			setPID(Variables.toteHeight[numTotes]);
+		}
+	}
+	
 	public double get() {
 		return currentSpeed;
 	}
