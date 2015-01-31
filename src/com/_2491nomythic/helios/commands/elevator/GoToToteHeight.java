@@ -1,19 +1,22 @@
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.Variables;
 
 /**
  *
  */
 public class GoToToteHeight extends CommandBase {
 	int toteHeightInput;
-    public GoToToteHeight() {
+    public GoToToteHeight(int heightInput) {
         // Use requires() here to declare subsystem dependencies
         requires(elevator);
+        toteHeightInput = heightInput;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	elevator.setPID(Variables.toteHeight[toteHeightInput]);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -23,7 +26,7 @@ public class GoToToteHeight extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
