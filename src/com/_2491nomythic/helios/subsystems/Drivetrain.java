@@ -1,6 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
-import com._2491nomythic.helios.commands.drivetrain.Drive;
+import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.CartesianCoord;
 import com._2491nomythic.util.PolarCoord;
@@ -157,7 +157,7 @@ public class Drivetrain extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new Drive());
+		setDefaultCommand(new AbsoluteDrive());
 	}
 	
 	
