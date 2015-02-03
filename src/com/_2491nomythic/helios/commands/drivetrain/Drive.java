@@ -24,7 +24,7 @@ public class Drive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.driveCartesian(oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisY), oi.getAxis(ControllerMap.TurnController, ControllerMap.TurnAxis));
+    	drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis));
     	SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
     	SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
     	SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
