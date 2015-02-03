@@ -28,5 +28,13 @@ public class HandheldControllerMap {
 	public static final int ZeroArmEncoderButton = 3;
 	//Controller 1: Move To A Target Position Button
 	public static final int SetToTargetButton = 8;
+	//Moving the elevator
+	public static final int moveUpOneToteController = 1;
+	public static final int moveUpOneToteButton = 2;
+	public static final int moveDownOneToteController = 1;
+	public static final int moveDownOneToteButton = 3;
+	public static final int scoringPlatformStatusController = 1;
+	public static final int scoringPlatformStatusButton = 1;
+	
 	
 }

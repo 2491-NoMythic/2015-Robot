@@ -10,6 +10,7 @@ public class PolarCoord {
 	
 	/**
 	 * Get the r value
+	 * 
 	 * @return the r value
 	 */
 	public double getR() {
@@ -18,7 +19,9 @@ public class PolarCoord {
 	
 	/**
 	 * Set the r value
-	 * @param newR new r value
+	 * 
+	 * @param newR
+	 *            new r value
 	 */
 	public void setR(double newR) {
 		r = newR;
@@ -26,6 +29,7 @@ public class PolarCoord {
 	
 	/**
 	 * Get the theta value
+	 * 
 	 * @return the theta value
 	 */
 	public double getTheta() {
@@ -34,7 +38,9 @@ public class PolarCoord {
 	
 	/**
 	 * Set the theta value using radians
-	 * @param newTheta new theta value in radians
+	 * 
+	 * @param newTheta
+	 *            new theta value in radians
 	 */
 	public void setTheta(double newTheta) {
 		theta = newTheta;
@@ -42,7 +48,9 @@ public class PolarCoord {
 	
 	/**
 	 * Set the theta value using degrees
-	 * @param newTheta new theta value in degrees
+	 * 
+	 * @param newTheta
+	 *            new theta value in degrees
 	 */
 	public void setThetaDeg(double newTheta) {
 		theta = newTheta / 180 * Math.PI;
@@ -50,11 +58,12 @@ public class PolarCoord {
 	
 	/**
 	 * Get a cartesian version of the coordinate
+	 * 
 	 * @return Cartesian version of the coordinate
 	 */
 	public CartesianCoord getCartesian() {
-		double x = Math.cos(theta)*r;
-		double y = Math.sin(theta)*r;
+		double x = Math.cos(theta) * r;
+		double y = Math.sin(theta) * r;
 		return new CartesianCoord(x, y);
 	}
 }

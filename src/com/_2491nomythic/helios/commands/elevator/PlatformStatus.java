@@ -1,34 +1,37 @@
 package com._2491nomythic.helios.commands.elevator;
 
-import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GoToToteHeight extends CommandBase {
-	
-    public GoToToteHeight() {
+public class PlatformStatus extends Command {
+
+    public PlatformStatus() {
         // Use requires() here to declare subsystem dependencies
-        requires(elevator);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Variables.PlatformStatus) {
-    		elevator.setPID(Variables.toteHeight[Variables.elevatorTarget] + 0.166667);
+    	
+    	if(Variables.PlatformStatus = true) {
+    		Variables.PlatformStatus = false;
     	}
-    	elevator.setPID(Variables.toteHeight[Variables.elevatorTarget]);
+    	else {
+    		Variables.PlatformStatus = true;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

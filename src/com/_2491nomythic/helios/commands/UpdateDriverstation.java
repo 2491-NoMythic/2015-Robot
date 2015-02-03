@@ -1,5 +1,7 @@
 package com._2491nomythic.helios.commands;
 
+import com._2491nomythic.helios.settings.Variables;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,10 +27,14 @@ public class UpdateDriverstation extends CommandBase {
 			SmartDashboard.putNumber("Power Usage (watts)", extraSensors.getPowerDistributionPanel().getTotalPower());
 			SmartDashboard.putNumber("Power Usage (amps)", extraSensors.getPowerDistributionPanel().getTotalCurrent());
 			SmartDashboard.putNumber("Power Used (joules)", extraSensors.getPowerDistributionPanel().getTotalEnergy());
-			SmartDashboard.putNumber("PDP Temp", extraSensors.getPowerDistributionPanel().getTemperature());
-			SmartDashboard.putNumber("PDP Voltage", extraSensors.getPowerDistributionPanel().getVoltage());
-			SmartDashboard.putNumber("Test", extraSensors.getPowerDistributionPanel().getCurrent(15));
-			SmartDashboard.putNumber("Test 2", extraSensors.getPowerDistributionPanel().getCurrent(0));
+			SmartDashboard.putNumber("Current Elevator Target (totes)", Variables.elevatorTarget); 
+			if (Variables.elevatorTarget < 0 || Variables.elevatorTarget >= Variables.toteHeight.length) {
+				SmartDashboard.putString("Current Elevator Target (in)", "Manual Control");
+			}
+			else {
+				SmartDashboard.putNumber("Current Elevator Target (in)", Variables.toteHeight[Variables.elevatorTarget]);
+			}
+			SmartDashboard.putNumber("Current Elevator Position", elevator.getEncoder().getDistance());
 		}
 	}
 

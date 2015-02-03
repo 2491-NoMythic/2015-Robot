@@ -7,10 +7,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
-
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 //Command imports
 import com._2491nomythic.helios.commands.arm.ZeroEncoder;
+import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
+import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
+import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,8 +28,9 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	int hypotheticalMoveArmValue; //not sure what Evan would like... will replace when known
-	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote;
+	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus;
+	public int buttonIncrementer = 0;
+	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
@@ -39,7 +42,14 @@ public class OI {
 		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.ZeroArmEncoderButton);
 		zeroArmEncoder.whenPressed(new ZeroEncoder());
 		
+		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
+		moveUpOneTote.whenPressed(new IncrementToteHeight());
 		
+		moveDownOneTote = new JoystickButton(controllers[ControllerMap.moveDownOneToteController], ControllerMap.moveDownOneToteButton);
+		moveDownOneTote.whenPressed(new DecrementToteHeight());
+		
+		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
+		scoringPlatformStatus.whenPressed(new PlatformStatus());
 	}
 	
 	/**
