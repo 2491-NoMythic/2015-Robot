@@ -26,9 +26,8 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	Button zeroArmEncoder, moveArmToPoint;
-	public int buttonIncrementer = 0;
-	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
+	int hypotheticalMoveArmValue; //not sure what Evan would like... will replace when known
+	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote;
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
@@ -39,6 +38,8 @@ public class OI {
 		
 		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.ZeroArmEncoderButton);
 		zeroArmEncoder.whenPressed(new ZeroEncoder());
+		
+		
 	}
 	
 	/**

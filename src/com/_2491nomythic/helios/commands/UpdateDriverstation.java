@@ -25,6 +25,10 @@ public class UpdateDriverstation extends CommandBase {
 			SmartDashboard.putNumber("Power Usage (watts)", extraSensors.getPowerDistributionPanel().getTotalPower());
 			SmartDashboard.putNumber("Power Usage (amps)", extraSensors.getPowerDistributionPanel().getTotalCurrent());
 			SmartDashboard.putNumber("Power Used (joules)", extraSensors.getPowerDistributionPanel().getTotalEnergy());
+			SmartDashboard.putNumber("PDP Temp", extraSensors.getPowerDistributionPanel().getTemperature());
+			SmartDashboard.putNumber("PDP Voltage", extraSensors.getPowerDistributionPanel().getVoltage());
+			SmartDashboard.putNumber("Test", extraSensors.getPowerDistributionPanel().getCurrent(15));
+			SmartDashboard.putNumber("Test 2", extraSensors.getPowerDistributionPanel().getCurrent(0));
 		}
 	}
 
