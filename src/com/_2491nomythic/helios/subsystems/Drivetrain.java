@@ -111,6 +111,10 @@ public class Drivetrain extends Subsystem {
 		drivePolar(coords, rotation);
 	}
 	
+	public void driveAbsolute(double r, double theta, double rotation) {
+		driveAbsolute(new PolarCoord(r, theta), rotation);
+	}
+	
 	public Encoder getLeftEncoder() {
 		return encoderLeft;
 	}
