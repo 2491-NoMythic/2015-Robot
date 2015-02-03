@@ -81,6 +81,17 @@ public class OI {
 		return controllers[joystickID].getRawAxis(axisID);
 	}
 	
+	/**
+	 * Get an axis from a controller that is automatically squared and deadzoned
+	 * @param joystickID The id of the controller.  0 = left or driver, 1 = right or driver
+	 * @param axisID The id of the axis (for use in getRawAxis)
+	 * @return the squared, deadzoned result from running getRawAxis
+	 */
+	public double getAxisForDrive(int joystickID, int axisID) {
+		double result = controllers[joystickID].getRawAxis(axisID);
+		result = result * Math.abs(result);
+		return result > 0.05 ? result : 0;
+	}
 
 	
     // There are a few additional built in buttons you can use. Additionally,
