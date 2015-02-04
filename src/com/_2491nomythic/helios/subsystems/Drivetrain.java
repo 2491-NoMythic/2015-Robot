@@ -111,6 +111,10 @@ public class Drivetrain extends Subsystem {
 		drivePolar(coords, rotation);
 	}
 	
+	public Gyro getGyro() {
+		return gyro;
+	}
+	
 	public Encoder getLeftEncoder() {
 		return encoderLeft;
 	}

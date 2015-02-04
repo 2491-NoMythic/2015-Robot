@@ -35,6 +35,7 @@ public class UpdateDriverstation extends CommandBase {
 				SmartDashboard.putNumber("Current Elevator Target (in)", Variables.toteHeight[Variables.elevatorTarget]);
 			}
 			SmartDashboard.putNumber("Current Elevator Position", elevator.getEncoder().getDistance());
+			SmartDashboard.putNumber("Gyro Positon", drivetrain.getGyro().getAngle());
 		}
 	}
 
