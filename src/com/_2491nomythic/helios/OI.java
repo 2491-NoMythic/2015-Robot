@@ -90,7 +90,7 @@ public class OI {
 	public double getAxisForDrive(int joystickID, int axisID) {
 		double result = controllers[joystickID].getRawAxis(axisID);
 		result = result * Math.abs(result);
-		return result > 0.05 ? result : 0;
+		return Math.abs(result) > 0.05 ? result : 0;
 	}
 
 	
