@@ -2,7 +2,6 @@ package com._2491nomythic.helios.commands.drivetrain;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
