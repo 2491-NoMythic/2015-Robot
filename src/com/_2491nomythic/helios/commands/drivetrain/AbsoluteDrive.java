@@ -1,19 +1,18 @@
 package com._2491nomythic.helios.commands.drivetrain;
 
- 
-
-
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
+import com._2491nomythic.helios.subsystems.Drivetrain;
+import com._2491nomythic.util.CartesianCoord;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class Drive extends CommandBase {
+public class AbsoluteDrive extends CommandBase {
 
-    public Drive() {
+    public AbsoluteDrive() {
         // Use requires() here to declare subsystem dependencies
         requires(drivetrain);
     }
@@ -24,7 +23,7 @@ public class Drive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis));
+    	drivetrain.driveAbsolute(new CartesianCoord(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY)).getPolar(), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis));
     	SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
     	SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
     	SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
