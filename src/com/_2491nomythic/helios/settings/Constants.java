@@ -26,8 +26,8 @@ public class Constants {
 	public static final int gyroChannel = 1;
 	
 	// Arm
-	public static final int armTalonArmMotorLeftChannel = 14;
-	public static final int armTalonArmMotorRightChannel = 19;
+	public static final int armTalonArmMotorLeftChannel = 13;
+	public static final int armTalonArmMotorRightChannel = 18;
 	public static final int ArmBrakeOnChannel = 0;
 	public static final int ArmBrakeOffChannel = 1;
 	public static final double ArmBrakeMaxSpeed = 10.0; // Max speed of arm to
