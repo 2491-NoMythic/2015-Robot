@@ -12,4 +12,6 @@ public class Variables {
 	public static  double toteHeight[] = {0.666667, 2.05, 3.058333, 4.066667, 5.075};
 	public static int elevatorTarget = 0;
 	public static boolean PlatformStatus = false;
+	
+	public static final double gyroToDegrees = 0.0015;
 }

@@ -1,7 +1,9 @@
 package com._2491nomythic.helios.subsystems;
 
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
+import com._2491nomythic.helios.commands.drivetrain.Drive;
 import com._2491nomythic.helios.settings.Constants;
+import com._2491nomythic.helios.settings.Variables;
 import com._2491nomythic.util.CartesianCoord;
 import com._2491nomythic.util.PolarCoord;
 
@@ -55,7 +57,9 @@ public class Drivetrain extends Subsystem {
 		encoderCenter.reset();
 		encoderRight.reset();
 		
+		gyro = new Gyro(Constants.gyroChannel);
 		gyro.initGyro();
+		gyro.setSensitivity(Variables.gyroToDegrees);
 	}
 	
 	
@@ -65,12 +69,12 @@ public class Drivetrain extends Subsystem {
 	
 	public void drive(double leftSpeed, double rightSpeed, double frontSpeed,
 			double backSpeed) {
-		frontLeft.set(leftSpeed);
+		frontLeft.set(-1.0 * leftSpeed);
 		frontCenter.set(frontSpeed);
-		frontRight.set(-1.0 * rightSpeed);
-		backLeft.set(leftSpeed);
+		frontRight.set(rightSpeed);
+		backLeft.set(-1.0 * leftSpeed);
 		backCenter.set(-1.0 * backSpeed);
-		backRight.set(-1.0 * rightSpeed);
+		backRight.set(rightSpeed);
 	}
 	
 	public void driveCartesian(double x, double y, double rotation) {
@@ -161,7 +165,7 @@ public class Drivetrain extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new AbsoluteDrive());
+		setDefaultCommand(new Drive());
 	}
 	
 	

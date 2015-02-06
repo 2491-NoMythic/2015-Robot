@@ -24,9 +24,11 @@ public class UpdateDriverstation extends CommandBase {
 	protected void execute() {
 		if (timer.get() > nextRun) {
 			nextRun = nextRun + 0.25;
+			/*
 			SmartDashboard.putNumber("Power Usage (watts)", extraSensors.getPowerDistributionPanel().getTotalPower());
 			SmartDashboard.putNumber("Power Usage (amps)", extraSensors.getPowerDistributionPanel().getTotalCurrent());
 			SmartDashboard.putNumber("Power Used (joules)", extraSensors.getPowerDistributionPanel().getTotalEnergy());
+			*/
 			SmartDashboard.putNumber("Current Elevator Target (totes)", Variables.elevatorTarget); 
 			if (Variables.elevatorTarget < 0 || Variables.elevatorTarget >= Variables.toteHeight.length) {
 				SmartDashboard.putString("Current Elevator Target (in)", "Manual Control");

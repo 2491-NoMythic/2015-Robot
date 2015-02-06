@@ -2,7 +2,6 @@ package com._2491nomythic.helios.commands.drivetrain;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
-import com._2491nomythic.helios.subsystems.Drivetrain;
 import com._2491nomythic.util.CartesianCoord;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
