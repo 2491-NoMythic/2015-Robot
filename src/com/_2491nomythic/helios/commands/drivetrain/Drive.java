@@ -28,6 +28,7 @@ public class Drive extends CommandBase {
     	SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
     	SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
     	SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
+    	SmartDashboard.putNumber("Back Center", drivetrain.getBackCenterMotor().get());
     }
 
     // Make this return true when this Command no longer needs to run execute()

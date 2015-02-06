@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.ExampleCommand;
 import com._2491nomythic.helios.commands.ReadDriverstation;
+import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
@@ -36,8 +37,9 @@ public class Robot extends IterativeRobot {
 		CommandBase.init();
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
-        SmartDashboard.putData(new ResetGyro());
-        SmartDashboard.putData(new ReadDriverstation());
+        SmartDashboard.putData("Reset Gyro", new ResetGyro());
+        SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
+        SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
     }
 	
 	public void disabledPeriodic() {
