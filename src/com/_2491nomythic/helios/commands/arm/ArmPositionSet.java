@@ -3,6 +3,8 @@ package com._2491nomythic.helios.commands.arm;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  */
@@ -32,6 +34,8 @@ public class ArmPositionSet extends CommandBase {
     	arm.set(armStickPos);
     	hasBeenStopped = false;
     	}
+    	
+    	SmartDashboard.putNumber("Arm axis reading", armStickPos);
     }
 
     // Make this return true when this Command no longer needs to run execute()
