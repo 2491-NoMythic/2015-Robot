@@ -13,5 +13,18 @@ public class Variables {
 	public static int elevatorTarget = 0;
 	public static boolean PlatformStatus = false;
 	
-	public static final double gyroToDegrees = 0.0015;
+	public static double gyroToDegrees = 0.0015;
+	
+	//Arm Positions
+	public static double verticalArmPos; //to be decided
+	public static double horizontalAForewardPos; //to be decided
+	public static double horizontalABackPos; //to be decided
+	
+	//Autonomous Distances
+	public static double pickup1stBinYDistance; //to be decided
+	public static double pickup1stBinXDistance = 0.0; //can and may be changed
+	
+	//Autonomous Drive Power Variables
+	public static double pickup1stBinPower;
+	
 }

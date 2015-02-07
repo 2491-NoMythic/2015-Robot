@@ -1,5 +1,9 @@
 package com._2491nomythic.helios.autonomous;
 
+import com._2491nomythic.helios.commands.arm.RunWithPID;
+import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
+import com._2491nomythic.helios.settings.Variables;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -9,11 +13,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class autonomous extends CommandGroup {
     
     public  autonomous() {
+    	addSequential(new RunWithPID(Variables.horizontalAForewardPos));
+    	addParallel(new DriveDistance(Variables.pickup1stBinPower, Variables.pickup1stBinXDistance, Variables.pickup1stBinYDistance));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	//ARM SHOULD EXTEND 4 AND A HALF FEET
+    	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
