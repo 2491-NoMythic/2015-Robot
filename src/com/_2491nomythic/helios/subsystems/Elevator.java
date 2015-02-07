@@ -6,6 +6,7 @@ import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
@@ -13,8 +14,9 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  *
  */
 public class Elevator extends PIDSubsystem {
-	private static CANTalon motorElevator;
-	private static Encoder encoder;
+	private CANTalon motorElevator;
+	private Encoder encoder;
+	private DigitalInput limitTop, limitBottom, toteCheckLeft, toteCheckRight;
 	private static Elevator instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
@@ -44,7 +46,12 @@ public class Elevator extends PIDSubsystem {
 		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
 		this.setInputRange(Constants.elevatorMinPosition,
 				Constants.elevatorMaxPosition);
-	}
+		
+		limitTop = new DigitalInput(Constants.elevatorLimitTopChannel);
+		limitBottom = new DigitalInput(Constants.elevatorLimitBottomChannel);
+		toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel);
+		toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel);
+	} 
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
