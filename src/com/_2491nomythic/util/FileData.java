@@ -1,6 +1,9 @@
 package com._2491nomythic.util;
 
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -14,10 +17,10 @@ public class FileData {
 	public FileData(String file_path) {
 		path = file_path;
 		try {
-		openAndReadFile();
+			openAndReadFile();
 		}
 		catch(IOException anything) {
-			System.out.println(anything.getMessage());
+			System.out.println("Couldn't open and read " + file_path + ".  Error: " + anything.getMessage());
 		}
 	}
 	
@@ -36,9 +39,55 @@ public class FileData {
 				System.out.println("Couldn't read line " + line + " in " + path);
 			}
 		}
-	
 		textreader.close();
+	}
 	
+	public boolean exists(String key) {
+		return fileData.containsKey(key);
+	}
+	
+	public String get(String key) {
+		if(fileData.containsKey(key)) {
+			return fileData.get(key);
+		}
+		else {
+			System.out.println("Couldn't find " + key);
+			return "";
+		}
+	}
+	
+	public String getWithDefault(String key, String defaultValue) {
+		if (exists(key)) {
+			return fileData.get(key);
+		}
+		else {
+			return defaultValue;
+		}
+	}
+	
+	public void set(String keyInput, String valueInput) {
+		fileData.put(keyInput, valueInput);
+		try {
+			writeToFile();
+		}
+		catch (IOException anything) {
+			System.out.println("Couldn't write to file " + path + ".  Error: " + anything.getMessage());
+		}
+	}
+	
+	
+	private void writeToFile() throws IOException {
+		FileWriter write = new FileWriter(path);
+		PrintWriter print_line = new PrintWriter(write);
+		
+		Enumeration<String> fd_key_Enum = fileData.keys();
+		Enumeration<String> fd_value_Enum = fileData.elements();
+		while (fd_key_Enum.hasMoreElements() && fd_value_Enum.hasMoreElements()) {
+		print_line.printf("%s" + "%n", fd_key_Enum.nextElement() + ":" + fd_value_Enum.nextElement());
+		}
+		
+		print_line.close();
+		
 	}
 	
 	
