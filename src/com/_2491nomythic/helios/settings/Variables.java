@@ -19,12 +19,19 @@ public class Variables {
 	public static double verticalArmPos; //to be decided
 	public static double horizontalAForewardPos; //to be decided
 	public static double horizontalABackPos; //to be decided
-	
+	public static double recyclingContainerReleasePos; //the position that the arm will be when the
+													  //recycling container touches the autozone AND may be released (this position needs to be far enough so that the arm can be pulled away)
+
 	//Autonomous Distances
+	public static double pickup1stBinXDistance; //May be added if needed?
 	public static double pickup1stBinYDistance; //to be decided
-	public static double pickup1stBinXDistance = 0.0; //can and may be changed
+	public static double pickup2ndBinXDistance;
+	public static double pickup2ndBinYDistance;
+	public static double unhookBinXDistance = 1; //drive one foot foreward
+	public static double unhookBinYDistance = 0.0;
 	
 	//Autonomous Drive Power Variables
-	public static double pickup1stBinPower;
-	
+	public static double pickupBinDrivePower;
+	public static double driveBackToOrigPosPower;
+	public static double unhookBinPower;
 }

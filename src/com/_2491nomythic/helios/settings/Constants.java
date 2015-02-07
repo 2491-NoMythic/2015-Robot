@@ -55,4 +55,8 @@ public class Constants {
 	
 	// Grabber
 	public static final int grabberTalonMotorChannel = 19;
+	
+	//Null (zero value) Driving Distances
+	public static final double nullX = 0.0;
+	public static final double nullY = 0.0;
 }

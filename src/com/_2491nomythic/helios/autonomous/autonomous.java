@@ -2,6 +2,7 @@ package com._2491nomythic.helios.autonomous;
 
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -14,7 +15,18 @@ public class autonomous extends CommandGroup {
     
     public  autonomous() {
     	addSequential(new RunWithPID(Variables.horizontalAForewardPos));
-    	addParallel(new DriveDistance(Variables.pickup1stBinPower, Variables.pickup1stBinXDistance, Variables.pickup1stBinYDistance));
+    	addSequential(new DriveDistance(Variables.pickupBinDrivePower, Constants.nullX, Variables.pickup1stBinYDistance));
+    	addSequential(new RunWithPID(Variables.verticalArmPos)); //may be made a parallel if the arm is brought up fast enough
+    	addSequential(new DriveDistance(Variables.driveBackToOrigPosPower, Constants.nullX, -(Variables.pickup1stBinYDistance)));
+    	addSequential(new RunWithPID(Variables.recyclingContainerReleasePos));
+    	addSequential(new DriveDistance(Variables.unhookBinPower, Variables.unhookBinXDistance, Variables.unhookBinYDistance));
+    	addSequential(new RunWithPID(Variables.horizontalAForewardPos));
+    	addSequential(new DriveDistance(Variables.pickupBinDrivePower, Constants.nullX, Variables.pickup2ndBinYDistance)); //may be made a parallel if the arm can be brought down fast enough
+    	addSequential(new DriveDistance(Variables.pickupBinDrivePower, Variables.pickup2ndBinXDistance, Constants.nullY));
+    	addSequential(new RunWithPID(Variables.verticalArmPos));
+    	addSequential(new DriveDistance(Variables.pickupBinDrivePower, -(Variables.pickup2ndBinXDistance), Constants.nullY)); //may be made a parallel if the arm is brought up fast enough
+    	addSequential(new DriveDistance(Variables.pickupBinDrivePower, Constants.nullX, -(Variables.pickup2ndBinYDistance)));
+    	addSequential(new RunWithPID(Variables.recyclingContainerReleasePos));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
