@@ -77,6 +77,20 @@ public class Drivetrain extends Subsystem {
 		backRight.set(rightSpeed);
 	}
 	
+	public void driveRight(double speed) {
+		frontRight.set(speed);
+		backRight.set(speed);
+	}
+	
+	public void driveLeft(double speed) {
+		frontLeft.set(-1.0 * speed);
+		backLeft.set(-1.0 * speed);
+	}
+	
+	public void driveCenter(double frontSpeed, double backSpeed) {
+		frontCenter.set(frontSpeed);
+		backCenter.set(-1.0 * backSpeed);
+	}
 	public void driveCartesian(double x, double y, double rotation) {
 		double left = y + rotation;
 		double right = y - rotation;

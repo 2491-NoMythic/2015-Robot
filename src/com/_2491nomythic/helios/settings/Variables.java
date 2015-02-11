@@ -7,6 +7,9 @@ public class Variables {
 	public static double elevatorPID_P = 1.0;
 	public static double elevatorPID_I = 0.0;
 	public static double elevatorPID_D = 0.0;
+	public static double drivePID_P = 1.0;
+	public static double drivePID_I = 0.0;
+	public static double drivePID_D = 0.0;
 	
 	//Tote Height Integers
 	public static  double toteHeight[] = {0.666667, 2.05, 3.058333, 4.066667, 5.075};
@@ -34,4 +37,6 @@ public class Variables {
 	public static double pickupBinDrivePower;
 	public static double driveBackToOrigPosPower;
 	public static double unhookBinPower;
+	
+
 }
