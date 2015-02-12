@@ -1,4 +1,4 @@
-package com._2491nomythic.helios.autonomous;
+package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
