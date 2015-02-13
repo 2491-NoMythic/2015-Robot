@@ -4,25 +4,37 @@ import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+
+
 /**
  *
  */
 public class PlatformStatus extends Command {
-
-    public PlatformStatus() {
+	enum switchType {
+		True,
+		False,
+		Toggle
+	}
+	
+	private switchType type;
+    public PlatformStatus(switchType type) {
+    	this.type = type;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	if(Variables.PlatformStatus = true) {
-    		Variables.PlatformStatus = false;
+    	if (type == switchType.True) {
+    		Variables.platformStatus = true;
+    	}
+    	else if (type == switchType.False) {
+    		Variables.platformStatus = false;
     	}
     	else {
-    		Variables.PlatformStatus = true;
+    		Variables.platformStatus = !Variables.platformStatus;
     	}
+    	//YOLO BRUH THIS CODE IS OUT OF THIS WORLD.
     }
 
     // Called repeatedly when this Command is scheduled to run

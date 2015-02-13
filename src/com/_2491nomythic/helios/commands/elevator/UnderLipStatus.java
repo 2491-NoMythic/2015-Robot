@@ -1,41 +1,49 @@
 package com._2491nomythic.helios.commands.elevator;
 
-import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+
 
 /**
  *
  */
-public class GoToToteHeight extends CommandBase {
+public class UnderLipStatus extends Command {
+	enum switchType {
+		True,
+		False,
+		Toggle
+	}
 	
-    public GoToToteHeight() {
+	private switchType type;
+    public UnderLipStatus(switchType type) {
+    	this.type = type;
         // Use requires() here to declare subsystem dependencies
-        requires(elevator);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double heightToSet = Variables.toteHeight[Variables.elevatorTarget];
-    	
-		if(Variables.platformStatus) {
-    		heightToSet += 0.166667;
+    	if (type == switchType.True) {
+    		Variables.underLipStatus = true;
     	}
-		if(Variables.underLipStatus) {
-			heightToSet -= Variables.underLipDistance; 
-		}
-    		
-    	elevator.setPID(heightToSet);
-    	
+    	else if (type == switchType.False) {
+    		Variables.underLipStatus = false;
+    	}
+    	else {
+    		Variables.underLipStatus = !Variables.underLipStatus;
+    	}
+    	//YOLO BRUH THIS CODE IS OUT OF THIS WORLD.
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
