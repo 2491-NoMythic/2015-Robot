@@ -1,10 +1,13 @@
 
 package com._2491nomythic.helios;
 
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
@@ -12,6 +15,7 @@ import com._2491nomythic.helios.commands.ExampleCommand;
 import com._2491nomythic.helios.commands.ReadDriverstation;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
 /**
@@ -40,6 +44,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Reset Gyro", new ResetGyro());
         SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
         SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
+        LiveWindow.addSensor("Drivetrain", "Gyro", new Gyro(Constants.gyroChannel));
     }
 	
 	public void disabledPeriodic() {
