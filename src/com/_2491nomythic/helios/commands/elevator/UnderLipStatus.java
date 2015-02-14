@@ -34,7 +34,6 @@ public class UnderLipStatus extends Command {
     	else {
     		Variables.underLipStatus = !Variables.underLipStatus;
     	}
-    	//YOLO BRUH THIS CODE IS OUT OF THIS WORLD.
     }
 
     // Called repeatedly when this Command is scheduled to run
