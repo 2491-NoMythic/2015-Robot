@@ -44,7 +44,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Reset Gyro", new ResetGyro());
         SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
         SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
-        LiveWindow.addSensor("Drivetrain", "Gyro", new Gyro(Constants.gyroChannel));
     }
 	
 	public void disabledPeriodic() {

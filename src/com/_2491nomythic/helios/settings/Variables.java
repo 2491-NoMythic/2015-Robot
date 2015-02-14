@@ -16,6 +16,7 @@ public class Variables {
 	public static int elevatorTarget = 0;
 	public static boolean platformStatus = false;
 	public static boolean underLipStatus = false;
+	public static double underLipDistance = 0.16667;
 	
 	public static double gyroToDegrees = 0.0015;
 	

@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.commands.elevator;
 
+import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PlatformStatus extends Command {
-	enum switchType {
+public class PlatformStatus extends CommandBase {
+	public static enum switchType {
 		True,
 		False,
 		Toggle

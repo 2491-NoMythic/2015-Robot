@@ -20,7 +20,7 @@ public class Elevate extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevator.set(oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis));
+    	elevator.set(-1.0 * oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class UnderLipStatus extends Command {
-	enum switchType {
+	public static enum switchType {
 		True,
 		False,
 		Toggle
