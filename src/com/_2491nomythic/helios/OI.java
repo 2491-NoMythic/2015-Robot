@@ -31,7 +31,7 @@ public class OI {
 	private final Joystick[] controllers = new Joystick[2];
 	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus, pickUpNextTote;
 	public int buttonIncrementer = 0;
-	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
+	int hypotheticalMoveArmValue; //not sure what value Evan would like... Will replace when known.
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
