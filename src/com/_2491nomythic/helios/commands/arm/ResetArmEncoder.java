@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class ZeroEncoder extends CommandBase {
+public class ResetArmEncoder extends CommandBase {
 	int state = 0;
 	Timer timer = new Timer();
 	double currentTime;
 	
-	public ZeroEncoder() {
+	public ResetArmEncoder() {
 		// Use requires() here to declare subsystem dependencies
 		requires(arm);
 		timer.start();

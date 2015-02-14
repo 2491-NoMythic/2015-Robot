@@ -9,6 +9,9 @@ import com._2491nomythic.helios.settings.ControllerMap;
  */
 public class Elevate extends CommandBase {
 	
+	private double elevatorStickPos;
+	private boolean hasBeenStopped;
+	
 	public Elevate() {
 		// Use requires() here to declare subsystem dependencies
 		requires(elevator);
@@ -20,7 +23,15 @@ public class Elevate extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		elevator.set(-1.0 * oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis));
+		elevatorStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
+		if (Math.abs(0.05) >= elevatorStickPos && !(hasBeenStopped)) {
+			elevator.set(0);
+			hasBeenStopped = true;
+		}
+		else if (elevatorStickPos >= 0.05) {
+			elevator.set(elevatorStickPos);
+			hasBeenStopped = false;
+		}
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

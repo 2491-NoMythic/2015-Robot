@@ -9,7 +9,7 @@ import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 //Command imports
-import com._2491nomythic.helios.commands.arm.ZeroEncoder;
+import com._2491nomythic.helios.commands.arm.ResetArmEncoder;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.PickUpNextTote;
@@ -43,7 +43,7 @@ public class OI {
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
 		
 		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.zeroArmEncoderController], ControllerMap.zeroArmEncoderButton);
-		zeroArmEncoder.whenPressed(new ZeroEncoder());
+		zeroArmEncoder.whenPressed(new ResetArmEncoder());
 		
 		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
 		moveUpOneTote.whenPressed(new IncrementToteHeight());
