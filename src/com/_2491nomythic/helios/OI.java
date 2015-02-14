@@ -49,7 +49,7 @@ public class OI {
 		moveDownOneTote.whenPressed(new DecrementToteHeight());
 		
 		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
-		scoringPlatformStatus.whenPressed(new PlatformStatus());
+		scoringPlatformStatus.whenPressed(new PlatformStatus(PlatformStatus.switchType.Toggle));
 	}
 	
 	/**

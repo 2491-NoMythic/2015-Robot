@@ -1,15 +1,16 @@
-
 package com._2491nomythic.helios;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.commands.ExampleCommand;
 import com._2491nomythic.helios.commands.ReadDriverstation;
+import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
+import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
@@ -22,69 +23,75 @@ import com._2491nomythic.helios.subsystems.ExampleSubsystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-
-    Command autonomousCommand;
-
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
+	private Command autoCommand;
+	private SendableChooser autoChooser;
+	
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
 		oi = new OI();
 		CommandBase.init();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
-        SmartDashboard.putData("Reset Gyro", new ResetGyro());
-        SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
-        SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
-    }
+		// instantiate the command used for the autonomous period
+		SmartDashboard.putData("Reset Gyro", new ResetGyro());
+		SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
+		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
+		autoChooser = new SendableChooser();
+		autoChooser.addObject("Pick up Bins from Step", new PickupBinsFromStep());
+		autoChooser.addDefault("Drive into Auto Zone", new DriveIntoAutoZone());
+		SmartDashboard.putData("Autonomous", autoChooser);
+	}
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
-    public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
-
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
-
-    public void teleopInit() {
+	
+	public void autonomousInit() {
+		// schedule the autonomous command (example)
+		autoCommand = (Command)autoChooser.getSelected();
+		autoCommand.start();
+	}
+	
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
+	
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-    }
-
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
-
-    }
-
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autoCommand != null) {
+			autoCommand.cancel();
+		}
+	}
+	
+	/**
+	 * This function is called when the disabled button is hit. You can use it
+	 * to reset subsystems before shutting down.
+	 */
+	public void disabledInit() {
+		
+	}
+	
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
+	
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }

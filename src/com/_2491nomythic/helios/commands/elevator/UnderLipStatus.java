@@ -1,26 +1,43 @@
 package com._2491nomythic.helios.commands.elevator;
 
-import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.settings.ControllerMap;
+import com._2491nomythic.helios.settings.Variables;
+
+import edu.wpi.first.wpilibj.command.Command;
+
 
 
 /**
  *
  */
-public class Elevate extends CommandBase {
-
-    public Elevate() {
+public class UnderLipStatus extends Command {
+	public static enum switchType {
+		True,
+		False,
+		Toggle
+	}
+	
+	private switchType type;
+    public UnderLipStatus(switchType type) {
+    	this.type = type;
         // Use requires() here to declare subsystem dependencies
-        requires(elevator);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if (type == switchType.True) {
+    		Variables.underLipStatus = true;
+    	}
+    	else if (type == switchType.False) {
+    		Variables.underLipStatus = false;
+    	}
+    	else {
+    		Variables.underLipStatus = !Variables.underLipStatus;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevator.set(-1.0 * oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,12 +47,10 @@ public class Elevate extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	elevator.set(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

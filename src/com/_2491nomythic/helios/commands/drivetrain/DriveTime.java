@@ -2,18 +2,21 @@ package com._2491nomythic.helios.commands.drivetrain;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.Timer;
+
 
 /**
  *
  */
-public class DriveDistance extends CommandBase {
+public class DriveTime extends CommandBase {
 	double powerInput;
 	double xInput;
 	double yInput;
 	double xDrive;
 	double yDrive;
+	Timer timer;
 	
-	public DriveDistance(double power, double x, double y) {
+	public DriveTime(double power, double x, double y) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		
@@ -21,10 +24,13 @@ public class DriveDistance extends CommandBase {
 		powerInput = Math.abs(power);
 		xInput = x;
 		yInput = y;
+		timer = new Timer();
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		timer.start();
+		timer.reset();
 		xDrive = powerInput;
 		yDrive = powerInput;
 		if (xInput < 0) {
@@ -33,26 +39,29 @@ public class DriveDistance extends CommandBase {
 		if (yInput < 0) {
 			yDrive = (-1 * powerInput);
 		}
+		drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
-		if ((yInput < 0 && drivetrain.getLeftEncoder().get() <= yInput) || (yInput > 0 && drivetrain.getLeftEncoder().get() >= yInput)) {
-			yDrive = 0;
-		}
-		if ((xInput < 0 && drivetrain.getCenterEncoder().get() <= xInput) || (xInput > 0 && drivetrain.getCenterEncoder().get() >= xInput)) {
+		if (timer.get() > Math.abs(xInput) && xDrive != 0) {
 			xDrive = 0;
+			drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		}
+		if (timer.get() > Math.abs(yInput) && xDrive != 0) {
+			yDrive = 0;
+			drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
 		}
 	}
 	
 	// Mak this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return xDrive == 0 && yDrive == 0;
+		return yDrive == 0 && xDrive == 0;
 	}
 	
 	// Called once after isFinished returns true
 	protected void end() {
+		timer.stop();
 		drivetrain.stop();
 	}
 	
