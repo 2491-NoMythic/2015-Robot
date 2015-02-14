@@ -3,9 +3,6 @@ package com._2491nomythic.helios.commands.elevator;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-
 
 /**
  *
@@ -35,7 +32,6 @@ public class PlatformStatus extends CommandBase {
     	else {
     		Variables.platformStatus = !Variables.platformStatus;
     	}
-    	//YOLO BRUH THIS CODE IS OUT OF THIS WORLD.
     }
 
     // Called repeatedly when this Command is scheduled to run
