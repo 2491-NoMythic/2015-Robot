@@ -44,9 +44,7 @@ public class Arm extends PIDSubsystem {
 		brakeOn = new Solenoid(Constants.ArmBrakeOnChannel);
 		brakeOff = new Solenoid(Constants.ArmBrakeOffChannel);
 		
-		encoder = new Encoder(Constants.armEncoderAChannel,
-				Constants.armEncoderBChannel, Constants.armEncoderReversed,
-				CounterBase.EncodingType.k4X);
+		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
 	}

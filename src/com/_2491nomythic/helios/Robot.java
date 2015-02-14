@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 	
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		autoCommand = (Command)autoChooser.getSelected();
+		autoCommand = (Command) autoChooser.getSelected();
 		autoCommand.start();
 	}
 	
