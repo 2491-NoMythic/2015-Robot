@@ -30,7 +30,7 @@ public class Drive extends CommandBase {
 		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonB)) {
 			multiplier *= 2;
 		}
-		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier, oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * multiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * multiplier);
+		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * multiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * multiplier);
 		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
 		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
 		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
