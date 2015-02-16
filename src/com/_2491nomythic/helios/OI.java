@@ -8,13 +8,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
-//Command imports
-import com._2491nomythic.helios.commands.arm.ResetArmEncoder;
-import com._2491nomythic.helios.commands.arm.ZeroEncoder;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
-import com._2491nomythic.helios.commands.elevator.PickUpNextTote;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 
 /**
@@ -42,9 +38,6 @@ public class OI {
 		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
 		
-		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.zeroArmEncoderController], ControllerMap.zeroArmEncoderButton);
-		zeroArmEncoder.whenPressed(new ResetArmEncoder());
-		
 		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
 		moveUpOneTote.whenPressed(new IncrementToteHeight());
 		
@@ -54,15 +47,14 @@ public class OI {
 		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
 		scoringPlatformStatus.whenPressed(new PlatformStatus(PlatformStatus.switchType.Toggle));
 		
-		
+		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
+		getNextTote.whenPressed(new GetNextToteTime());
 	}
 	
 	/**
 	 * Get a controller
 	 * 
-	 * @param id
-	 *            the ID of the controller. 0 = left or driver, 1 = right or
-	 *            codriver.
+	 * @param id the ID of the controller. 0 = left or driver, 1 = right or codriver.
 	 * @return the instance of the controller requested
 	 */
 	public Joystick getController(int id) {
@@ -100,11 +92,8 @@ public class OI {
 	/**
 	 * Get an axis from a controller that is automatically squared and deadzoned
 	 * 
-	 * @param joystickID
-	 *            The id of the controller. 0 = left or driver, 1 = right or
-	 *            driver
-	 * @param axisID
-	 *            The id of the axis (for use in getRawAxis)
+	 * @param joystickID The id of the controller. 0 = left or driver, 1 = right or driver
+	 * @param axisID The id of the axis (for use in getRawAxis)
 	 * @return the squared, deadzoned result from running getRawAxis
 	 */
 	public double getAxisForDrive(int joystickID, int axisID) {

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  *
  */
 public class Arm extends PIDSubsystem {
-	private CANTalon motorLeft, motorRight;
+	private CANTalon motor;
 	private Encoder encoder;
 	private Solenoid brakeOn, brakeOff;
 	private static Arm instance;
@@ -38,8 +38,7 @@ public class Arm extends PIDSubsystem {
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		motorLeft = new CANTalon(Constants.armTalonArmMotorLeftChannel);
-		motorRight = new CANTalon(Constants.armTalonArmMotorRightChannel);
+		motor = new CANTalon(Constants.armTalonChannel);
 		
 		brakeOn = new Solenoid(Constants.ArmBrakeOnChannel);
 		brakeOff = new Solenoid(Constants.ArmBrakeOffChannel);
@@ -63,25 +62,21 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
-		motorLeft.set(output);
-		motorRight.set(-1.0 * output);
+		motor.set(output);
 		currentSpeed = output;
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
 	}
 	
 	public void set(double speed) {
-		disengageBrake();
 		if (usingPID) {
 			this.disable();
 			usingPID = false;
 		}
-		motorLeft.set(speed);
-		motorRight.set(-1.0 * speed);
+		motor.set(speed);
 	}
 	
 	public void setPID(double position) {
-		disengageBrake();
 		if (!usingPID) {
 			this.enable();
 			usingPID = true;
@@ -90,23 +85,8 @@ public class Arm extends PIDSubsystem {
 		this.setSetpoint(position);
 	}
 	
-	private void engageBrake() {
-		motorLeft.set(0.0);
-		motorRight.set(0.0);
-		while (encoder.getRate() > Constants.ArmBrakeMaxSpeed) {
-			Timer.delay(0.01);
-		}
-		brakeOff.set(false);
-		brakeOn.set(true);
-	}
-	
-	private void disengageBrake() {
-		brakeOn.set(false);
-		brakeOff.set(true);
-	}
-	
 	public void stop() {
-		engageBrake();
+		set(0.0);
 	}
 	
 	public double get() {
@@ -127,5 +107,9 @@ public class Arm extends PIDSubsystem {
 	
 	public void resetEncoder() {
 		encoder.reset();
+	}
+	
+	public Encoder getEncoder() {
+		return encoder;
 	}
 }
