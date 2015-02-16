@@ -12,6 +12,7 @@ import com._2491nomythic.helios.commands.ReadDriverstation;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
+import com._2491nomythic.helios.commands.drivetrain.DriveToTote;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.commands.elevator.BottomElevator;
@@ -48,6 +49,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Drive into Auto Zone", new DriveIntoAutoZone());
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
+		SmartDashboard.putData("Align with tote", new DriveToTote(0.25, 4.0));
 	}
 	
 	public void disabledPeriodic() {
