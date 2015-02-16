@@ -15,7 +15,7 @@ public class UpdateDriverstation extends CommandBase {
 	public UpdateDriverstation() {
 		requires(extraSensors);
 		timer = new Timer();
-		file = new FileData("");
+		file = new FileData("/home/lvuser/SmartDashboard.txt");
 		SmartDashboard.putNumber("Gyro Sensitivity", Double.parseDouble(file.getWithDefault("GyroToDegrees", Double.toString(Variables.gyroToDegrees))));
 	}
 	

@@ -78,8 +78,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void driveCartesian(double x, double y, double rotation) {
-		double left = y - rotation;
-		double right = y + rotation;
+		double left = y + rotation;
+		double right = y - rotation;
 		
 		if (left > 1) {
 			left = 1;

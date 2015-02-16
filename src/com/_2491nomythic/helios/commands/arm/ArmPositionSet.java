@@ -36,7 +36,6 @@ public class ArmPositionSet extends CommandBase {
 			hasBeenStopped = false;
 		}
 		
-		SmartDashboard.putNumber("Arm axis reading", armStickPos);
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

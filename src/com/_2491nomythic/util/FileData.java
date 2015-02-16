@@ -40,6 +40,7 @@ public class FileData {
 			}
 		}
 		textreader.close();
+		fr.close();
 	}
 	
 	public boolean exists(String key) {
@@ -87,7 +88,7 @@ public class FileData {
 		}
 		
 		print_line.close();
-		
+		write.close();
 	}
 	
 	

@@ -12,6 +12,7 @@ import com._2491nomythic.helios.commands.ReadDriverstation;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
+import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.commands.elevator.BottomElevator;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
 		CommandBase.init();
 		// instantiate the command used for the autonomous period
 		SmartDashboard.putData("Reset Gyro", new ResetGyro());
+		SmartDashboard.putData("Rescan Gyro", new FixGyroIssues());
 		SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
 		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
 		autoChooser = new SendableChooser();
