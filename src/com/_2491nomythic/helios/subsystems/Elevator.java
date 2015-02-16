@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -66,7 +67,7 @@ public class Elevator extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
-		if (limitTop.get()) {
+		if (!limitTop.get()) {
 			if (output >= 0) {
 				motorElevator.set(0);
 				currentSpeed = 0;
@@ -76,7 +77,7 @@ public class Elevator extends PIDSubsystem {
 				currentSpeed = output;
 			}
 		}
-		else if (limitBottom.get()) {
+		else if (!limitBottom.get()) {
 			if (output > 0) {
 				motorElevator.set(output);
 				currentSpeed = output;
@@ -99,28 +100,27 @@ public class Elevator extends PIDSubsystem {
 			this.disable();
 			usingPID = false;
 		}
-		
-		if (limitTop.get()) {
-			if (speed >= 0) {
-				motorElevator.set(0);
+		SmartDashboard.putBoolean("Top limit switch", getTopSwitch());
+		SmartDashboard.putBoolean("Bottom limit switch", getBottomSwitch());
+		if (!limitTop.get()) {
+			if (speed >= 0.0) {
+				motorElevator.set(0.0);
 			}
-			else if (speed < 0) {
+			else {
 				motorElevator.set(speed);
 			}
 		}
-		else if (limitBottom.get()) {
-			if (speed > 0) {
+		else if (!limitBottom.get()) {
+			if (speed > 0.0) {
 				motorElevator.set(speed);
 			}
-			else if (speed <= 0) {
-				motorElevator.set(0);
+			else {
+				motorElevator.set(0.0);
 			}
 		}
 		else {
 			motorElevator.set(speed);
 		}
-		
-		motorElevator.set(speed);
 	}
 	
 	public void setPID(double position) {
@@ -158,6 +158,13 @@ public class Elevator extends PIDSubsystem {
 		return encoder;
 	}
 	
+	public boolean getBottomSwitch() {
+		return !limitBottom.get();
+	}
+	
+	public boolean getTopSwitch() {
+		return !limitTop.get();
+	}
 	public void resetEncoder() {
 		encoder.reset();
 	}

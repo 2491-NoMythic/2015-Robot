@@ -11,6 +11,7 @@ import com._2491nomythic.helios.commands.arm.RunWithPID;
 //Command imports
 import com._2491nomythic.helios.commands.arm.ZeroEncoder;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
+import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 
@@ -28,7 +29,7 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus;
+	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus, getNextTote;
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
@@ -50,6 +51,9 @@ public class OI {
 		
 		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
 		scoringPlatformStatus.whenPressed(new PlatformStatus(PlatformStatus.switchType.Toggle));
+		
+		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
+		getNextTote.whenPressed(new GetNextToteTime());
 	}
 	
 	/**

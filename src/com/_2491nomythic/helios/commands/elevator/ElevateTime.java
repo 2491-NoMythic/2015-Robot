@@ -1,4 +1,4 @@
-package com._2491nomythic.helios.commands.drivetrain;
+package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
@@ -8,22 +8,18 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class DriveTime extends CommandBase {
+public class ElevateTime extends CommandBase {
 	double powerInput;
-	double xInput;
-	double yInput;
-	double xDrive;
-	double yDrive;
+	double time;
 	Timer timer;
 	
-	public DriveTime(double power, double x, double y) {
+	public ElevateTime(double power, double time) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		
-		requires(drivetrain);
-		powerInput = Math.abs(power);
-		xInput = x;
-		yInput = y;
+		requires(elevator);
+		powerInput = power;
+		this.time = time;
 		timer = new Timer();
 	}
 	
@@ -31,38 +27,28 @@ public class DriveTime extends CommandBase {
 	protected void initialize() {
 		timer.start();
 		timer.reset();
-		xDrive = powerInput;
-		yDrive = powerInput;
-		if (xInput < 0) {
-			xDrive = (-1 * powerInput);
-		}
-		if (yInput < 0) {
-			yDrive = (-1 * powerInput);
-		}
-		drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		elevator.set(powerInput);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (timer.get() > Math.abs(xInput) && xDrive != 0) {
-			xDrive = 0;
-			drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		if (timer.get() > Math.abs(time)) {
+			elevator.set(0.0);
 		}
-		if (timer.get() > Math.abs(yInput) && yDrive != 0) {
-			yDrive = 0;
-			drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		else {
+			elevator.set(powerInput);
 		}
 	}
 	
 	// Mak this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return yDrive == 0 && xDrive == 0;
+		return (timer.get() > Math.abs(time));
 	}
 	
 	// Called once after isFinished returns true
 	protected void end() {
 		timer.stop();
-		drivetrain.stop();
+		elevator.set(0.0);
 	}
 	
 	// Called when another command which requires one or more of the same

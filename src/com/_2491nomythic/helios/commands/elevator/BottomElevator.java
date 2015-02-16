@@ -1,29 +1,26 @@
-package com._2491nomythic.helios.commands.drivetrain;
+package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
  *
  */
-public class DriveTime extends CommandBase {
+public class BottomElevator extends CommandBase {
 	double powerInput;
-	double xInput;
-	double yInput;
-	double xDrive;
-	double yDrive;
+	double time = 4.0;
 	Timer timer;
+	boolean finished;
 	
-	public DriveTime(double power, double x, double y) {
+	public BottomElevator(double power) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		
-		requires(drivetrain);
-		powerInput = Math.abs(power);
-		xInput = x;
-		yInput = y;
+		requires(elevator);
+		powerInput = -1.0 * Math.abs(power);
 		timer = new Timer();
 	}
 	
@@ -31,38 +28,34 @@ public class DriveTime extends CommandBase {
 	protected void initialize() {
 		timer.start();
 		timer.reset();
-		xDrive = powerInput;
-		yDrive = powerInput;
-		if (xInput < 0) {
-			xDrive = (-1 * powerInput);
-		}
-		if (yInput < 0) {
-			yDrive = (-1 * powerInput);
-		}
-		drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		elevator.set(powerInput);
+		finished = false;
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (timer.get() > Math.abs(xInput) && xDrive != 0) {
-			xDrive = 0;
-			drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		if (timer.get() > Math.abs(time)) {
+			elevator.set(0.0);
+			finished = true;
+			SmartDashboard.putString("Bottom Elevator", "Bottom Out Timed Out");
 		}
-		if (timer.get() > Math.abs(yInput) && yDrive != 0) {
-			yDrive = 0;
-			drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
+		else if (elevator.getBottomSwitch()) {
+			elevator.set(0.0);
+			finished = true;
+			SmartDashboard.putString("Bottom Elevator", "Hit Switch");
 		}
 	}
 	
 	// Mak this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return yDrive == 0 && xDrive == 0;
+		return (finished);
 	}
 	
 	// Called once after isFinished returns true
 	protected void end() {
 		timer.stop();
-		drivetrain.stop();
+		elevator.set(0.0);
+		finished = false;
 	}
 	
 	// Called when another command which requires one or more of the same
