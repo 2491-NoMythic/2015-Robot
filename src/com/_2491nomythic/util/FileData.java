@@ -19,7 +19,7 @@ public class FileData {
 		try {
 			openAndReadFile();
 		}
-		catch(IOException anything) {
+		catch (IOException anything) {
 			System.out.println("Couldn't open and read " + file_path + ".  Error: " + anything.getMessage());
 		}
 	}
@@ -27,12 +27,12 @@ public class FileData {
 	
 	private void openAndReadFile() throws IOException {
 		FileReader fr = new FileReader(path);
-		BufferedReader textreader = new BufferedReader(fr);	
+		BufferedReader textreader = new BufferedReader(fr);
 		String line;
 		String[] parsedLine;
-		while((line = textreader.readLine()) != null) {
+		while ((line = textreader.readLine()) != null) {
 			parsedLine = pattern.split(line);
-			if(parsedLine.length == 2) {
+			if (parsedLine.length == 2) {
 				fileData.put(parsedLine[0], parsedLine[1]);
 			}
 			else {
@@ -47,7 +47,7 @@ public class FileData {
 	}
 	
 	public String get(String key) {
-		if(fileData.containsKey(key)) {
+		if (fileData.containsKey(key)) {
 			return fileData.get(key);
 		}
 		else {
@@ -83,7 +83,7 @@ public class FileData {
 		Enumeration<String> fd_key_Enum = fileData.keys();
 		Enumeration<String> fd_value_Enum = fileData.elements();
 		while (fd_key_Enum.hasMoreElements() && fd_value_Enum.hasMoreElements()) {
-		print_line.printf("%s" + "%n", fd_key_Enum.nextElement() + ":" + fd_value_Enum.nextElement());
+			print_line.printf("%s" + "%n", fd_key_Enum.nextElement() + ":" + fd_value_Enum.nextElement());
 		}
 		
 		print_line.close();
@@ -92,4 +92,3 @@ public class FileData {
 	
 	
 }
-

@@ -9,11 +9,13 @@ import com._2491nomythic.helios.subsystems.*;
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
- * subsystem elsewhere in your code in your code use CommandBase.exampleSubsystem
+ * subsystem elsewhere in your code in your code use
+ * CommandBase.exampleSubsystem
+ * 
  * @author Author
  */
 public abstract class CommandBase extends Command {
-
+	
 	protected static OI oi;
 	protected static Drivetrain drivetrain;
 	protected static Arm arm;
@@ -34,17 +36,17 @@ public abstract class CommandBase extends Command {
 		// news. Don't move it.
 		oi = new OI();
 		oi.init();
-
+		
 		// Show what command your subsystem is running on the SmartDashboard
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(arm);
 		SmartDashboard.putData(compressor);
 	}
-
+	
 	public CommandBase(String name) {
 		super(name);
 	}
-
+	
 	public CommandBase() {
 		super();
 	}

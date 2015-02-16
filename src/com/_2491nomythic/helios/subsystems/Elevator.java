@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator extends PIDSubsystem {
 	private CANTalon motorElevator;
 	private Encoder encoder;
-	private DigitalInput limitTop, limitBottom, toteCheckLeft, toteCheckRight;
+	private DigitalInput limitTop, limitBottom/* , toteCheckLeft, toteCheckRight */;
 	private static Elevator instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
@@ -33,26 +33,22 @@ public class Elevator extends PIDSubsystem {
 	}
 	
 	public Elevator() {
-		super(Variables.elevatorPID_P, Variables.elevatorPID_I,
-				Variables.elevatorPID_D);
+		super(Variables.elevatorPID_P, Variables.elevatorPID_I, Variables.elevatorPID_D);
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
 		motorElevator = new CANTalon(Constants.elevatorTalonMotorChannel);
 		
-		encoder = new Encoder(Constants.elevatorEncoderAChannel,
-				Constants.elevatorEncoderBChannel,
-				Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
+		encoder = new Encoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
-		this.setInputRange(Constants.elevatorMinPosition,
-				Constants.elevatorMaxPosition);
+		this.setInputRange(Constants.elevatorMinPosition, Constants.elevatorMaxPosition);
 		
 		limitTop = new DigitalInput(Constants.elevatorLimitTopChannel);
 		limitBottom = new DigitalInput(Constants.elevatorLimitBottomChannel);
-		toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel);
-		toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel);
-	} 
+		/*
+		 * toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel); toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel); */
+	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -132,8 +128,8 @@ public class Elevator extends PIDSubsystem {
 		this.setSetpoint(position);
 	}
 	
-	public void setPosition(int numTotes){
-		if(numTotes >= 1 && numTotes <= 4){
+	public void setPosition(int numTotes) {
+		if (numTotes >= 1 && numTotes <= 4) {
 			setPID(Variables.toteHeight[numTotes]);
 		}
 	}

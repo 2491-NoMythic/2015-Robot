@@ -8,34 +8,45 @@ import com._2491nomythic.helios.settings.ControllerMap;
  *
  */
 public class Elevate extends CommandBase {
-
-    public Elevate() {
-        // Use requires() here to declare subsystem dependencies
-        requires(elevator);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	elevator.set(-1.0 * oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis));
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    	elevator.set(0.0);
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	
+	private double elevatorStickPos;
+	private boolean hasBeenStopped;
+	
+	public Elevate() {
+		// Use requires() here to declare subsystem dependencies
+		requires(elevator);
+	}
+	
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
+	
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		elevatorStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
+		if (Math.abs(0.05) >= elevatorStickPos && !(hasBeenStopped)) {
+			elevator.set(0);
+			hasBeenStopped = true;
+		}
+		else if (elevatorStickPos >= 0.05) {
+			elevator.set(elevatorStickPos);
+			hasBeenStopped = false;
+		}
+	}
+	
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
+	
+	// Called once after isFinished returns true
+	protected void end() {
+		elevator.set(0.0);
+	}
+	
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

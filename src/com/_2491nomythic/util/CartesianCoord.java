@@ -10,6 +10,7 @@ public class CartesianCoord {
 	
 	/**
 	 * Get the x coordinate
+	 * 
 	 * @return the x coordinate
 	 */
 	public double getX() {
@@ -18,7 +19,9 @@ public class CartesianCoord {
 	
 	/**
 	 * Set the x coordinate
-	 * @param newX new x coordinate
+	 * 
+	 * @param newX
+	 *            new x coordinate
 	 */
 	public void setX(double newX) {
 		x = newX;
@@ -26,6 +29,7 @@ public class CartesianCoord {
 	
 	/**
 	 * Get the y coordinate
+	 * 
 	 * @return the y coordinate
 	 */
 	public double getY() {
@@ -34,7 +38,9 @@ public class CartesianCoord {
 	
 	/**
 	 * Set the y coordinate
-	 * @param newY new y coordinate
+	 * 
+	 * @param newY
+	 *            new y coordinate
 	 */
 	public void setY(double newY) {
 		y = newY;
@@ -42,6 +48,7 @@ public class CartesianCoord {
 	
 	/**
 	 * Get a polar version of the coordinate
+	 * 
 	 * @return a poler version of the coordinate
 	 */
 	public PolarCoord getPolar() {

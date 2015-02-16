@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ExtraSensors extends Subsystem {
-
+	
 	private PowerDistributionPanel powerDistributionPanel;
 	private static ExtraSensors instance;
 	

@@ -38,7 +38,7 @@ public class NMCompressor extends Subsystem {
 	}
 	
 	protected void initDefaultCommand() {
-		setDefaultCommand(new RunCompressor());	
+		setDefaultCommand(new RunCompressor());
 	}
 	
 }

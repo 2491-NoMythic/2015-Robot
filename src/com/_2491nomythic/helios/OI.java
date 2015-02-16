@@ -1,7 +1,7 @@
 package com._2491nomythic.helios;
 
 
-import edu.wpi.first.wpilibj.Joystick;  
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -9,10 +9,12 @@ import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 //Command imports
+import com._2491nomythic.helios.commands.arm.ResetArmEncoder;
 import com._2491nomythic.helios.commands.arm.ZeroEncoder;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
+import com._2491nomythic.helios.commands.elevator.PickUpNextTote;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 
 /**
@@ -37,11 +39,11 @@ public class OI {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);
 		
-		moveArmToPoint = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.SetToTargetButton);
+		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
 		
-		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.ElevatorController], ControllerMap.ZeroArmEncoderButton);
-		zeroArmEncoder.whenPressed(new ZeroEncoder());
+		zeroArmEncoder = new JoystickButton(controllers[ControllerMap.zeroArmEncoderController], ControllerMap.zeroArmEncoderButton);
+		zeroArmEncoder.whenPressed(new ResetArmEncoder());
 		
 		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
 		moveUpOneTote.whenPressed(new IncrementToteHeight());
@@ -52,13 +54,15 @@ public class OI {
 		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
 		scoringPlatformStatus.whenPressed(new PlatformStatus(PlatformStatus.switchType.Toggle));
 		
-		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
-		getNextTote.whenPressed(new GetNextToteTime());
+		
 	}
 	
 	/**
 	 * Get a controller
-	 * @param id the ID of the controller.  0 = left or driver, 1 = right or codriver.
+	 * 
+	 * @param id
+	 *            the ID of the controller. 0 = left or driver, 1 = right or
+	 *            codriver.
 	 * @return the instance of the controller requested
 	 */
 	public Joystick getController(int id) {
@@ -67,8 +71,12 @@ public class OI {
 	
 	/**
 	 * Get a button from a controller
-	 * @param joystickID The id of the controller.  0 = left or driver, 1 = right or codriver.
-	 * @param axisID The id of the button (for use in getRawButton)
+	 * 
+	 * @param joystickID
+	 *            The id of the controller. 0 = left or driver, 1 = right or
+	 *            codriver.
+	 * @param axisID
+	 *            The id of the button (for use in getRawButton)
 	 * @return the result from running getRawButton(button)
 	 */
 	public boolean getButton(int joystickID, int buttonID) {
@@ -77,8 +85,12 @@ public class OI {
 	
 	/**
 	 * Get an axis from a controller
-	 * @param joystickID The id of the controller.  0 = left or driver, 1 = right or codriver.
-	 * @param axisID The id of the axis (for use in getRawAxis)
+	 * 
+	 * @param joystickID
+	 *            The id of the controller. 0 = left or driver, 1 = right or
+	 *            codriver.
+	 * @param axisID
+	 *            The id of the axis (for use in getRawAxis)
 	 * @return the result from running getRawAxis(axis)
 	 */
 	public double getAxis(int joystickID, int axisID) {
@@ -87,8 +99,12 @@ public class OI {
 	
 	/**
 	 * Get an axis from a controller that is automatically squared and deadzoned
-	 * @param joystickID The id of the controller.  0 = left or driver, 1 = right or driver
-	 * @param axisID The id of the axis (for use in getRawAxis)
+	 * 
+	 * @param joystickID
+	 *            The id of the controller. 0 = left or driver, 1 = right or
+	 *            driver
+	 * @param axisID
+	 *            The id of the axis (for use in getRawAxis)
 	 * @return the squared, deadzoned result from running getRawAxis
 	 */
 	public double getAxisForDrive(int joystickID, int axisID) {
@@ -96,27 +112,26 @@ public class OI {
 		result = result * Math.abs(result);
 		return Math.abs(result) > 0.05 ? result : 0;
 	}
-
 	
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
 	
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
+	// There are a few additional built in buttons you can use. Additionally,
+	// by subclassing Button you can create custom triggers and bind those to
+	// commands the same as any other Button.
+	
+	
+	// // TRIGGERING COMMANDS WITH BUTTONS
+	// Once you have a button, it's trivial to bind it to a button in one of
+	// three ways:
+	
+	// Start the command when the button is pressed and let it run the command
+	// until it is finished as determined by it's isFinished method.
+	// button.whenPressed(new ExampleCommand());
+	
+	// Run the command while the button is being held down and interrupt it once
+	// the button is released.
+	// button.whileHeld(new ExampleCommand());
+	
+	// Start the command when the button is released and let it run the command
+	// until it is finished as determined by it's isFinished method.
+	// button.whenReleased(new ExampleCommand());
 }
-
