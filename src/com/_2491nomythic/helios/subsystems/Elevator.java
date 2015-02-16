@@ -43,6 +43,7 @@ public class Elevator extends PIDSubsystem {
 		encoder = new Encoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
 		this.setInputRange(Constants.elevatorMinPosition, Constants.elevatorMaxPosition);
+		this.setAbsoluteTolerance(1.0);
 		
 		limitTop = new DigitalInput(Constants.elevatorLimitTopChannel);
 		limitBottom = new DigitalInput(Constants.elevatorLimitBottomChannel);

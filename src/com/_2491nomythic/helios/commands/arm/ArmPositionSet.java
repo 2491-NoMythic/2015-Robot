@@ -28,7 +28,7 @@ public class ArmPositionSet extends CommandBase {
 	protected void execute() {
 		armStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
 		if (Math.abs(armStickPos) >= 0.05) {
-			arm.set(armStickPos);
+			arm.set(-1 * armStickPos);
 			hasBeenStopped = false;
 		}
 		else if (!(hasBeenStopped)) {

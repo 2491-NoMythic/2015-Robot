@@ -46,6 +46,7 @@ public class Arm extends PIDSubsystem {
 		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
+		this.setAbsoluteTolerance(5.0);
 	}
 	
 	public void initDefaultCommand() {
@@ -62,7 +63,7 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
-		motor.set(output);
+		motor.set(-1.0 * output);
 		currentSpeed = output;
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
@@ -73,7 +74,7 @@ public class Arm extends PIDSubsystem {
 			this.disable();
 			usingPID = false;
 		}
-		motor.set(speed);
+		motor.set(-1.0 * speed);
 	}
 	
 	public void setPID(double position) {

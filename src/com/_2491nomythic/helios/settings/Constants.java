@@ -32,8 +32,8 @@ public class Constants {
 	public static final double ArmBrakeMaxSpeed = 10.0; // Max speed of arm to
 														// allow brake to be
 														// engaged
-	public static final int armEncoderAChannel = 6;
-	public static final int armEncoderBChannel = 7;
+	public static final int armEncoderAChannel = 15;
+	public static final int armEncoderBChannel = 16;
 	public static final boolean armEncoderReversed = false;
 	public static final double armEncoderToDegrees = 1.0;
 	public static final double armMinPosition = 0.0;
