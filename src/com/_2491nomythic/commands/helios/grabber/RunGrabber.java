@@ -3,8 +3,6 @@ package com._2491nomythic.commands.helios.grabber;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  *
  */

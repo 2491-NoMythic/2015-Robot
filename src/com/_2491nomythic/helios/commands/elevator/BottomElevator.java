@@ -3,7 +3,6 @@ package com._2491nomythic.helios.commands.elevator;
 import com._2491nomythic.helios.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**

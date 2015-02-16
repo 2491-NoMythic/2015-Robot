@@ -7,8 +7,6 @@ import com._2491nomythic.helios.settings.Variables;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
@@ -17,7 +15,6 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class Arm extends PIDSubsystem {
 	private CANTalon motor;
 	private Encoder encoder;
-	private Solenoid brakeOn, brakeOff;
 	private static Arm instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
@@ -39,9 +36,6 @@ public class Arm extends PIDSubsystem {
 		// to
 		// enable() - Enables the PID controller.
 		motor = new CANTalon(Constants.armTalonChannel);
-		
-		brakeOn = new Solenoid(Constants.ArmBrakeOnChannel);
-		brakeOff = new Solenoid(Constants.ArmBrakeOffChannel);
 		
 		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);

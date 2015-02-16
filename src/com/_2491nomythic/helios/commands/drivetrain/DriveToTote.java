@@ -4,7 +4,6 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Constants;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
