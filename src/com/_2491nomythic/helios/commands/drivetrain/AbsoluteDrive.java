@@ -22,7 +22,15 @@ public class AbsoluteDrive extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		drivetrain.driveAbsolute(new CartesianCoord(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX), -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY)).getPolar(), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis));
+		double multiplier = 0.25;
+		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonA)) {
+			multiplier *= 2;
+		}
+		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonB)) {
+			multiplier *= 2;
+		}
+		CartesianCoord driveCoord = new CartesianCoord(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * multiplier);
+		drivetrain.driveAbsolute(driveCoord.getPolar(), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * multiplier);
 		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
 		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
 		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());

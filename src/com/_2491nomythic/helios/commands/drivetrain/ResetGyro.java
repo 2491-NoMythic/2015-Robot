@@ -7,8 +7,6 @@ import com._2491nomythic.helios.commands.CommandBase;
  */
 public class ResetGyro extends CommandBase {
 	
-	private boolean done = false;
-	
 	public ResetGyro() {
 		requires(drivetrain);
 		// Use requires() here to declare subsystem dependencies
@@ -17,11 +15,7 @@ public class ResetGyro extends CommandBase {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		
 		drivetrain.getGyro().reset();
-		// drivetrain.getGyro().initGyro();
-		done = true;
-		
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -31,12 +25,11 @@ public class ResetGyro extends CommandBase {
 	
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return done;
+		return true;
 	}
 	
 	// Called once after isFinished returns true
 	protected void end() {
-		done = false;
 	}
 	
 	// Called when another command which requires one or more of the same
