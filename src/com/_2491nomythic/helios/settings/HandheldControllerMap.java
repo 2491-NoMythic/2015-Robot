@@ -18,6 +18,7 @@ public class HandheldControllerMap {
 	// Left Y Axis on Controller 1: Arm Manual
 	public static final int ArmController = 1;
 	public static final int ArmAxis = 1;
+	public static final int GrabberAxis = 0;
 	// Up-Down Dpad on Controller 1: Arm Turn
 	public static final int ArmTurnController = 1;
 	public static final int ArmTurnAxis = 5;
@@ -39,8 +40,8 @@ public class HandheldControllerMap {
 	public static final int scoringPlatformStatusButton = 1;
 	public static final int getNextToteController = 1;
 	public static final int getNextToteButton = 10;
+	public static final int driveToToteButton = 9;
+	//Drive
 	public static final int FasterDriveButtonA = 6;
 	public static final int FasterDriveButtonB = 5;
-	
-	
 }

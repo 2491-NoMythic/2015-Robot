@@ -21,6 +21,7 @@ public abstract class CommandBase extends Command {
 	protected static Arm arm;
 	protected static NMCompressor compressor;
 	protected static Elevator elevator;
+	protected static Grabber grabber;
 	protected static ExtraSensors extraSensors;
 	
 	public static void init() {
@@ -28,6 +29,7 @@ public abstract class CommandBase extends Command {
 		arm = Arm.getInstance();
 		compressor = NMCompressor.getInstance();
 		elevator = Elevator.getInstance();
+		grabber = Grabber.getInstance();
 		extraSensors = ExtraSensors.getInstance();
 		// This MUST be here. If the OI creates Commands (which it very likely
 		// will), constructing it during the construction of CommandBase (from
@@ -41,6 +43,7 @@ public abstract class CommandBase extends Command {
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(arm);
 		SmartDashboard.putData(compressor);
+		SmartDashboard.putData(grabber);
 		SmartDashboard.putData(elevator);
 	}
 	
