@@ -39,7 +39,8 @@ public class HandheldControllerMap {
 	public static final int scoringPlatformStatusButton = 1;
 	public static final int getNextToteController = 1;
 	public static final int getNextToteButton = 10;
-	public static final int DriveHalfSpeedButton = 6;
+	public static final int FasterDriveButtonA = 6;
+	public static final int FasterDriveButtonB = 5;
 	
 	
 }

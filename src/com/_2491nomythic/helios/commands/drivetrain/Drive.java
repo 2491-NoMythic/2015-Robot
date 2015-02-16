@@ -23,12 +23,14 @@ public class Drive extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// Go at half speed unless the right trigger is held
-    	if (oi.getButton(ControllerMap.DriveController, ControllerMap.DriveHalfSpeedButton)) {
-    		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX), oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis));
-    	}
-    	else {
-    		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * 0.5, oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * 0.5, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * 0.5);
-    	}
+		double multiplier = 0.25;
+		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonA)) {
+			multiplier *= 2;
+		}
+		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonB)) {
+			multiplier *= 2;
+		}
+		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier, oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * multiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * multiplier);
 		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
 		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
 		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
