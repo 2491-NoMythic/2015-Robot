@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator extends PIDSubsystem {
 	private CANTalon motorElevator;
 	private Encoder encoder;
-	private DigitalInput limitTop, limitBottom/* , toteCheckLeft, toteCheckRight */;
+	private DigitalInput limitTop, limitBottom , toteCheckLeft, toteCheckRight;
 	private static Elevator instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
@@ -46,8 +46,8 @@ public class Elevator extends PIDSubsystem {
 		
 		limitTop = new DigitalInput(Constants.elevatorLimitTopChannel);
 		limitBottom = new DigitalInput(Constants.elevatorLimitBottomChannel);
-		/*
-		 * toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel); toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel); */
+		toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel);
+		toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel);
 	}
 	
 	public void initDefaultCommand() {
@@ -161,6 +161,15 @@ public class Elevator extends PIDSubsystem {
 	public boolean getTopSwitch() {
 		return !limitTop.get();
 	}
+	
+	public boolean getToteCheckLeft() {
+		return !toteCheckLeft.get();
+	}
+	
+	public boolean getToteCheckRight() {
+		return !toteCheckRight.get();
+	}
+	
 	public void resetEncoder() {
 		encoder.reset();
 	}

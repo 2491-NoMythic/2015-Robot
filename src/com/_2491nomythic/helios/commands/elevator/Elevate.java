@@ -23,13 +23,13 @@ public class Elevate extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		elevatorStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
-		if (Math.abs(0.05) >= elevatorStickPos && !(hasBeenStopped)) {
+		elevatorStickPos = oi.getAxis(ControllerMap.ElevatorController, ControllerMap.ElevatorAxis);
+		if (0.05 >= Math.abs(elevatorStickPos) && !(hasBeenStopped)) {
 			elevator.set(0);
 			hasBeenStopped = true;
 		}
-		else if (elevatorStickPos >= 0.05) {
-			elevator.set(elevatorStickPos);
+		else if (Math.abs(elevatorStickPos) >= 0.05) {
+			elevator.set(-1 * elevatorStickPos);
 			hasBeenStopped = false;
 		}
 	}

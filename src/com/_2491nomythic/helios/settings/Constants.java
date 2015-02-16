@@ -49,8 +49,8 @@ public class Constants {
 	public static final double elevatorMaxPosition = 5.0;
 	public static final int elevatorLimitTopChannel = 11;
 	public static final int elevatorLimitBottomChannel = 9;
-	public static final int elevatorToteCheckLeftChannel = 13;
-	public static final int elevatorToteCheckRightChannel = 14;
+	public static final int elevatorToteCheckLeftChannel = 6;
+	public static final int elevatorToteCheckRightChannel = 7;
 	
 	// Grabber
 	public static final int grabberTalonMotorChannel = 19;

@@ -1,6 +1,7 @@
-package com._2491nomythic.helios.commands.elevator;
+package com._2491nomythic.helios.commands.drivetrain;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.Constants;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,40 +10,42 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class BottomElevator extends CommandBase {
-	double powerInput;
-	double time = 4.0;
+public class DriveToTote extends CommandBase {
+	double power;
+	double time;
 	Timer timer;
 	boolean finished = false;
 	
-	public BottomElevator(double power) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		
-		requires(elevator);
-		powerInput = -1.0 * Math.abs(power);
+	public DriveToTote(double power, double timeout) {
+		requires(drivetrain);
+		this.power = Math.abs(power);
+		this.time = timeout;
 		timer = new Timer();
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		finished = false;
 		timer.start();
 		timer.reset();
-		elevator.set(powerInput);
-		finished = false;
+		drivetrain.drive(power, power, Constants.nullX, Constants.nullX);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (timer.get() > time) {
-			elevator.set(0.0);
+			drivetrain.stop();;
 			finished = true;
-			System.out.println("Elevator bottom out timed out");
 		}
-		else if (elevator.getBottomSwitch()) {
-			elevator.set(0.0);
+		else if (elevator.getToteCheckLeft() && elevator.getToteCheckRight()) {
+			drivetrain.stop();
 			finished = true;
-			System.out.println("Elevator hit switch");
+		}
+		else if (elevator.getToteCheckLeft()) {
+			drivetrain.drive(-0.5 * power, power, Constants.nullX, Constants.nullX);
+		}
+		else if (elevator.getToteCheckRight()) {
+			drivetrain.drive(power, -0.5 * power, Constants.nullX, Constants.nullX);
 		}
 	}
 	
