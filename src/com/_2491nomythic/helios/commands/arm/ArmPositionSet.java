@@ -27,13 +27,13 @@ public class ArmPositionSet extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		armStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
-		if (Math.abs(0.05) >= armStickPos && !(hasBeenStopped)) {
-			arm.stop();
-			hasBeenStopped = true;
-		}
-		else if (armStickPos >= 0.05) {
+		if (Math.abs(armStickPos) >= 0.05) {
 			arm.set(armStickPos);
 			hasBeenStopped = false;
+		}
+		else if (!(hasBeenStopped)) {
+			arm.stop();
+			hasBeenStopped = true;
 		}
 		
 	}
