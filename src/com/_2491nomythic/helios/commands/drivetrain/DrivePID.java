@@ -14,17 +14,21 @@ public class DrivePID extends CommandBase {
 	private double yTargetInput;
 	private PIDController xController;
 	private PIDController yController;
+	private int centerEncoder = drivetrain.getCenterEncoder().get();
+	private int leftEncoder = drivetrain.getLeftEncoder().get();
+	private int rightEncoder = drivetrain.getRightEncoder().get();
+	
 	private PIDOutput xOutput = new PIDOutput() {
 		
 		public void pidWrite(double output) {
-			drivetrain.driveCenter(output, output);
+			drivetrain.driveCenter(output + centerEncoder, output + centerEncoder);
 		}
 	};
 	private PIDOutput yOutput = new PIDOutput() {
 		
 		public void pidWrite(double output) {
-			drivetrain.driveRight(output);
-			drivetrain.driveLeft(output);
+			drivetrain.driveRight(output + rightEncoder);
+			drivetrain.driveLeft(output + leftEncoder);
 		}
 	};
 	
