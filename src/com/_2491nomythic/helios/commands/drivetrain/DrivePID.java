@@ -32,8 +32,15 @@ public class DrivePID extends CommandBase {
 		requires(drivetrain);
 		this.xTargetInput = xTargetInput;
 		this.yTargetInput = yTargetInput;
-		xController = new PIDController(Variables.drivePID_P, Variables.drivePID_I, Variables.drivePID_D, drivetrain.getLeftEncoder(), xOutput);
-		yController = new PIDController(Variables.drivePID_P, Variables.drivePID_I, Variables.drivePID_D, drivetrain.getCenterEncoder(), yOutput);
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getLeftEncoder(), xOutput);
+		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
+		xController.setAbsoluteTolerance(0.1);
+		yController.setAbsoluteTolerance(0.1);
+	}
+	
+	public void updateSettings() {
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getLeftEncoder(), xOutput);
+		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
