@@ -1,6 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
-import com._2491nomythic.commands.helios.grabber.RunGrabber;
+import com._2491nomythic.helios.commands.grabber.RunGrabber;
 import com._2491nomythic.helios.settings.Constants;
 
 import edu.wpi.first.wpilibj.CANTalon;

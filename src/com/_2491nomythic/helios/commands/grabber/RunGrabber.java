@@ -1,27 +1,25 @@
-package com._2491nomythic.commands.helios.grabber;
+package com._2491nomythic.helios.commands.grabber;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.ControllerMap;
 
 /**
  *
  */
-public class RotateGrabber extends CommandBase {
+public class RunGrabber extends CommandBase {
 	
-	private double speed;
 	
-	public RotateGrabber(double speed) {
+	public RunGrabber() {
 		requires(grabber);
-		this.speed = speed;
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		grabber.set(speed);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		
+		grabber.set(oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.GrabberAxis));
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()
