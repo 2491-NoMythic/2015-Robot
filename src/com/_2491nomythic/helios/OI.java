@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
+import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
@@ -27,7 +28,7 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus, getNextTote, goToTote; 
+	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus, getNextTote, goToTote, driveOneAndAHalfFeetRight, driveOneAndAHalfFeetStraight; 
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
@@ -49,8 +50,15 @@ public class OI {
 		
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new GetNextToteTime());
+		
+		driveOneAndAHalfFeetRight = new JoystickButton(controllers[ControllerMap.drivePIDController], ControllerMap.tempOneAndAHalfftDriveButton);
+		driveOneAndAHalfFeetRight.whenPressed(new DrivePID(0, 1.5));
+		
+		driveOneAndAHalfFeetStraight = new JoystickButton(controllers[0], 8);
+		driveOneAndAHalfFeetStraight.whenPressed(new DrivePID(1.5, 0));
+		
 	}
-	
+	;
 	/**
 	 * Get a controller
 	 * 

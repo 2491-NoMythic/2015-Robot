@@ -12,10 +12,12 @@ import com._2491nomythic.helios.commands.ReadDriverstation;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
+import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.drivetrain.DriveToTote;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.commands.elevator.BottomElevator;
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
 /**
@@ -31,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	private Command autoCommand;
 	private SendableChooser autoChooser;
+	public static DrivePID drivePID;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -50,6 +53,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
 		SmartDashboard.putData("Align with tote", new DriveToTote(0.25, 4.0));
+		drivePID = new DrivePID(Constants.nullX, 1.0);
+		SmartDashboard.putData("Test Drive PID", drivePID);
 	}
 	
 	public void disabledPeriodic() {

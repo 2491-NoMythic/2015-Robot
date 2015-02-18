@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.commands;
 
+import com._2491nomythic.helios.Robot;
 import com._2491nomythic.helios.settings.Variables;
 import com._2491nomythic.util.FileData;
 
@@ -16,7 +17,10 @@ public class UpdateDriverstation extends CommandBase {
 		requires(extraSensors);
 		timer = new Timer();
 		file = new FileData("/home/lvuser/SmartDashboard.txt");
-		SmartDashboard.putNumber("Gyro Sensitivity", Double.parseDouble(file.getWithDefault("GyroToDegrees", Double.toString(Variables.gyroToDegrees))));
+		SmartDashboard.putNumber("Gyro Sensitivity", file.getDoubleWithDefault("GyroToDegrees", Variables.gyroToDegrees));
+		SmartDashboard.putNumber("Drive Y PID P", file.getDoubleWithDefault("DriveYPIDP", Variables.driveyPID_P));
+		SmartDashboard.putNumber("Drive Y PID I", file.getDoubleWithDefault("DriveYPIDI", Variables.driveyPID_I));
+		SmartDashboard.putNumber("Drive Y PID D", file.getDoubleWithDefault("DriveYPIDD", Variables.driveyPID_D));
 	}
 	
 	protected void initialize() {
@@ -72,6 +76,27 @@ public class UpdateDriverstation extends CommandBase {
 			Variables.gyroToDegrees = tmp;
 			file.set("GyroToDegrees", Double.toString(tmp));
 		}
-	}
+		
+		tmp = SmartDashboard.getNumber("Drive Y PID P");
+		if (tmp != Variables.driveyPID_P) {
+			Variables.driveyPID_P = tmp;
+			file.set("DriveYPIDP", Double.toString(tmp));
+			Robot.drivePID.updateSettings();
+		}
+			
+		tmp = SmartDashboard.getNumber("Drive Y PID I");
+		if (tmp != Variables.driveyPID_I) {
+			Variables.driveyPID_I = tmp;
+			file.set("DriveYPIDI", Double.toString(tmp));
+			Robot.drivePID.updateSettings();
+		}
 	
+		tmp = SmartDashboard.getNumber("Drive Y PID D");
+		if (tmp != Variables.driveyPID_D) {
+			Variables.driveyPID_D = tmp;
+			file.set("DriveYPIDD", Double.toString(tmp));
+			Robot.drivePID.updateSettings();
+		}
+	
+	}
 }

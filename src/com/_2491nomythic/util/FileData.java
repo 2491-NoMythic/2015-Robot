@@ -91,5 +91,16 @@ public class FileData {
 		write.close();
 	}
 	
+	public void set(String key, double valueInput) {
+		set(key, Double.toString(valueInput));
+	}
+	
+	public double getDouble(String key) {
+		return Double.parseDouble(get(key));
+	}
+	
+	public double getDoubleWithDefault(String key, double defaultValue) {
+		return Double.parseDouble(getWithDefault(key, Double.toString(defaultValue)));
+	}
 	
 }
