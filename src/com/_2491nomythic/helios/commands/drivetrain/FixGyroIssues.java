@@ -1,6 +1,7 @@
 package com._2491nomythic.helios.commands.drivetrain;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.Variables;
 
 /**
  *
@@ -16,6 +17,7 @@ public class FixGyroIssues extends CommandBase {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		drivetrain.getGyro().initGyro();
+		drivetrain.getGyro().setSensitivity(Variables.gyroToDegrees);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run

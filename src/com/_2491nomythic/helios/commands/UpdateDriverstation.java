@@ -67,6 +67,8 @@ public class UpdateDriverstation extends CommandBase {
 		}
 		SmartDashboard.putNumber("Current Elevator Position", elevator.getEncoder().getDistance());
 		SmartDashboard.putNumber("Gyro Positon", drivetrain.getGyro().getAngle());
+		SmartDashboard.putNumber("Right Encoder", drivetrain.getRightEncoder().getDistance());
+		SmartDashboard.putNumber("Center Encoder", drivetrain.getCenterEncoder().getDistance());
 	}
 	
 	private void readVariables() {
@@ -75,6 +77,7 @@ public class UpdateDriverstation extends CommandBase {
 		if (tmp != Variables.gyroToDegrees) {
 			Variables.gyroToDegrees = tmp;
 			file.set("GyroToDegrees", Double.toString(tmp));
+			drivetrain.getGyro().setSensitivity(tmp);
 		}
 		
 		tmp = SmartDashboard.getNumber("Drive Y PID P");

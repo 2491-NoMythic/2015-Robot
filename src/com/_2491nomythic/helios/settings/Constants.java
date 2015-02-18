@@ -13,16 +13,16 @@ public class Constants {
 	public static final int driveTalonBackLeftChannel = 10;
 	public static final int driveTalonBackCenterChannel = 11;
 	public static final int driveTalonBackRightChannel = 15;
-	public static final int driveEncoderLeftAChannel = 0;
-	public static final int driveEncoderLeftBChannel = 1;
-	public static final int driveEncoderCenterAChannel = 4;
-	public static final int driveEncoderCenterBChannel = 5;
-	public static final int driveEncoderRightAChannel = 2;
-	public static final int driveEncoderRightBChannel = 3;
+	public static final int driveEncoderLeftAChannel = 4;
+	public static final int driveEncoderLeftBChannel = 5;
+	public static final int driveEncoderCenterAChannel = 2;
+	public static final int driveEncoderCenterBChannel = 3;
+	public static final int driveEncoderRightAChannel = 0;
+	public static final int driveEncoderRightBChannel = 1;
 	public static final boolean driveEncoderLeftReversed = false;
 	public static final boolean driveEncoderCenterReversed = false;
 	public static final boolean driveEncoderRightReversed = false;
-	public static final double driveEncoderToFeet = 1.0;
+	public static final double driveEncoderToFeet = 0.00598740738248483559836600606686;
 	public static final int gyroChannel = 1;
 	
 	// Arm

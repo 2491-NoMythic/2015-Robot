@@ -13,8 +13,8 @@ public class HandheldControllerMap {
 	public static final int TurnController = 0;
 	public static final int TurnAxis = 2;
 	// Right Y Axis on Controller 1: Elevator
-	public static final int ElevatorController = 0;
-	public static final int ElevatorAxis = 5;
+	public static final int CodriverElevatorController = 1;
+	public static final int CodriverElevatorAxis = 3;
 	// Left Y Axis on Controller 1: Arm Manual
 	public static final int ArmController = 1;
 	public static final int ArmAxis = 1;
@@ -41,6 +41,9 @@ public class HandheldControllerMap {
 	public static final int getNextToteController = 0;
 	public static final int getNextToteButton = 10;
 	public static final int driveToToteButton = 9;
+	public static final int driverElevatorController = 0;
+	public static final int driverElevatorUp = 4;
+	public static final int driverElevatorDown = 1;
 	//Drive
 	public static final int FasterDriveButtonA = 6;
 	public static final int FasterDriveButtonB = 5;

@@ -15,7 +15,9 @@ import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.drivetrain.DriveToTote;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
+import com._2491nomythic.helios.commands.drivetrain.ResetCenterEncoder;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
+import com._2491nomythic.helios.commands.drivetrain.ResetSideEncoders;
 import com._2491nomythic.helios.commands.elevator.BottomElevator;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
@@ -55,6 +57,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Align with tote", new DriveToTote(0.25, 4.0));
 		drivePID = new DrivePID(Constants.nullX, 1.0);
 		SmartDashboard.putData("Test Drive PID", drivePID);
+		SmartDashboard.putData("Reset Side Encoders", new ResetSideEncoders());
+		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
 	}
 	
 	public void disabledPeriodic() {

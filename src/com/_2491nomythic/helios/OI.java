@@ -10,6 +10,7 @@ import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
+import com._2491nomythic.helios.commands.elevator.ElevatePower;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
@@ -28,13 +29,18 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	Button zeroArmEncoder, moveArmToPoint, moveUpOneTote, moveDownOneTote, scoringPlatformStatus, getNextTote, goToTote, driveOneAndAHalfFeetRight, driveOneAndAHalfFeetStraight; 
+	Button zeroArmEncoder, moveArmToPoint,
+		moveUpOneTote, moveDownOneTote, getNextTote, goToTote,
+		scoringPlatformStatus, driveOneAndAHalfFeetRight, driveOneAndAHalfFeetStraight,
+		driverElevatorUp, driverElevatorDown; 
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);
+		
+		
 		
 		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
@@ -57,6 +63,11 @@ public class OI {
 		driveOneAndAHalfFeetStraight = new JoystickButton(controllers[0], 8);
 		driveOneAndAHalfFeetStraight.whenPressed(new DrivePID(1.5, 0));
 		
+		driverElevatorUp = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorUp);
+		driverElevatorUp.whileHeld(new ElevatePower(1.0));
+		
+		driverElevatorDown = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorDown);
+		driverElevatorDown.whileHeld(new ElevatePower(-1.0));
 	}
 	;
 	/**

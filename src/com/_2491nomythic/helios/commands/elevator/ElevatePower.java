@@ -1,37 +1,27 @@
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.settings.ControllerMap;
 
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Elevate extends CommandBase {
+public class ElevatePower extends CommandBase {
+	double power;
 	
-	private double elevatorStickPos;
-	private boolean hasBeenStopped;
-	
-	public Elevate() {
-		// Use requires() here to declare subsystem dependencies
+	public ElevatePower(double power) {
+		this.power = power;
 		requires(elevator);
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		elevator.set(power);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		elevatorStickPos = oi.getAxis(ControllerMap.CodriverElevatorController, ControllerMap.CodriverElevatorAxis);
-		if (0.05 >= Math.abs(elevatorStickPos) && !(hasBeenStopped)) {
-			elevator.set(0);
-			hasBeenStopped = true;
-		}
-		else if (Math.abs(elevatorStickPos) >= 0.05) {
-			elevator.set(-1 * elevatorStickPos);
-			hasBeenStopped = false;
-		}
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()
