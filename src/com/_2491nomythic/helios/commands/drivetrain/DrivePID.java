@@ -17,33 +17,51 @@ public class DrivePID extends CommandBase {
 	private int centerEncoder = drivetrain.getCenterEncoder().get();
 	private int leftEncoder = drivetrain.getLeftEncoder().get();
 	private int rightEncoder = drivetrain.getRightEncoder().get();
+	private double maxSpeed;
 	
 	private PIDOutput xOutput = new PIDOutput() {
 		
 		public void pidWrite(double output) {
+			if(Math.abs(output) > Math.abs(maxSpeed)) {
+				if(output < 0) {
+					output = -(Math.abs(maxSpeed));
+				}
+				else {
+					output = maxSpeed;
+				}
+			}
 			drivetrain.driveCenter(output + centerEncoder, output + centerEncoder);
 		}
 	};
 	private PIDOutput yOutput = new PIDOutput() {
 		
 		public void pidWrite(double output) {
+			if(Math.abs(output) > Math.abs(maxSpeed)) {
+				if(output < 0) {
+					output = -(Math.abs(maxSpeed));
+				}
+				else {
+					output = maxSpeed;
+				}
+			}
 			drivetrain.driveRight(output + rightEncoder);
 			drivetrain.driveLeft(output + leftEncoder);
 		}
 	};
 	
-	public DrivePID(double xTargetInput, double yTargetInput) {
+	public DrivePID(double maxSpeedInput, double xTargetInput, double yTargetInput) {
 		requires(drivetrain);
+		maxSpeed = maxSpeedInput;
 		this.xTargetInput = xTargetInput;
 		this.yTargetInput = yTargetInput;
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getRightEncoder(), xOutput);
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getLeftEncoder(), xOutput);
 		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
 	
 	public void updateSettings() {
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getRightEncoder(), xOutput);
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getLeftEncoder(), xOutput);
 		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);

@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
 		SmartDashboard.putData("Align with tote", new DriveToTote(0.25, 4.0));
-		drivePID = new DrivePID(Constants.nullX, 1.0);
+		drivePID = new DrivePID(0.5, Constants.nullX, 1.0);
 		SmartDashboard.putData("Test Drive PID", drivePID);
 		SmartDashboard.putData("Reset Side Encoders", new ResetSideEncoders());
 		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
