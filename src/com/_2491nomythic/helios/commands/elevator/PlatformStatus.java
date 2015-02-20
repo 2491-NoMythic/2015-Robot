@@ -13,6 +13,7 @@ public class PlatformStatus extends CommandBase {
 	}
 	
 	private switchType type;
+	private static GoToToteHeight go;
 	
 	public PlatformStatus(switchType type) {
 		this.type = type;
@@ -31,6 +32,7 @@ public class PlatformStatus extends CommandBase {
 		else {
 			Variables.platformStatus = !Variables.platformStatus;
 		}
+		go.start();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run

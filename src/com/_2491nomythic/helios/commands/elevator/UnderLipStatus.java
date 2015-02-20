@@ -9,11 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class UnderLipStatus extends Command {
+	
 	public static enum switchType {
 		True, False, Toggle
 	}
 	
 	private switchType type;
+	private static GoToToteHeight go;
 	
 	public UnderLipStatus(switchType type) {
 		this.type = type;
@@ -32,6 +34,7 @@ public class UnderLipStatus extends Command {
 		else {
 			Variables.underLipStatus = !Variables.underLipStatus;
 		}
+		go.start();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run

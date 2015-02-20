@@ -1,3 +1,4 @@
+
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
@@ -7,7 +8,7 @@ import com._2491nomythic.helios.settings.Variables;
  *
  */
 public class GoToToteHeight extends CommandBase {
-	
+
 	public GoToToteHeight() {
 		// Use requires() here to declare subsystem dependencies
 		requires(elevator);

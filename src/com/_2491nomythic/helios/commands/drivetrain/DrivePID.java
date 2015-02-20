@@ -14,9 +14,6 @@ public class DrivePID extends CommandBase {
 	private double yTargetInput;
 	private PIDController xController;
 	private PIDController yController;
-	private int centerEncoder = drivetrain.getCenterEncoder().get();
-	private int leftEncoder = drivetrain.getLeftEncoder().get();
-	private int rightEncoder = drivetrain.getRightEncoder().get();
 	private double maxSpeed;
 	
 	private PIDOutput xOutput = new PIDOutput() {
@@ -30,7 +27,7 @@ public class DrivePID extends CommandBase {
 					output = maxSpeed;
 				}
 			}
-			drivetrain.driveCenter(output + centerEncoder, output + centerEncoder);
+			drivetrain.driveCenter(output, output);
 		}
 	};
 	private PIDOutput yOutput = new PIDOutput() {
@@ -44,8 +41,8 @@ public class DrivePID extends CommandBase {
 					output = maxSpeed;
 				}
 			}
-			drivetrain.driveRight(output + rightEncoder);
-			drivetrain.driveLeft(output + leftEncoder);
+			drivetrain.driveRight(output);
+			drivetrain.driveLeft(output);
 		}
 	};
 	
@@ -69,8 +66,8 @@ public class DrivePID extends CommandBase {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		xController.setSetpoint(xTargetInput);
-		yController.setSetpoint(yTargetInput);
+		xController.setSetpoint(xTargetInput + drivetrain.getCenterEncoder().getDistance());
+		yController.setSetpoint(yTargetInput + drivetrain.getRightEncoder().getDistance());
 		xController.enable();
 		yController.disable();
 	}
