@@ -47,6 +47,4 @@ public class HandheldControllerMap {
 	//Drive
 	public static final int FasterDriveButtonA = 6;
 	public static final int FasterDriveButtonB = 5;
-	public static final int tempOneAndAHalfftDriveButton = 7;
-	public static final int drivePIDController = 0;
 }

@@ -57,12 +57,6 @@ public class OI {
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new GetNextToteTime());
 		
-		driveOneAndAHalfFeetRight = new JoystickButton(controllers[ControllerMap.drivePIDController], ControllerMap.tempOneAndAHalfftDriveButton);
-		driveOneAndAHalfFeetRight.whenPressed(new DrivePID(0, 1.5));
-		
-		driveOneAndAHalfFeetStraight = new JoystickButton(controllers[0], 8);
-		driveOneAndAHalfFeetStraight.whenPressed(new DrivePID(1.5, 0));
-		
 		driverElevatorUp = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorUp);
 		driverElevatorUp.whileHeld(new ElevatePower(1.0));
 		
