@@ -6,6 +6,7 @@ import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class Arm extends PIDSubsystem {
 	private CANTalon motor;
 	private Encoder encoder;
+	private DigitalInput hallEffectSensor;
 	private static Arm instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
@@ -41,6 +43,8 @@ public class Arm extends PIDSubsystem {
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
 		this.setAbsoluteTolerance(5.0);
+		
+		hallEffectSensor = new DigitalInput(Constants.armHallEffectSensorChannel);
 	}
 	
 	public void initDefaultCommand() {
@@ -106,5 +110,9 @@ public class Arm extends PIDSubsystem {
 	
 	public Encoder getEncoder() {
 		return encoder;
+	}
+	
+	public boolean getHallEffectSensor() {
+		return !hallEffectSensor.get();
 	}
 }
