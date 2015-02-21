@@ -25,6 +25,7 @@ public class IncrementToteHeightHelper extends CommandBase {
 				}
 			}
 			go.start();
+			Variables.manualHasBeenUsed = false;
 		}
 		
 		if (Variables.elevatorTarget >= 0 && Variables.elevatorTarget < 4) {
