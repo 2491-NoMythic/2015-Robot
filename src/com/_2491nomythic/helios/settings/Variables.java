@@ -15,7 +15,7 @@ public class Variables {
 	public static double driveyPID_D = 0.0;
 	
 	// Tote Height Integers
-	public static double toteHeight[] = { 0.666667, 2.05, 3.058333, 4.066667, 5.075 };
+	public static double toteHeight[] = { 0.666667, 2.05, 3.058333, 4.066667 };
 	public static int elevatorTarget = 0;
 	public static boolean platformStatus = false;
 	public static boolean underLipStatus = false;
@@ -46,6 +46,9 @@ public class Variables {
 	public static double pickupBinDrivePower = 0.5;
 	public static double driveBackToConPlacementPos;
 	public static double unhookBinPower = 0.5;
+	
+	//Manual Drive Checker
+	public static boolean manualHasBeenUsed = false;
 	
 	
 }

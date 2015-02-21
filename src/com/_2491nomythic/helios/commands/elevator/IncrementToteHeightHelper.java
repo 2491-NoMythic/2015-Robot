@@ -8,12 +8,25 @@ import com._2491nomythic.helios.settings.Variables;
  *
  */
 public class IncrementToteHeightHelper extends CommandBase {
-	
+	private double manualEncoderDistance;
+	private boolean isBigger;
+	private static GoToToteHeight go;
 	public IncrementToteHeightHelper() {
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		if(Variables.manualHasBeenUsed) {
+			manualEncoderDistance = elevator.getEncoder().getDistance();
+			for(int i = 0; i <= 3; i++) {
+				isBigger = Variables.toteHeight[i] >= manualEncoderDistance;
+				if(isBigger) {
+					Variables.elevatorTarget = i;
+				}
+			}
+			go.start();
+		}
+		
 		if (Variables.elevatorTarget >= 0 && Variables.elevatorTarget < 4) {
 			Variables.elevatorTarget++;
 		}

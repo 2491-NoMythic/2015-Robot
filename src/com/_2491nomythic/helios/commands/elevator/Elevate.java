@@ -2,6 +2,7 @@ package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
+import com._2491nomythic.helios.settings.Variables;
 
 
 /**
@@ -31,6 +32,7 @@ public class Elevate extends CommandBase {
 		else if (Math.abs(elevatorStickPos) >= 0.05) {
 			elevator.set(-1 * elevatorStickPos);
 			hasBeenStopped = false;
+			Variables.manualHasBeenUsed = true;
 		}
 	}
 	
@@ -42,6 +44,7 @@ public class Elevate extends CommandBase {
 	// Called once after isFinished returns true
 	protected void end() {
 		elevator.set(0.0);
+		
 	}
 	
 	// Called when another command which requires one or more of the same

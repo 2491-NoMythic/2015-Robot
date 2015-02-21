@@ -1,19 +1,35 @@
 package com._2491nomythic.helios.commands.elevator;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Command; 
+
+import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
+import com._2491nomythic.helios.subsystems.Elevator;
 
 /**
  *
  */
-public class DecrementToteHeightHelper extends Command {
-	
+public class DecrementToteHeightHelper extends CommandBase {
+	private double manualEncoderDistance;
+	private boolean isSmaller;
+	private static GoToToteHeight go;
 	public DecrementToteHeightHelper() {
 		// Use requires() here to declare subsystem dependencies
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		if(Variables.manualHasBeenUsed) {
+			manualEncoderDistance = elevator.getEncoder().getDistance();
+			for(int i = 3; i <= 0; i--) {
+				isSmaller = Variables.toteHeight[i] <= manualEncoderDistance;
+				if(isSmaller) {
+					Variables.elevatorTarget = i;
+				}
+			}
+			go.start();
+		}
+		
 		if (Variables.elevatorTarget > 0 && Variables.elevatorTarget <= 4) {
 			Variables.elevatorTarget--;
 		}
