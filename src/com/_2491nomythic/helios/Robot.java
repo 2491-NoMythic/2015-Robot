@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.ReadDriverstation;
+import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
@@ -19,6 +20,7 @@ import com._2491nomythic.helios.commands.drivetrain.ResetCenterEncoder;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.commands.drivetrain.ResetSideEncoders;
 import com._2491nomythic.helios.commands.elevator.BottomElevator;
+import com._2491nomythic.helios.commands.elevator.ManuallyResetElevatorEncoder;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
@@ -59,6 +61,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Test Drive PID", drivePID);
 		SmartDashboard.putData("Reset Side Encoders", new ResetSideEncoders());
 		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
+		SmartDashboard.putData("Reset Arm Encoder", new ManuallyResetArmEncoder());
+		SmartDashboard.putData("Reset Elevator Encoder", new ManuallyResetElevatorEncoder());
 	}
 	
 	public void disabledPeriodic() {

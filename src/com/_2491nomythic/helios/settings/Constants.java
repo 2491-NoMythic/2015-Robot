@@ -14,7 +14,7 @@ public class Constants {
 	public static final int driveTalonBackCenterChannel = 11;
 	public static final int driveTalonBackRightChannel = 15;
 	public static final int driveEncoderLeftAChannel = 18;
-	public static final int driveEncoderLeftBChannel = 5;
+	public static final int driveEncoderLeftBChannel = 15;
 	public static final int driveEncoderCenterAChannel = 2;
 	public static final int driveEncoderCenterBChannel = 3;
 	public static final int driveEncoderRightAChannel = 0;
@@ -38,12 +38,12 @@ public class Constants {
 	public static final double armEncoderToDegrees = 1.0;
 	public static final double armMinPosition = 0.0;
 	public static final double armMaxPosition = 180.0;
-	public static final int armHallEffectSensorChannel = 4;
+	public static final int armHallEffectSensorChannel = 13;
 	
 	// Elevator
 	public static final int elevatorTalonMotorChannel = 14;
-	public static final int elevatorEncoderAChannel = 8;
-	public static final int elevatorEncoderBChannel = 12;
+	public static final int elevatorEncoderAChannel = 4;
+	public static final int elevatorEncoderBChannel = 5;
 	public static final boolean elevatorEncoderReversed = false;
 	public static final double elevatorEncoderToFeet = 1.0;
 	public static final double elevatorMinPosition = 0.0;

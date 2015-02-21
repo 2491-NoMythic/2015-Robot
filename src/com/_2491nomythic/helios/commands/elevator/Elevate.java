@@ -4,6 +4,8 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.settings.Variables;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  *
@@ -34,6 +36,7 @@ public class Elevate extends CommandBase {
 			hasBeenStopped = false;
 			Variables.manualHasBeenUsed = true;
 		}
+		SmartDashboard.putNumber("Elevator Distance", elevator.getEncoder().getDistance());
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()
