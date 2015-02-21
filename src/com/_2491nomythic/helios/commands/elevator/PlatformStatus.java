@@ -17,6 +17,9 @@ public class PlatformStatus extends CommandBase {
 	
 	public PlatformStatus(switchType type) {
 		this.type = type;
+		if (go == null) {
+			go = new GoToToteHeight();
+		}
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}

@@ -19,6 +19,9 @@ public class UnderLipStatus extends Command {
 	
 	public UnderLipStatus(switchType type) {
 		this.type = type;
+		if (go == null) {
+			go = new GoToToteHeight();
+		}
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}

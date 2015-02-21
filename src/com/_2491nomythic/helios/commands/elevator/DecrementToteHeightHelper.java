@@ -9,7 +9,6 @@ import com._2491nomythic.helios.settings.Variables;
 public class DecrementToteHeightHelper extends CommandBase {
 	private double manualEncoderDistance;
 	private boolean isSmaller;
-	private static GoToToteHeight go;
 	public DecrementToteHeightHelper() {
 		// Use requires() here to declare subsystem dependencies
 	}
@@ -27,7 +26,7 @@ public class DecrementToteHeightHelper extends CommandBase {
 			Variables.manualHasBeenUsed = false;
 		}
 		
-		if (Variables.elevatorTarget > 0 && Variables.elevatorTarget <= 4) {
+		if (Variables.elevatorTarget > 0 && Variables.elevatorTarget <= 3) {
 			Variables.elevatorTarget--;
 		}
 	}
