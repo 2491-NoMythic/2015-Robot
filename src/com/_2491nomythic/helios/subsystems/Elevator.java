@@ -53,7 +53,7 @@ public class Elevator extends PIDSubsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new Elevate());
+//		setDefaultCommand(new Elevate()); //Elevator control now on buttons
 	}
 	
 	protected double returnPIDInput() {

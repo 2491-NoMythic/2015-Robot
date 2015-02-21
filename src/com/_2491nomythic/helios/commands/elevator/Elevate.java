@@ -26,7 +26,7 @@ public class Elevate extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		elevatorStickPos = oi.getAxis(ControllerMap.CodriverElevatorController, ControllerMap.CodriverElevatorAxis);
+		elevatorStickPos = 0;//oi.getAxis(ControllerMap.codriverElevatorController, ControllerMap.CodriverElevatorAxis);
 		if (0.05 >= Math.abs(elevatorStickPos) && !(hasBeenStopped)) {
 			elevator.set(0);
 			hasBeenStopped = true;

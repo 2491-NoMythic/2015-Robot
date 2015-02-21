@@ -25,8 +25,16 @@ public class ArmPositionSet extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		armStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
+		double multiplier = 0.25;
+		if (oi.getButton(ControllerMap.ArmController, ControllerMap.FasterArmButtonA)) {
+			multiplier *= 2;
+		}
+		if (oi.getButton(ControllerMap.ArmController, ControllerMap.FasterArmButtonB)) {
+			multiplier *= 2;
+		}
 		if (Math.abs(armStickPos) >= 0.05) {
-			arm.set(-1 * armStickPos);
+			
+			arm.set(-1 * armStickPos * multiplier);
 			hasBeenStopped = false;
 		}
 		else if (!(hasBeenStopped)) {

@@ -31,7 +31,7 @@ public class OI {
 	Button zeroArmEncoder, moveArmToPoint,
 		moveUpOneTote, moveDownOneTote, getNextTote, goToTote,
 		scoringPlatformStatus, driveOneAndAHalfFeetRight, driveOneAndAHalfFeetStraight,
-		driverElevatorUp, driverElevatorDown; 
+		driverElevatorUp, driverElevatorDown, codriverElevatorUp, codriverElevatorDown; 
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	
@@ -44,11 +44,11 @@ public class OI {
 		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
 		
-		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
-		moveUpOneTote.whenPressed(new IncrementToteHeight());
-		
-		moveDownOneTote = new JoystickButton(controllers[ControllerMap.moveDownOneToteController], ControllerMap.moveDownOneToteButton);
-		moveDownOneTote.whenPressed(new DecrementToteHeight());
+//		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
+//		moveUpOneTote.whenPressed(new IncrementToteHeight());
+//		
+//		moveDownOneTote = new JoystickButton(controllers[ControllerMap.moveDownOneToteController], ControllerMap.moveDownOneToteButton);
+//		moveDownOneTote.whenPressed(new DecrementToteHeight());
 		
 		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
 		scoringPlatformStatus.whenPressed(new PlatformStatus(PlatformStatus.switchType.Toggle));
@@ -61,6 +61,12 @@ public class OI {
 		
 		driverElevatorDown = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorDown);
 		driverElevatorDown.whileHeld(new ElevatePower(-1.0));
+		
+		codriverElevatorUp = new JoystickButton(controllers[ControllerMap.codriverElevatorController], ControllerMap.codriverElevatorUp);
+		codriverElevatorUp.whileHeld(new ElevatePower(1.0));
+		
+		codriverElevatorDown = new JoystickButton(controllers[ControllerMap.codriverElevatorController], ControllerMap.codriverElevatorDown);
+		codriverElevatorDown.whileHeld(new ElevatePower(-1.0));
 	}
 	;
 	/**
