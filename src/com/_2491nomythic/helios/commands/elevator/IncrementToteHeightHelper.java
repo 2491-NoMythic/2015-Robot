@@ -18,13 +18,12 @@ public class IncrementToteHeightHelper extends CommandBase {
 	protected void initialize() {
 		if(Variables.manualHasBeenUsed) {
 			manualEncoderDistance = elevator.getEncoder().getDistance();
-			for(int i = 0; i <= 3; i++) {
+			for(int i = 0; i < Variables.toteHeight.length; i++) {
 				isBigger = Variables.toteHeight[i] >= manualEncoderDistance;
 				if(isBigger) {
 					Variables.elevatorTarget = i;
 				}
 			}
-			go.start();
 			Variables.manualHasBeenUsed = false;
 		}
 		

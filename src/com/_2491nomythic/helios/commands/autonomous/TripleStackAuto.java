@@ -2,7 +2,6 @@ package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
-import com._2491nomythic.helios.commands.elevator.GoToToteHeight;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.UnderLipStatus;
 import com._2491nomythic.helios.settings.Constants;
@@ -18,7 +17,7 @@ public class TripleStackAuto extends CommandGroup {
     public  TripleStackAuto() {
     	Variables.elevatorTarget = 0;
     	addSequential(new UnderLipStatus(UnderLipStatus.switchType.False));
-    	addParallel(new IncrementToteHeight());
+    	addParallel(new IncrementToteHeight()); //CAN WE START RIGHT UNDER THE TOTE? IF NOT WE NEED TO CHANGE THIS SO IT DRIVES UP A LITTLE BIT
     	addSequential(new DriveDistance(0.5, Constants.nullX, -1));
     	addSequential(new DriveDistance(0.5, -6.75 , Constants.nullY));
     	addSequential(new DriveDistance(0.5, Constants.nullX, 1));

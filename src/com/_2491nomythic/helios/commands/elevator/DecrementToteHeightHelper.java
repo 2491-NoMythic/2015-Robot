@@ -1,10 +1,7 @@
 package com._2491nomythic.helios.commands.elevator;
 
-import edu.wpi.first.wpilibj.command.Command; 
-
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
-import com._2491nomythic.helios.subsystems.Elevator;
 
 /**
  *
@@ -21,13 +18,12 @@ public class DecrementToteHeightHelper extends CommandBase {
 	protected void initialize() {
 		if(Variables.manualHasBeenUsed) {
 			manualEncoderDistance = elevator.getEncoder().getDistance();
-			for(int i = 3; i <= 0; i--) {
+			for(int i = Variables.toteHeight.length - 1; i <= 0; i--) {
 				isSmaller = Variables.toteHeight[i] <= manualEncoderDistance;
 				if(isSmaller) {
 					Variables.elevatorTarget = i;
 				}
 			}
-			go.start();
 			Variables.manualHasBeenUsed = false;
 		}
 		
