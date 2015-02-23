@@ -1,6 +1,5 @@
 package com._2491nomythic.helios;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,10 +23,6 @@ import com._2491nomythic.helios.commands.elevator.BottomElevator;
 import com._2491nomythic.helios.commands.elevator.ManuallyResetElevatorEncoder;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.DrawMode;
-import com.ni.vision.NIVision.Image;
-import com.ni.vision.NIVision.ShapeMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -43,9 +38,6 @@ public class Robot extends IterativeRobot {
 	private Command autoCommand;
 	private SendableChooser autoChooser;
 	public static DrivePID drivePID;
-	int session;
-	Image frame;
-	NIVision.Rect rect;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -71,10 +63,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
 		SmartDashboard.putData("Reset Arm Encoder", new ManuallyResetArmEncoder());
 		SmartDashboard.putData("Reset Elevator Encoder", new ManuallyResetElevatorEncoder());
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-        session = NIVision.IMAQdxOpenCamera("cam0",
-                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        NIVision.IMAQdxConfigureGrab(session);
 	}
 	
 	public void disabledPeriodic() {
@@ -102,8 +90,6 @@ public class Robot extends IterativeRobot {
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
-		NIVision.IMAQdxStartAcquisition(session);
-        rect = new NIVision.Rect(10, 10, 100, 100);
 	}
 	
 	/**
@@ -111,7 +97,6 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-        NIVision.IMAQdxStopAcquisition(session);
 	}
 	
 	/**
@@ -119,11 +104,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		NIVision.IMAQdxGrab(session, frame, 1);
-        NIVision.imaqDrawShapeOnImage(frame, frame, rect,
-                DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f);
-        
-        CameraServer.getInstance().setImage(frame);
 	}
 	
 	/**
