@@ -10,6 +10,7 @@ public class ArmPositionSet extends CommandBase {
 	
 	private double armStickPos;
 	private boolean hasBeenStopped;
+	private int reverse = 1;
 	
 	public ArmPositionSet() {
 		requires(arm);
@@ -24,7 +25,7 @@ public class ArmPositionSet extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		armStickPos = oi.getAxis(ControllerMap.ArmController, ControllerMap.ArmAxis);
+		armStickPos = oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.ArmAxis);
 		double multiplier = 0.25;
 		if (oi.getButton(ControllerMap.ArmController, ControllerMap.FasterArmButtonA)) {
 			multiplier *= 2;
@@ -33,15 +34,21 @@ public class ArmPositionSet extends CommandBase {
 			multiplier *= 2;
 		}
 		if (Math.abs(armStickPos) >= 0.05) {
-			
-			arm.set(-1 * armStickPos * multiplier);
+			if (hasBeenStopped) {
+				if (arm.getPosition() > 0) {
+					reverse = -1;
+				}
+				else {
+					reverse = 1;
+				}
+			}
+			arm.set(-1 * armStickPos * multiplier * reverse);
 			hasBeenStopped = false;
 		}
 		else if (!(hasBeenStopped)) {
 			arm.stop();
 			hasBeenStopped = true;
 		}
-		
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

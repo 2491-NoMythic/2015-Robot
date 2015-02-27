@@ -8,6 +8,8 @@ import com._2491nomythic.helios.settings.ControllerMap;
  */
 public class RunGrabber extends CommandBase {
 	
+	private boolean hasBeenStopped = true;
+	private int reverse;
 	
 	public RunGrabber() {
 		requires(grabber);
@@ -19,7 +21,23 @@ public class RunGrabber extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		grabber.set(oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.GrabberAxis));
+		double speed = oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.GrabberAxis);
+		if (speed != 0) {
+			if (hasBeenStopped) {
+				if (arm.getPosition() > 0) {
+					reverse = -1;
+				}
+				else {
+					reverse = 1;
+				}
+			}
+			grabber.set(speed *  reverse);
+			hasBeenStopped = false;
+		}
+		else {
+			grabber.set(0.0);
+			hasBeenStopped = true;
+		}
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

@@ -97,8 +97,6 @@ public class Elevator extends PIDSubsystem {
 			this.disable();
 			usingPID = false;
 		}
-		SmartDashboard.putBoolean("Top limit switch", getTopSwitch());
-		SmartDashboard.putBoolean("Bottom limit switch", getBottomSwitch());
 		if (!limitTop.get()) {
 			if (speed >= 0.0) {
 				motorElevator.set(0.0);
