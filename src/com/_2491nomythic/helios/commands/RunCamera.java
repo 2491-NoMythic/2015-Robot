@@ -1,22 +1,34 @@
 package com._2491nomythic.helios.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  *
  */
 public class RunCamera extends CommandBase {
 	
+	private Timer timer;
+	private double nextRun;
+	
 	public RunCamera() {
 		requires(camera);
+		timer = new Timer();
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		camera.startImageAcquisition();
+		timer.start();
+		timer.reset();
+		nextRun = timer.get();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		camera.updateDriverstationImage();
+		if (timer.get() > nextRun) {
+			nextRun = nextRun + 0.2;
+			camera.updateDriverstationImage();
+		}
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()
@@ -27,6 +39,7 @@ public class RunCamera extends CommandBase {
 	// Called once after isFinished returns true
 	protected void end() {
 		camera.stopImageAcquisition();
+		timer.stop();
 	}
 	
 	// Called when another command which requires one or more of the same
