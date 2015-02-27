@@ -100,8 +100,12 @@ public class Arm extends PIDSubsystem {
 		return usingPID;
 	}
 	
-	public double getERate() {
+	public double getRate() {
 		return encoder.getRate();
+	}
+	
+	public double getPosition() {
+		return encoder.getDistance();
 	}
 	
 	public void resetEncoder() {
