@@ -23,6 +23,13 @@ public class BottomElevator extends CommandBase {
 		timer = new Timer();
 	}
 	
+	public BottomElevator(double power, double time) {
+		requires(elevator);
+		powerInput = -1.0 * Math.abs(power);
+		timer = new Timer();
+		this.time = time;
+	}
+	
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		timer.start();
