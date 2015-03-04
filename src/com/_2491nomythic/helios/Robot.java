@@ -9,8 +9,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.ReadDriverstation;
+import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
+import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.DrivePID;
@@ -52,8 +54,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
 		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
 		autoChooser = new SendableChooser();
-		autoChooser.addObject("Pick up Bins from Step", new PickupBinsFromStep());
+		//autoChooser.addObject("Pick up Bins from Step", new PickupBinsFromStep());
 		autoChooser.addDefault("Drive into Auto Zone", new DriveIntoAutoZone());
+		autoChooser.addObject("Drive into auto zone and drop item", new DriveIntoAutoZoneAndDrop());
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
 		SmartDashboard.putData("Align with tote", new DriveToTote(0.25, 4.0));
@@ -63,6 +66,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
 		SmartDashboard.putData("Reset Arm Encoder", new ManuallyResetArmEncoder());
 		SmartDashboard.putData("Reset Elevator Encoder", new ManuallyResetElevatorEncoder());
+		SmartDashboard.putData("Hold arm in place", new KeepArmFromFalling(1.0));
 	}
 	
 	public void disabledPeriodic() {

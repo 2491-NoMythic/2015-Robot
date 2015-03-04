@@ -72,6 +72,7 @@ public class UpdateDriverstation extends CommandBase {
 		SmartDashboard.putBoolean("Top limit switch", elevator.getTopSwitch());
 		SmartDashboard.putBoolean("Bottom limit switch", elevator.getBottomSwitch());
 		SmartDashboard.putNumber("Arm Encoder", arm.getPosition());
+		SmartDashboard.putNumber("Arm Power", arm.get());
 	}
 	
 	private void readVariables() {
