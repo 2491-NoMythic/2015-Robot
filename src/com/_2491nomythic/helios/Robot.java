@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.commands.ReadDriverstation;
 import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
@@ -51,7 +50,6 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
 		SmartDashboard.putData("Reset Gyro", new ResetGyro());
 		SmartDashboard.putData("Rescan Gyro", new FixGyroIssues());
-		SmartDashboard.putData("Read Driverstation Variables", new ReadDriverstation());
 		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
 		autoChooser = new SendableChooser();
 		//autoChooser.addObject("Pick up Bins from Step", new PickupBinsFromStep());

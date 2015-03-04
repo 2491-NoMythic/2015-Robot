@@ -19,7 +19,6 @@ public abstract class CommandBase extends Command {
 	protected static OI oi;
 	protected static Drivetrain drivetrain;
 	protected static Arm arm;
-	protected static NMCompressor compressor;
 	protected static Elevator elevator;
 	protected static Grabber grabber;
 	protected static ExtraSensors extraSensors;
@@ -28,7 +27,6 @@ public abstract class CommandBase extends Command {
 	public static void init() {
 		drivetrain = Drivetrain.getInstance();
 		arm = Arm.getInstance();
-		compressor = NMCompressor.getInstance();
 		elevator = Elevator.getInstance();
 		grabber = Grabber.getInstance();
 		extraSensors = ExtraSensors.getInstance();
@@ -44,7 +42,6 @@ public abstract class CommandBase extends Command {
 		// Show what command your subsystem is running on the SmartDashboard
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(arm);
-		SmartDashboard.putData(compressor);
 		SmartDashboard.putData(grabber);
 		SmartDashboard.putData(elevator);
 	}
