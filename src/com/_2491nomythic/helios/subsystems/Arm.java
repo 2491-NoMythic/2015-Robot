@@ -61,8 +61,17 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
+		if (Math.abs(output - currentSpeed) > 0.05) {
+			if (output > currentSpeed) {
+				output = currentSpeed + 0.05;
+			}
+			else {
+				output = currentSpeed - 0.05;
+			}
+		}
 		motor.set(-1.0 * output);
 		currentSpeed = output;
+		
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
 	}
@@ -72,7 +81,16 @@ public class Arm extends PIDSubsystem {
 			this.disable();
 			usingPID = false;
 		}
+		if (Math.abs(speed - currentSpeed) > 0.05) {
+			if (speed > currentSpeed) {
+				speed = currentSpeed + 0.05;
+			}
+			else {
+				speed = currentSpeed - 0.05;
+			}
+		}
 		motor.set(-1.0 * speed);
+		currentSpeed = speed;
 	}
 	
 	public void setPID(double position) {
@@ -85,7 +103,8 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	public void stop() {
-		set(0.0);
+		currentSpeed = 0.0;
+		motor.set(0.0);
 	}
 	
 	public double get() {
