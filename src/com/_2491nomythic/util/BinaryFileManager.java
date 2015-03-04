@@ -13,7 +13,7 @@ import java.nio.file.StandardOpenOption;
 public class BinaryFileManager {
 	protected Path path;
 	
-	BinaryFileManager(String fileName) {
+	public BinaryFileManager(String fileName) {
 		path = Paths.get(fileName);
 	}
 	
@@ -21,7 +21,7 @@ public class BinaryFileManager {
 	 * Read data from the file and return it as a byte array
 	 * @return the data read from the file
 	 */
-	byte[] read() {
+	public byte[] read() {
 		try {
 			return Files.readAllBytes(path);
 		}
@@ -31,11 +31,21 @@ public class BinaryFileManager {
 		}
 	}
 	
+	
+	public void clear() {
+		try {
+			Files.write(path, new byte[0]);
+		}
+		catch (IOException e) {
+			System.out.println("Couldn't clear file " + path.toString() + ", " + e.getLocalizedMessage());
+		}
+	}
+	
 	/**
 	 * Append data to the file
 	 * @param bytes data to append to the file
 	 */
-	void append(byte[] bytes) {
+	public void append(byte[] bytes) {
 		try {
 			Files.write(path, bytes, StandardOpenOption.APPEND);
 		}
@@ -44,27 +54,27 @@ public class BinaryFileManager {
 		}
 	}
 	
-	void append(int[] ints) {
+	public void append(int[] ints) {
 		append(intToByte(ints));
 	}
 	
-	void append(float[] floats) {
+	public void append(float[] floats) {
 		append(floatToByte(floats));
 	}
 	
-	void append(double[] doubles) {
+	public void append(double[] doubles) {
 		append(doubleToByte(doubles));
 	}
 	
-	void append(int anInt) {
+	public void append(int anInt) {
 		append(intToByte(new int[] {anInt}));
 	}
 	
-	void append(float aFloat) {
+	public void append(float aFloat) {
 		append(floatToByte(new float[] {aFloat}));
 	}
 	
-	void append(double aDouble) {
+	public void append(double aDouble) {
 		append(doubleToByte(new double[] {aDouble}));
 	}
 	
@@ -73,7 +83,7 @@ public class BinaryFileManager {
 	 * Overwrite the file with new data
 	 * @param bytes new data to write to the file
 	 */
-	void write(byte[] bytes) {
+	public void write(byte[] bytes) {
 		try {
 			Files.write(path, bytes);
 		}
@@ -82,27 +92,27 @@ public class BinaryFileManager {
 		}
 	}
 	
-	void write(int[] ints) {
+	public void write(int[] ints) {
 		write(intToByte(ints));
 	}
 	
-	void write(float[] floats) {
+	public void write(float[] floats) {
 		write(floatToByte(floats));
 	}
 	
-	void write(double[] doubles) {
+	public void write(double[] doubles) {
 		write(doubleToByte(doubles));
 	}
 	
-	void write(int anInt) {
+	public void write(int anInt) {
 		write(intToByte(new int[] {anInt}));
 	}
 	
-	void write(float aFloat) {
+	public void write(float aFloat) {
 		write(floatToByte(new float[] {aFloat}));
 	}
 	
-	void write(double aDouble) {
+	public void write(double aDouble) {
 		write(doubleToByte(new double[] {aDouble}));
 	}
 	

@@ -8,14 +8,14 @@ import java.util.zip.Inflater;
 
 public class CompressedBinaryFileManager extends BinaryFileManager {
 	
-	CompressedBinaryFileManager(String fileName) {
+	public CompressedBinaryFileManager(String fileName) {
 		super(fileName);
 	}
 	
 	/**
 	 * Read data from the file, decompress it, and return it as a byte array
 	 */
-	byte[] read() {
+	public byte[] read() {
 		byte[] readBytes = super.read();
 		Inflater decompress = new Inflater();
 		if (readBytes.length < 4) {
@@ -40,7 +40,7 @@ public class CompressedBinaryFileManager extends BinaryFileManager {
 	/**
 	 * Append data to the file.  This requires reading the whole file, appending it, recompressing it, and writing it again, so don't spam it, especially with large files.
 	 */
-	void append(byte[] bytes) {
+	public void append(byte[] bytes) {
 		byte[] readBytes = read();
 		byte[] bytesToWrite = new byte[readBytes.length + bytes.length];
 		System.arraycopy(readBytes, 0, bytesToWrite, 0, readBytes.length);
@@ -51,7 +51,7 @@ public class CompressedBinaryFileManager extends BinaryFileManager {
 	/**
 	 * Overwrite the file with new data.
 	 */
-	void write(byte[] bytes) {
+	public void write(byte[] bytes) {
 		Deflater compress = new Deflater(9);
 		byte[] compressedData = new byte[bytes.length];
 		compress.setInput(bytes);
