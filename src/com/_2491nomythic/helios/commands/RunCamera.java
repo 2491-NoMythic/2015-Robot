@@ -13,6 +13,7 @@ public class RunCamera extends CommandBase {
 	public RunCamera() {
 		requires(camera);
 		timer = new Timer();
+		setRunWhenDisabled(true);
 	}
 	
 	// Called just before this Command runs the first time
@@ -26,7 +27,7 @@ public class RunCamera extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (timer.get() > nextRun) {
-			nextRun = nextRun + 0.2;
+			nextRun = nextRun + 0.1;
 			camera.updateDriverstationImage();
 		}
 	}
