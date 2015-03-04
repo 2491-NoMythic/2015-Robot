@@ -10,12 +10,12 @@ public class ArmPositionSet extends CommandBase {
 	
 	private double armStickPos;
 	private boolean hasBeenStopped;
+	private KeepArmFromFalling stopArm;
 	private int reverse = 1;
 	
 	public ArmPositionSet() {
 		requires(arm);
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+		stopArm = new KeepArmFromFalling(0.1);
 	}
 	
 	// Called just before this Command runs the first time
@@ -41,6 +41,7 @@ public class ArmPositionSet extends CommandBase {
 				else {
 					reverse = 1;
 				}
+				stopArm.cancel();
 			}
 			arm.set(-1 * armStickPos * multiplier * reverse);
 			hasBeenStopped = false;
@@ -48,6 +49,7 @@ public class ArmPositionSet extends CommandBase {
 		else if (!(hasBeenStopped)) {
 			arm.stop();
 			hasBeenStopped = true;
+			stopArm.start();
 		}
 	}
 	
