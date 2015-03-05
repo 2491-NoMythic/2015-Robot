@@ -1,6 +1,9 @@
 package com._2491nomythic.helios.settings;
 
 public class Constants {
+	// Roborio directories
+	public static final String homeDirectory = "/home/lvuser/";
+	
 	// Joysticks
 	public static final int ControllerOnePort = 0;
 	public static final int ControllerTwoPort = 1;

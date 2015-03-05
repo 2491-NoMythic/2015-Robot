@@ -1,6 +1,7 @@
 package com._2491nomythic.helios.commands;
 
 import com._2491nomythic.helios.Robot;
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 import com._2491nomythic.util.FileData;
 
@@ -16,7 +17,7 @@ public class UpdateDriverstation extends CommandBase {
 	public UpdateDriverstation() {
 		requires(extraSensors);
 		timer = new Timer();
-		file = new FileData("/home/lvuser/SmartDashboard.txt");
+		file = new FileData(Constants.homeDirectory + "SmartDashboard.txt");
 		SmartDashboard.putNumber("Gyro Sensitivity", file.getDoubleWithDefault("GyroToDegrees", Variables.gyroToDegrees));
 		SmartDashboard.putNumber("Drive Y PID P", file.getDoubleWithDefault("DriveYPIDP", Variables.driveyPID_P));
 		SmartDashboard.putNumber("Drive Y PID I", file.getDoubleWithDefault("DriveYPIDI", Variables.driveyPID_I));
