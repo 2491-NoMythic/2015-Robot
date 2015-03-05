@@ -19,6 +19,7 @@ public class Drivetrain extends Subsystem {
 	CANTalon frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
 	Encoder encoderLeft, encoderCenter, encoderRight;
 	Gyro gyro;
+	double currentLeftSpeed, currentRightSpeed, currentBackSpeed, currentFrontSpeed;
 	private static Drivetrain instance;
 	
 	public static Drivetrain getInstance() {
@@ -65,16 +66,20 @@ public class Drivetrain extends Subsystem {
 	public void driveRight(double speed) {
 		frontRight.set(-1.0 * speed);
 		backRight.set(-1.0 * speed);
+		currentRightSpeed = speed;
 	}
 	
 	public void driveLeft(double speed) {
 		frontLeft.set(speed);
 		backLeft.set(speed);
+		currentLeftSpeed = speed;
 	}
 	
 	public void driveCenter(double frontSpeed, double backSpeed) {
 		frontCenter.set(frontSpeed);
 		backCenter.set(-1.0 * backSpeed);
+		currentFrontSpeed = frontSpeed;
+		currentBackSpeed = backSpeed;
 	}
 	
 	public void driveCartesian(double x, double y, double rotation) {
@@ -157,6 +162,22 @@ public class Drivetrain extends Subsystem {
 	
 	public CANTalon getBackCenterMotor() {
 		return backCenter;
+	}
+	
+	public double getCurrentRightSpeed() {
+		return currentRightSpeed;
+	}
+	
+	public double getCurrentLeftSpeed() {
+		return currentLeftSpeed;
+	}
+	
+	public double getCurrentFrontSpeed() {
+		return currentFrontSpeed;
+	}
+	
+	public double getCurrentBackSpeed() {
+		return currentBackSpeed;
 	}
 	
 	public void stop() {
