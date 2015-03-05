@@ -23,10 +23,10 @@ public class RecordRobotScript extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		floatArray[0] = (float) drivetrain.getFrontLeftMotor().get();
-		floatArray[1] = (float) drivetrain.getFrontCenterMotor().get();
-		floatArray[2] = (float) drivetrain.getBackCenterMotor().get();
-		floatArray[3] = (float) drivetrain.getFrontRightMotor().get();
+		floatArray[0] = (float) drivetrain.getCurrentLeftSpeed();
+		floatArray[1] = (float) drivetrain.getCurrentFrontSpeed();
+		floatArray[2] = (float) drivetrain.getCurrentBackSpeed();
+		floatArray[3] = (float) drivetrain.getCurrentRightSpeed();
 		floatArray[4] = (float) elevator.get();
 		floatArray[5] = (float) arm.get();
 		floatArray[6] = (float) grabber.get();
