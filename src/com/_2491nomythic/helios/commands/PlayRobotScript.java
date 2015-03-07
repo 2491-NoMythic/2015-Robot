@@ -2,6 +2,7 @@ package com._2491nomythic.helios.commands;
 
 import java.nio.ByteBuffer;
 
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.BinaryFileManager;
 
 /**
@@ -12,12 +13,12 @@ public class PlayRobotScript extends CommandBase {
 	private ByteBuffer buffer;
 	private String path;
 	
-	public PlayRobotScript(String path) {
+	public PlayRobotScript(String filename) {
 		requires(drivetrain);
 		requires(elevator);
 		requires(arm);
 		requires(grabber);
-		this.path = path;
+		this.path = Constants.homeDirectory + "Scripts/" + filename + Constants.recordedFileExtension;
 	}
 	
 	// Called just before this Command runs the first time

@@ -19,7 +19,7 @@ public class RecordRobotScript extends CommandBase {
 		if(!directory.exists()) {
 			directory.mkdir();
 		}
-		file = new BinaryFileManager(Constants.homeDirectory + filename + Constants.recordedFileExtension);
+		file = new BinaryFileManager(Constants.homeDirectory + "Scripts/" + filename + Constants.recordedFileExtension);
 		
 		
 	}

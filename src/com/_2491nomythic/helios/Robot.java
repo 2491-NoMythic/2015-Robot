@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.commands.PlayRobotScript;
+import com._2491nomythic.helios.commands.RecordRobotScript;
 import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
@@ -68,6 +70,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Hold arm in place", new KeepArmFromFalling(1.0));
 		SmartDashboard.putData("Move arm to center", new RunWithPID(0.0));
 		SmartDashboard.putData("Run test auto", new PickupBinsFromStep());
+		SmartDashboard.putData("Record Driver Joystick Inputs", new RecordRobotScript());
+		SmartDashboard.putdata("Play Driver Joystick Inputs", new PlayRobotScript());
 	}
 	
 	public void disabledPeriodic() {
