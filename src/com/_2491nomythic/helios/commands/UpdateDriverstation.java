@@ -22,6 +22,7 @@ public class UpdateDriverstation extends CommandBase {
 		SmartDashboard.putNumber("Drive Y PID P", file.getDoubleWithDefault("DriveYPIDP", Variables.driveyPID_P));
 		SmartDashboard.putNumber("Drive Y PID I", file.getDoubleWithDefault("DriveYPIDI", Variables.driveyPID_I));
 		SmartDashboard.putNumber("Drive Y PID D", file.getDoubleWithDefault("DriveYPIDD", Variables.driveyPID_D));
+		SmartDashboard.putNumber("Arm Compensation Speed", file.getDoubleWithDefault("ArmCompensationSpeed", Variables.armCompensationMultiplier));
 	}
 	
 	protected void initialize() {
@@ -104,6 +105,12 @@ public class UpdateDriverstation extends CommandBase {
 			Variables.driveyPID_D = tmp;
 			file.set("DriveYPIDD", Double.toString(tmp));
 			Robot.drivePID.updateSettings();
+		}
+		
+		tmp = SmartDashboard.getNumber("ArmCompensationSpeed");
+		if (tmp != Variables.armCompensationMultiplier) {
+			Variables.armCompensationMultiplier = tmp;
+			file.set("ArmCompensationSpeed", Double.toString(tmp));
 		}
 	
 	}

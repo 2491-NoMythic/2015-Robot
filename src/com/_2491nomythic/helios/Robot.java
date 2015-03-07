@@ -19,6 +19,7 @@ import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.drivetrain.DriveToTote;
+import com._2491nomythic.helios.commands.drivetrain.DriveWithArm;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
 import com._2491nomythic.helios.commands.drivetrain.ResetCenterEncoder;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
@@ -72,6 +73,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Run test auto", new PickupBinsFromStep());
 		SmartDashboard.putData("Record Driver Joystick Inputs", new RecordRobotScript("TestScript"));
 		SmartDashboard.putData("Play Driver Joystick Inputs", new PlayRobotScript("TestScript"));
+		SmartDashboard.putData("Horizontal Compensation For Arm", new DriveWithArm());
 	}
 	
 	public void disabledPeriodic() {
