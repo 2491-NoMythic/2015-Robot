@@ -62,7 +62,6 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
-		System.out.println("PID requested " + output);
 		if (Math.abs(output) > maxPIDSpeed) {
 			if (output > 0) {
 				output = maxPIDSpeed;
@@ -82,7 +81,6 @@ public class Arm extends PIDSubsystem {
 		}
 		motor.set(-1.0 * output);
 		currentSpeed = output;
-		System.out.println("PID set to " + output);
 	}
 	
 	public void set(double speed) {
