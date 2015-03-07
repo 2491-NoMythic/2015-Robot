@@ -25,9 +25,9 @@ public class PickupBinsFromStep extends CommandBase {
 	
 	public PickupBinsFromStep() {
 		lowerToBin = new RunWithPID(Variables.pickUpBinFromStepPosition);
-		driveToBin = new DriveTime(0.5, Constants.nullX, 0.1);
+		driveToBin = new DriveTime(0.25, Constants.nullX, 0.1);
 		pickUpBin = new RunWithPID(Variables.holdBinDistance);
-		makeBinVertical = new RunGrabberTime(1.0, 1.0);
+		makeBinVertical = new RunGrabberTime(1.0, 2.0);
 		timer = new Timer();
 	}
 

@@ -54,7 +54,7 @@ public class DriveTime extends CommandBase {
 		}
 	}
 	
-	// Mak this return true when this Command no longer needs to run execute()
+	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return yDrive == 0 && xDrive == 0;
 	}
