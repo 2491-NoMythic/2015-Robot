@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The camera used to help the drivers pick up things.
  */
 public class Camera extends Subsystem {
 	
@@ -43,6 +43,9 @@ public class Camera extends Subsystem {
 		}
 	}
 	
+	/**
+	 * Starts receiving video from the Camera.
+	 */
 	public void startImageAcquisition() {
 		if (cameraFound) {
 			NIVision.IMAQdxStartAcquisition(session);
@@ -50,12 +53,18 @@ public class Camera extends Subsystem {
 		}
 	}
 	
+	/**
+	 * Stops receiving video from the camera.
+	 */
 	public void stopImageAcquisition() {
 		if (cameraFound) {
 			NIVision.IMAQdxStopAcquisition(session);
 		}
 	}
 	
+	/**
+	 * Updates the current image to the Driver Station.
+	 */
 	public void updateDriverstationImage() {
 		if (cameraFound) {
 			NIVision.IMAQdxGrab(session, frame, 1);
