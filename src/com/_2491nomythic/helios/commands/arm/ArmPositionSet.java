@@ -35,10 +35,10 @@ public class ArmPositionSet extends CommandBase {
 		}
 		if (Math.abs(armStickPos) >= 0.05) {
 			if (hasBeenStopped) {
-				if (arm.getPosition() > 0) {
+				if (arm.getPosition() > 30) {
 					reverse = -1;
 				}
-				else {
+				else if(arm.getPosition() < -30) {
 					reverse = 1;
 				}
 				stopArm.cancel();
