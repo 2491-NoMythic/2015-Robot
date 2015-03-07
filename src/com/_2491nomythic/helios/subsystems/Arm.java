@@ -21,6 +21,7 @@ public class Arm extends PIDSubsystem {
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
 	private double currentTarget = 0.0;
+	private double maxPIDSpeed = 0.5;
 	
 	// Initialize your subsystem here
 	
@@ -42,7 +43,7 @@ public class Arm extends PIDSubsystem {
 		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
-		this.setAbsoluteTolerance(5.0);
+		this.setAbsoluteTolerance(1.0);
 		
 		hallEffectSensor = new DigitalInput(Constants.armHallEffectSensorChannel);
 	}
@@ -61,6 +62,16 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
+		System.out.println("PID requested " + output);
+		if (Math.abs(output) > maxPIDSpeed) {
+			if (output > 0) {
+				output = maxPIDSpeed;
+			}
+			else {
+				output = -1 * maxPIDSpeed;
+			}
+		}
+		
 		if (Math.abs(output - currentSpeed) > 0.05) {
 			if (output > currentSpeed) {
 				output = currentSpeed + 0.05;
@@ -71,9 +82,7 @@ public class Arm extends PIDSubsystem {
 		}
 		motor.set(-1.0 * output);
 		currentSpeed = output;
-		
-		// Use output to drive your system, like a motor
-		// e.g. yourMotor.set(output);
+		System.out.println("PID set to " + output);
 	}
 	
 	public void set(double speed) {
@@ -100,6 +109,10 @@ public class Arm extends PIDSubsystem {
 		}
 		currentTarget = position;
 		this.setSetpoint(position);
+	}
+	
+	public void setMaxPIDSpeed(double speed) {
+		maxPIDSpeed = speed;
 	}
 	
 	public void stop() {
@@ -133,6 +146,16 @@ public class Arm extends PIDSubsystem {
 	
 	public Encoder getEncoder() {
 		return encoder;
+	}
+	
+	public void enable() {
+		usingPID = true;
+		super.enable();
+	}
+	
+	public void disable() {
+		usingPID = false;
+		super.disable();
 	}
 	
 	public boolean getHallEffectSensor() {

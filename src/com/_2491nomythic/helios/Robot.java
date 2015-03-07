@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
+import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
@@ -65,6 +66,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Reset Arm Encoder", new ManuallyResetArmEncoder());
 		SmartDashboard.putData("Reset Elevator Encoder", new ManuallyResetElevatorEncoder());
 		SmartDashboard.putData("Hold arm in place", new KeepArmFromFalling(1.0));
+		SmartDashboard.putData("Move arm to center", new RunWithPID(0.0));
+		SmartDashboard.putData("Run test auto", new PickupBinsFromStep());
 	}
 	
 	public void disabledPeriodic() {

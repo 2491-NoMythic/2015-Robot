@@ -1,7 +1,7 @@
 package com._2491nomythic.helios.settings;
 
 public class Variables {
-	public static double armPID_P = 1.0;
+	public static double armPID_P = 0.05;
 	public static double armPID_I = 0.0;
 	public static double armPID_D = 0.0;
 	public static double elevatorPID_P = 1.0;
@@ -23,16 +23,8 @@ public class Variables {
 	
 	public static double gyroToDegrees = 0.0015;
 	
-	// Arm Positions
-	public static double verticalArmPos = 0;
-	public static double horizontalAForewardPos = 90; // to be decided
-	public static double horizontalABackPos = -90;
-	public static double binPickup = 80;
-	// to be decided
-	public static double recyclingContainerReleasePos = -90; // the position that the arm will be when the
-	// recycling container touches the autozone AND may be released (this position needs to be far enough so that the arm can be pulled away)
 	
-	// Autonomous Distances
+	// Autonomous
 	public static double pickup1stBinXDistance; // May be added if needed?
 	public static double pickupBinYDistance = 0.167; // to be decided
 	public static double pickup2ndBinXDistance = -4.225;
@@ -41,6 +33,8 @@ public class Variables {
 	public static double pickup2ndBinYDistance;
 	public static double unhookBinXDistance = 0.0;
 	public static double unhookBinYDistance = 0.167;
+	public static double pickUpBinFromStepPosition = 73;
+	public static double holdBinDistance = 0.0;
 	
 	// Autonomous Drive Power Variables
 	public static double pickupBinDrivePower = 0.5;
