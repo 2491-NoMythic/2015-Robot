@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
- *
+ * The Arm that picks up recycling containers.
+ * Does not include the hook
  */
 public class Arm extends PIDSubsystem {
 	private CANTalon motor;
@@ -83,6 +84,10 @@ public class Arm extends PIDSubsystem {
 		currentSpeed = output;
 	}
 	
+	/**
+	 * Sets the motor on the arm to a certain power.
+	 * @param speed The power at which to set the motor.
+	 */
 	public void set(double speed) {
 		if (usingPID) {
 			this.disable();
@@ -100,6 +105,10 @@ public class Arm extends PIDSubsystem {
 		currentSpeed = speed;
 	}
 	
+	/**
+	 * Sets the position of the arm using PID.
+	 * @param position The position to set the arm to.
+	 */
 	public void setPID(double position) {
 		if (!usingPID) {
 			this.enable();
@@ -109,39 +118,65 @@ public class Arm extends PIDSubsystem {
 		this.setSetpoint(position);
 	}
 	
+	/**
+	 * Sets the max speed the robot uses for the arm when using PID.
+	 * @param speed The top speed of the arm when using PID.
+	 */
 	public void setMaxPIDSpeed(double speed) {
 		maxPIDSpeed = speed;
 	}
 	
+	/**
+	 * Stops the arm motor (but lets the arm fall).
+	 */
 	public void stop() {
 		currentSpeed = 0.0;
 		motor.set(0.0);
 	}
 	
+	/**
+	 * 
+	 * @return The last speed that was set to the arm motor
+	 */
 	public double get() {
 		return currentSpeed;
 	}
 	
+	/**
+	 * 
+	 * @return The PID target tht was set most recently.
+	 */
 	public double getPID() {
 		return currentTarget;
 	}
 	
+	/**
+	 * 
+	 * @return If the arm is using PID at the moment
+	 */
 	public boolean isUsingPID() {
 		return usingPID;
 	}
 	
+	/**
+	 * 
+	 * @return the rate the arm is moving at in degrees per second.
+	 */
 	public double getRate() {
 		return encoder.getRate();
 	}
 	
-	public double getPosition() {
-		return encoder.getDistance();
-	}
-	
+	/**
+	 * Resets the arm encoder. 
+	 */
 	public void resetEncoder() {
 		encoder.reset();
 	}
 	
+	/**
+	 * 
+	 * @return The current value of the arm encoder.
+	 */
 	public Encoder getEncoder() {
 		return encoder;
 	}
@@ -156,6 +191,10 @@ public class Arm extends PIDSubsystem {
 		super.disable();
 	}
 	
+	/**
+	 * 
+	 * @return The whether the hall effect sensor has detected something.
+	 */
 	public boolean getHallEffectSensor() {
 		return !hallEffectSensor.get();
 	}
