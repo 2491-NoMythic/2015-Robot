@@ -39,6 +39,7 @@ public class Constants {
 	public static final double armMinPosition = 0.0;
 	public static final double armMaxPosition = 180.0;
 	public static final int armHallEffectSensorChannel = 13;
+	public static final double armLength = 4.833;
 	
 	// Elevator
 	public static final int elevatorTalonMotorChannel = 14;
