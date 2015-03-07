@@ -1,5 +1,8 @@
 package com._2491nomythic.helios.commands;
 
+import java.io.File;
+
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.BinaryFileManager;
 
 /**
@@ -9,10 +12,15 @@ public class RecordRobotScript extends CommandBase {
 	private BinaryFileManager file;
 	float floatArray[] = new float[7];
 	
-	public RecordRobotScript(String path) {
+	public RecordRobotScript(String filename) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		file = new BinaryFileManager(path);
+		File directory = new File(Constants.homeDirectory + "Scripts");
+		if(!directory.exists()) {
+			directory.mkdir();
+		}
+		file = new BinaryFileManager(Constants.homeDirectory + filename + Constants.recordedFileExtension);
+		
 		
 	}
 	

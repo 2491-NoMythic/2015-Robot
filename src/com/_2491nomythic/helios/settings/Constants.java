@@ -3,6 +3,7 @@ package com._2491nomythic.helios.settings;
 public class Constants {
 	// Roborio directories
 	public static final String homeDirectory = "/home/lvuser/";
+	public static final String recordedFileExtension = ".hmi"; //Helios Movement Instructions
 	
 	// Joysticks
 	public static final int ControllerOnePort = 0;
