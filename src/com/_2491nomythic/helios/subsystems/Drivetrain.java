@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The thing we drive with.
  */
 public class Drivetrain extends Subsystem {
 	CANTalon frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
@@ -56,25 +56,44 @@ public class Drivetrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
-	
+	/**
+	 * Sets the power of the drive motors.
+	 * @param leftSpeed The power of the left motors.
+	 * @param rightSpeed The power of the right motors.
+	 * @param frontSpeed The power of the front motor.
+	 * @param backSpeed The power of the back motor.
+	 */
 	public void drive(double leftSpeed, double rightSpeed, double frontSpeed, double backSpeed) {
 		driveLeft(leftSpeed);
 		driveRight(rightSpeed);
 		driveCenter(frontSpeed, backSpeed);
 	}
 	
+	/**
+	 * Sets the power of the right drive motors.
+	 * @param speed The power of the right drive motors.
+	 */
 	public void driveRight(double speed) {
 		frontRight.set(-1.0 * speed);
 		backRight.set(-1.0 * speed);
 		currentRightSpeed = speed;
 	}
 	
+	/**
+	 * Sets the power of the left drive motors.
+	 * @param speed The power of the left drive motors.
+	 */
 	public void driveLeft(double speed) {
 		frontLeft.set(speed);
 		backLeft.set(speed);
 		currentLeftSpeed = speed;
 	}
 	
+	/**
+	 * Sets the power of the center drive motors.
+	 * @param frontSpeed The power of the front center motor.
+	 * @param backSpeed The power of the back center motor.
+	 */
 	public void driveCenter(double frontSpeed, double backSpeed) {
 		frontCenter.set(frontSpeed);
 		backCenter.set(-1.0 * backSpeed);
@@ -82,6 +101,12 @@ public class Drivetrain extends Subsystem {
 		currentBackSpeed = backSpeed;
 	}
 	
+	/**
+	 * Sets the power of the drive motors using Cartesian coordinates.
+	 * @param x The power of the center drive motors.
+	 * @param y The power of the center drive motors.
+	 * @param rotation The amount that the robot turns.
+	 */
 	public void driveCartesian(double x, double y, double rotation) {
 		double left = y + rotation;
 		double right = y - rotation;
@@ -102,24 +127,51 @@ public class Drivetrain extends Subsystem {
 		drive(left, right, x, x);
 	}
 	
+	/**
+	 * Sets the drive motors using a set of coords created with the CartesianCoord class.
+	 * @param coords The motors' powers put into a CartesianCoord.
+	 * @param rotation The amount that the robot turns.
+	 */
 	public void driveCartesian(CartesianCoord coords, double rotation) {
 		driveCartesian(coords.getX(), coords.getY(), rotation);
 	}
 	
+	/**
+	 * Sets the drive motors using a set of coords created with the PolarCoord class.
+	 * @param coords The motors' powers put into a PolarCoord.
+	 * @param rotation The amount that the robot turns.
+	 */
 	public void drivePolar(PolarCoord coords, double rotation) {
 		driveCartesian(coords.getCartesian(), rotation);
 	}
 	
+	/**
+	 * Sets the drive power of the drive motors using polar coordinates.
+	 * @param r The power of the motors in the direction theta.
+	 * @param theta The direction the robot drives in degrees.
+	 * @param rotation The amount that the robot turns.
+	 */
 	public void drivePolar(double r, double theta, double rotation) {
 		PolarCoord polarCoords = new PolarCoord(r, theta);
 		drivePolar(polarCoords, rotation);
 	}
 	
+	/**
+	 * Sets the drive motors such that forward is always the same direction, even when you rotate.
+	 * @param coords The PolarCoord that contains coords for the drive motors.
+	 * @param rotation The amount that the robot turns.
+	 */
 	public void driveAbsolute(PolarCoord coords, double rotation) {
 		coords.setTheta(coords.getTheta() + gyro.getAngle() * Math.PI / 180);
 		drivePolar(coords, rotation);
 	}
 	
+	/**
+	 * Sets the drive motors such that forward is always the same direction, even when you rotate.
+	 * @param r The power of the motors in the direction theta.
+	 * @param theta The direction the robot drives in degrees.
+	 * @param rotation The amount that the robot turns.
+	 */
 	public void driveAbsolute(double r, double theta, double rotation) {
 		driveAbsolute(new PolarCoord(r, theta), rotation);
 	}
