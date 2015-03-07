@@ -24,10 +24,10 @@ public class RunGrabber extends CommandBase {
 		double speed = oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.GrabberAxis);
 		if (speed != 0) {
 			if (hasBeenStopped) {
-				if (arm.getPosition() > 0) {
+				if (arm.getPosition() > 30) {
 					reverse = -1;
 				}
-				else {
+				else if (arm.getPosition() < -30) {
 					reverse = 1;
 				}
 			}
