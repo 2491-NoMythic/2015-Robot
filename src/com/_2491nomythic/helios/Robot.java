@@ -70,8 +70,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Hold arm in place", new KeepArmFromFalling(1.0));
 		SmartDashboard.putData("Move arm to center", new RunWithPID(0.0));
 		SmartDashboard.putData("Run test auto", new PickupBinsFromStep());
-		SmartDashboard.putData("Record Driver Joystick Inputs", new RecordRobotScript());
-		SmartDashboard.putdata("Play Driver Joystick Inputs", new PlayRobotScript());
+		SmartDashboard.putData("Record Driver Joystick Inputs", new RecordRobotScript("TestScript"));
+		SmartDashboard.putData("Play Driver Joystick Inputs", new PlayRobotScript("TestScript"));
 	}
 	
 	public void disabledPeriodic() {
