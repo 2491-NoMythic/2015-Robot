@@ -16,18 +16,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 
 public class PickupBinsFromStep extends CommandBase {
+	private DriveTime backUpToStart;
 	private RunWithPID lowerToBin;
 	private DriveTime driveToBin;
 	private RunWithPID pickUpBin;
 	private RunGrabberTime makeBinVertical;
-	private int state; // 0 = Before start, 1 = lowering arm, 2 = driving forward, 3 = picking up bin, 4 = rotating bin
+	private DriveTime driveIntoAutoZone;
+	private int state; // 0 = Before start, 1 = lowering arm, 2 = driving forward,3 = waiting to pick up bin
+					   // 4 = picking up bin, 5 = rotating bin, 6 = driving to auto zone
 	private Timer timer;
 	
 	public PickupBinsFromStep() {
+		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunWithPID(Variables.pickUpBinFromStepPosition);
-		driveToBin = new DriveTime(0.25, Constants.nullX, 0.1);
+		driveToBin = new DriveTime(0.25, Constants.nullX, 0.6);
 		pickUpBin = new RunWithPID(Variables.holdBinDistance);
-		makeBinVertical = new RunGrabberTime(1.0, 2.0);
+		makeBinVertical = new RunGrabberTime(1.0, 3.0);
+		driveIntoAutoZone = new DriveTime(0.5, Constants.nullX, -1.85);
 		timer = new Timer();
 	}
 
@@ -39,29 +44,41 @@ public class PickupBinsFromStep extends CommandBase {
 		switch (state) {
 			case 0:
 				lowerToBin.start();
+				backUpToStart.start();
 				state = 1;
 				break;
 			case 1:
-				if (!lowerToBin.isRunning()) {
+				if (!lowerToBin.isRunning() && !backUpToStart.isRunning()) {
 					driveToBin.start();
 					state = 2;
 				}
 				break;
 			case 2:
 				if (!driveToBin.isRunning()) {
-					pickUpBin.start();
 					state = 3;
 					timer.start();
 					timer.reset();
 				}
 				break;
 			case 3:
-				if (timer.get() > 0.25) {
-					makeBinVertical.start();
+				if (timer.get() > 0.5) {
+					pickUpBin.start();
+					timer.reset();
 					state = 4;
 				}
 				break;
 			case 4:
+				if (timer.get() > 0.25) {
+					makeBinVertical.start();
+					state = 5;
+				}
+				break;
+			case 5:
+				if (arm.getPosition() < 30) {
+					driveIntoAutoZone.start();
+					state = 6;
+				}
+			case 6:
 				break;
 			default:
 				System.out.println("Something's wrong in autonomous!  State is " + state);
@@ -69,7 +86,7 @@ public class PickupBinsFromStep extends CommandBase {
 	}
 
 	protected boolean isFinished() {
-		return state == 4 && !makeBinVertical.isRunning() && !pickUpBin.isRunning();
+		return state == 6 && !makeBinVertical.isRunning() && !pickUpBin.isRunning();
 	}
 
 	protected void end() {		

@@ -9,7 +9,7 @@ import com._2491nomythic.helios.settings.ControllerMap;
 public class RunGrabber extends CommandBase {
 	
 	private boolean hasBeenStopped = true;
-	private int reverse;
+	private int reverse = 1;
 	
 	public RunGrabber() {
 		requires(grabber);
@@ -24,10 +24,10 @@ public class RunGrabber extends CommandBase {
 		double speed = oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.GrabberAxis);
 		if (speed != 0) {
 			if (hasBeenStopped) {
-				if (arm.getPosition() > 30) {
+				if (arm.getPosition() > 10) {
 					reverse = -1;
 				}
-				else if (arm.getPosition() < -30) {
+				else if (arm.getPosition() < -10) {
 					reverse = 1;
 				}
 			}

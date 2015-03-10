@@ -107,7 +107,7 @@ public class UpdateDriverstation extends CommandBase {
 			Robot.drivePID.updateSettings();
 		}
 		
-		tmp = SmartDashboard.getNumber("ArmCompensationSpeed");
+		tmp = SmartDashboard.getNumber("Arm Compensation Speed");
 		if (tmp != Variables.armCompensationMultiplier) {
 			Variables.armCompensationMultiplier = tmp;
 			file.set("ArmCompensationSpeed", Double.toString(tmp));
