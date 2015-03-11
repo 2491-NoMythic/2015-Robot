@@ -111,6 +111,8 @@ public class Drivetrain extends Subsystem {
 		double left = y + rotation;
 		double right = y - rotation;
 		
+		x *= Constants.centerMotorMultiplier;
+		
 		if (left > 1) {
 			left = 1;
 		}

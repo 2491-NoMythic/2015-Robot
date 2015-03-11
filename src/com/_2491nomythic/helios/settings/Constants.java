@@ -28,6 +28,7 @@ public class Constants {
 	public static final boolean driveEncoderRightReversed = false;
 	public static final double driveEncoderToFeet = 0.00598740738248483559836600606686;
 	public static final int gyroChannel = 1;
+	public static final double centerMotorMultiplier = 1.17;
 	
 	// Arm
 	public static final int armTalonChannel = 18;
@@ -61,4 +62,7 @@ public class Constants {
 	// Null (zero value) Driving Distances
 	public static final double nullX = 0.0;
 	public static final double nullY = 0.0;
+	
+	//Square root of three for speed buttons
+	public static final double sqrt3 = Math.sqrt(3);
 }

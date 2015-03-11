@@ -2,6 +2,7 @@ package com._2491nomythic.helios.commands.drivetrain;
 
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drive extends CommandBase {
-	
+	private double currentMultiplier = 0.25;
 	public Drive() {
 		// Use requires() here to declare subsystem dependencies
 		requires(drivetrain);
@@ -23,14 +24,27 @@ public class Drive extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// Go at half speed unless the right trigger is held
-		double multiplier = 0.25;
+		double targetMultiplier = 0.25;
 		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonA)) {
-			multiplier *= 2;
+			targetMultiplier *= Constants.sqrt3;
 		}
 		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonB)) {
-			multiplier *= 2;
+			targetMultiplier *= Constants.sqrt3;
 		}
-		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * multiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * multiplier);
+		if(Math.abs(targetMultiplier - currentMultiplier) > 0.05) {
+			if(targetMultiplier > currentMultiplier) {
+				currentMultiplier += 0.05;
+			}
+			else {
+				currentMultiplier -= 0.05;
+			}
+		}
+		else {
+			targetMultiplier = currentMultiplier;
+		}
+		
+		
+		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * currentMultiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * currentMultiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * targetMultiplier);
 		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
 		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
 		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
