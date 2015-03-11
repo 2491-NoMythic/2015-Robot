@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The hooks at the end of the arm.
  */
 public class Grabber extends Subsystem {
 	private CANTalon motor;
@@ -25,15 +25,26 @@ public class Grabber extends Subsystem {
 		motor = new CANTalon(Constants.grabberTalonMotorChannel);
 	}
 	
+	/**
+	 * Sets the power of the grabber.
+	 * @param speed The power and direction to be applied to the grabber.
+	 */
 	public void set(double speed) {
 		currentSpeed = speed;
 		motor.set(speed);
 	}
 	
+	/**
+	 * 
+	 * @return The current power being applied to the grabber.
+	 */
 	public double get() {
 		return currentSpeed;
 	}
 	
+	/**
+	 * Stops the grabber.
+	 */
 	public void stop() {
 		set(0.0);
 	}
