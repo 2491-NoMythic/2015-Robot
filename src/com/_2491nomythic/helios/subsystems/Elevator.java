@@ -1,6 +1,5 @@
 package com._2491nomythic.helios.subsystems;
 
-import com._2491nomythic.helios.commands.elevator.Elevate;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
@@ -9,10 +8,9 @@ import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * The thing that lifts totes.
  */
 public class Elevator extends PIDSubsystem {
 	private CANTalon motorElevator;
@@ -92,6 +90,10 @@ public class Elevator extends PIDSubsystem {
 		// e.g. yourMotor.set(output);
 	}
 	
+	/**
+	 * Sets the power being applied to the elevator.
+	 * @param speed The power and direction being applied to the elevator.
+	 */
 	public void set(double speed) {
 		if (usingPID) {
 			this.disable();
@@ -118,6 +120,10 @@ public class Elevator extends PIDSubsystem {
 		}
 	}
 	
+	/**
+	 * Sends the elevator to a specific position.
+	 * @param position The position to send the elevator to.
+	 */
 	public void setPID(double position) {
 		if (!usingPID) {
 			this.enable();
@@ -127,48 +133,91 @@ public class Elevator extends PIDSubsystem {
 		this.setSetpoint(position);
 	}
 	
+	/**
+	 * Sends the elevator to a position specified by the number of totes.
+	 * @param numTotes The number of totes to send the elevator to.
+	 */
 	public void setPosition(int numTotes) {
 		if (numTotes >= 1 && numTotes <= 4) {
 			setPID(Variables.toteHeight[numTotes]);
 		}
 	}
 	
+	/**
+	 * 
+	 * @return The power being applied to the elevator.
+	 */
 	public double get() {
 		return currentSpeed;
 	}
 	
+	/**
+	 * 
+	 * @return The current target the elevator is being sent to.
+	 */
 	public double getPID() {
 		return currentTarget;
 	}
 	
+	/**
+	 * 
+	 * @return Whether or not the elevator is currently using PID.
+	 */
 	public boolean isUsingPID() {
 		return usingPID;
 	}
 	
-	public double getERate() {
+	/**
+	 * 
+	 * @return The current speed of the elevator.
+	 */
+	public double getRate() {
 		return encoder.getRate();
 	}
 	
+	/**
+	 * 
+	 * @return The current value of the encoder.
+	 */
 	public Encoder getEncoder() {
 		return encoder;
 	}
 	
+	/**
+	 * 
+	 * @return Whether the bottom elevator limit switch is pressed.
+	 */
 	public boolean getBottomSwitch() {
 		return !limitBottom.get();
 	}
 	
+	/**
+	 * 
+	 * @return Whether the top elevator limit switch is pressed.
+	 */
 	public boolean getTopSwitch() {
 		return !limitTop.get();
 	}
 	
+	/**
+	 * 
+	 * @return Whether the left tote check limit switch is pressed.
+	 */
 	public boolean getToteCheckLeft() {
 		return !toteCheckLeft.get();
 	}
 	
+	/**
+	 * 
+	 * @return Whether the right tote check limit switch is pressed.
+	 */
 	public boolean getToteCheckRight() {
 		return !toteCheckRight.get();
 	}
 	
+	/**
+	 * Resets the elevator encoder.
+	 */
 	public void resetEncoder() {
 		encoder.reset();
 	}
