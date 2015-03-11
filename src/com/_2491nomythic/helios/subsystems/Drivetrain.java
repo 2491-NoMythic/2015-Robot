@@ -176,62 +176,121 @@ public class Drivetrain extends Subsystem {
 		driveAbsolute(new PolarCoord(r, theta), rotation);
 	}
 	
+	/**
+	 * 
+	 * @return The value of the gyro.
+	 */
 	public Gyro getGyro() {
 		return gyro;
 	}
 	
+	/**
+	 * 
+	 * @return The value of the left drive encoder.
+	 */
 	public Encoder getLeftEncoder() {
 		return encoderLeft;
 	}
 	
+	/**
+	 * 
+	 * @return The value of the center drive encoder.
+	 */
 	public Encoder getCenterEncoder() {
 		return encoderCenter;
 	}
 	
+	/**
+	 * 
+	 * @return The value of the right drive encoder.
+	 */
 	public Encoder getRightEncoder() {
 		return encoderRight;
 	}
 	
+	/**
+	 * 
+	 * @return The front left drive motor.
+	 */
 	public CANTalon getFrontLeftMotor() {
 		return frontLeft;
 	}
 	
+	/**
+	 * 
+	 * @return The back left drive motor.
+	 */
 	public CANTalon getBackLeftMotor() {
 		return backLeft;
 	}
 	
+	/**
+	 * 
+	 * @return The front right drive motor.
+	 */
 	public CANTalon getFrontRightMotor() {
 		return frontRight;
 	}
 	
+	/**
+	 * 
+	 * @return The back right drive motor.
+	 */
 	public CANTalon getBackRightMotor() {
 		return backRight;
 	}
 	
+	/**
+	 * 
+	 * @return The front center drive motor.
+	 */
 	public CANTalon getFrontCenterMotor() {
 		return frontCenter;
 	}
 	
+	/**
+	 * 
+	 * @return The back center drive motor.
+	 */
 	public CANTalon getBackCenterMotor() {
 		return backCenter;
 	}
 	
+	/**
+	 * 
+	 * @return The current power being applied to the right drive motors.
+	 */
 	public double getCurrentRightSpeed() {
 		return currentRightSpeed;
 	}
 	
+	/**
+	 * 
+	 * @return The current power being applied to the left drive motors.
+	 */
 	public double getCurrentLeftSpeed() {
 		return currentLeftSpeed;
 	}
 	
+	/**
+	 * 
+	 * @return The current power being applied to the front center drive motor.
+	 */
 	public double getCurrentFrontSpeed() {
 		return currentFrontSpeed;
 	}
 	
+	/**
+	 * 
+	 * @return The currrent power being applied to the back center drive motor.
+	 */
 	public double getCurrentBackSpeed() {
 		return currentBackSpeed;
 	}
 	
+	/**
+	 * Stops the drivetrain.
+	 */
 	public void stop() {
 		drive(0.0, 0.0, 0.0, 0.0);
 	}
