@@ -9,7 +9,7 @@ import com._2491nomythic.helios.settings.ControllerMap;
 public class RunGrabber extends CommandBase {
 	
 	private boolean hasBeenStopped = true;
-	private int reverse;
+	private int reverse = 1;
 	
 	public RunGrabber() {
 		requires(grabber);
