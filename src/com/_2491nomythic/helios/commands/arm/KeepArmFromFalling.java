@@ -10,6 +10,11 @@ public class KeepArmFromFalling extends CommandBase {
 	private double target;
 	private double tolerance;
 	
+	/**
+	 * Holds the arm in place
+	 * WARNING!!! This command doesn't requires(arm), so it needs to be canceled manually so it doesn't constantly set the arm to 0;
+	 * @param tolerance
+	 */
 	public KeepArmFromFalling(double tolerance) {
 		//requires(arm);
 		this.tolerance = tolerance;

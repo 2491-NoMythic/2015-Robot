@@ -11,7 +11,7 @@ public class ArmPositionSet extends CommandBase {
 	private double armStickPos;
 	private boolean hasBeenStopped;
 	private KeepArmFromFalling stopArm;
-	private int reverse = 1;
+	private int reverse = -1;
 	
 	public ArmPositionSet() {
 		requires(arm);
@@ -20,6 +20,7 @@ public class ArmPositionSet extends CommandBase {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		reverse = -1;
 		hasBeenStopped = false;
 	}
 	
@@ -35,10 +36,10 @@ public class ArmPositionSet extends CommandBase {
 		}
 		if (Math.abs(armStickPos) >= 0.05) {
 			if (hasBeenStopped) {
-				if (arm.getPosition() > 30) {
+				if (arm.getPosition() > 15) {
 					reverse = -1;
 				}
-				else if(arm.getPosition() < -30) {
+				else if(arm.getPosition() < -15) {
 					reverse = 1;
 				}
 				stopArm.cancel();
