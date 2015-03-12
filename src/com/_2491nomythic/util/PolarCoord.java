@@ -39,8 +39,7 @@ public class PolarCoord {
 	/**
 	 * Set the theta value using radians
 	 * 
-	 * @param newTheta
-	 *            new theta value in radians
+	 * @param newTheta new theta value in radians
 	 */
 	public void setTheta(double newTheta) {
 		theta = newTheta;
@@ -49,8 +48,7 @@ public class PolarCoord {
 	/**
 	 * Set the theta value using degrees
 	 * 
-	 * @param newTheta
-	 *            new theta value in degrees
+	 * @param newTheta new theta value in degrees
 	 */
 	public void setThetaDeg(double newTheta) {
 		theta = newTheta / 180 * Math.PI;

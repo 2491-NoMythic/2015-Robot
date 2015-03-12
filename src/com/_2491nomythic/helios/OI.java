@@ -13,6 +13,8 @@ import com._2491nomythic.helios.commands.elevator.ElevatePower;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
+import com._2491nomythic.util.CartesianCoord;
+import com._2491nomythic.util.PolarCoord;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -118,6 +120,27 @@ public class OI {
 		double result = controllers[joystickID].getRawAxis(axisID);
 		result = result * Math.abs(result);
 		return Math.abs(result) > 0.05 ? result : 0;
+	}
+	
+	/**
+	 * Get two axes from a controller that are squared and deadzoned together
+	 * @param joystickID The id of the controller. 0 = left or driver, 1 = right or driver
+	 * @param xAxis The id of the X axis (for use in getRawAxis)
+	 * @param yAxis The id of the Y axis (for use in getRawAxis)
+	 * @return A polar coordinate of the axes after they've been squared and deadzoned
+	 */
+	public PolarCoord getPlaneForDrive(int joystickID, int xAxis, int yAxis, boolean xReversed, boolean yReversed) {
+		double xCoordinate = getAxis(joystickID, xAxis) * (xReversed? -1 : 1);
+		double yCoordinate = getAxis(joystickID, yAxis) * (yReversed? -1 : 1);
+		PolarCoord polarCoord = new CartesianCoord(xCoordinate, yCoordinate).getPolar();
+		polarCoord.setR(polarCoord.getR() * polarCoord.getR());
+		if (Math.abs(polarCoord.getR()) > 0.05) {
+			return polarCoord;
+		}
+		else {
+			return new PolarCoord(0, 1337);
+		}
+		
 	}
 	
 	

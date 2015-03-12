@@ -4,6 +4,7 @@ package com._2491nomythic.helios.commands.drivetrain;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
+import com._2491nomythic.util.PolarCoord;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -44,7 +45,10 @@ public class Drive extends CommandBase {
 		}
 		
 		
-		drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * currentMultiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * currentMultiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * targetMultiplier);
+		//drivetrain.driveCartesian(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * currentMultiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * currentMultiplier, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * currentMultiplier);
+		PolarCoord coord = oi.getPlaneForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX, ControllerMap.DriveAxisY, false, true);
+		coord.setR(coord.getR() * currentMultiplier);
+		drivetrain.drivePolar(coord, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * currentMultiplier);
 		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
 		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
 		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());

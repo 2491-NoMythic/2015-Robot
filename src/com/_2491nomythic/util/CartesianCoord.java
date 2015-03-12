@@ -49,7 +49,7 @@ public class CartesianCoord {
 	/**
 	 * Get a polar version of the coordinate
 	 * 
-	 * @return a poler version of the coordinate
+	 * @return a polar version of the coordinate
 	 */
 	public PolarCoord getPolar() {
 		double r, theta;
