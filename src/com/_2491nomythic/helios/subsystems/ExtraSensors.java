@@ -21,6 +21,10 @@ public class ExtraSensors extends Subsystem {
 		powerDistributionPanel = new PowerDistributionPanel();
 	}
 	
+	/**
+	 * 
+	 * @return The power distribution panel.
+	 */
 	public PowerDistributionPanel getPowerDistributionPanel() {
 		return powerDistributionPanel;
 	}
