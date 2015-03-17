@@ -5,7 +5,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Resets the arm encoder.
  */
 public class ResetArmEncoder extends CommandBase {
 	int state = 0;

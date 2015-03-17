@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
 /**
- *
+ * Sets the position of the arm during Tele-Op.
  */
 public class ArmPositionSet extends CommandBase {
 	

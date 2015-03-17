@@ -5,7 +5,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Resets the arm encoder manually.
  */
 public class ManuallyResetArmEncoder extends CommandBase {
 

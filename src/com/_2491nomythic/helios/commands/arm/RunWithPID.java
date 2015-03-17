@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 
 
 /**
- *
+ * Sets the Arm to the specified position.
  */
 public class RunWithPID extends CommandBase {
 	double target;
