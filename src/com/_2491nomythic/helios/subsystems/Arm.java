@@ -193,9 +193,17 @@ public class Arm extends PIDSubsystem {
 	
 	/**
 	 * 
-	 * @return The whether the hall effect sensor has detected something.
+	 * @return The hall effect sensor.
 	 */
-	public boolean getHallEffectSensor() {
+	public DigitalInput getHallEffectSensor() {
+		return hallEffectSensor;
+	}
+	
+	/**
+	 * 
+	 * @return Whether the hall effect sensor has detected something.
+	 */
+	public boolean getHallEffectSensorValue() {
 		return !hallEffectSensor.get();
 	}
 }
