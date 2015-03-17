@@ -3,7 +3,7 @@ package com._2491nomythic.helios.commands;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Runs the camera. 'nuff said.
  */
 public class RunCamera extends CommandBase {
 	

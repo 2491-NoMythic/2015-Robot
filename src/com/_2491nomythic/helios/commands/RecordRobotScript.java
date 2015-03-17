@@ -6,7 +6,7 @@ import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.BinaryFileManager;
 
 /**
- *
+ * Records the functions of the robot for playback using the PlayRobotScript command.
  */
 public class RecordRobotScript extends CommandBase {
 	private BinaryFileManager file;

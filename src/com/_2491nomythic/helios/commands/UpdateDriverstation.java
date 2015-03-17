@@ -8,6 +8,9 @@ import com._2491nomythic.util.FileData;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Puts some stuff on the DriverStation and collects some stuff from the DriverStation.
+ */
 public class UpdateDriverstation extends CommandBase {
 	
 	private Timer timer;
