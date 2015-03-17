@@ -44,7 +44,8 @@ public class Constants {
 	public static final double armLength = 4.833;
 	
 	// Elevator
-	public static final int elevatorTalonMotorChannel = 14;
+	public static final int elevatorTalonMotorAChannel = 14;
+	public static final int elevatorTalonMotorBChannel = 19;
 	public static final int elevatorEncoderAChannel = 15;
 	public static final int elevatorEncoderBChannel = 16;
 	public static final boolean elevatorEncoderReversed = false;
@@ -57,7 +58,7 @@ public class Constants {
 	public static final int elevatorToteCheckRightChannel = 12;
 	
 	// Grabber
-	public static final int grabberTalonMotorChannel = 19;
+	public static final int grabberTalonMotorChannel = 13;
 	
 	// Null (zero value) Driving Distances
 	public static final double nullX = 0.0;

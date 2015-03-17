@@ -36,7 +36,7 @@ public class Elevator extends PIDSubsystem {
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		motorElevator = new CANTalon(Constants.elevatorTalonMotorChannel);
+		motorElevator = new CANTalon(Constants.elevatorTalonMotorAChannel);
 		
 		encoder = new Encoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
