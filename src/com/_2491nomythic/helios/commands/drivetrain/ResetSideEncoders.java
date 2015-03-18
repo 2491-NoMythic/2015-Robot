@@ -3,7 +3,7 @@ package com._2491nomythic.helios.commands.drivetrain;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Resets the side encoders on the drivetrain.
  */
 public class ResetSideEncoders extends CommandBase {
 	

@@ -7,7 +7,7 @@ import com._2491nomythic.util.CartesianCoord;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * A drive that theoretically keeps drive directions in the same direction relative to the driver and field, not the robot. It currently is just for show because the gyro is very imprecise.
  */
 public class AbsoluteDrive extends CommandBase {
 	

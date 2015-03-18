@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
 
 /**
- *
+ * Reinitializes the gyro.
  */
 public class FixGyroIssues extends CommandBase {
 	

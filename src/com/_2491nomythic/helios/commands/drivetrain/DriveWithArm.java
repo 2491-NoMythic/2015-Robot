@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 
 /**
- *
+ * Adjusts the location of the chassis while moving the arm to compensate for horizontal movement of the arm.
  */
 public class DriveWithArm extends CommandBase {
 	private double armStartingPosition;

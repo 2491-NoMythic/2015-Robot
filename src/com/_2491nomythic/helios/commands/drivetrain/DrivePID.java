@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 
 /**
- *
+ * Drives the robot a specified distance in a specified direction with specified power using PID.
  */
 public class DrivePID extends CommandBase {
 	private double xTargetInput;
@@ -46,6 +46,12 @@ public class DrivePID extends CommandBase {
 		}
 	};
 	
+	/**
+	 * 
+	 * @param maxSpeedInput the maximum speed to drive the robot.
+	 * @param xTargetInput The distance to drive the robot in the x direction.
+	 * @param yTargetInput The distance to drive the robot in the y direction.
+	 */
 	public DrivePID(double maxSpeedInput, double xTargetInput, double yTargetInput) {
 		requires(drivetrain);
 		maxSpeed = maxSpeedInput;

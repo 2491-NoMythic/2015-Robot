@@ -9,7 +9,7 @@ import com._2491nomythic.util.PolarCoord;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * The main drive command. It drives the robot.
  */
 public class Drive extends CommandBase {
 	private double currentMultiplier = 0.25;

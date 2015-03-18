@@ -3,7 +3,7 @@ package com._2491nomythic.helios.commands.drivetrain;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Resets the center encoder on the drivetrain.
  */
 public class ResetCenterEncoder extends CommandBase {
 	

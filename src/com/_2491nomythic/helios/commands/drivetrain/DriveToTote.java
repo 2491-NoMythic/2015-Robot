@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 
 /**
- *
+ * Drives the robot until it detects a tote and then stops the robot.
  */
 public class DriveToTote extends CommandBase {
 	double power;
@@ -15,6 +15,11 @@ public class DriveToTote extends CommandBase {
 	Timer timer;
 	boolean finished = false;
 	
+	/**
+	 * 
+	 * @param power The power of the drive motors.
+	 * @param timeout The amount of time to wait before aborting the process.
+	 */
 	public DriveToTote(double power, double timeout) {
 		requires(drivetrain);
 		this.power = Math.abs(power);
