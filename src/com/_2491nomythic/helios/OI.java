@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.subsystems.Arm;
-import com._2491nomythic.helios.commands.arm.ResetArmEncoder;
+import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.ElevatePower;
@@ -62,6 +62,8 @@ public class OI {
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new GetNextToteTime());
 		
+		/*
+		// Too laggy
 		driverElevatorUp = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorUp);
 		driverElevatorUp.whileHeld(new ElevatePower(1.0));
 		
@@ -73,9 +75,10 @@ public class OI {
 		
 		codriverElevatorDown = new JoystickButton(controllers[ControllerMap.codriverElevatorController], ControllerMap.codriverElevatorDown);
 		codriverElevatorDown.whileHeld(new ElevatePower(-1.0));
-		
-		resetArmEncoder = new DigitalInputButton(Arm.getInstance().getHallEffectSensor());
-		resetArmEncoder.whenPressed(new ResetArmEncoder());
+		*/
+//		
+//		resetArmEncoder = new DigitalInputButton(Arm.getInstance().getHallEffectSensor());
+//		resetArmEncoder.whenPressed(new ManuallyResetArmEncoder());
 	}
 	;
 	/**
