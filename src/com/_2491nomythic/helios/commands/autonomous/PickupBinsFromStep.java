@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
  */
 
 public class PickupBinsFromStep extends CommandBase {

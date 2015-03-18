@@ -8,7 +8,7 @@ import com._2491nomythic.helios.settings.Constants;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * An autonomous that drives into the auto zone with a yellow tote and drops it.
  */
 
 public class DriveIntoAutoZoneAndDrop extends CommandGroup {
