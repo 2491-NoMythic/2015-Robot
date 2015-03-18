@@ -12,6 +12,10 @@ public class RecordRobotScript extends CommandBase {
 	private BinaryFileManager file;
 	float floatArray[] = new float[7];
 	
+	/**
+	 * 
+	 * @param filename The name of the file to record to.
+	 */
 	public RecordRobotScript(String filename) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

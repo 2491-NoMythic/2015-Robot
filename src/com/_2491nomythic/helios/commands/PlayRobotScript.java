@@ -13,6 +13,10 @@ public class PlayRobotScript extends CommandBase {
 	private ByteBuffer buffer;
 	private String path;
 	
+	/**
+	 * 
+	 * @param filename The name of the file to play from.
+	 */
 	public PlayRobotScript(String filename) {
 		requires(drivetrain);
 		requires(elevator);
