@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
- *
+ * The main command that moves the elevator according to driver control during Tele-Op.
  */
 public class Elevate extends CommandBase {
 	

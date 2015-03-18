@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 
 /**
- *
+ * Changes the heiht of the elevator based on whether or not to be under the lip of a tote.
  */
 public class UnderLipStatus extends Command {
 	
@@ -17,6 +17,10 @@ public class UnderLipStatus extends Command {
 	private switchType type;
 	private static GoToToteHeight go;
 	
+	/**
+	 * 
+	 * @param type Whether or not to be under the lip of a tote.
+	 */
 	public UnderLipStatus(switchType type) {
 		this.type = type;
 		if (go == null) {

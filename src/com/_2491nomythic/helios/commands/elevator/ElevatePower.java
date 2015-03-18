@@ -3,11 +3,15 @@ package com._2491nomythic.helios.commands.elevator;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Sets the power of the elevator motors.
  */
 public class ElevatePower extends CommandBase {
 	double power;
 	
+	/**
+	 * 
+	 * @param power The power to set the elevator motors to.
+	 */
 	public ElevatePower(double power) {
 		this.power = power;
 		requires(elevator);

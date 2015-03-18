@@ -5,7 +5,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 
 
 /**
- *
+ * Resets the elevator encoder manually.
  */
 public class ManuallyResetElevatorEncoder extends CommandBase {
 

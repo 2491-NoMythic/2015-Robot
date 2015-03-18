@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
 
 /**
- *
+ * Sets the height of the elevator based on the height of totes.
  */
 public class SetToteHeight extends CommandBase {
 	private int target;
@@ -12,12 +12,23 @@ public class SetToteHeight extends CommandBase {
 	private boolean onPlatform;
 	private static GoToToteHeight go = new GoToToteHeight();
 	
+	/**
+	 * 
+	 * @param totes The number of totes to put the elevator at.
+	 * @param underLip Whether or not to put the elevator under the lip of the top tote.
+	 * @param platform Whether or not to add the scoring platform's height to the elevator's height.
+	 */
 	public SetToteHeight(int totes, boolean underLip, boolean platform) {
 		target = totes;
 		lip = underLip;
 		onPlatform = platform;
 	}
 	
+	/**
+	 * 
+	 * @param totes The number of totes to put the elevator at.
+	 * @param underLip Whether or not to put the elevator under the lip of the top tote.
+	 */
     public SetToteHeight(int totes, boolean underLip) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -26,6 +37,10 @@ public class SetToteHeight extends CommandBase {
     	onPlatform = false;
     }
     
+    /**
+     * 
+     * @param totes The number of totes to put the elevator at.
+     */
     public SetToteHeight(int totes) {
     	target = totes;
     	lip = false;

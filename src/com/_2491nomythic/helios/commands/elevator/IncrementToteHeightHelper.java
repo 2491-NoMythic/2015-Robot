@@ -5,7 +5,7 @@ import com._2491nomythic.helios.settings.Variables;
 
 
 /**
- *
+ * A command that is used in conjunction with GoToToteHeight to move the elevator up by the height of one tote.
  */
 public class IncrementToteHeightHelper extends CommandBase {
 	private double manualEncoderDistance;

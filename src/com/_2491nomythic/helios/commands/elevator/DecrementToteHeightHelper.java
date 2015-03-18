@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
 
 /**
- *
+ * Used in conjunction with GoToToteHeight in a command group to make the elevator go down one tote.
  */
 public class DecrementToteHeightHelper extends CommandBase {
 	private double manualEncoderDistance;

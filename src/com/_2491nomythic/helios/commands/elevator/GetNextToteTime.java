@@ -5,7 +5,7 @@ import com._2491nomythic.helios.commands.drivetrain.DriveTime;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * An unreliable command group that is supposed to go from holding one tote to holding two totes.
  */
 public class GetNextToteTime extends CommandGroup {
     

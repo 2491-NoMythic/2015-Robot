@@ -5,7 +5,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.Variables;
 
 /**
- *
+ * Goes to a specific tote height set by values in the Variables file.
  */
 public class GoToToteHeight extends CommandBase {
 

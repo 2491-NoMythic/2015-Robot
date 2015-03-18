@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
 
 /**
- *
+ * An unreliable command group that is supposed to go from holding one tote to holding two totes.
  */
 public class PickUpNextTote extends CommandGroup {
 	
