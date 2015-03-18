@@ -29,6 +29,7 @@ public class UpdateDriverstation extends CommandBase {
 		SmartDashboard.putNumber("Drive Y PID I", file.getDoubleWithDefault("DriveYPIDI", Variables.driveyPID_I));
 		SmartDashboard.putNumber("Drive Y PID D", file.getDoubleWithDefault("DriveYPIDD", Variables.driveyPID_D));
 		SmartDashboard.putNumber("Arm Compensation Speed", file.getDoubleWithDefault("ArmCompensationSpeed", Variables.armCompensationMultiplier));
+		SmartDashboard.putNumber("Elevator Speed", 1.0);
 		SmartDashboard.putBoolean("Show Max Power Usage", false);
 	}
 	
@@ -104,6 +105,7 @@ public class UpdateDriverstation extends CommandBase {
 		SmartDashboard.putNumber("Center Encoder", drivetrain.getCenterEncoder().getDistance());
 		SmartDashboard.putBoolean("Top limit switch", elevator.getTopSwitch());
 		SmartDashboard.putBoolean("Bottom limit switch", elevator.getBottomSwitch());
+		SmartDashboard.putBoolean("Hall Effect Sensor", arm.getHallEffectSensorValue());
 		SmartDashboard.putNumber("Arm Encoder", arm.getPosition());
 		SmartDashboard.putNumber("Arm Power", arm.get());
 	}
@@ -143,7 +145,8 @@ public class UpdateDriverstation extends CommandBase {
 			Variables.armCompensationMultiplier = tmp;
 			file.set("ArmCompensationSpeed", Double.toString(tmp));
 		}
-	
+		
+		Variables.elevatorMultiplier = SmartDashboard.getNumber("Elevator Speed");
 	}
 	private double updateMaxValue (int pos, double value) {
 		if(maxValues[pos] < value) {

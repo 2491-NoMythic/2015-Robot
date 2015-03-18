@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
+import com._2491nomythic.helios.commands.elevator.RunElevator;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
@@ -52,7 +53,7 @@ public class Elevator extends PIDSubsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-//		setDefaultCommand(new Elevate()); //Elevator control now on buttons
+		setDefaultCommand(new RunElevator()); //Elevator control now on buttons
 	}
 	
 	protected double returnPIDInput() {
@@ -122,7 +123,7 @@ public class Elevator extends PIDSubsystem {
 		}
 		else {
 			motorElevatorA.set(speed);
-			motorElevatorA.set(-1.0 * speed);
+			motorElevatorB.set(-1.0 * speed);
 		}
 	}
 	

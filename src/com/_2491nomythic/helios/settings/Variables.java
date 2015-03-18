@@ -47,5 +47,6 @@ public class Variables {
 	//Variable for DriveWithArm class
 	public static double armCompensationMultiplier = -1;
 	
-	
+	// Elevator speed multiplier
+	public static double elevatorMultiplier = 1;
 }
