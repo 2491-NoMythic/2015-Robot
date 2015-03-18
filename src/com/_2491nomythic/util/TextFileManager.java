@@ -1,5 +1,6 @@
 package com._2491nomythic.util;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,15 +12,43 @@ import java.nio.file.StandardOpenOption;
 public class TextFileManager {
 	protected Path path;
 	protected Scanner fileScanner;
+	protected PrintWriter writer;
+	private boolean fileScannerIsOpen = false;
+	private boolean caught;
 	
 	public TextFileManager(String filename) {
 		path = Paths.get(filename);
-		fileScanner = new Scanner(filename);
+		try {
+		writer = new PrintWriter(filename);
+		}
+		catch (IOException e) {
+			System.out.println("Couldn't find file " + filename + ", " + e.getLocalizedMessage());
+		}
+	}
+	
+	public void openFileScanner() {
+		try {
+		fileScanner = new Scanner(path);
+		}
+		
+		catch (IOException e) {
+			System.out.println("Couldn't open file " + path.toString() + ", " + e.getLocalizedMessage());
+			caught = true;
+		}
+		
+		if(caught) {
+			
+		}
+		else {
+			 fileScannerIsOpen = true;
+		}
+		
 	}
 	
 	public String readLine() {
-		if(fileScanner.hasNextLine()) {
+		if(fileScanner.hasNextLine() && fileScannerIsOpen) {
 			return fileScanner.nextLine();
+			
 		}
 		else {
 			return null;
@@ -42,6 +71,7 @@ public class TextFileManager {
 		}
 		catch (IOException e) {
 			System.out.println("Couldn't append to file " + path.toString() + ", " + e.getLocalizedMessage());
+			caught = true;
 		}
 	}
 	
@@ -51,5 +81,17 @@ public class TextFileManager {
 		append(appendee);
 	}
 	
+	public void write(String lines) {
+		writer.println(lines);
+	}
+	
+	public void closePrintWriter() {
+		writer.close();
+	}
+	
+	public void closeFileScanner() {
+		fileScanner.close();
+	}
+
 	
 }
