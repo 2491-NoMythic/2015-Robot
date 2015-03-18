@@ -26,6 +26,9 @@ public class ArmPositionSet extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		if (arm.getHallEffectSensorValue()) {
+			arm.resetEncoder();
+		}
 		armStickPos = oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.ArmAxis);
 		double multiplier = 0.25;
 		if (oi.getButton(ControllerMap.ArmController, ControllerMap.FasterArmButtonA)) {
