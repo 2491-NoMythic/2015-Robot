@@ -9,6 +9,10 @@ import com._2491nomythic.helios.commands.CommandBase;
 public class RunWithPID extends CommandBase {
 	double target;
 	
+	/**
+	 * 
+	 * @param targetPosition The position to set the arm to.
+	 */
 	public RunWithPID(double targetPosition) {
 		// Use requires() here to declare subsystem dependencies
 		requires(arm);
