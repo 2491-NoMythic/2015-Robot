@@ -31,6 +31,9 @@ public class DriveWithArm extends CommandBase {
 	};
 	private PIDController yController;
 	
+	/**
+	 * Adjusts the location of the chassis while moving the arm to compensate for horizontal movement of the arm.
+	 */
 	public DriveWithArm() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

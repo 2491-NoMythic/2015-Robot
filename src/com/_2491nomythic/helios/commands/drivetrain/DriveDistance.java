@@ -14,7 +14,7 @@ public class DriveDistance extends CommandBase {
 	double yDrive;
 	
 	/**
-	 * 
+	 * Drives the robot a specified distance in a specified direction with specified power.
 	 * @param power The power of the drive motors.
 	 * @param x The distance in the x direction to drive the robot.
 	 * @param y The distance in the y direction to drive the robot.

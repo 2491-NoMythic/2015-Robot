@@ -19,6 +19,9 @@ public class UpdateDriverstation extends CommandBase {
 	private double[] maxValues = new double[8];
 	private boolean maxValuesEnabled = false;
 	
+	/**
+	 * Puts some stuff on the DriverStation and collects some stuff from the DriverStation.
+	 */
 	public UpdateDriverstation() {
 		requires(extraSensors);
 		timer = new Timer();

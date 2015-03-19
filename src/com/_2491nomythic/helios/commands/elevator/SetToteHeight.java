@@ -13,7 +13,7 @@ public class SetToteHeight extends CommandBase {
 	private static GoToToteHeight go = new GoToToteHeight();
 	
 	/**
-	 * 
+	 * Sets the height of the elevator based on the height of totes.
 	 * @param totes The number of totes to put the elevator at.
 	 * @param underLip Whether or not to put the elevator under the lip of the top tote.
 	 * @param platform Whether or not to add the scoring platform's height to the elevator's height.

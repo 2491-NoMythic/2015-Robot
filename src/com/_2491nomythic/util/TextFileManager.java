@@ -6,10 +6,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.StandardOpenOption;
+
+/**
+ * A manager for text files.
+ */
 public class TextFileManager {
 	protected Path path;
 	protected Scanner fileScanner;
 	
+	/**
+	 * A manager for text files.
+	 * @param filename The name of the file.
+	 */
 	public TextFileManager(String filename) {
 		path = Paths.get(filename);
 		fileScanner = new Scanner(filename);

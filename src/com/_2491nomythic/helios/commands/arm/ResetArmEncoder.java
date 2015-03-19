@@ -12,6 +12,9 @@ public class ResetArmEncoder extends CommandBase {
 	Timer timer = new Timer();
 	double currentTime;
 	
+	/**
+	 * Resets the arm encoder.
+	 */
 	public ResetArmEncoder() {
 		// Use requires() here to declare subsystem dependencies
 		requires(arm);

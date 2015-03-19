@@ -10,7 +10,7 @@ public class RotateGrabber extends CommandBase {
 	private double speed;
 	
 	/**
-	 * 
+	 * Rotates the hook at a specified speed.
 	 * @param speed The speed to rotate the grabber at.
 	 */
 	public RotateGrabber(double speed) {

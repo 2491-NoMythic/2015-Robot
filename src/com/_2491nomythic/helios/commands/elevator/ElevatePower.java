@@ -9,7 +9,7 @@ public class ElevatePower extends CommandBase {
 	double power;
 	
 	/**
-	 * 
+	 * Sets the power of the elevator motors.
 	 * @param power The power to set the elevator motors to.
 	 */
 	public ElevatePower(double power) {

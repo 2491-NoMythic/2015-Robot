@@ -1,5 +1,8 @@
 package com._2491nomythic.helios.settings;
 
+/**
+ * A directory of constants referenced in other commands and subsystems.
+ */
 public class Constants {
 	// Roborio directories
 	public static final String homeDirectory = "/home/lvuser/";

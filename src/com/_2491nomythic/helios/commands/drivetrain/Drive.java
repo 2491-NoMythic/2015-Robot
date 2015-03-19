@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Drive extends CommandBase {
 	private double currentMultiplier = 0.25;
+	
+	/**
+	 * The main drive command. It drives the robot.
+	 */
 	public Drive() {
 		// Use requires() here to declare subsystem dependencies
 		requires(drivetrain);

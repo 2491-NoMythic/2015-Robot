@@ -47,7 +47,7 @@ public class DrivePID extends CommandBase {
 	};
 	
 	/**
-	 * 
+	 * Drives the robot a specified distance in a specified direction with specified power using PID.
 	 * @param maxSpeedInput the maximum speed to drive the robot.
 	 * @param xTargetInput The distance to drive the robot in the x direction.
 	 * @param yTargetInput The distance to drive the robot in the y direction.

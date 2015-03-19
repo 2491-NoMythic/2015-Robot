@@ -14,7 +14,7 @@ public class ElevateTime extends CommandBase {
 	Timer timer;
 	
 	/**
-	 * 
+	 * Sets the power of the elevator motor for a specified time.
 	 * @param power The power to set the elevator motor to.
 	 * @param time The amount of time to run the elevator for.
 	 */

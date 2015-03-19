@@ -29,6 +29,9 @@ public class Camera extends Subsystem {
 		return instance;
 	}
 	
+	/**
+	 * The camera used to help the drivers pick up things.
+	 */
 	private Camera() {
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		try {

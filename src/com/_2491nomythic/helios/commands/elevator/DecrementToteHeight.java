@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DecrementToteHeight extends CommandGroup {
 	
+	/**
+	 * Sends elevator down one tote.
+	 */
 	public DecrementToteHeight() {
 		// Add Commands here:
 		// e.g. addSequential(new Command1());

@@ -7,7 +7,9 @@ import com._2491nomythic.helios.commands.CommandBase;
  */
 public class ResetSideEncoders extends CommandBase {
 	
-	
+	/**
+	 * Resets the side encoders on the drivetrain.
+	 */
 	public ResetSideEncoders() {
 		// Use requires() here to declare subsystem dependencies
 		requires(drivetrain);

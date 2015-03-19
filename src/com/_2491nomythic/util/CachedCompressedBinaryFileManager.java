@@ -1,5 +1,8 @@
 package com._2491nomythic.util;
 
+/**
+ * A manager for binary files that are compressed that uses advanced caching technology for no discernible practical reason.
+ */
 public class CachedCompressedBinaryFileManager extends CompressedBinaryFileManager {
 	
 	protected byte[] cache;

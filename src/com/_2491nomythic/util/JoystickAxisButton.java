@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
- *
- * @author NoMythic
+ * Create a joystick button for triggering commands
  */
 public class JoystickAxisButton extends Button {
 	

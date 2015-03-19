@@ -8,6 +8,9 @@ import com._2491nomythic.helios.settings.Variables;
  */
 public class FixGyroIssues extends CommandBase {
 	
+	/**
+	 * Reinitializes the gyro.
+	 */
 	public FixGyroIssues() {
 		requires(drivetrain);
 		// Use requires() here to declare subsystem dependencies

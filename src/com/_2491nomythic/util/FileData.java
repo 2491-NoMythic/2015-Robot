@@ -1,5 +1,8 @@
 package com._2491nomythic.util;
 
+/**
+ * Stores variables in a file.
+ */
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -14,6 +17,10 @@ public class FileData {
 	private Hashtable<String, String> fileData = new Hashtable<String, String>();
 	private static Pattern pattern = Pattern.compile(":");
 	
+	/**
+	 * Stores variables in a file.
+	 * @param file_path The file path of the file.
+	 */
 	public FileData(String file_path) {
 		path = file_path;
 		try {

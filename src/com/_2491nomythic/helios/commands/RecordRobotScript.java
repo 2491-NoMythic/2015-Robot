@@ -13,7 +13,7 @@ public class RecordRobotScript extends CommandBase {
 	float floatArray[] = new float[7];
 	
 	/**
-	 * 
+	 * Records the functions of the robot for playback using the PlayRobotScript command.
 	 * @param filename The name of the file to record to.
 	 */
 	public RecordRobotScript(String filename) {

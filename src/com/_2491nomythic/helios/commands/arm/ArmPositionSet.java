@@ -13,6 +13,9 @@ public class ArmPositionSet extends CommandBase {
 	private KeepArmFromFalling stopArm;
 	private int reverse = -1;
 	
+	/**
+	 * Sets the position of the arm during Tele-Op.
+	 */
 	public ArmPositionSet() {
 		requires(arm);
 		stopArm = new KeepArmFromFalling(0.1);

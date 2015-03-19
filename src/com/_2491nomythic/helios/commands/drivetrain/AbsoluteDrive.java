@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AbsoluteDrive extends CommandBase {
 	
+	/**
+	 * A drive that theoretically keeps drive directions in the same direction relative to the driver and field, not the robot. It currently is just for show because the gyro is very imprecise.
+	 */
 	public AbsoluteDrive() {
 		// Use requires() here to declare subsystem dependencies
 		requires(drivetrain);

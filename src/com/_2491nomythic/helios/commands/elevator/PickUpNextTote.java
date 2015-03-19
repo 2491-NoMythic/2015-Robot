@@ -8,6 +8,9 @@ import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
  */
 public class PickUpNextTote extends CommandGroup {
 	
+	/**
+	 * An unreliable command group that is supposed to go from holding one tote to holding two totes.
+	 */
 	public PickUpNextTote() {
 		// Add Commands here:
 		// e.g. addSequential(new Command1());

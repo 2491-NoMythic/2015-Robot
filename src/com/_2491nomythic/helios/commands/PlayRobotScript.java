@@ -14,7 +14,7 @@ public class PlayRobotScript extends CommandBase {
 	private String path;
 	
 	/**
-	 * 
+	 * Plays the script recorded with the RecordRobotScript command.
 	 * @param filename The name of the file to play from.
 	 */
 	public PlayRobotScript(String filename) {

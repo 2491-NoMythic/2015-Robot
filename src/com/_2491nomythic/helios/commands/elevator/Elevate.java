@@ -14,6 +14,9 @@ public class Elevate extends CommandBase {
 	private double elevatorStickPos;
 	private boolean hasBeenStopped;
 	
+	/**
+	 * The main command that moves the elevator according to driver control during Tele-Op.
+	 */
 	public Elevate() {
 		// Use requires() here to declare subsystem dependencies
 		requires(elevator);

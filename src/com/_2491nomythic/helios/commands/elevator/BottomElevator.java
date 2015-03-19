@@ -15,7 +15,7 @@ public class BottomElevator extends CommandBase {
 	boolean finished = false;
 	
 	/**
-	 * 
+	 * Sends the elevator to the bottom of its track.
 	 * @param power The power to apply to the elevator motor.
 	 */
 	public BottomElevator(double power) {
@@ -28,7 +28,7 @@ public class BottomElevator extends CommandBase {
 	}
 	
 	/**
-	 * 
+	 * Sends the elevator to the bottom of its track.
 	 * @param power The power to apply to the elevator motor.
 	 * @param time The amount of time before the command aborts.
 	 */

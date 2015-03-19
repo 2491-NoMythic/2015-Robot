@@ -33,6 +33,10 @@ public class Arm extends PIDSubsystem {
 		return instance;
 	}
 	
+	/**
+	 * The Arm that picks up recycling containers.
+	 * Does not include the hook
+	 */
 	private Arm() {
 		super(Variables.armPID_P, Variables.armPID_I, Variables.armPID_D);
 		// Use these to get going:

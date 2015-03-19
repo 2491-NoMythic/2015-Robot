@@ -14,7 +14,7 @@ public class RunGrabberTime extends CommandBase {
 	Timer timer;
 	
 	/**
-	 * 
+	 * Runs the grabber with a specified power for a specified time.
 	 * @param power The power to apply to the grabber motor.
 	 * @param time The amount of time to run the grabber for.
 	 */

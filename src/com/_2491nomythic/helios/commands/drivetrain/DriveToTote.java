@@ -16,7 +16,7 @@ public class DriveToTote extends CommandBase {
 	boolean finished = false;
 	
 	/**
-	 * 
+	 * Drives the robot until it detects a tote and then stops the robot.
 	 * @param power The power of the drive motors.
 	 * @param timeout The amount of time to wait before aborting the process.
 	 */

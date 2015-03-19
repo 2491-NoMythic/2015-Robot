@@ -31,6 +31,9 @@ public class Elevator extends PIDSubsystem {
 		return instance;
 	}
 	
+	/**
+	 * The thing that lifts totes.
+	 */
 	public Elevator() {
 		super(Variables.elevatorPID_P, Variables.elevatorPID_I, Variables.elevatorPID_D);
 		// Use these to get going:

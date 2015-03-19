@@ -18,7 +18,7 @@ public class UnderLipStatus extends Command {
 	private static GoToToteHeight go;
 	
 	/**
-	 * 
+	 * Changes the heiht of the elevator based on whether or not to be under the lip of a tote.
 	 * @param type Whether or not to be under the lip of a tote.
 	 */
 	public UnderLipStatus(switchType type) {

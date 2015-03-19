@@ -16,7 +16,7 @@ public class PlatformStatus extends CommandBase {
 	private static GoToToteHeight go;
 	
 	/**
-	 * 
+	 * Moves the elevator up or down by the height of the scoring platform.
 	 * @param type Whether or not to add the platform height to the tote heights.
 	 */
 	public PlatformStatus(switchType type) {

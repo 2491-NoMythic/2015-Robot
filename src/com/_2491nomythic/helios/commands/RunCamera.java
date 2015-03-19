@@ -10,6 +10,9 @@ public class RunCamera extends CommandBase {
 	private Timer timer;
 	private double nextRun;
 	
+	/**
+	 * Runs the camera. 'nuff said.
+	 */
 	public RunCamera() {
 		requires(camera);
 		timer = new Timer();

@@ -6,7 +6,10 @@ import com._2491nomythic.helios.commands.CommandBase;
  * Resets the arm encoder manually.
  */
 public class ManuallyResetArmEncoder extends CommandBase {
-
+	
+	/**
+	 * Resets the arm encoder manually.
+	 */
     public ManuallyResetArmEncoder() {
     }
 

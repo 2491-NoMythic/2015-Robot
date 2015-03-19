@@ -3,6 +3,11 @@ package com._2491nomythic.util;
 public class PolarCoord {
 	private double r, theta;
 	
+	/**
+	 * A polar coordinate.
+	 * @param r The r value of the coordinate.
+	 * @param theta The theta value of the coordinate.
+	 */
 	public PolarCoord(double r, double theta) {
 		this.r = r;
 		this.theta = theta;

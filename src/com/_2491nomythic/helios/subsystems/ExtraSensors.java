@@ -5,6 +5,9 @@ import com._2491nomythic.helios.commands.UpdateDriverstation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * Extra sensors that don't fit into any other subsystem.
+ */
 public class ExtraSensors extends Subsystem {
 	
 	private PowerDistributionPanel powerDistributionPanel;
@@ -17,6 +20,9 @@ public class ExtraSensors extends Subsystem {
 		return instance;
 	}
 	
+	/**
+	 * Extra sensors that don't fit into any other subsystem.
+	 */
 	private ExtraSensors() {
 		powerDistributionPanel = new PowerDistributionPanel();
 	}

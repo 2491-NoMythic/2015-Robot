@@ -17,7 +17,7 @@ public class DriveTime extends CommandBase {
 	Timer timer;
 	
 	/**
-	 * 
+	 * Drives the robot for a specified amount of time in a specified direction with specified power.
 	 * @param power The power of the drive motors.
 	 * @param x The amount to drive the robot in the x direction.
 	 * @param y The amount to drive the robot in the y direction.

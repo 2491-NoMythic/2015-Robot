@@ -5,10 +5,13 @@ import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.settings.Variables;
 
 /**
- *
+ * Runs the elevator based on Driver Control. Better. Hopefully.
  */
 public class RunElevator extends CommandBase {
-
+	
+	/**
+	 * Runs the elevator based on Driver Control. Better. Hopefully.
+	 */
     public RunElevator() {
         requires(elevator);
     }

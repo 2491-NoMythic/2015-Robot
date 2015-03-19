@@ -24,6 +24,9 @@ public class PickupBinsFromStep extends CommandBase {
 					   // 4 = picking up bin, 5 = rotating bin, 6 = driving to auto zone
 	private Timer timer;
 	
+	/**
+	 * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
+	 */
 	public PickupBinsFromStep() {
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunWithPID(Variables.pickUpBinFromStepPosition);

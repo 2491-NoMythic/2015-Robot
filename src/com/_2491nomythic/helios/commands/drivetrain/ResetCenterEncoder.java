@@ -9,6 +9,9 @@ public class ResetCenterEncoder extends CommandBase {
 	
 	private boolean done = false;
 	
+	/**
+	 * Resets the center encoder on the drivetrain.
+	 */
 	public ResetCenterEncoder() {
 		requires(drivetrain);
 		// Use requires() here to declare subsystem dependencies
