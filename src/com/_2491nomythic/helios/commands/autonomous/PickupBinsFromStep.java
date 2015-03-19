@@ -2,14 +2,12 @@ package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
-import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
 import com._2491nomythic.helios.commands.grabber.RunGrabberTime;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * An autonomous that picks up two recycling containers from the step and places them into the auto zone.

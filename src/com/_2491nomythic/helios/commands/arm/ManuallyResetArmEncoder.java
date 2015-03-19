@@ -2,8 +2,6 @@ package com._2491nomythic.helios.commands.arm;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  * Resets the arm encoder manually.
  */
