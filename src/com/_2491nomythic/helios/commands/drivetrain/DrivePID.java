@@ -57,15 +57,15 @@ public class DrivePID extends CommandBase {
 		maxSpeed = maxSpeedInput;
 		this.xTargetInput = xTargetInput;
 		this.yTargetInput = yTargetInput;
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getLeftEncoder(), xOutput);
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getRightEncoder(), xOutput);
 		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
 	
 	public void updateSettings() {
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getLeftEncoder(), xOutput);
-		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getCenterEncoder(), xOutput);
+		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getRightEncoder(), yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
@@ -74,8 +74,8 @@ public class DrivePID extends CommandBase {
 	protected void initialize() {
 		xController.setSetpoint(xTargetInput + drivetrain.getCenterEncoder().getDistance());
 		yController.setSetpoint(yTargetInput + drivetrain.getRightEncoder().getDistance());
-		xController.enable();
-		yController.disable();
+		//xController.enable();
+		yController.enable();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -90,12 +90,13 @@ public class DrivePID extends CommandBase {
 	
 	// Called once after isFinished returns true
 	protected void end() {
-		xController.enable();
+		xController.disable();
 		yController.disable();
 	}
 	
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		end();
 	}
 }
