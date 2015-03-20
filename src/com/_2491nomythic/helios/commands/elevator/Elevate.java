@@ -1,20 +1,22 @@
 package com._2491nomythic.helios.commands.elevator;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
- *
+ * The main command that moves the elevator according to driver control during Tele-Op.
  */
 public class Elevate extends CommandBase {
 	
 	private double elevatorStickPos;
 	private boolean hasBeenStopped;
 	
+	/**
+	 * The main command that moves the elevator according to driver control during Tele-Op.
+	 */
 	public Elevate() {
 		// Use requires() here to declare subsystem dependencies
 		requires(elevator);

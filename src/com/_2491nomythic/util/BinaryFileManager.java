@@ -10,9 +10,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+/**
+ * A manager for binary files.
+ */
 public class BinaryFileManager {
 	protected Path path;
 	
+	/**
+	 * A manager for binary files.
+	 * @param fileName The name of the file.
+	 */
 	public BinaryFileManager(String fileName) {
 		path = Paths.get(fileName);
 	}

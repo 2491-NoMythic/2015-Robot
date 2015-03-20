@@ -6,13 +6,18 @@ import edu.wpi.first.wpilibj.Timer;
 
 
 /**
- *
+ * Runs the grabber with a specified power for a specified time.
  */
 public class RunGrabberTime extends CommandBase {
 	double powerInput;
 	double time;
 	Timer timer;
 	
+	/**
+	 * Runs the grabber with a specified power for a specified time.
+	 * @param power The power to apply to the grabber motor.
+	 * @param time The amount of time to run the grabber for.
+	 */
 	public RunGrabberTime(double power, double time) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

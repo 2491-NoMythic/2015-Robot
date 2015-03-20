@@ -2,17 +2,15 @@ package com._2491nomythic.helios.commands.arm;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
- *
+ * Resets the arm encoder manually.
  */
 public class ManuallyResetArmEncoder extends CommandBase {
-
+	
+	/**
+	 * Resets the arm encoder manually.
+	 */
     public ManuallyResetArmEncoder() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(arm);
     }
 
     // Called just before this Command runs the first time

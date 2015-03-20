@@ -6,13 +6,17 @@ import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.BinaryFileManager;
 
 /**
- *
+ * Plays the script recorded with the RecordRobotScript command.
  */
 public class PlayRobotScript extends CommandBase {
 	
 	private ByteBuffer buffer;
 	private String path;
 	
+	/**
+	 * Plays the script recorded with the RecordRobotScript command.
+	 * @param filename The name of the file to play from.
+	 */
 	public PlayRobotScript(String filename) {
 		requires(drivetrain);
 		requires(elevator);

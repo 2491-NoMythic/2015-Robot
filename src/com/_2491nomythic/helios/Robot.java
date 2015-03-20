@@ -30,7 +30,6 @@ import com._2491nomythic.helios.commands.elevator.BottomElevator;
 import com._2491nomythic.helios.commands.elevator.ManuallyResetElevatorEncoder;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
-import com._2491nomythic.helios.subsystems.ExtraSensors;
 
 /**
  * The VM is configured to automatically run this class, and to call the

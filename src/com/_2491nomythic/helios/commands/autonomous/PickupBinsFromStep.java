@@ -2,17 +2,15 @@ package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
-import com._2491nomythic.helios.commands.drivetrain.DriveDistance;
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
 import com._2491nomythic.helios.commands.grabber.RunGrabberTime;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
  */
 
 public class PickupBinsFromStep extends CommandBase {
@@ -26,6 +24,9 @@ public class PickupBinsFromStep extends CommandBase {
 					   // 4 = picking up bin, 5 = rotating bin, 6 = driving to auto zone
 	private Timer timer;
 	
+	/**
+	 * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
+	 */
 	public PickupBinsFromStep() {
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunWithPID(Variables.pickUpBinFromStepPosition);

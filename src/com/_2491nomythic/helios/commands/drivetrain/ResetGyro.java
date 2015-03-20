@@ -3,10 +3,13 @@ package com._2491nomythic.helios.commands.drivetrain;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Resets the value of the gyro back to zero.
  */
 public class ResetGyro extends CommandBase {
 	
+	/**
+	 * Resets the value of the gyro back to zero.
+	 */
 	public ResetGyro() {
 		requires(drivetrain);
 		// Use requires() here to declare subsystem dependencies

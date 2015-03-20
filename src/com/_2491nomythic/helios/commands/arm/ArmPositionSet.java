@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
 /**
- *
+ * Sets the position of the arm during Tele-Op.
  */
 public class ArmPositionSet extends CommandBase {
 	
@@ -13,6 +13,9 @@ public class ArmPositionSet extends CommandBase {
 	private KeepArmFromFalling stopArm;
 	private int reverse = -1;
 	
+	/**
+	 * Sets the position of the arm during Tele-Op.
+	 */
 	public ArmPositionSet() {
 		requires(arm);
 		stopArm = new KeepArmFromFalling(0.1);
@@ -26,6 +29,9 @@ public class ArmPositionSet extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		if (arm.getHallEffectSensorValue()) {
+			arm.resetEncoder();
+		}
 		armStickPos = oi.getAxisForDrive(ControllerMap.ArmController, ControllerMap.ArmAxis);
 		double multiplier = 0.25;
 		if (oi.getButton(ControllerMap.ArmController, ControllerMap.FasterArmButtonA)) {

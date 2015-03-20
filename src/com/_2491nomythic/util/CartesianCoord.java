@@ -1,8 +1,16 @@
 package com._2491nomythic.util;
 
+/**
+ * A cartesian coordinate.
+ */
 public class CartesianCoord {
 	private double x, y;
 	
+	/**
+	 * A cartesian coordinate.
+	 * @param x The x value of the coordinate.
+	 * @param y The y value of the coordinate.
+	 */
 	public CartesianCoord(double x, double y) {
 		this.x = x;
 		this.y = y;

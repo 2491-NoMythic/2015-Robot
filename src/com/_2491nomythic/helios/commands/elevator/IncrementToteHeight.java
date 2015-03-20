@@ -3,10 +3,13 @@ package com._2491nomythic.helios.commands.elevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * A command group that makes the elevator go up by the height of one tote.
  */
 public class IncrementToteHeight extends CommandGroup {
 	
+	/**
+	 * A command group that makes the elevator go up by the height of one tote.
+	 */
 	public IncrementToteHeight() {
 		addSequential(new IncrementToteHeightHelper());
 		addSequential(new GoToToteHeight());

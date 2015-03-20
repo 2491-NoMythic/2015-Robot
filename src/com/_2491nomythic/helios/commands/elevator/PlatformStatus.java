@@ -5,7 +5,7 @@ import com._2491nomythic.helios.settings.Variables;
 
 
 /**
- *
+ * Moves the elevator up or down by the height of the scoring platform.
  */
 public class PlatformStatus extends CommandBase {
 	public static enum switchType {
@@ -15,6 +15,10 @@ public class PlatformStatus extends CommandBase {
 	private switchType type;
 	private static GoToToteHeight go;
 	
+	/**
+	 * Moves the elevator up or down by the height of the scoring platform.
+	 * @param type Whether or not to add the platform height to the tote heights.
+	 */
 	public PlatformStatus(switchType type) {
 		this.type = type;
 		if (go == null) {

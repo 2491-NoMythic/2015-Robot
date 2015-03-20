@@ -4,13 +4,16 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
 /**
- *
+ * Runs the grabber according to driver control in Tele-Op.
  */
 public class RunGrabber extends CommandBase {
 	
 	private boolean hasBeenStopped = true;
 	private int reverse = 1;
 	
+	/**
+	 * Runs the grabber according to driver control in Tele-Op.
+	 */
 	public RunGrabber() {
 		requires(grabber);
 	}

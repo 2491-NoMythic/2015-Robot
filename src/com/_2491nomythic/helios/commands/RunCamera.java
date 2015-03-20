@@ -3,13 +3,16 @@ package com._2491nomythic.helios.commands;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Runs the camera. 'nuff said.
  */
 public class RunCamera extends CommandBase {
 	
 	private Timer timer;
 	private double nextRun;
 	
+	/**
+	 * Runs the camera. 'nuff said.
+	 */
 	public RunCamera() {
 		requires(camera);
 		timer = new Timer();
@@ -27,7 +30,7 @@ public class RunCamera extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (timer.get() > nextRun) {
-			nextRun = nextRun + 0.1;
+			nextRun = nextRun + 0.05;
 			camera.updateDriverstationImage();
 		}
 	}

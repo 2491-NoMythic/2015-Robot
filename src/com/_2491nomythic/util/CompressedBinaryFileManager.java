@@ -5,9 +5,15 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-
+/**
+ * A manager for binary files that are compressed.
+ */
 public class CompressedBinaryFileManager extends BinaryFileManager {
 	
+	/**
+	 * A manager for binary files that are compressed.
+	 * @param fileName The name of the file.
+	 */
 	public CompressedBinaryFileManager(String fileName) {
 		super(fileName);
 	}

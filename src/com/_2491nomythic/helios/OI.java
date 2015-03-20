@@ -8,12 +8,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
-import com._2491nomythic.helios.commands.elevator.DecrementToteHeight;
-import com._2491nomythic.helios.commands.elevator.ElevatePower;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
-import com._2491nomythic.helios.commands.elevator.IncrementToteHeight;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 import com._2491nomythic.util.CartesianCoord;
+import com._2491nomythic.util.DigitalInputButton;
 import com._2491nomythic.util.PolarCoord;
 
 /**
@@ -36,6 +34,7 @@ public class OI {
 		driverElevatorUp, driverElevatorDown, codriverElevatorUp, codriverElevatorDown; 
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
+	DigitalInputButton resetArmEncoder;
 	
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
@@ -58,6 +57,8 @@ public class OI {
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new GetNextToteTime());
 		
+		/*
+		// Too laggy
 		driverElevatorUp = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorUp);
 		driverElevatorUp.whileHeld(new ElevatePower(1.0));
 		
@@ -69,6 +70,10 @@ public class OI {
 		
 		codriverElevatorDown = new JoystickButton(controllers[ControllerMap.codriverElevatorController], ControllerMap.codriverElevatorDown);
 		codriverElevatorDown.whileHeld(new ElevatePower(-1.0));
+		*/
+//		
+//		resetArmEncoder = new DigitalInputButton(Arm.getInstance().getHallEffectSensor());
+//		resetArmEncoder.whenPressed(new ManuallyResetArmEncoder());
 	}
 	;
 	/**

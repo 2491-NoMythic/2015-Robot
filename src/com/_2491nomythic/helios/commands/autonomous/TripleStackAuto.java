@@ -10,10 +10,13 @@ import com._2491nomythic.helios.settings.Variables;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * An autonomous that picks up all three yellow totes and brigs them to the auto zone.
  */
 public class TripleStackAuto extends CommandGroup {
     
+	/**
+	 * An autonomous that picks up all three yellow totes and brigs them to the auto zone.
+	 */
     public  TripleStackAuto() {
     	Variables.elevatorTarget = 0;
     	addSequential(new UnderLipStatus(UnderLipStatus.switchType.False));

@@ -6,13 +6,18 @@ import edu.wpi.first.wpilibj.Timer;
 
 
 /**
- *
+ * Sets the power of the elevator motor for a specified time.
  */
 public class ElevateTime extends CommandBase {
 	double powerInput;
 	double time;
 	Timer timer;
 	
+	/**
+	 * Sets the power of the elevator motor for a specified time.
+	 * @param power The power to set the elevator motor to.
+	 * @param time The amount of time to run the elevator for.
+	 */
 	public ElevateTime(double power, double time) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

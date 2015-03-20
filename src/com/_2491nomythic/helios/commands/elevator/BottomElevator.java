@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 
 /**
- *
+ * Sends the elevator to the bottom of its track.
  */
 public class BottomElevator extends CommandBase {
 	double powerInput;
@@ -14,6 +14,10 @@ public class BottomElevator extends CommandBase {
 	Timer timer;
 	boolean finished = false;
 	
+	/**
+	 * Sends the elevator to the bottom of its track.
+	 * @param power The power to apply to the elevator motor.
+	 */
 	public BottomElevator(double power) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -23,6 +27,11 @@ public class BottomElevator extends CommandBase {
 		timer = new Timer();
 	}
 	
+	/**
+	 * Sends the elevator to the bottom of its track.
+	 * @param power The power to apply to the elevator motor.
+	 * @param time The amount of time before the command aborts.
+	 */
 	public BottomElevator(double power, double time) {
 		requires(elevator);
 		powerInput = -1.0 * Math.abs(power);

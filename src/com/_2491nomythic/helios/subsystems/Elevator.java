@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
+import com._2491nomythic.helios.commands.elevator.RunElevator;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  * The thing that lifts totes.
  */
 public class Elevator extends PIDSubsystem {
-	private CANTalon motorElevator;
+	private CANTalon motorElevatorA, motorElevatorB;
 	private Encoder encoder;
 	private DigitalInput limitTop, limitBottom , toteCheckLeft, toteCheckRight;
 	private static Elevator instance;
@@ -30,13 +31,17 @@ public class Elevator extends PIDSubsystem {
 		return instance;
 	}
 	
+	/**
+	 * The thing that lifts totes.
+	 */
 	public Elevator() {
 		super(Variables.elevatorPID_P, Variables.elevatorPID_I, Variables.elevatorPID_D);
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		motorElevator = new CANTalon(Constants.elevatorTalonMotorChannel);
+		motorElevatorA = new CANTalon(Constants.elevatorTalonMotorAChannel);
+		motorElevatorB = new CANTalon(Constants.elevatorTalonMotorBChannel);
 		
 		encoder = new Encoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
@@ -51,7 +56,7 @@ public class Elevator extends PIDSubsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-//		setDefaultCommand(new Elevate()); //Elevator control now on buttons
+		setDefaultCommand(new RunElevator()); //Elevator control now on buttons
 	}
 	
 	protected double returnPIDInput() {
@@ -64,26 +69,26 @@ public class Elevator extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		if (!limitTop.get()) {
 			if (output >= 0) {
-				motorElevator.set(0);
+				motorElevatorA.set(0);
 				currentSpeed = 0;
 			}
 			else if (output < 0) {
-				motorElevator.set(output);
+				motorElevatorA.set(output);
 				currentSpeed = output;
 			}
 		}
 		else if (!limitBottom.get()) {
 			if (output > 0) {
-				motorElevator.set(output);
+				motorElevatorA.set(output);
 				currentSpeed = output;
 			}
 			else if (output <= 0) {
-				motorElevator.set(0);
+				motorElevatorA.set(0);
 				currentSpeed = 0;
 			}
 		}
 		else {
-			motorElevator.set(output);
+			motorElevatorA.set(output);
 			currentSpeed = output;
 		}
 		// Use output to drive your system, like a motor
@@ -101,22 +106,27 @@ public class Elevator extends PIDSubsystem {
 		}
 		if (!limitTop.get()) {
 			if (speed >= 0.0) {
-				motorElevator.set(0.0);
+				motorElevatorA.set(0.0);
+				motorElevatorB.set(0.0);
 			}
 			else {
-				motorElevator.set(speed);
+				motorElevatorA.set(speed);
+				motorElevatorB.set(-1.0 * speed);
 			}
 		}
 		else if (!limitBottom.get()) {
 			if (speed > 0.0) {
-				motorElevator.set(speed);
+				motorElevatorA.set(speed);
+				motorElevatorB.set(-1.0 * speed);
 			}
 			else {
-				motorElevator.set(0.0);
+				motorElevatorA.set(0.0);
+				motorElevatorB.set(0.0);
 			}
 		}
 		else {
-			motorElevator.set(speed);
+			motorElevatorA.set(speed);
+			motorElevatorB.set(-1.0 * speed);
 		}
 	}
 	

@@ -3,12 +3,16 @@ package com._2491nomythic.helios.commands.grabber;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Rotates the hook at a specified speed.
  */
 public class RotateGrabber extends CommandBase {
 	
 	private double speed;
 	
+	/**
+	 * Rotates the hook at a specified speed.
+	 * @param speed The speed to rotate the grabber at.
+	 */
 	public RotateGrabber(double speed) {
 		requires(grabber);
 		this.speed = speed;

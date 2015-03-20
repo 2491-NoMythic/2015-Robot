@@ -5,10 +5,13 @@ import com._2491nomythic.helios.commands.CommandBase;
 
 
 /**
- *
+ * Resets the elevator encoder manually.
  */
 public class ManuallyResetElevatorEncoder extends CommandBase {
-
+	
+	/**
+	 * Resets the elevator encoder manually.
+	 */
     public ManuallyResetElevatorEncoder() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires();

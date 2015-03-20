@@ -1,6 +1,5 @@
 package com._2491nomythic.util;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -9,12 +8,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.StandardOpenOption;
+
+/**
+ * A manager for text files.
+ */
 public class TextFileManager {
 	protected Path path;
 	protected Scanner fileScanner;
 	private boolean fileScannerIsOpen = false;
 	private boolean caught;
 	
+	/**
+	 * A manager for text files.
+	 * @param filename The name of the file.
+	 */
 	public TextFileManager(String filename) {
 		path = Paths.get(filename);
 	}

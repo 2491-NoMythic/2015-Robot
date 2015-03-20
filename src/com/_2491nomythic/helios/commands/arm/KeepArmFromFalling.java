@@ -3,7 +3,7 @@ package com._2491nomythic.helios.commands.arm;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Keeps the arm from falling during Tele-Op.
  */
 public class KeepArmFromFalling extends CommandBase {
 	

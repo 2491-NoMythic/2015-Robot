@@ -1,5 +1,8 @@
 package com._2491nomythic.helios.settings;
 
+/**
+ * A general purpose directory of variables referenced by commands and subsystems.
+ */
 public class Variables {
 	public static double armPID_P = 0.05;
 	public static double armPID_I = 0.0;
@@ -47,5 +50,6 @@ public class Variables {
 	//Variable for DriveWithArm class
 	public static double armCompensationMultiplier = -1;
 	
-	
+	// Elevator speed multiplier
+	public static double elevatorMultiplier = 1;
 }

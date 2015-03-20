@@ -1,5 +1,8 @@
 package com._2491nomythic.helios.settings;
 
+/**
+ * A directory of constants referenced by other commands and subsystems that matches up controller buttons to robot functions.
+ */
 public class HandheldControllerMap {
 	
 	public static final String controllerType = "HandheldController";

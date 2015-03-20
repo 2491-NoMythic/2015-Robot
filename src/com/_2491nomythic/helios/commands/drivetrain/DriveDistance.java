@@ -4,7 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 
 
 /**
- *
+ * Drives the robot a specified distance in a specified direction with specified power.
  */
 public class DriveDistance extends CommandBase {
 	double powerInput;
@@ -13,6 +13,12 @@ public class DriveDistance extends CommandBase {
 	double xDrive;
 	double yDrive;
 	
+	/**
+	 * Drives the robot a specified distance in a specified direction with specified power.
+	 * @param power The power of the drive motors.
+	 * @param x The distance in the x direction to drive the robot.
+	 * @param y The distance in the y direction to drive the robot.
+	 */
 	public DriveDistance(double power, double x, double y) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

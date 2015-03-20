@@ -1,5 +1,8 @@
 package com._2491nomythic.helios.settings;
 
+/**
+ * A directory of constants referenced in other commands and subsystems.
+ */
 public class Constants {
 	// Roborio directories
 	public static final String homeDirectory = "/home/lvuser/";
@@ -20,7 +23,7 @@ public class Constants {
 	public static final int driveEncoderLeftAChannel = 18;
 	public static final int driveEncoderLeftBChannel = 14;
 	public static final int driveEncoderCenterAChannel = 2;
-	public static final int driveEncoderCenterBChannel = 3;
+	public static final int driveEncoderCenterBChannel = 13;
 	public static final int driveEncoderRightAChannel = 0;
 	public static final int driveEncoderRightBChannel = 1;
 	public static final boolean driveEncoderLeftReversed = false;
@@ -40,11 +43,12 @@ public class Constants {
 	public static final double armEncoderToDegrees = 0.23076923076923076923076923076923; // 0.4 for helios if we don't change the gearing
 	public static final double armMinPosition = 0.0;
 	public static final double armMaxPosition = 180.0;
-	public static final int armHallEffectSensorChannel = 13;
+	public static final int armHallEffectSensorChannel = 3;
 	public static final double armLength = 4.833;
 	
 	// Elevator
-	public static final int elevatorTalonMotorChannel = 14;
+	public static final int elevatorTalonMotorAChannel = 14;
+	public static final int elevatorTalonMotorBChannel = 19;
 	public static final int elevatorEncoderAChannel = 15;
 	public static final int elevatorEncoderBChannel = 16;
 	public static final boolean elevatorEncoderReversed = false;
@@ -57,7 +61,7 @@ public class Constants {
 	public static final int elevatorToteCheckRightChannel = 12;
 	
 	// Grabber
-	public static final int grabberTalonMotorChannel = 19;
+	public static final int grabberTalonMotorChannel = 13;
 	
 	// Null (zero value) Driving Distances
 	public static final double nullX = 0.0;

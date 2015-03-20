@@ -21,6 +21,9 @@ public class Grabber extends Subsystem {
 		return instance;
 	}
 	
+	/**
+	 * The hooks at the end of the arm.
+	 */
 	private Grabber() {
 		motor = new CANTalon(Constants.grabberTalonMotorChannel);
 	}
