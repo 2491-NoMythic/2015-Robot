@@ -31,7 +31,10 @@ public class FileData {
 		}
 	}
 	
-	
+	/**
+	 * Opens and reads the file.
+	 * @throws IOException
+	 */
 	private void openAndReadFile() throws IOException {
 		FileReader fr = new FileReader(path);
 		BufferedReader textreader = new BufferedReader(fr);
@@ -50,10 +53,20 @@ public class FileData {
 		fr.close();
 	}
 	
+	/**
+	 * Checks whether a certain string exists within the file's data.
+	 * @param key The string to check for.
+	 * @return A boolean describing whether or not the string is in the file data.
+	 */
 	public boolean exists(String key) {
 		return fileData.containsKey(key);
 	}
 	
+	/**
+	 * Checks what value the specified key is mapped to.
+	 * @param key The key to check for.
+	 * @return The value the key is mapped to in the file data.
+	 */
 	public String get(String key) {
 		if (fileData.containsKey(key)) {
 			return fileData.get(key);
@@ -64,6 +77,12 @@ public class FileData {
 		}
 	}
 	
+	/**
+	 * Checks what value the specified key is mapped to, with a backup value to return if the key does not exist.
+	 * @param key The key to find the value for.
+	 * @param defaultValue Returned if the key does not exist in the file data.
+	 * @return The value of the key if it exists and the defaultValue if it does not.
+	 */
 	public String getWithDefault(String key, String defaultValue) {
 		if (exists(key)) {
 			return fileData.get(key);
@@ -73,6 +92,11 @@ public class FileData {
 		}
 	}
 	
+	/**
+	 * Stores a new key and value in the file data.
+	 * @param keyInput The key to store.
+	 * @param valueInput The value to map the key to.
+	 */
 	public void set(String keyInput, String valueInput) {
 		fileData.put(keyInput, valueInput);
 		try {
@@ -83,7 +107,10 @@ public class FileData {
 		}
 	}
 	
-	
+	/**
+	 * Saves the new data to the file.
+	 * @throws IOException
+	 */
 	private void writeToFile() throws IOException {
 		FileWriter write = new FileWriter(path);
 		PrintWriter print_line = new PrintWriter(write);
@@ -98,14 +125,30 @@ public class FileData {
 		write.close();
 	}
 	
+	/**
+	 * Stores a new key and value in the file data.
+	 * @param key The key to store.
+	 * @param valueInput The value to map the key to as a double.
+	 */
 	public void set(String key, double valueInput) {
 		set(key, Double.toString(valueInput));
 	}
 	
+	/**
+	 * Checks what value the specified key is mapped to as a double.
+	 * @param key The key to find the value for.
+	 * @return The value of the key as a double.
+	 */
 	public double getDouble(String key) {
 		return Double.parseDouble(get(key));
 	}
 	
+	/**
+	 * Checks what value the specified key is mapped to as a double with a backup value to return if the key does not exist.
+	 * @param key The key to find the value for.
+	 * @param defaultValue Returned if the key does not exist in the file data.
+	 * @return The value of the key as a double if it exists and the defaultValue if it does not.
+	 */
 	public double getDoubleWithDefault(String key, double defaultValue) {
 		return Double.parseDouble(getWithDefault(key, Double.toString(defaultValue)));
 	}

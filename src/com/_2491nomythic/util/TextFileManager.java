@@ -45,6 +45,10 @@ public class TextFileManager {
 		
 	}
 	
+	/**
+	 * Reads the next line of the file.
+	 * @return
+	 */
 	public String readLine() {
 		if(!fileScannerIsOpen) {
 			openFileScanner();
@@ -58,7 +62,9 @@ public class TextFileManager {
 		}
 	}
 	
-	
+	/**
+	 * Clears the contents of the file.
+	 */
 	public void clear() {
 		try {
 		Files.write(path, new byte[0]);
@@ -68,6 +74,10 @@ public class TextFileManager {
 		}
 	}
 	
+	/**
+	 * Appends data to the file.
+	 * @param apendee The data to be appended to the file.
+	 */
 	public void append(ArrayList<String> apendee) {
 		try {
 		Files.write(path, apendee, StandardOpenOption.APPEND);
@@ -78,6 +88,10 @@ public class TextFileManager {
 		}
 	}
 	
+	/**
+	 * Appends a line to the file
+	 * @param apendingLine The line to append to the file.
+	 */
 	public void appendLine(String apendingLine){
 		ArrayList<String> appendee = new ArrayList<String>();
 		appendee.add(apendingLine);

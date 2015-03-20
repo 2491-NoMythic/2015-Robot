@@ -46,10 +46,23 @@ public abstract class CommandBase extends Command {
 		SmartDashboard.putData(elevator);
 	}
 	
+	/**
+	 * The base for all commands. All atomic commands should subclass CommandBase.
+	 * CommandBase stores creates and stores each control system. To access a
+	 * subsystem elsewhere in your code in your code use
+	 * CommandBase.exampleSubsystem
+	 * @param name The name that shows up on the SmartDashboard in association with any command created using this parameter.
+	 */
 	public CommandBase(String name) {
 		super(name);
 	}
 	
+	/**
+	 * The base for all commands. All atomic commands should subclass CommandBase.
+	 * CommandBase stores creates and stores each control system. To access a
+	 * subsystem elsewhere in your code in your code use
+	 * CommandBase.exampleSubsystem
+	 */
 	public CommandBase() {
 		super();
 	}

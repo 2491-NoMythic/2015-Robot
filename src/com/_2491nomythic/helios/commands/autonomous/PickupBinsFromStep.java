@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
  */
-
 public class PickupBinsFromStep extends CommandBase {
 	private DriveTime backUpToStart;
 	private RunWithPID lowerToBin;

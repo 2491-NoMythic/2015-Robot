@@ -29,6 +29,9 @@ public class Drivetrain extends Subsystem {
 		return instance;
 	}
 	
+	/**
+	 * The thing we drive with.
+	 */
 	private Drivetrain() {
 		frontLeft = new CANTalon(Constants.driveTalonFrontLeftChannel);
 		frontCenter = new CANTalon(Constants.driveTalonFrontCenterChannel);

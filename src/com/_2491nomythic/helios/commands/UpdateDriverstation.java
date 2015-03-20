@@ -62,6 +62,9 @@ public class UpdateDriverstation extends CommandBase {
 		end();
 	}
 	
+	/**
+	 * Updates the values on the SmartDashboard if maxValuesEnabled is changed.
+	 */
 	private void updateStatus() {
 		
 		if (SmartDashboard.getBoolean("Show Max Power Usage")) {
@@ -113,6 +116,9 @@ public class UpdateDriverstation extends CommandBase {
 		SmartDashboard.putNumber("Arm Power", arm.get());
 	}
 	
+	/**
+	 * Sends the values on the SmartDashboard to the variables file.
+	 */
 	private void readVariables() {
 		double tmp;
 		tmp = SmartDashboard.getNumber("Gyro Sensitivity");
@@ -151,6 +157,13 @@ public class UpdateDriverstation extends CommandBase {
 		
 		Variables.elevatorMultiplier = SmartDashboard.getNumber("Elevator Speed");
 	}
+	
+	/**
+	 * Updates the max value to be higher if the current value is exceeded.
+	 * @param pos The value to check the max for.
+	 * @param value The value to update the max with if it is higher than the current max.
+	 * @return The (possibly new) max value.
+	 */
 	private double updateMaxValue (int pos, double value) {
 		if(maxValues[pos] < value) {
 			maxValues[pos] = value;
