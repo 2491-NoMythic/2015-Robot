@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TextRecordRobotScript extends CommandBase {
 	private TextFileManager file;;
     public TextRecordRobotScript(String filename) {
-    	File directory = new File(Constants.homeDirectory + "Text_Scripts");
+    	File directory = new File(Constants.homeDirectory + "Scripts");
     	if(!directory.exists()) {
     		directory.mkdir();
     	}
-        file = new TextFileManager(Constants.homeDirectory + "Text_Scripts/" + filename + Constants.recordedFileExtension);
+        file = new TextFileManager(Constants.homeDirectory + "Scripts/" + filename + ".csv");
     }
 
     // Called just before this Command runs the first time
@@ -27,7 +27,7 @@ public class TextRecordRobotScript extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	file.appendLine(String.valueOf(drivetrain.getCurrentLeftSpeed()) + ", " + String.valueOf(drivetrain.getCurrentFrontSpeed()) + String.valueOf(drivetrain.getCurrentBackSpeed()) + ", " + String.valueOf(drivetrain.getCurrentRightSpeed()) + ", " + String.valueOf(elevator.get()) + ", " + String.valueOf(arm.get()) + ", " + String.valueOf(grabber.get()));
+    	file.appendLine(String.valueOf(drivetrain.getCurrentLeftSpeed()) + ", " + String.valueOf(drivetrain.getCurrentFrontSpeed()) + ", " + String.valueOf(drivetrain.getCurrentBackSpeed()) + ", " + String.valueOf(drivetrain.getCurrentRightSpeed()) + ", " + String.valueOf(elevator.get()) + ", " + String.valueOf(arm.get()) + ", " + String.valueOf(grabber.get()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

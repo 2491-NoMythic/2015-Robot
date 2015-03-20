@@ -23,7 +23,7 @@ public class TextPlayRobotScript extends CommandBase {
 		requires(elevator);
 		requires(arm);
 		requires(grabber);
-		this.path = Constants.homeDirectory + "Text_Scripts/" + filename + Constants.recordedFileExtension;
+		this.path = Constants.homeDirectory + "Scripts/" + filename + ".csv";
     }
 
     // Called just before this Command runs the first time

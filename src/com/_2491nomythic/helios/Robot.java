@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.PlayRobotScript;
 import com._2491nomythic.helios.commands.RecordRobotScript;
+import com._2491nomythic.helios.commands.TextPlayRobotScript;
+import com._2491nomythic.helios.commands.TextRecordRobotScript;
 import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
@@ -75,6 +77,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Record Driver Joystick Inputs", new RecordRobotScript("TestScript"));
 		SmartDashboard.putData("Play Driver Joystick Inputs", new PlayRobotScript("TestScript"));
 		SmartDashboard.putData("Horizontal Compensation For Arm", new DriveWithArm());
+		SmartDashboard.putData("Record Driver Joystick Inputs (Text)", new TextRecordRobotScript("TestScript"));
+		SmartDashboard.putData("Play Driver Joystick Inputs (Text)", new TextPlayRobotScript("TestScript"));
 	}
 	
 	public void disabledPeriodic() {

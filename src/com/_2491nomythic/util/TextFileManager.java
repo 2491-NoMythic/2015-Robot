@@ -12,18 +12,11 @@ import java.nio.file.StandardOpenOption;
 public class TextFileManager {
 	protected Path path;
 	protected Scanner fileScanner;
-	protected PrintWriter writer;
 	private boolean fileScannerIsOpen = false;
 	private boolean caught;
 	
 	public TextFileManager(String filename) {
 		path = Paths.get(filename);
-		try {
-		writer = new PrintWriter(filename);
-		}
-		catch (IOException e) {
-			System.out.println("Couldn't find file " + filename + ", " + e.getLocalizedMessage());
-		}
 	}
 	
 	public void openFileScanner() {
@@ -46,6 +39,9 @@ public class TextFileManager {
 	}
 	
 	public String readLine() {
+		if(!fileScannerIsOpen) {
+			openFileScanner();
+		}
 		if(fileScanner.hasNextLine() && fileScannerIsOpen) {
 			return fileScanner.nextLine();
 			
@@ -81,13 +77,13 @@ public class TextFileManager {
 		append(appendee);
 	}
 	
-	public void write(String lines) {
-		writer.println(lines);
+	public void write(ArrayList<String> lines) {
+		try{ Files.write(path, lines);  }
+		catch(IOException e) {
+			System.out.println("Couldn't write to file " + path.toString() + ", " + e.getLocalizedMessage());
+		}
 	}
 	
-	public void closePrintWriter() {
-		writer.close();
-	}
 	
 	public void closeFileScanner() {
 		fileScanner.close();
