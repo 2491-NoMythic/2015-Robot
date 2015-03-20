@@ -36,6 +36,9 @@ public class OI {
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	DigitalInputButton resetArmEncoder;
 	
+	/**
+	 * Initiates some joysticks and buttons.
+	 */
 	public void init() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);

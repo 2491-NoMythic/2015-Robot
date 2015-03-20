@@ -25,7 +25,7 @@ public class SetToteHeight extends CommandBase {
 	}
 	
 	/**
-	 * 
+	 * Sets the height of the elevator based on the height of totes.
 	 * @param totes The number of totes to put the elevator at.
 	 * @param underLip Whether or not to put the elevator under the lip of the top tote.
 	 */
@@ -38,7 +38,7 @@ public class SetToteHeight extends CommandBase {
     }
     
     /**
-     * 
+     * Sets the height of the elevator based on the height of totes.
      * @param totes The number of totes to put the elevator at.
      */
     public SetToteHeight(int totes) {
