@@ -5,8 +5,6 @@ import java.io.File;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.TextFileManager;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */
