@@ -24,6 +24,9 @@ public class TextFileManager {
 		path = Paths.get(filename);
 	}
 	
+	/**
+	 * Opens the file scanner.
+	 */
 	public void openFileScanner() {
 		try {
 		fileScanner = new Scanner(path);
@@ -96,6 +99,10 @@ public class TextFileManager {
 		append(appendee);
 	}
 	
+	/**
+	 * Writes lines to the file.
+	 * @param lines The lines to write to the file.
+	 */
 	public void write(ArrayList<String> lines) {
 		try{ Files.write(path, lines);  }
 		catch(IOException e) {
@@ -103,10 +110,10 @@ public class TextFileManager {
 		}
 	}
 	
-	
+	/**
+	 * Closes the file scanner.
+	 */
 	public void closeFileScanner() {
 		fileScanner.close();
 	}
-
-	
 }
