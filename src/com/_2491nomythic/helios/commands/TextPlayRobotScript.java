@@ -8,7 +8,7 @@ import com._2491nomythic.util.TextFileManager;
 
 
 /**
- *
+ * Plays a script recorded with TextRecordRobotScript.
  */
 public class TextPlayRobotScript extends CommandBase {
 	private String path;
@@ -18,6 +18,10 @@ public class TextPlayRobotScript extends CommandBase {
 	private boolean isDone = false;
 	String myString;
 	
+	/**
+	 * Plays a script recorded with TextRecordRobotScript.
+	 * @param filename The name of the file that contains the script to play.
+	 */
     public TextPlayRobotScript(String filename) {
     	requires(drivetrain);
 		requires(elevator);

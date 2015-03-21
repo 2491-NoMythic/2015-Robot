@@ -6,10 +6,15 @@ import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.util.TextFileManager;
 
 /**
- *
+ * Records a script to play with TextPlayRobotScript.
  */
 public class TextRecordRobotScript extends CommandBase {
 	private TextFileManager file;;
+	
+	/**
+	 * Records a script to play with TextPlayRobotScript.
+	 * @param filename The name of the file to save the script to.
+	 */
     public TextRecordRobotScript(String filename) {
     	File directory = new File(Constants.homeDirectory + "Scripts");
     	if(!directory.exists()) {

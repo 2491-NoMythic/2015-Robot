@@ -3,11 +3,16 @@ package com._2491nomythic.helios.commands.drivetrain;
 import com._2491nomythic.helios.commands.CommandBase;
 
 /**
- *
+ * Acts as a brake for the drivetrain.
  */
 public class StopRobot extends CommandBase {
 	private double tolerance;
 	private double targetY;
+	
+	/**
+	 * Acts as a brake for the drivetrain.
+	 * @param tolerance distance allowed before the brake engages.
+	 */
     public StopRobot(double tolerance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
