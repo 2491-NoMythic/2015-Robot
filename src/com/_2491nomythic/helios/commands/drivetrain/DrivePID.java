@@ -5,6 +5,7 @@ import com._2491nomythic.helios.settings.Variables;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
 
 /**
  * Drives the robot a specified distance in a specified direction with specified power using PID.
@@ -15,6 +16,12 @@ public class DrivePID extends CommandBase {
 	private PIDController xController;
 	private PIDController yController;
 	private double maxSpeed;
+	
+	private PIDSource xInput = new PIDSource() {
+		public double pidGet() {
+			return drivetrain.getCenterEncoder().getDistance();
+		}
+	};
 	
 	private PIDOutput xOutput = new PIDOutput() {
 		
@@ -28,6 +35,11 @@ public class DrivePID extends CommandBase {
 				}
 			}
 			drivetrain.driveCenter(output, output);
+		}
+	};
+	private PIDSource yInput = new PIDSource() {
+		public double pidGet() {
+			return drivetrain.getRightEncoder().getDistance();
 		}
 	};
 	private PIDOutput yOutput = new PIDOutput() {
@@ -57,15 +69,17 @@ public class DrivePID extends CommandBase {
 		maxSpeed = maxSpeedInput;
 		this.xTargetInput = xTargetInput;
 		this.yTargetInput = yTargetInput;
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getRightEncoder(), xOutput);
-		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getCenterEncoder(), yOutput);
+		// For some reason, inputting an encoder as the PIDSource doesn't work properly, even if the encoder has it PIDSourceParamater set to Distance.
+		// Instead, make a PIDSource that returns encoder.getDistance() in its pidGet function, and it'll work fine.
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, xInput, xOutput);
+		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, yInput, yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
 	
 	public void updateSettings() {
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, drivetrain.getCenterEncoder(), xOutput);
-		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, drivetrain.getRightEncoder(), yOutput);
+		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, xInput, xOutput);
+		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, yInput, yOutput);
 		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
