@@ -73,13 +73,13 @@ public class Elevator extends PIDSubsystem {
 				currentSpeed = 0;
 			}
 			else if (output < 0) {
-				motorElevatorA.set(output);
+				motorElevatorA.set(-1.0 * output);
 				currentSpeed = output;
 			}
 		}
 		else if (!limitBottom.get()) {
 			if (output > 0) {
-				motorElevatorA.set(output);
+				motorElevatorA.set(-1.0 * output);
 				currentSpeed = output;
 			}
 			else if (output <= 0) {
@@ -88,7 +88,7 @@ public class Elevator extends PIDSubsystem {
 			}
 		}
 		else {
-			motorElevatorA.set(output);
+			motorElevatorA.set(-1.0 * output);
 			currentSpeed = output;
 		}
 		// Use output to drive your system, like a motor
@@ -110,14 +110,14 @@ public class Elevator extends PIDSubsystem {
 				motorElevatorB.set(0.0);
 			}
 			else {
-				motorElevatorA.set(speed);
-				motorElevatorB.set(-1.0 * speed);
+				motorElevatorA.set(-1.0 * speed);
+				motorElevatorB.set(speed);
 			}
 		}
 		else if (!limitBottom.get()) {
 			if (speed > 0.0) {
-				motorElevatorA.set(speed);
-				motorElevatorB.set(-1.0 * speed);
+				motorElevatorA.set(-1.0 * speed);
+				motorElevatorB.set(speed);
 			}
 			else {
 				motorElevatorA.set(0.0);
@@ -125,8 +125,8 @@ public class Elevator extends PIDSubsystem {
 			}
 		}
 		else {
-			motorElevatorA.set(speed);
-			motorElevatorB.set(-1.0 * speed);
+			motorElevatorA.set(-1.0 * speed);
+			motorElevatorB.set(speed);
 		}
 	}
 	
