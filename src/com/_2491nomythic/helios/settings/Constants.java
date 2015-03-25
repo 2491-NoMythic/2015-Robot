@@ -69,4 +69,7 @@ public class Constants {
 	
 	//Square root of three for speed buttons
 	public static final double sqrt3 = Math.sqrt(3);
+	
+	//Autonomous Two Bin Position Distance Away From Recycling Container (ft) (Will be adjusted for tote)
+	public static final double autonomousTwoBinPositionAwayFromRecContainer = 4.407382097;
 }
