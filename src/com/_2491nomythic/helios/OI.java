@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
+import com._2491nomythic.helios.commands.drivetrain.DriveWithArm;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 import com._2491nomythic.util.CartesianCoord;
@@ -57,6 +58,7 @@ public class OI {
 				new JoystickAxisDeadzoneButton(controllers[ControllerMap.DriveController], ControllerMap.TurnAxis, 0.15, false),
 				ButtonMode.AOrB);
 		driveWithArm = new LogicButton(codriverDriveWithArm, driverBlockDWA, ButtonMode.AAndNotB);
+		driveWithArm.whileHeld(new DriveWithArm());
 	}
 	;
 	/**
