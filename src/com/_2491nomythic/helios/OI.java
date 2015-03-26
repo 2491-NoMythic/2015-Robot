@@ -12,6 +12,9 @@ import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 import com._2491nomythic.util.CartesianCoord;
 import com._2491nomythic.util.DigitalInputButton;
+import com._2491nomythic.util.JoystickAxisDeadzoneButton;
+import com._2491nomythic.util.LogicButton;
+import com._2491nomythic.util.LogicButton.ButtonMode;
 import com._2491nomythic.util.PolarCoord;
 
 /**
@@ -28,10 +31,7 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
     
 	private final Joystick[] controllers = new Joystick[2];
-	Button zeroArmEncoder, moveArmToPoint,
-		moveUpOneTote, moveDownOneTote, getNextTote, goToTote,
-		scoringPlatformStatus, driveOneAndAHalfFeetRight, driveOneAndAHalfFeetStraight,
-		driverElevatorUp, driverElevatorDown, codriverElevatorUp, codriverElevatorDown; 
+	Button zeroArmEncoder, moveArmToPoint, getNextTote, goToTote, driveWithArm;
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	DigitalInputButton resetArmEncoder;
@@ -48,35 +48,15 @@ public class OI {
 		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
 		
-//		moveUpOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
-//		moveUpOneTote.whenPressed(new IncrementToteHeight());
-//		
-//		moveDownOneTote = new JoystickButton(controllers[ControllerMap.moveDownOneToteController], ControllerMap.moveDownOneToteButton);
-//		moveDownOneTote.whenPressed(new DecrementToteHeight());
-		
-		scoringPlatformStatus = new JoystickButton(controllers[ControllerMap.scoringPlatformStatusController], ControllerMap.scoringPlatformStatusButton);
-		scoringPlatformStatus.whenPressed(new PlatformStatus(PlatformStatus.switchType.Toggle));
-		
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new GetNextToteTime());
 		
-		/*
-		// Too laggy
-		driverElevatorUp = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorUp);
-		driverElevatorUp.whileHeld(new ElevatePower(1.0));
-		
-		driverElevatorDown = new JoystickButton(controllers[ControllerMap.driverElevatorController], ControllerMap.driverElevatorDown);
-		driverElevatorDown.whileHeld(new ElevatePower(-1.0));
-		
-		codriverElevatorUp = new JoystickButton(controllers[ControllerMap.codriverElevatorController], ControllerMap.codriverElevatorUp);
-		codriverElevatorUp.whileHeld(new ElevatePower(1.0));
-		
-		codriverElevatorDown = new JoystickButton(controllers[ControllerMap.codriverElevatorController], ControllerMap.codriverElevatorDown);
-		codriverElevatorDown.whileHeld(new ElevatePower(-1.0));
-		*/
-//		
-//		resetArmEncoder = new DigitalInputButton(Arm.getInstance().getHallEffectSensor());
-//		resetArmEncoder.whenPressed(new ManuallyResetArmEncoder());
+		Button codriverDriveWithArm = new JoystickButton(controllers[ControllerMap.driveWithArmController], ControllerMap.driveWithArmButton);
+		Button driverBlockDWA = new LogicButton(
+				new JoystickAxisDeadzoneButton(controllers[ControllerMap.DriveController], ControllerMap.DriveAxisY, 0.15, false),
+				new JoystickAxisDeadzoneButton(controllers[ControllerMap.DriveController], ControllerMap.TurnAxis, 0.15, false),
+				ButtonMode.AOrB);
+		driveWithArm = new LogicButton(codriverDriveWithArm, driverBlockDWA, ButtonMode.AAndNotB);
 	}
 	;
 	/**
