@@ -46,8 +46,8 @@ public class HandheldControllerMap {
 	public static final int driverElevatorUp = 4;
 	public static final int driverElevatorDown = 1;
 	public static final int codriverElevatorController = 1;
-	public static final int codriverElevatorUp = 4;
-	public static final int codriverElevatorDown = 1;
+	public static final int[] codriverElevatorUpPOV = new int[] {315, 0, 45};
+	public static final int[] codriverElevatorDownPOV = new int[] {135, 180, 225};
 	//Drive
 	public static final int FasterDriveButtonA = 6;
 	public static final int FasterDriveButtonB = 5;

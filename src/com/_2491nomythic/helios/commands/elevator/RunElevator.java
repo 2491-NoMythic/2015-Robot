@@ -4,6 +4,8 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.settings.Variables;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * Runs the elevator based on Driver Control. Better. Hopefully.
  */
@@ -15,23 +17,22 @@ public class RunElevator extends CommandBase {
     public RunElevator() {
         requires(elevator);
     }
-
     // Called just before this Command runs the first time
     protected void initialize() {
     }
-
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	int codriverPOV = oi.getController(ControllerMap.codriverElevatorController).getPOV();
     	if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorUp)) {
     		elevator.set(Variables.elevatorMultiplier);
     	}
     	else if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorDown)) {
     		elevator.set(-1.0 * Variables.elevatorMultiplier);
     	}
-    	else if (oi.getButton(ControllerMap.codriverElevatorController, ControllerMap.codriverElevatorUp)) {
+    	else if (codriverPOV == ControllerMap.codriverElevatorUpPOV[0] || codriverPOV == ControllerMap.codriverElevatorUpPOV[1] || codriverPOV == ControllerMap.codriverElevatorUpPOV[2]) {
     		elevator.set(Variables.elevatorMultiplier);
     	}
-    	else if (oi.getButton(ControllerMap.codriverElevatorController, ControllerMap.codriverElevatorDown)) {
+    	else if (codriverPOV == ControllerMap.codriverElevatorDownPOV[0] || codriverPOV == ControllerMap.codriverElevatorDownPOV[1] || codriverPOV == ControllerMap.codriverElevatorDownPOV[2]) {
     		elevator.set(-1.0 * Variables.elevatorMultiplier);
     	}
     	else {
