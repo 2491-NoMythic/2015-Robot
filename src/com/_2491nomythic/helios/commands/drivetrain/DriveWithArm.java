@@ -69,7 +69,14 @@ public class DriveWithArm extends CommandBase {
 		yController.setSetpoint(driveTarget);
 		
 		// Drive the x axis because this requires drivetrain and will cancel the normal drive command.
-		double xSpeed = oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisX);
+		double multiplier = 0.25;
+		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonA)) {
+			multiplier *= Constants.sqrt3;
+		}
+		if (oi.getButton(ControllerMap.DriveController, ControllerMap.FasterDriveButtonB)) {
+			multiplier *= Constants.sqrt3;
+		}
+		double xSpeed = oi.getAxis(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier;
 		drivetrain.driveCenter(xSpeed, xSpeed);
 	}
 	
