@@ -34,14 +34,11 @@ public class HandheldControllerMap {
 	public static final int setToTargetButton = 8;
 	// Moving the elevator
 	public static final int moveUpOneToteController = 1;
-	public static final int moveUpOneToteButton = 2;
+	public static final int moveUpOneToteButton = 4;
 	public static final int moveDownOneToteController = 1;
 	public static final int moveDownOneToteButton = 3;
-	public static final int scoringPlatformStatusController = 1;
-	public static final int scoringPlatformStatusButton = 1;
 	public static final int getNextToteController = 0;
 	public static final int getNextToteButton = 10;
-	public static final int driveToToteButton = 9;
 	public static final int driverElevatorController = 0;
 	public static final int driverElevatorUp = 4;
 	public static final int driverElevatorDown = 1;

@@ -9,6 +9,7 @@ import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveWithArm;
+import com._2491nomythic.helios.commands.elevator.ElevateTime;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.PickUpNextTote;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
@@ -34,6 +35,7 @@ public class OI {
     
 	private final Joystick[] controllers = new Joystick[2];
 	Button zeroArmEncoder, moveArmToPoint, getNextTote, goToTote, driveWithArm;
+	Button upOneTote, downOneTote;
 	public int buttonIncrementer = 0;
 	int hypotheticalMoveArmValue; //not sure what value Evan would like.... Will replace when known.
 	DigitalInputButton resetArmEncoder;
@@ -52,6 +54,12 @@ public class OI {
 		
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new PickUpNextTote());
+		
+		upOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
+		upOneTote.whenPressed(new ElevateTime(Constants.upOneToteTime));
+		
+		downOneTote = new JoystickButton(controllers[ControllerMap.moveDownOneToteController], ControllerMap.moveDownOneToteButton);
+		downOneTote.whenPressed(new ElevateTime(-1 * Constants.upOneToteTime));
 		
 		Button codriverDriveWithArm = new JoystickButton(controllers[ControllerMap.driveWithArmController], ControllerMap.driveWithArmButton);
 		Button driverBlockDWA = new LogicButton(

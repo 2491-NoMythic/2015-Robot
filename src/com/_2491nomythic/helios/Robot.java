@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Pick up bin from step", new PickupBinsFromStep());
 		autoChooser.addDefault("Grab two totes and a bin", new TwoTotesAndOneBin(false));
 		autoChooser.addObject("Grab two totes and a bin and set them down", new TwoTotesAndOneBin(true));
-		autoChooser.addObject("Drive into Auto Zone", new DriveIntoAutoZone());
+		autoChooser.addObject("Drive into auto zone", new DriveIntoAutoZone());
 		autoChooser.addObject("Drive into auto zone and drop item", new DriveIntoAutoZoneAndDrop());
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
