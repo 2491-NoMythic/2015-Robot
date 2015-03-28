@@ -24,7 +24,6 @@ public class TwoTotesAndOneBin extends CommandBase {
 	private DrivePID driveVerticalToToteDistance;
 	private DrivePID moveIntoAutozone;
 	private ElevateTime stackBin;
-	private RunWithPID beginLowering;
 	private ElevateTime placeDown;
 	private DrivePID driveBackALittle;
 	private RunWithPID moveArmUpALittle;
@@ -42,7 +41,6 @@ public class TwoTotesAndOneBin extends CommandBase {
 				6.230298764 + 0.519701236);
 		stackBin = new ElevateTime(-0.75, 1);
 		moveIntoAutozone = new DrivePID(0.5, 9.9167, 0);
-		beginLowering = new RunWithPID(Variables.pickUpBinPosTwoToteAuto - 20);
 		placeDown = new ElevateTime(-0.75, 1);
 		driveBackALittle = new DrivePID(0.5, 0, -1.2);
 		moveArmUpALittle = new RunWithPID(50);
@@ -59,6 +57,7 @@ public class TwoTotesAndOneBin extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		System.out.println(state);
 		switch (state) {
 			case 0:
 				lowerToBin.start();
@@ -108,7 +107,7 @@ public class TwoTotesAndOneBin extends CommandBase {
 				state = 7;
 				break;
 			case 7:
-				if (!lowerToBin.isRunning() && !beginLowering.isRunning()) {
+				if (!lowerToBin.isRunning()) {
 					driveBackALittle.start();
 				}
 				state = 8;
@@ -136,7 +135,7 @@ public class TwoTotesAndOneBin extends CommandBase {
 	
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return state == 14 && !driveBack.isRunning();
+		return state == 14 && !driveBack.isRunning() && !moveIntoAutozone.isRunning();
 	}
 	
 	// Called once after isFinished returns true
@@ -156,7 +155,6 @@ public class TwoTotesAndOneBin extends CommandBase {
 		pickUpBin.cancel();
 		stackBin.cancel();
 		raiseToteUp.cancel();
-		beginLowering.cancel();
 		lowerToBin.cancel();
 		placeDown.cancel();
 		moveArmUpALittle.cancel();
