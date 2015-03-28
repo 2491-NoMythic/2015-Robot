@@ -78,6 +78,7 @@ public class PickupBinsFromStep extends CommandBase {
 					driveIntoAutoZone.start();
 					state = 6;
 				}
+				break;
 			case 6:
 				break;
 			default:
@@ -93,6 +94,7 @@ public class PickupBinsFromStep extends CommandBase {
 	}
 
 	protected void interrupted() {
+		backUpToStart.cancel();
 		lowerToBin.cancel();
 		driveToBin.cancel();
 		pickUpBin.cancel();
