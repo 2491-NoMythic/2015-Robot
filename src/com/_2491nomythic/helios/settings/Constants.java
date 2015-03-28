@@ -72,4 +72,5 @@ public class Constants {
 	
 	//Autonomous Two Bin Position Distance Away From Recycling Container (ft)
 	public static final double autonomousTwoBinPositionAwayFromRecContainer = 3.480298764; //or .519701236 ft away from gaffers tape
+	public static final double upOneToteTime = 1;
 }

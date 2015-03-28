@@ -10,6 +10,7 @@ import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.commands.arm.RunWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveWithArm;
 import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
+import com._2491nomythic.helios.commands.elevator.PickUpNextTote;
 import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 import com._2491nomythic.util.CartesianCoord;
 import com._2491nomythic.util.DigitalInputButton;
@@ -50,7 +51,7 @@ public class OI {
 		moveArmToPoint.whenPressed(new RunWithPID(hypotheticalMoveArmValue));
 		
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
-		getNextTote.whenPressed(new GetNextToteTime());
+		getNextTote.whenPressed(new PickUpNextTote());
 		
 		Button codriverDriveWithArm = new JoystickButton(controllers[ControllerMap.driveWithArmController], ControllerMap.driveWithArmButton);
 		Button driverBlockDWA = new LogicButton(
