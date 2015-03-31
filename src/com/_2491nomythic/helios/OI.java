@@ -56,10 +56,10 @@ public class OI {
 		getNextTote.whenPressed(new PickUpNextTote());
 		
 		upOneTote = new JoystickButton(controllers[ControllerMap.moveUpOneToteController], ControllerMap.moveUpOneToteButton);
-		upOneTote.whenPressed(new ElevateTime(Constants.upOneToteTime));
+		upOneTote.whenPressed(new ElevateTime(0.75, Constants.upOneToteTime));
 		
 		downOneTote = new JoystickButton(controllers[ControllerMap.moveDownOneToteController], ControllerMap.moveDownOneToteButton);
-		downOneTote.whenPressed(new ElevateTime(-1 * Constants.upOneToteTime));
+		downOneTote.whenPressed(new ElevateTime(-0.75, Constants.upOneToteTime));
 		
 		Button codriverDriveWithArm = new JoystickButton(controllers[ControllerMap.driveWithArmController], ControllerMap.driveWithArmButton);
 		Button driverBlockDWA = new LogicButton(

@@ -67,69 +67,67 @@ public class TwoTotesAndOneBin extends CommandBase {
 			case 1:
 				if (!lowerToBin.isRunning() && !raiseToteUp.isRunning()) {
 					driveUpALittle.start();
+					state = 2;
 				}
-				state = 2;
 				break;
 			case 2:
 				if (!driveUpALittle.isRunning()) {
 					pickUpBin.start();
+					state = 3;
 				}
-				state = 3;
 				break;
 			case 3:
 				if (!pickUpBin.isRunning()) {
 					driveVerticalToToteDistance.start();
+					state = 4;
 				}
-				state = 4;
 				break;
 			case 4:
 				if (!driveVerticalToToteDistance.isRunning()) {
 					pickUp.start();
+					state = 5;
 				}
-				state = 5;
 				break;
 			case 5:
 				if (!pickUp.isRunning()) {
 					moveIntoAutozone.start();
-				}
-				if (placeThemDown) {
-					state = 6;
-				}
-				else {
-					state = 10;
+					if (placeThemDown) {
+						state = 6;
+					}
+					else {
+						state = 10;
+					}
 				}
 				break;
 			case 6:
 				if (!moveIntoAutozone.isRunning()) {
 					lowerToBin.start(); // release the bin point
 					placeDown.start();
+					state = 7;
 				}
-				state = 7;
 				break;
 			case 7:
 				if (!lowerToBin.isRunning()) {
 					driveBackALittle.start();
+					state = 8;
 				}
-				state = 8;
 				break;
 			case 8:
 				if (!driveBackALittle.isRunning()) {
 					moveArmUpALittle.start();
+					state = 9;
 				}
-				state = 9;
 				break;
 			case 9:
 				if (!moveArmUpALittle.isRunning()) {
 					driveBack.start();
+					state = 10;
 				}
-				state = 10;
 				break;
 			case 10:
 				break;
 			default:
-				System.out
-						.println("Something's wrong in autonomous!  State is "
-								+ state);
+				System.out.println("Something's wrong in autonomous!  State is " + state);
 		}
 	}
 	
