@@ -17,35 +17,41 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class TwoTotesAndOneBin extends CommandBase {
-	private RunWithPID lowerToBin;
-	private DrivePID driveUpALittle;
+	private RunWithPID lowerToBin, lowerNearBin;
+	private DrivePID driveToPickUpBin, driveToHookBin;
+	private DriveTime driveBackToHookBin;
 	private RunWithPID pickUpBin;
 	private ElevateTime raiseToteUp;
-	private DrivePID driveVerticalToToteDistance;
-	private DrivePID moveIntoAutozone;
-	private ElevateTime stackBin;
-	private ElevateTime placeDown;
-	private DrivePID driveBackALittle;
+	private DrivePID driveToSecondTote, driveToSecondToteSlow;
+	private DriveTime moveIntoAutozone;
+	private ElevateTime stackTote;
+	private ElevateTime placeTotesDown;
+	private DrivePID driveToUnhookBin;
 	private RunWithPID moveArmUpALittle;
 	private int state;
-	private PickUpNextTote pickUp;
+	private PickUpNextTote pickUpTote;
 	private DrivePID driveBack;
+	Timer timer;
 	private boolean placeThemDown = false;
 	
 	public TwoTotesAndOneBin(boolean placeTotes) {
-		lowerToBin = new RunWithPID(Variables.pickUpBinPosTwoToteAuto);
-		raiseToteUp = new ElevateTime(0.75, 1);
-		driveUpALittle = new DrivePID(0.5, 0, 1.2);
-		pickUpBin = new RunWithPID(Variables.holdBinDistance);
-		driveVerticalToToteDistance = new DrivePID(0.5, 0,
-				6.230298764 + 0.519701236);
-		stackBin = new ElevateTime(-0.75, 1);
-		moveIntoAutozone = new DrivePID(0.5, 9.9167, 0);
-		placeDown = new ElevateTime(-0.75, 1);
-		driveBackALittle = new DrivePID(0.5, 0, -1.2);
+		lowerNearBin = new RunWithPID(Variables.pickUpBinPosTwoToteAuto - 10); // Start lowering the arm before we're done driving back 
+		raiseToteUp = new ElevateTime(0.75, Constants.upOneToteTime); // Lift up tote
+		driveToPickUpBin = new DrivePID(0.3, Constants.nullX, -1.2); // Drive back with the tote so we can pick up the bin
+		lowerToBin = new RunWithPID(Variables.pickUpBinPosTwoToteAuto); // Lower arm to position to actually pick up bin
+		driveToHookBin = new DrivePID(0.3, Constants.nullX, 0.75); // Drive forward to hook tote
+		driveBackToHookBin = new DriveTime(-0.3, Constants.nullX, 0.5); 
+		pickUpBin = new RunWithPID(Variables.holdBinDistance); // Lift the arm back up
+		driveToSecondTote = new DrivePID(0.4, Constants.nullX, 7); // Drive to the second tote
+		driveToSecondToteSlow = new DrivePID(0.3, Constants.nullX, 1.5); // Don't launch the second tote
+		pickUpTote = new PickUpNextTote(); // Pick up the second tote
+		moveIntoAutozone = new DriveTime(0.5, 2, 0); // Drive into the auto zone
+		placeTotesDown = new ElevateTime(-0.75, 1); // Place the totes down
+		stackTote = new ElevateTime(-0.75, 1);
+		driveToUnhookBin = new DrivePID(0.5, 0, -0.5);
 		moveArmUpALittle = new RunWithPID(50);
 		driveBack = new DrivePID(0.5, 0, -1);
-		pickUp = new PickUpNextTote();
+		timer = new Timer();
 		this.placeThemDown = placeTotes;
 	}
 	
@@ -57,74 +63,101 @@ public class TwoTotesAndOneBin extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		System.out.println(state);
 		switch (state) {
-			case 0:
-				lowerToBin.start();
+			case 0: // Start by lifting the tote and starting the arm lowering process
+				lowerNearBin.start();
 				raiseToteUp.start();
+				timer.start();
+				timer.reset();
 				state = 1;
 				break;
-			case 1:
-				if (!lowerToBin.isRunning() && !raiseToteUp.isRunning()) {
-					driveUpALittle.start();
+			case 1: // After 0.1 seconds, the tote will be off the ground so we can start backing up.
+				if (timer.get() > 0.1) {
+					timer.stop();
+					driveToPickUpBin.start();
 					state = 2;
 				}
 				break;
-			case 2:
-				if (!driveUpALittle.isRunning()) {
-					pickUpBin.start();
+			case 2: // Once we drive back, we can lower the hook into the bin
+				if (!driveToPickUpBin.isRunning()) {
+					lowerToBin.start();
 					state = 3;
 				}
 				break;
-			case 3:
-				if (!pickUpBin.isRunning()) {
-					driveVerticalToToteDistance.start();
+			case 3: // We used to drive back in case the hook was in front of the bin, but that hasn't been happening.
+				if (arm.getRate() < 1 && (arm.getPosition() > Variables.pickUpBinPosTwoToteAuto - 10)) {
+					//driveBackToHookBin.start();
 					state = 4;
 				}
 				break;
-			case 4:
-				if (!driveVerticalToToteDistance.isRunning()) {
-					pickUp.start();
+			case 4: // Once the hook is in the bin, drive forward to hook the bin
+				if (!driveBackToHookBin.isRunning()) {
+					driveToHookBin.start();
 					state = 5;
 				}
 				break;
-			case 5:
-				if (!pickUp.isRunning()) {
-					moveIntoAutozone.start();
-					if (placeThemDown) {
-						state = 6;
-					}
-					else {
-						state = 10;
-					}
+			case 5: // Then, start picking the bin up
+				if (!driveToHookBin.isRunning()) {
+					pickUpBin.start();
+					state = 6;
 				}
 				break;
-			case 6:
-				if (!moveIntoAutozone.isRunning()) {
-					lowerToBin.start(); // release the bin point
-					placeDown.start();
+			case 6: // Once the arm is fairly high, drive to the next tote
+				if (arm.getPosition() < 30) {
+					driveToSecondTote.start();
 					state = 7;
 				}
 				break;
-			case 7:
-				if (!lowerToBin.isRunning()) {
-					driveBackALittle.start();
+			case 7: // Slow down so the tote doesn't go flying if we hit it
+				if (!driveToSecondTote.isRunning()) {
+					driveToSecondToteSlow.start();
 					state = 8;
 				}
 				break;
-			case 8:
-				if (!driveBackALittle.isRunning()) {
-					moveArmUpALittle.start();
+			case 8: // Then, pick up the second tote
+				if (!driveToSecondToteSlow.isRunning() || drivetrain.getRightEncoder().getRate() < 0.1) {
+					driveToSecondToteSlow.cancel();
+					pickUpTote.start();
 					state = 9;
 				}
 				break;
-			case 9:
-				if (!moveArmUpALittle.isRunning()) {
-					driveBack.start();
-					state = 10;
+			case 9: // After we pick up the second tote, drive into the auto zone
+				if (!pickUpTote.isRunning()) {
+					moveIntoAutozone.start();
+					if (placeThemDown) {
+						state = 10; // If placing stuff down is enabled, continue
+					}
+					else {
+						state = 14; // Otherwise, go straight to the end
+					}
 				}
 				break;
-			case 10:
+			case 10: // If we're in the auto zone, place down the tote stack and bin.
+				if (!moveIntoAutozone.isRunning()) {
+					lowerToBin.start();
+					placeTotesDown.start();
+					state = 11;
+				}
+				break;
+			case 11: // Unhook the bin
+				if (!lowerToBin.isRunning()) {
+					driveToUnhookBin.start();
+					state = 12;
+				}
+				break;
+			case 12: // Move the arm up a little
+				if (!driveToUnhookBin.isRunning()) {
+					moveArmUpALittle.start();
+					state = 13;
+				}
+				break;
+			case 13: // Drive away from the bin
+				if (!moveArmUpALittle.isRunning()) {
+					driveBack.start();
+					state = 14;
+				}
+				break;
+			case 14:
 				break;
 			default:
 				System.out.println("Something's wrong in autonomous!  State is " + state);
@@ -143,18 +176,18 @@ public class TwoTotesAndOneBin extends CommandBase {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		driveUpALittle.cancel();
-		driveVerticalToToteDistance.cancel();
+		driveToHookBin.cancel();
+		driveToSecondTote.cancel();
 		moveIntoAutozone.cancel();
 		driveBack.cancel();
-		driveBackALittle.cancel();
+		driveToUnhookBin.cancel();
 		lowerToBin.cancel();
 		raiseToteUp.cancel();
 		pickUpBin.cancel();
-		stackBin.cancel();
+		stackTote.cancel();
 		raiseToteUp.cancel();
 		lowerToBin.cancel();
-		placeDown.cancel();
+		placeTotesDown.cancel();
 		moveArmUpALittle.cancel();
 	}
 }
