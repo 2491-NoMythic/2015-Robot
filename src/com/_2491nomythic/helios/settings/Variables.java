@@ -10,10 +10,10 @@ public class Variables {
 	public static double elevatorPID_P = 1.0;
 	public static double elevatorPID_I = 0.0;
 	public static double elevatorPID_D = 0.0;
-	public static double drivexPID_P = 1.0;
+	public static double drivexPID_P = 0.5;
 	public static double drivexPID_I = 0.0;
 	public static double drivexPID_D = 0.0;
-	public static double driveyPID_P = 1.0;
+	public static double driveyPID_P = 0.5;
 	public static double driveyPID_I = 0.0;
 	public static double driveyPID_D = 0.0;
 	
