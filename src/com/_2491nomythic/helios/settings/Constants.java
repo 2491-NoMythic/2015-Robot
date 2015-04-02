@@ -56,7 +56,7 @@ public class Constants {
 	public static final double armMaxPosition = 180.0;
 	public static final double armLength = 4.833;
 	public static final boolean elevatorEncoderReversed = false;
-	public static final double elevatorEncoderToFeet = 0.002617993878;
+	public static final double elevatorEncoderToFeet = 0.00265775786231219618505436443707;
 	public static final double elevatorMinPosition = 0.0;
 	public static final double elevatorMaxPosition = 5.0;	
 	

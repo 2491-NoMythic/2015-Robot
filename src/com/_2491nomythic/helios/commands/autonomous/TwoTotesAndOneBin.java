@@ -34,7 +34,7 @@ public class TwoTotesAndOneBin extends CommandBase {
 	private boolean placeThemDown = false;
 	
 	public TwoTotesAndOneBin(boolean placeTotes) {
-		lowerNearBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto - 10); // Start lowering the arm before we're done driving back 
+		lowerNearBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto - 5); // Start lowering the arm before we're done driving back 
 		raiseToteUp = new ElevateTime(0.75, Constants.upOneToteTime); // Lift up tote
 		driveToPickUpBin = new DrivePID(0.3, Constants.nullX, -1.2); // Drive back with the tote so we can pick up the bin
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto); // Lower arm to position to actually pick up bin
@@ -44,7 +44,7 @@ public class TwoTotesAndOneBin extends CommandBase {
 		driveToSecondTote = new DrivePID(0.4, Constants.nullX, 7); // Drive to the second tote
 		driveToSecondToteSlow = new DrivePID(0.3, Constants.nullX, 1.5); // Don't launch the second tote
 		pickUpTote = new PickUpNextTote(); // Pick up the second tote
-		moveIntoAutozone = new DriveTime(0.5, 2, 0); // Drive into the auto zone
+		moveIntoAutozone = new DriveTime(0.5, 4.0, 0); // Drive into the auto zone
 		placeTotesDown = new ElevateTime(-0.75, 1); // Place the totes down
 		stackTote = new ElevateTime(-0.75, 1);
 		driveToUnhookBin = new DrivePID(0.5, 0, -0.5);
@@ -72,19 +72,21 @@ public class TwoTotesAndOneBin extends CommandBase {
 				break;
 			case 1: // After 0.1 seconds, the tote will be off the ground so we can start backing up.
 				if (timer.get() > 0.1) {
-					timer.stop();
+					timer.reset();
 					driveToPickUpBin.start();
 					state = 2;
 				}
 				break;
 			case 2: // Once we drive back, we can lower the hook into the bin
-				if (!driveToPickUpBin.isRunning()) {
+				if (!driveToPickUpBin.isRunning() || timer.get() > 1.8) {
+					timer.stop();
 					lowerToBin.start();
 					state = 3;
 				}
 				break;
 			case 3: // We used to drive back in case the hook was in front of the bin, but that hasn't been happening.
 				if (arm.getRate() < 1 && (arm.getPosition() > Variables.pickUpBinPosTwoToteAuto - 10)) {
+					System.out.println(arm.getRate());
 					//driveBackToHookBin.start();
 					state = 4;
 				}

@@ -15,7 +15,6 @@ public class DriveIntoAutoZone extends CommandGroup {
 	 * An autonomous that drives into the auto zone with a yellow tote.
 	 */
     public  DriveIntoAutoZone() {
-    	addSequential(new ElevateTime(1.0, 4.0));
     	addSequential(new DriveTime(0.5, Constants.nullX, 2.5));
     }
 }

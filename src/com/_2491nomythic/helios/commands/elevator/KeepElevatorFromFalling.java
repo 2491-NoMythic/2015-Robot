@@ -20,7 +20,9 @@ public class KeepElevatorFromFalling extends CommandBase {
 
 	protected void execute() {
 		if (elevator.getPosition() < target) {
-			elevator.set(target - arm.getPosition());
+			double power = (target - elevator.getPosition() * 8);
+			System.out.println("Elevator Power: " + power);
+			elevator.set(power);
 		}
 		else {
 			elevator.stop();

@@ -8,11 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.commands.PlayRobotScript;
-import com._2491nomythic.helios.commands.RecordRobotScript;
 import com._2491nomythic.helios.commands.TextPlayRobotScript;
 import com._2491nomythic.helios.commands.TextRecordRobotScript;
-import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
@@ -20,16 +17,14 @@ import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.autonomous.TwoTotesAndOneBin;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
-import com._2491nomythic.helios.commands.drivetrain.DrivePID;
-import com._2491nomythic.helios.commands.drivetrain.DriveToTote;
-import com._2491nomythic.helios.commands.drivetrain.DriveWithArm;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
 import com._2491nomythic.helios.commands.drivetrain.ResetCenterEncoder;
 import com._2491nomythic.helios.commands.drivetrain.ResetGyro;
 import com._2491nomythic.helios.commands.drivetrain.ResetSideEncoders;
 import com._2491nomythic.helios.commands.elevator.BottomElevator;
+import com._2491nomythic.helios.commands.elevator.ElevatePID;
+import com._2491nomythic.helios.commands.elevator.KeepElevatorFromFalling;
 import com._2491nomythic.helios.commands.elevator.ManuallyResetElevatorEncoder;
-import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.ExampleSubsystem;
 
 /**
@@ -72,6 +67,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Move arm to center", new RunArmWithPID(0.0));
 		SmartDashboard.putData("Record Driver Joystick Inputs", new TextRecordRobotScript("TestScript"));
 		SmartDashboard.putData("Play Driver Joystick Inputs", new TextPlayRobotScript("TestScript"));
+		SmartDashboard.putData("Hold Elevator", new KeepElevatorFromFalling());
+		SmartDashboard.putData("Elevator PID Test", new ElevatePID(1.0));
 	}
 	
 	public void disabledPeriodic() {
