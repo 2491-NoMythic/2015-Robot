@@ -8,7 +8,7 @@ public class KeepElevatorFromFalling extends CommandBase {
 	
 	/**
 	 * Keeps the elevator from slipping downwards due to bin weight
-	 * WARNING!!! This command doesn't requires(elevator), so it needs to be canceled manually so it doesn't constantly set the arm to 0;
+	 * WARNING!!! This command doesn't requires(elevator), so it needs to be canceled manually so it doesn't constantly set the elevator to 0;
 	 */
 	public KeepElevatorFromFalling() {
 		// We don't requires(elevator) so this command can be run by another command that requires(elevator) without canceling it.
