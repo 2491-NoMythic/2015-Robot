@@ -14,7 +14,7 @@ import com._2491nomythic.helios.commands.TextPlayRobotScript;
 import com._2491nomythic.helios.commands.TextRecordRobotScript;
 import com._2491nomythic.helios.commands.arm.KeepArmFromFalling;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
-import com._2491nomythic.helios.commands.arm.RunWithPID;
+import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
 		SmartDashboard.putData("Reset Arm Encoder", new ManuallyResetArmEncoder());
 		SmartDashboard.putData("Reset Elevator Encoder", new ManuallyResetElevatorEncoder());
-		SmartDashboard.putData("Move arm to center", new RunWithPID(0.0));
+		SmartDashboard.putData("Move arm to center", new RunArmWithPID(0.0));
 		SmartDashboard.putData("Record Driver Joystick Inputs", new TextRecordRobotScript("TestScript"));
 		SmartDashboard.putData("Play Driver Joystick Inputs", new TextPlayRobotScript("TestScript"));
 	}

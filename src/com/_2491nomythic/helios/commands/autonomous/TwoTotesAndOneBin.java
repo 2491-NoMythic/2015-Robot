@@ -1,7 +1,7 @@
 package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.CommandBase; 
-import com._2491nomythic.helios.commands.arm.RunWithPID;
+import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
 import com._2491nomythic.helios.commands.elevator.ElevateTime;
@@ -17,17 +17,17 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class TwoTotesAndOneBin extends CommandBase {
-	private RunWithPID lowerToBin, lowerNearBin;
+	private RunArmWithPID lowerToBin, lowerNearBin;
 	private DrivePID driveToPickUpBin, driveToHookBin;
 	private DriveTime driveBackToHookBin;
-	private RunWithPID pickUpBin;
+	private RunArmWithPID pickUpBin;
 	private ElevateTime raiseToteUp;
 	private DrivePID driveToSecondTote, driveToSecondToteSlow;
 	private DriveTime moveIntoAutozone;
 	private ElevateTime stackTote;
 	private ElevateTime placeTotesDown;
 	private DrivePID driveToUnhookBin;
-	private RunWithPID moveArmUpALittle;
+	private RunArmWithPID moveArmUpALittle;
 	private int state;
 	private PickUpNextTote pickUpTote;
 	private DrivePID driveBack;
@@ -35,13 +35,13 @@ public class TwoTotesAndOneBin extends CommandBase {
 	private boolean placeThemDown = false;
 	
 	public TwoTotesAndOneBin(boolean placeTotes) {
-		lowerNearBin = new RunWithPID(Variables.pickUpBinPosTwoToteAuto - 10); // Start lowering the arm before we're done driving back 
+		lowerNearBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto - 10); // Start lowering the arm before we're done driving back 
 		raiseToteUp = new ElevateTime(0.75, Constants.upOneToteTime); // Lift up tote
 		driveToPickUpBin = new DrivePID(0.3, Constants.nullX, -1.2); // Drive back with the tote so we can pick up the bin
-		lowerToBin = new RunWithPID(Variables.pickUpBinPosTwoToteAuto); // Lower arm to position to actually pick up bin
+		lowerToBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto); // Lower arm to position to actually pick up bin
 		driveToHookBin = new DrivePID(0.3, Constants.nullX, 0.75); // Drive forward to hook tote
 		driveBackToHookBin = new DriveTime(-0.3, Constants.nullX, 0.5); 
-		pickUpBin = new RunWithPID(Variables.holdBinDistance); // Lift the arm back up
+		pickUpBin = new RunArmWithPID(Variables.holdBinDistance); // Lift the arm back up
 		driveToSecondTote = new DrivePID(0.4, Constants.nullX, 7); // Drive to the second tote
 		driveToSecondToteSlow = new DrivePID(0.3, Constants.nullX, 1.5); // Don't launch the second tote
 		pickUpTote = new PickUpNextTote(); // Pick up the second tote
@@ -49,7 +49,7 @@ public class TwoTotesAndOneBin extends CommandBase {
 		placeTotesDown = new ElevateTime(-0.75, 1); // Place the totes down
 		stackTote = new ElevateTime(-0.75, 1);
 		driveToUnhookBin = new DrivePID(0.5, 0, -0.5);
-		moveArmUpALittle = new RunWithPID(50);
+		moveArmUpALittle = new RunArmWithPID(50);
 		driveBack = new DrivePID(0.5, 0, -1);
 		timer = new Timer();
 		this.placeThemDown = placeTotes;

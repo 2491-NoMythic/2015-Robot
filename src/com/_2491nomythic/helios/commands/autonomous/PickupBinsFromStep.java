@@ -1,7 +1,7 @@
 package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.CommandBase;
-import com._2491nomythic.helios.commands.arm.RunWithPID;
+import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
 import com._2491nomythic.helios.commands.grabber.RunGrabberTime;
 import com._2491nomythic.helios.settings.Constants;
@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class PickupBinsFromStep extends CommandBase {
 	private DriveTime backUpToStart;
-	private RunWithPID lowerToBin;
+	private RunArmWithPID lowerToBin;
 	private DriveTime driveToBin;
-	private RunWithPID pickUpBin;
+	private RunArmWithPID pickUpBin;
 	private RunGrabberTime makeBinVertical;
 	private DriveTime driveIntoAutoZone;
 	private int state; // 0 = Before start, 1 = lowering arm, 2 = driving forward,3 = waiting to pick up bin
@@ -28,9 +28,9 @@ public class PickupBinsFromStep extends CommandBase {
 	 */
 	public PickupBinsFromStep() {
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
-		lowerToBin = new RunWithPID(Variables.pickUpBinFromStepPosition);
+		lowerToBin = new RunArmWithPID(Variables.pickUpBinFromStepPosition);
 		driveToBin = new DriveTime(0.25, Constants.nullX, 0.6);
-		pickUpBin = new RunWithPID(Variables.holdBinDistance);
+		pickUpBin = new RunArmWithPID(Variables.holdBinDistance);
 		makeBinVertical = new RunGrabberTime(1.0, 3.0);
 		driveIntoAutoZone = new DriveTime(0.5, Constants.nullX, -1.85);
 		timer = new Timer();
