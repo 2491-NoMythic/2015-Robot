@@ -67,32 +67,7 @@ public class Elevator extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
-		if (!limitTop.get()) {
-			if (output >= 0) {
-				motorElevatorA.set(0);
-				currentSpeed = 0;
-			}
-			else if (output < 0) {
-				motorElevatorA.set(-1.0 * output);
-				currentSpeed = output;
-			}
-		}
-		else if (!limitBottom.get()) {
-			if (output > 0) {
-				motorElevatorA.set(-1.0 * output);
-				currentSpeed = output;
-			}
-			else if (output <= 0) {
-				motorElevatorA.set(0);
-				currentSpeed = 0;
-			}
-		}
-		else {
-			motorElevatorA.set(-1.0 * output);
-			currentSpeed = output;
-		}
-		// Use output to drive your system, like a motor
-		// e.g. yourMotor.set(output);
+		internalSet(output);
 	}
 	
 	/**
@@ -104,7 +79,15 @@ public class Elevator extends PIDSubsystem {
 			this.disable();
 			usingPID = false;
 		}
-		if (!limitTop.get()) {
+		internalSet(speed);
+	}
+	
+	/**
+	 * The internal function so that both set and usePIDOutput don't need duplicate code
+	 * @param speed
+	 */
+	private void internalSet(double speed) {
+		if (getTopSwitch()) {
 			if (speed >= 0.0) {
 				motorElevatorA.set(0.0);
 				motorElevatorB.set(0.0);
@@ -114,7 +97,7 @@ public class Elevator extends PIDSubsystem {
 				motorElevatorB.set(speed);
 			}
 		}
-		else if (!limitBottom.get()) {
+		else if (getBottomSwitch()) {
 			if (speed > 0.0) {
 				motorElevatorA.set(-1.0 * speed);
 				motorElevatorB.set(speed);
@@ -128,6 +111,13 @@ public class Elevator extends PIDSubsystem {
 			motorElevatorA.set(-1.0 * speed);
 			motorElevatorB.set(speed);
 		}
+	}
+	
+	/**
+	 * Same as set(0).  It's just more obvious what it does.
+	 */
+	public void stop() {
+		set(0.0);
 	}
 	
 	/**
