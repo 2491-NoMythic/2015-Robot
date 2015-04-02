@@ -28,10 +28,6 @@ public class UpdateDriverstation extends CommandBase {
 		file = new FileData(Constants.homeDirectory + "SmartDashboard.txt");
 		setRunWhenDisabled(true);
 		SmartDashboard.putNumber("Gyro Sensitivity", file.getDoubleWithDefault("GyroToDegrees", Variables.gyroToDegrees));
-		SmartDashboard.putNumber("Drive Y PID P", file.getDoubleWithDefault("DriveYPIDP", Variables.driveyPID_P));
-		SmartDashboard.putNumber("Drive Y PID I", file.getDoubleWithDefault("DriveYPIDI", Variables.driveyPID_I));
-		SmartDashboard.putNumber("Drive Y PID D", file.getDoubleWithDefault("DriveYPIDD", Variables.driveyPID_D));
-		SmartDashboard.putNumber("Arm Compensation Speed", file.getDoubleWithDefault("ArmCompensationSpeed", Variables.armCompensationMultiplier));
 		SmartDashboard.putNumber("Elevator Speed", 1.0);
 		SmartDashboard.putBoolean("Show Max Power Usage", false);
 	}
@@ -94,9 +90,6 @@ public class UpdateDriverstation extends CommandBase {
 			SmartDashboard.putNumber("Arm Power Usage", extraSensors.getPowerDistributionPanel().getCurrent(3));
 			SmartDashboard.putNumber("Hook Power Usage", extraSensors.getPowerDistributionPanel().getCurrent(4));
 		}
-//		SmartDashboard.putNumber("Power Usage (watts)", extraSensors.getPowerDistributionPanel().getTotalPower());
-//		SmartDashboard.putNumber("Power Usage (amps)", extraSensors.getPowerDistributionPanel().getTotalCurrent());
-//		SmartDashboard.putNumber("Power Used (joules)", extraSensors.getPowerDistributionPanel().getTotalEnergy());
 		
 //		SmartDashboard.putNumber("Current Elevator Target (totes)", Variables.elevatorTarget);
 //		if (Variables.elevatorTarget < 0 || Variables.elevatorTarget >= Variables.toteHeight.length) {
@@ -111,9 +104,7 @@ public class UpdateDriverstation extends CommandBase {
 		SmartDashboard.putNumber("Center Encoder", drivetrain.getCenterEncoder().getDistance());
 		SmartDashboard.putBoolean("Top limit switch", elevator.getTopSwitch());
 		SmartDashboard.putBoolean("Bottom limit switch", elevator.getBottomSwitch());
-		SmartDashboard.putBoolean("Hall Effect Sensor", arm.getHallEffectSensorValue());
 		SmartDashboard.putNumber("Arm Encoder", arm.getPosition());
-		SmartDashboard.putNumber("Arm Power", arm.get());
 	}
 	
 	/**
@@ -126,33 +117,6 @@ public class UpdateDriverstation extends CommandBase {
 			Variables.gyroToDegrees = tmp;
 			file.set("GyroToDegrees", Double.toString(tmp));
 			drivetrain.getGyro().setSensitivity(tmp);
-		}
-		
-		tmp = SmartDashboard.getNumber("Drive Y PID P");
-		if (tmp != Variables.driveyPID_P) {
-			Variables.driveyPID_P = tmp;
-			file.set("DriveYPIDP", Double.toString(tmp));
-			Robot.drivePID.updateSettings();
-		}
-			
-		tmp = SmartDashboard.getNumber("Drive Y PID I");
-		if (tmp != Variables.driveyPID_I) {
-			Variables.driveyPID_I = tmp;
-			file.set("DriveYPIDI", Double.toString(tmp));
-			Robot.drivePID.updateSettings();
-		}
-	
-		tmp = SmartDashboard.getNumber("Drive Y PID D");
-		if (tmp != Variables.driveyPID_D) {
-			Variables.driveyPID_D = tmp;
-			file.set("DriveYPIDD", Double.toString(tmp));
-			Robot.drivePID.updateSettings();
-		}
-		
-		tmp = SmartDashboard.getNumber("Arm Compensation Speed");
-		if (tmp != Variables.armCompensationMultiplier) {
-			Variables.armCompensationMultiplier = tmp;
-			file.set("ArmCompensationSpeed", Double.toString(tmp));
 		}
 		
 		Variables.elevatorMultiplier = SmartDashboard.getNumber("Elevator Speed");

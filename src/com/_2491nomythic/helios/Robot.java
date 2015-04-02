@@ -45,7 +45,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	private Command autoCommand;
 	private SendableChooser autoChooser;
-	public static DrivePID drivePID;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -66,21 +65,13 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Drive into auto zone and drop item", new DriveIntoAutoZoneAndDrop());
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
-		SmartDashboard.putData("Align with tote", new DriveToTote(0.25, 4.0));
-		drivePID = new DrivePID(0.5, Constants.nullX, 1.0);
-		SmartDashboard.putData("Test Drive PID", drivePID);
 		SmartDashboard.putData("Reset Side Encoders", new ResetSideEncoders());
 		SmartDashboard.putData("Reset Center Encoder", new ResetCenterEncoder());
 		SmartDashboard.putData("Reset Arm Encoder", new ManuallyResetArmEncoder());
 		SmartDashboard.putData("Reset Elevator Encoder", new ManuallyResetElevatorEncoder());
-		SmartDashboard.putData("Hold arm in place", new KeepArmFromFalling(1.0));
 		SmartDashboard.putData("Move arm to center", new RunWithPID(0.0));
-		SmartDashboard.putData("Run test auto", new PickupBinsFromStep());
-		SmartDashboard.putData("Record Driver Joystick Inputs", new RecordRobotScript("TestScript"));
-		SmartDashboard.putData("Play Driver Joystick Inputs", new PlayRobotScript("TestScript"));
-		SmartDashboard.putData("Horizontal Compensation For Arm", new DriveWithArm());
-		SmartDashboard.putData("Record Driver Joystick Inputs (Text)", new TextRecordRobotScript("TestScript"));
-		SmartDashboard.putData("Play Driver Joystick Inputs (Text)", new TextPlayRobotScript("TestScript"));
+		SmartDashboard.putData("Record Driver Joystick Inputs", new TextRecordRobotScript("TestScript"));
+		SmartDashboard.putData("Play Driver Joystick Inputs", new TextPlayRobotScript("TestScript"));
 	}
 	
 	public void disabledPeriodic() {

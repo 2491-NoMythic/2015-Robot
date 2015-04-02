@@ -48,9 +48,6 @@ public class Variables {
 	//Manual Drive Checker
 	public static boolean manualHasBeenUsed = false;
 	
-	//Variable for DriveWithArm class
-	public static double armCompensationMultiplier = -1;
-	
 	// Elevator speed multiplier
 	public static double elevatorMultiplier = 1;
 }
