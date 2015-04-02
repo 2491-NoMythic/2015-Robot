@@ -61,8 +61,8 @@ public class DriveWithArm extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// Calculate the horizontal distance the arm has moved and set the drivetrain setpoint to that distance.
-		double armPosRadions = Math.toRadians(arm.getPosition());
-		double armDistanceFromZero = Constants.armLength * Math.sin(armPosRadions);
+		double armPosRadians = Math.toRadians(arm.getPosition());
+		double armDistanceFromZero = Constants.armLength * Math.sin(armPosRadians);
 		double horizontalFeetMoved = armDistanceFromZero - armStartingHorizontalPosition;
 		double driveTarget = drivetrainStartingPosition - horizontalFeetMoved;
 		System.out.println("Horizontal Feet Moved: " + horizontalFeetMoved);
