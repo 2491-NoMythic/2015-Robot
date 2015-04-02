@@ -19,9 +19,6 @@ public class BottomElevator extends CommandBase {
 	 * @param power The power to apply to the elevator motor.
 	 */
 	public BottomElevator(double power) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		
 		requires(elevator);
 		powerInput = -1.0 * Math.abs(power);
 		timer = new Timer();
@@ -52,12 +49,11 @@ public class BottomElevator extends CommandBase {
 		if (timer.get() > time) {
 			elevator.set(0.0);
 			finished = true;
-			System.out.println("Elevator bottom out timed out");
 		}
 		else if (elevator.getBottomSwitch()) {
 			elevator.set(0.0);
+			elevator.resetEncoder();
 			finished = true;
-			System.out.println("Elevator hit switch");
 		}
 	}
 	
