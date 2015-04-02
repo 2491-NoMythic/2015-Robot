@@ -87,30 +87,28 @@ public class Elevator extends PIDSubsystem {
 	 * @param speed
 	 */
 	private void internalSet(double speed) {
-		if (getTopSwitch()) {
-			if (speed >= 0.0) {
-				motorElevatorA.set(0.0);
-				motorElevatorB.set(0.0);
-			}
-			else {
-				motorElevatorA.set(-1.0 * speed);
-				motorElevatorB.set(speed);
+		
+		if ((getTopSwitch() || getPosition() > Constants.elevatorMaxPosition) && speed > 0.0) {
+			speed = 0.0;
+		}
+		else if (getBottomSwitch() && speed < 0.0) {
+			speed = 0.0;
+		}
+		else if (getPosition() < 0.5) {
+			double cap = getPosition() + 0.5;
+			if(-1 * speed > cap) {
+				speed = -1.0 * cap;
 			}
 		}
-		else if (getBottomSwitch()) {
-			if (speed > 0.0) {
-				motorElevatorA.set(-1.0 * speed);
-				motorElevatorB.set(speed);
-			}
-			else {
-				motorElevatorA.set(0.0);
-				motorElevatorB.set(0.0);
+		else if (getPosition() > Constants.elevatorMaxPosition - 0.5) {
+			double cap =  Constants.elevatorMaxPosition -  getPosition() + 0.5;
+			if (speed > cap) {
+				speed = cap;
 			}
 		}
-		else {
-			motorElevatorA.set(-1.0 * speed);
-			motorElevatorB.set(speed);
-		}
+		
+		motorElevatorA.set(-1.0 * speed);
+		motorElevatorB.set(speed);
 	}
 	
 	/**
