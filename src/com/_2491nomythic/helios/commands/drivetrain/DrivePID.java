@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.PIDSource;
  * Drives the robot a specified distance in a specified direction with specified power using PID.
  */
 public class DrivePID extends CommandBase {
-	private double xTargetInput;
+//	private double xTargetInput;
 	private double yTargetInput;
-	private PIDController xController;
+//	private PIDController xController;
 	private PIDController yController;
 	private double maxSpeed;
 	
+	/*
 	private PIDSource xInput = new PIDSource() {
 		public double pidGet() {
 			return drivetrain.getCenterEncoder().getDistance();
@@ -24,6 +25,8 @@ public class DrivePID extends CommandBase {
 	};
 	
 	private PIDOutput xOutput = new PIDOutput() {
+		
+		private double prevSpeed = 0.0;
 		
 		public void pidWrite(double output) {
 			if(Math.abs(output) > Math.abs(maxSpeed)) {
@@ -34,9 +37,19 @@ public class DrivePID extends CommandBase {
 					output = maxSpeed;
 				}
 			}
+			if (Math.abs(prevSpeed - output) > 0.05) {
+				if (output > prevSpeed) {
+					output = prevSpeed + 0.05;
+				}
+				else {
+					output = prevSpeed - 0.05;
+				}
+			}
+			prevSpeed = output;
 			drivetrain.driveCenter(output, output);
 		}
 	};
+	*/
 	private PIDSource yInput = new PIDSource() {
 		public double pidGet() {
 			return drivetrain.getRightEncoder().getDistance();
@@ -67,26 +80,26 @@ public class DrivePID extends CommandBase {
 	public DrivePID(double maxSpeedInput, double xTargetInput, double yTargetInput) {
 		requires(drivetrain);
 		maxSpeed = maxSpeedInput;
-		this.xTargetInput = xTargetInput;
+//		this.xTargetInput = xTargetInput;
 		this.yTargetInput = yTargetInput;
 		// For some reason, inputting an encoder as the PIDSource doesn't work properly, even if the encoder has it PIDSourceParamater set to Distance.
 		// Instead, make a PIDSource that returns encoder.getDistance() in its pidGet function, and it'll work fine.
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, xInput, xOutput);
-		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, yInput, yOutput);
-		xController.setAbsoluteTolerance(0.1);
+//		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, xInput, xOutput);
+		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I + 0.01, Variables.driveyPID_D, yInput, yOutput);
+//		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
 	
 	public void updateSettings() {
-		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, xInput, xOutput);
+//		xController = new PIDController(Variables.drivexPID_P, Variables.drivexPID_I, Variables.drivexPID_D, xInput, xOutput);
 		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I, Variables.driveyPID_D, yInput, yOutput);
-		xController.setAbsoluteTolerance(0.1);
+//		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		xController.setSetpoint(xTargetInput + drivetrain.getCenterEncoder().getDistance());
+//		xController.setSetpoint(xTargetInput + drivetrain.getCenterEncoder().getDistance());
 		yController.setSetpoint(yTargetInput + drivetrain.getRightEncoder().getDistance());
 		//xController.enable();
 		yController.enable();
@@ -99,12 +112,13 @@ public class DrivePID extends CommandBase {
 	
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return xController.onTarget() && yController.onTarget();
+//		return xController.onTarget() && yController.onTarget();
+		return yController.onTarget();
 	}
 	
 	// Called once after isFinished returns true
 	protected void end() {
-		xController.disable();
+//		xController.disable();
 		yController.disable();
 	}
 	

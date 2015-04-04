@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class RunElevator extends CommandBase {
 	
+	private double target;
+	
 	/**
 	 * Runs the elevator based on Driver Control. Better. Hopefully.
 	 */
@@ -24,19 +26,48 @@ public class RunElevator extends CommandBase {
     protected void execute() {
     	int codriverPOV = oi.getController(ControllerMap.codriverElevatorController).getPOV();
     	if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorUp)) {
+    		target = -1000;
     		elevator.set(Variables.elevatorMultiplier);
     	}
     	else if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorDown)) {
+    		target = -1000;
     		elevator.set(-1.0 * Variables.elevatorMultiplier);
+    		if (elevator.getBottomSwitch()) {
+    			elevator.resetEncoder();
+    		}
     	}
     	else if (codriverPOV == ControllerMap.codriverElevatorUpPOV[0] || codriverPOV == ControllerMap.codriverElevatorUpPOV[1] || codriverPOV == ControllerMap.codriverElevatorUpPOV[2]) {
+    		target = -1000;
     		elevator.set(Variables.elevatorMultiplier);
     	}
     	else if (codriverPOV == ControllerMap.codriverElevatorDownPOV[0] || codriverPOV == ControllerMap.codriverElevatorDownPOV[1] || codriverPOV == ControllerMap.codriverElevatorDownPOV[2]) {
+    		target = -1000;
     		elevator.set(-1.0 * Variables.elevatorMultiplier);
+    		if (elevator.getBottomSwitch()) {
+    			elevator.resetEncoder();
+    		}
     	}
     	else {
-    		elevator.set(0.0);
+    		if (target < -500.0) {
+    			elevator.set(0.0);
+    			target = -400;
+    		}
+    		else if (target < -300) {
+    			target = -200;
+    		}
+    		else if (target < -100) {
+    			target = elevator.getPosition();
+    		}
+    		else {
+	    		if (elevator.getPosition() < target) {
+	    			double power = ((target - elevator.getPosition()) * 8);
+	    			System.out.println("Elevator Power: " + power);
+	    			elevator.setWithoutStop(power);
+	    		}
+	    		else {
+	    			elevator.set(0.0);
+	    		}
+    		}
     	}
     }
 

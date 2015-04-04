@@ -1,5 +1,6 @@
 package com._2491nomythic.helios.subsystems;
 
+import com._2491nomythic.helios.commands.elevator.KeepElevatorFromFalling;
 import com._2491nomythic.helios.commands.elevator.RunElevator;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
@@ -21,6 +22,7 @@ public class Elevator extends PIDSubsystem {
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
 	private double currentTarget = 0.0;
+	private KeepElevatorFromFalling holdElevator;
 	
 	// Initialize your subsystem here
 	
@@ -52,6 +54,8 @@ public class Elevator extends PIDSubsystem {
 		limitBottom = new DigitalInput(Constants.elevatorLimitBottomChannel);
 		toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel);
 		toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel);
+		
+		holdElevator = new KeepElevatorFromFalling();
 	}
 	
 	public void initDefaultCommand() {
@@ -67,6 +71,9 @@ public class Elevator extends PIDSubsystem {
 	}
 	
 	protected void usePIDOutput(double output) {
+		if (holdElevator.isRunning()) {
+			holdElevator.cancel();
+		}
 		internalSet(output);
 	}
 	
@@ -75,6 +82,20 @@ public class Elevator extends PIDSubsystem {
 	 * @param speed The power and direction being applied to the elevator.
 	 */
 	public void set(double speed) {
+		if (usingPID) {
+			this.disable();
+			usingPID = false;
+		}
+		if (holdElevator.isRunning()) {
+			holdElevator.cancel();
+		}
+		internalSet(speed);
+	}
+	
+	/**
+	 * Set command for use by keepElevatorFromFalling ONLY.  Don't use otherwise.
+	 */
+	public void setWithoutStop(double speed) {
 		if (usingPID) {
 			this.disable();
 			usingPID = false;
@@ -96,12 +117,18 @@ public class Elevator extends PIDSubsystem {
 		}
 		else if (getPosition() < 0.5) {
 			double cap = getPosition() + 0.5;
+			if (cap < 0.5) {
+				cap = 0.5;
+			}
 			if(-1 * speed > cap) {
 				speed = -1.0 * cap;
 			}
 		}
 		else if (getPosition() > Constants.elevatorMaxPosition - 0.5) {
 			double cap =  Constants.elevatorMaxPosition -  getPosition() + 0.5;
+			if (cap < 0.5) {
+				cap = 0.5;
+			}
 			if (speed > cap) {
 				speed = cap;
 			}
@@ -112,10 +139,13 @@ public class Elevator extends PIDSubsystem {
 	}
 	
 	/**
-	 * Same as set(0).  It's just more obvious what it does.
+	 * Stops the elevator and starts KeepElevatorFromFalling.
 	 */
 	public void stop() {
-		set(0.0);
+		setWithoutStop(0.0);
+		if (!holdElevator.isRunning()) {
+			holdElevator.start();
+		}
 	}
 	
 	/**

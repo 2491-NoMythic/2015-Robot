@@ -12,8 +12,10 @@ import com._2491nomythic.helios.commands.TextPlayRobotScript;
 import com._2491nomythic.helios.commands.TextRecordRobotScript;
 import com._2491nomythic.helios.commands.arm.ManuallyResetArmEncoder;
 import com._2491nomythic.helios.commands.arm.RunArmWithPID;
+import com._2491nomythic.helios.commands.autonomous.DoNothing;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
+import com._2491nomythic.helios.commands.autonomous.OneToteAndOneBin;
 import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.autonomous.TwoTotesAndOneBin;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
@@ -55,9 +57,11 @@ public class Robot extends IterativeRobot {
 		autoChooser = new SendableChooser();
 		autoChooser.addObject("Pick up bin from step", new PickupBinsFromStep());
 		autoChooser.addDefault("Grab two totes and a bin", new TwoTotesAndOneBin(false));
-		autoChooser.addObject("Grab two totes and a bin and set them down", new TwoTotesAndOneBin(true));
+		autoChooser.addObject("Grab one tote and a bin from center", new OneToteAndOneBin(true));
+		autoChooser.addObject("Grab one tote and a bin from left", new OneToteAndOneBin(false));
 		autoChooser.addObject("Drive into auto zone", new DriveIntoAutoZone());
 		autoChooser.addObject("Drive into auto zone and drop item", new DriveIntoAutoZoneAndDrop());
+		autoChooser.addObject("Do Nothing", new DoNothing());
 		SmartDashboard.putData("Autonomous", autoChooser);
 		SmartDashboard.putData("Bottom out Elevator", new BottomElevator(-1.0));
 		SmartDashboard.putData("Reset Side Encoders", new ResetSideEncoders());
@@ -69,6 +73,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Play Driver Joystick Inputs", new TextPlayRobotScript("TestScript"));
 		SmartDashboard.putData("Hold Elevator", new KeepElevatorFromFalling());
 		SmartDashboard.putData("Elevator PID Test", new ElevatePID(1.0));
+		System.out.println("Robot Init Completed");
 	}
 	
 	public void disabledPeriodic() {
@@ -76,8 +81,8 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void autonomousInit() {
-		// schedule the autonomous command (example)
-		autoCommand = (Command) autoChooser.getSelected();
+//		autoCommand = (Command) autoChooser.getSelected();
+		autoCommand = new OneToteAndOneBin(false);
 		autoCommand.start();
 	}
 	
