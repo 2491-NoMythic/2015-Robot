@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
 	
 	public void autonomousInit() {
 //		autoCommand = (Command) autoChooser.getSelected();
-		autoCommand = new OneToteAndOneBin(false);
+		autoCommand = new PickupBinsFromStep();
 		autoCommand.start();
 	}
 	

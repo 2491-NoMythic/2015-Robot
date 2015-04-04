@@ -44,7 +44,7 @@ public class PickupBinsFromStep extends CommandBase {
 		switch (state) {
 			case 0:
 				lowerToBin.start();
-				backUpToStart.start();
+//				backUpToStart.start();
 				state = 1;
 				break;
 			case 1:
