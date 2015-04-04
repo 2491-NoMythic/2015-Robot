@@ -29,7 +29,7 @@ public class PickupBinsFromStep extends CommandBase {
 	public PickupBinsFromStep() {
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinFromStepPosition);
-		driveToBin = new DriveTime(0.25, Constants.nullX, 0.6);
+		driveToBin = new DriveTime(0.25, Constants.nullX, 0.8);
 		pickUpBin = new RunArmWithPID(Variables.holdBinDistance);
 		makeBinVertical = new RunGrabberTime(1.0, 3.0);
 		driveIntoAutoZone = new DriveTime(0.5, Constants.nullX, -1.85);
