@@ -2,12 +2,16 @@ package com._2491nomythic.helios.commands.arm;
 
 import com._2491nomythic.helios.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.Timer;
+
 
 /**
  * Sets the Arm to the specified position.
  */
 public class RunArmWithPID extends CommandBase {
 	double target;
+	private Timer timer;
+	private double startPos;
 	
 	/**
 	 * Sets the Arm to the specified position.
@@ -17,16 +21,28 @@ public class RunArmWithPID extends CommandBase {
 		// Use requires() here to declare subsystem dependencies
 		requires(arm);
 		target = targetPosition;
+		timer = new Timer();
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		arm.setPID(target);
 		arm.enable();
+		timer.start();
+		timer.reset();
+		startPos = arm.getPosition(); 
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		if(timer.get() > 0.2) {
+			timer.stop();
+			timer.reset();
+			if(startPos == arm.getPosition()) {
+				this.cancel();
+			}
+			
+		}
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

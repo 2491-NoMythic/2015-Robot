@@ -6,6 +6,7 @@ import com._2491nomythic.helios.settings.Variables;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Drives the robot a specified distance in a specified direction with specified power using PID.
@@ -16,7 +17,8 @@ public class DrivePID extends CommandBase {
 //	private PIDController xController;
 	private PIDController yController;
 	private double maxSpeed;
-	
+	private Timer timer;
+	private double rightStartPos;
 	/*
 	private PIDSource xInput = new PIDSource() {
 		public double pidGet() {
@@ -103,10 +105,19 @@ public class DrivePID extends CommandBase {
 		yController.setSetpoint(yTargetInput + drivetrain.getRightEncoder().getDistance());
 		//xController.enable();
 		yController.enable();
+		rightStartPos = drivetrain.getRightEncoder().getDistance();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		if(timer.get() > 0.2) {
+			timer.stop();
+			timer.reset();
+			if(rightStartPos == drivetrain.getRightEncoder().getDistance()) {
+				yController.disable();
+				this.cancel();
+			}
+		}	
 		
 	}
 	
