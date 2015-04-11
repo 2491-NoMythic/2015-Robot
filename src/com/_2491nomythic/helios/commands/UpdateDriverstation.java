@@ -1,6 +1,5 @@
 package com._2491nomythic.helios.commands;
 
-import com._2491nomythic.helios.Robot;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
 import com._2491nomythic.util.FileData;

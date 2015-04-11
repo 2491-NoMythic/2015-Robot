@@ -1,7 +1,6 @@
 package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
-import com._2491nomythic.helios.commands.elevator.ElevateTime;
 import com._2491nomythic.helios.settings.Constants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

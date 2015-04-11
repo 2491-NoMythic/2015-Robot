@@ -4,8 +4,6 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 import com._2491nomythic.helios.settings.Variables;
 
-import edu.wpi.first.wpilibj.Joystick;
-
 /**
  * Runs the elevator based on Driver Control. Better. Hopefully.
  */
