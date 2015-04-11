@@ -10,6 +10,8 @@ public class ArmPositionSet extends CommandBase {
 	
 	private double armStickPos;
 	private boolean hasBeenStopped;
+	private double target;
+	private double tolerance;
 	private KeepArmFromFalling stopArm;
 	private int reverse = -1;
 	
@@ -25,6 +27,8 @@ public class ArmPositionSet extends CommandBase {
 	protected void initialize() {
 		reverse = -1;
 		hasBeenStopped = false;
+		tolerance = 0.1;
+		target = arm.getPosition();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -49,6 +53,7 @@ public class ArmPositionSet extends CommandBase {
 					reverse = 1;
 				}
 				stopArm.cancel();
+				//replace with arm.set(0.0);?
 			}
 			arm.set(-1 * armStickPos * multiplier * reverse);
 			hasBeenStopped = false;
@@ -56,7 +61,37 @@ public class ArmPositionSet extends CommandBase {
 		else if (!(hasBeenStopped)) {
 			arm.stop();
 			hasBeenStopped = true;
-			stopArm.start();
+     		stopArm.start();
+//			if (arm.getPosition() > 0) {
+//				if (arm.get() == 0) {
+//					if (arm.getPosition() > target + tolerance) {
+//						arm.set((target - arm.getPosition()) / 10);
+//					}
+//				}
+//				else {
+//					if (arm.getPosition() < target) {
+//						arm.stop();
+//					}
+//					else {
+//						arm.set((target - arm.getPosition()) / 10);
+//					}
+//				}
+//			}
+//			else {
+//				if (arm.get() == 0) {
+//					if (arm.getPosition() < target - tolerance) {
+//						arm.set((target - arm.getPosition()) / 10);
+//					}
+//				}
+//				else {
+//					if (arm.getPosition() > target) {
+//						arm.stop();
+//					}
+//					else {
+//						arm.set((target - arm.getPosition()) / 10);
+//					}
+//				}
+//			}
 		}
 	}
 	
