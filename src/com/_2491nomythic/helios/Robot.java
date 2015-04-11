@@ -16,7 +16,7 @@ import com._2491nomythic.helios.commands.autonomous.DoNothing;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
 import com._2491nomythic.helios.commands.autonomous.OneToteAndOneBin;
-import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
+import com._2491nomythic.helios.commands.autonomous.PickupBinFromStep;
 import com._2491nomythic.helios.commands.autonomous.TwoTotesAndOneBin;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Rescan Gyro", new FixGyroIssues());
 		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
 		autoChooser = new SendableChooser();
-		autoChooser.addObject("Pick up bin from step", new PickupBinsFromStep());
+		autoChooser.addObject("Pick up bin from step", new PickupBinFromStep());
 		autoChooser.addDefault("Grab two totes and a bin", new TwoTotesAndOneBin(false));
 		autoChooser.addObject("Grab one tote and a bin from center", new OneToteAndOneBin(true));
 		autoChooser.addObject("Grab one tote and a bin from left", new OneToteAndOneBin(false));
@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
 	
 	public void autonomousInit() {
 //		autoCommand = (Command) autoChooser.getSelected();
-		autoCommand = new PickupBinsFromStep();
+		autoCommand = new PickupBinFromStep();
 		autoCommand.start();
 	}
 	

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
  */
-public class PickupBinsFromStep extends CommandBase {
+public class PickupBinFromStep extends CommandBase {
 	private DriveTime backUpToStart;
 	private RunArmWithPID lowerToBin;
 	private DriveTime driveToBin;
@@ -26,7 +26,7 @@ public class PickupBinsFromStep extends CommandBase {
 	/**
 	 * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
 	 */
-	public PickupBinsFromStep() {
+	public PickupBinFromStep() {
 		arm.setMaxPIDSpeed(1);
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinFromStepPosition);
