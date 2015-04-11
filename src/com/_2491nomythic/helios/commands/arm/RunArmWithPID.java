@@ -13,6 +13,7 @@ public class RunArmWithPID extends CommandBase {
 	private Timer timer;
 	private double startPos;
 	private boolean differenceIsNegative;
+	private boolean hasRunOnce = false;
 	
 	/**
 	 * Sets the Arm to the specified position.
@@ -37,17 +38,13 @@ public class RunArmWithPID extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(timer.get() > 0.2) {
+		if(timer.get() > 0.2 && !hasRunOnce) {
 			timer.stop();
-			timer.reset();
-			if(differenceIsNegative && arm.getRate() > 0) {//this means the encoder is reversed, if the difference is negative, the arm power should be negative as well since it is going back
-				this.cancel();
-			}
-			else if(!differenceIsNegative && arm.getRate() < 0) {
-				this.cancel();
-			}
-			if(startPos == arm.getPosition()) {
-				this.cancel();
+			hasRunOnce = true;
+			if(startPos == arm.getPosition() || (differenceIsNegative && arm.getRate() > 0) || (!differenceIsNegative && arm.getRate() < 0)) {
+				this.cancel(); //arm shouldn't be at same position- cancel
+							   //if our difference is negative, the motor input should also be negative
+							   //if our difference is positive the motor input should also be positive
 			}
 			
 		}
