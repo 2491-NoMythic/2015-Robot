@@ -19,7 +19,6 @@ public class DrivePID extends CommandBase {
 	private double maxSpeed;
 	private Timer timer;
 	private double rightStartPos;
-	private boolean hasRunOnce;
 	/*
 	private PIDSource xInput = new PIDSource() {
 		public double pidGet() {
@@ -91,7 +90,6 @@ public class DrivePID extends CommandBase {
 		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I + 0.01, Variables.driveyPID_D, yInput, yOutput);
 //		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
-		hasRunOnce = false;
 	}
 	
 	public void updateSettings() {
@@ -112,9 +110,9 @@ public class DrivePID extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(timer.get() > 0.2 && !hasRunOnce) {
+		if(timer.get() > 0.2) {
+			timer.reset();
 			timer.stop();
-			hasRunOnce = true;
 			if(rightStartPos == drivetrain.getRightEncoder().getDistance()) {
 				yController.disable();
 				this.cancel();

@@ -53,7 +53,9 @@ public class ArmPositionSet extends CommandBase {
 					reverse = 1;
 				}
 				stopArm.cancel();
-				//replace with arm.set(0.0);?
+				//replace with arm.set(0.0);? or just remove the cancel?
+				
+				
 			}
 			arm.set(-1 * armStickPos * multiplier * reverse);
 			hasBeenStopped = false;

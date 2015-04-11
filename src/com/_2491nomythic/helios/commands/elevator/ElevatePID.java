@@ -9,7 +9,6 @@ public class ElevatePID extends CommandBase {
 	private double target;
 	private Timer timer;
 	private double startPos;
-	private boolean hasRunOnce;
 	
 	public ElevatePID(double target) {
 		requires(elevator);
@@ -21,13 +20,12 @@ public class ElevatePID extends CommandBase {
 		timer.start();
 		timer.reset();
 		startPos = elevator.getPosition();
-		hasRunOnce = false;
 	}
 
 	protected void execute() {
-		if(timer.get() > 0.2 && !hasRunOnce) {
+		if(timer.get() > 0.2) {
+			timer.reset();
 			timer.stop();
-			hasRunOnce = true;
 			if(startPos == elevator.getPosition()) {
 				this.cancel();
 			}
