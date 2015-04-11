@@ -10,8 +10,8 @@ public class ArmPositionSet extends CommandBase {
 	
 	private double armStickPos;
 	private boolean hasBeenStopped;
-	private double target;
-	private double tolerance;
+//	private double target;
+//	private double tolerance;
 	private KeepArmFromFalling stopArm;
 	private int reverse = -1;
 	
@@ -27,8 +27,8 @@ public class ArmPositionSet extends CommandBase {
 	protected void initialize() {
 		reverse = -1;
 		hasBeenStopped = false;
-		tolerance = 0.1;
-		target = arm.getPosition();
+//		tolerance = 0.1;
+//		target = arm.getPosition();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
