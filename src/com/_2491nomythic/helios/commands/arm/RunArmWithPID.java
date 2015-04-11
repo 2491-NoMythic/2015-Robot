@@ -12,7 +12,6 @@ public class RunArmWithPID extends CommandBase {
 	double target;
 	private Timer timer;
 	private double startPos;
-	private boolean differenceIsNegative;
 	
 	/**
 	 * Sets the Arm to the specified position.
@@ -32,7 +31,6 @@ public class RunArmWithPID extends CommandBase {
 		timer.start();
 		timer.reset();
 		startPos = arm.getPosition(); 
-		differenceIsNegative = 0 > target - startPos;
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -40,11 +38,8 @@ public class RunArmWithPID extends CommandBase {
 		if(timer.get() > 0.2) {
 			timer.reset();
 			timer.stop();
-
-			if(startPos == arm.getPosition() || (differenceIsNegative && arm.getRate() > 0) || (!differenceIsNegative && arm.getRate() < 0)) {
+			if(startPos == arm.getPosition() || (arm.getRate() > 0 != arm.get() > 0)) {
 				this.cancel(); //arm shouldn't be at same position- cancel
-							   //if our difference is negative, the motor input should also be negative
-							   //if our difference is positive the motor input should also be positive
 			}
 			
 		}

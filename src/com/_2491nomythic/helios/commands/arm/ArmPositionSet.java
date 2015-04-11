@@ -3,6 +3,8 @@ package com._2491nomythic.helios.commands.arm;
 import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.settings.ControllerMap;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  * Sets the position of the arm during Tele-Op.
  */
@@ -14,6 +16,7 @@ public class ArmPositionSet extends CommandBase {
 //	private double tolerance;
 	private KeepArmFromFalling stopArm;
 	private int reverse = -1;
+	private Timer timer;
 	
 	/**
 	 * Sets the position of the arm during Tele-Op.
@@ -21,14 +24,16 @@ public class ArmPositionSet extends CommandBase {
 	public ArmPositionSet() {
 		requires(arm);
 		stopArm = new KeepArmFromFalling(0.1);
+		timer = new Timer();
 	}
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		reverse = -1;
 		hasBeenStopped = false;
+		timer.start();
+		timer.reset();
 //		tolerance = 0.1;
-//		target = arm.getPosition();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -62,12 +67,24 @@ public class ArmPositionSet extends CommandBase {
 		}
 		else if (!(hasBeenStopped)) {
 			arm.stop();
+	//		target = arm.getPosition();
 			hasBeenStopped = true;
      		stopArm.start();
+//     		timer.reset();
 //			if (arm.getPosition() > 0) {
 //				if (arm.get() == 0) {
 //					if (arm.getPosition() > target + tolerance) {
 //						arm.set((target - arm.getPosition()) / 10);
+//     		if(timer.get() > 0.2) {
+//				timer.reset();
+//				timer.stop();
+//				if(startPos == arm.getPosition() || (arm.getRate() > 0 != arm.get() > 0)) {
+//					this.cancel(); //arm shouldn't be at same position- cancel
+//								   //if our difference is negative, the motor input should also be negative
+//								   //if our difference is positive the motor input should also be positive
+//				}
+//				
+//			}
 //					}
 //				}
 //				else {
@@ -76,6 +93,16 @@ public class ArmPositionSet extends CommandBase {
 //					}
 //					else {
 //						arm.set((target - arm.getPosition()) / 10);
+//     		if(timer.get() > 0.2) {
+//				timer.reset();
+//				timer.stop();
+//				if((arm.getRate() > 0 != arm.get() > 0)) {
+//					this.cancel(); //arm shouldn't be at same position- cancel
+//								   //if our difference is negative, the motor input should also be negative
+//								   //if our difference is positive the motor input should also be positive
+//				}
+				
+//			}
 //					}
 //				}
 //			}
@@ -83,6 +110,15 @@ public class ArmPositionSet extends CommandBase {
 //				if (arm.get() == 0) {
 //					if (arm.getPosition() < target - tolerance) {
 //						arm.set((target - arm.getPosition()) / 10);
+//     		if(timer.get() > 0.2) {
+//				timer.reset();
+//				timer.stop();
+//				if( (arm.getRate() > 0 != arm.get() > 0)) {
+//					this.cancel(); //arm shouldn't be at same position- cancel
+//								   
+//				}
+//				
+//			}
 //					}
 //				}
 //				else {
@@ -91,6 +127,14 @@ public class ArmPositionSet extends CommandBase {
 //					}
 //					else {
 //						arm.set((target - arm.getPosition()) / 10);
+//     		if(timer.get() > 0.2) {
+//				timer.reset();
+//				if((arm.getRate() > 0 != arm.get() > 0)) {
+//					this.cancel(); //arm shouldn't be at same position- cancel
+//								   
+//				}
+				
+//			}
 //					}
 //				}
 //			}
