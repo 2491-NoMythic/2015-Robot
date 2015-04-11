@@ -13,7 +13,7 @@ public class RunArmWithPID extends CommandBase {
 	private Timer timer;
 	private double startPos;
 	private boolean differenceIsNegative;
-	private boolean hasRunOnce = false;
+	private boolean hasRunOnce;
 	
 	/**
 	 * Sets the Arm to the specified position.
@@ -24,6 +24,7 @@ public class RunArmWithPID extends CommandBase {
 		requires(arm);
 		target = targetPosition;
 		timer = new Timer();
+		hasRunOnce = false;
 	}
 	
 	// Called just before this Command runs the first time
