@@ -34,6 +34,11 @@ public class RunGrabber extends CommandBase {
 					reverse = 1;
 				}
 			}
+			
+			if (!oi.getButton(ControllerMap.ArmController, ControllerMap.FasterGrabberButtonA) && !oi.getButton(ControllerMap.ArmController, ControllerMap.FasterArmButtonB)) {
+				speed *= 0.5;
+			}
+			
 			grabber.set(speed *  reverse);
 			hasBeenStopped = false;
 		}

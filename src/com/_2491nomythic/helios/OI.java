@@ -7,12 +7,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.ControllerMap;
-import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveWithArm;
 import com._2491nomythic.helios.commands.elevator.ElevateTime;
-import com._2491nomythic.helios.commands.elevator.GetNextToteTime;
 import com._2491nomythic.helios.commands.elevator.PickUpNextTote;
-import com._2491nomythic.helios.commands.elevator.PlatformStatus;
 import com._2491nomythic.util.CartesianCoord;
 import com._2491nomythic.util.DigitalInputButton;
 import com._2491nomythic.util.JoystickAxisDeadzoneButton;
@@ -49,8 +46,8 @@ public class OI {
 		
 		
 		
-		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
-		moveArmToPoint.whenPressed(new RunArmWithPID(hypotheticalMoveArmValue));
+//		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
+//		moveArmToPoint.whenPressed(new RunArmWithPID(hypotheticalMoveArmValue));
 		
 		getNextTote = new JoystickButton(controllers[ControllerMap.getNextToteController], ControllerMap.getNextToteButton);
 		getNextTote.whenPressed(new PickUpNextTote());

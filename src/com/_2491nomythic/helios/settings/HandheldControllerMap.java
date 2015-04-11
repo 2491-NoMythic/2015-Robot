@@ -25,13 +25,15 @@ public class HandheldControllerMap {
 	
 	
 	// Buttons
-	// Controller 1: Encoder Zero Button
+	// Controller 1: Faster Arm Button
 	public static final int FasterArmButtonA = 6;
 	public static final int FasterArmButtonB = 5;
-	
+	// Controller 1: Faster Grabber Button
+	public static final int FasterGrabberButtonA = 8;
+	public static final int FasterGrabberButtonB = 7;
 	// Controller 1: Move To A Target Position Button
-	public static final int setToTargetController = 1;
-	public static final int setToTargetButton = 8;
+//	public static final int setToTargetController = 1;
+//	public static final int setToTargetButton = 8;
 	// Moving the elevator
 	public static final int moveUpOneToteController = 1;
 	public static final int moveUpOneToteButton = 4;
