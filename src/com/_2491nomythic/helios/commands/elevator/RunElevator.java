@@ -36,11 +36,11 @@ public class RunElevator extends CommandBase {
     	}
     	else if (codriverPOV == ControllerMap.codriverElevatorUpPOV[0] || codriverPOV == ControllerMap.codriverElevatorUpPOV[1] || codriverPOV == ControllerMap.codriverElevatorUpPOV[2]) {
     		target = -1000;
-    		elevator.set(1.0 * Variables.elevatorMultiplier);
+    		elevator.set(Variables.elevatorMultiplier);
     	}
     	else if (codriverPOV == ControllerMap.codriverElevatorDownPOV[0] || codriverPOV == ControllerMap.codriverElevatorDownPOV[1] || codriverPOV == ControllerMap.codriverElevatorDownPOV[2]) {
     		target = -1000;
-    		elevator.set(Variables.elevatorMultiplier);
+    		elevator.set(-1.0 * Variables.elevatorMultiplier);
     		if (elevator.getBottomSwitch()) {
     			elevator.resetEncoder();
     		}
