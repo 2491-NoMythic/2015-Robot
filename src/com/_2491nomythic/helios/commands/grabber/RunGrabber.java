@@ -28,10 +28,10 @@ public class RunGrabber extends CommandBase {
 		if (speed != 0) {
 			if (hasBeenStopped) {
 				if (arm.getPosition() > 10) {
-					reverse = -1;
+					reverse = 1;
 				}
 				else if (arm.getPosition() < -10) {
-					reverse = 1;
+					reverse = -1;
 				}
 			}
 			
