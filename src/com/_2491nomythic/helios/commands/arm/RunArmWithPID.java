@@ -52,6 +52,7 @@ public class RunArmWithPID extends CommandBase {
 	
 	// Called once after isFinished returns true
 	protected void end() {
+		arm.disable();
 		arm.stop();
 	}
 	

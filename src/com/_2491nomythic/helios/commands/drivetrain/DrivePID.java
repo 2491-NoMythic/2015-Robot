@@ -113,7 +113,7 @@ public class DrivePID extends CommandBase {
 		if(timer.get() > 0.2) {
 			timer.reset();
 			timer.stop();
-			if(rightStartPos == drivetrain.getRightEncoder().getDistance()) {
+			if(rightStartPos == drivetrain.getRightEncoder().getDistance() || drivetrain.getRightEncoder().getRate() > 0 != drivetrain.getCurrentRightSpeed() > 0) {
 				yController.disable();
 				this.cancel();
 			}

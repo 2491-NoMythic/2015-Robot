@@ -26,7 +26,7 @@ public class ElevatePID extends CommandBase {
 		if(timer.get() > 0.2) {
 			timer.reset();
 			timer.stop();
-			if(startPos == elevator.getPosition()) {
+			if(startPos == elevator.getPosition() || elevator.getRate() > 0 != elevator.get() > 0) {
 				this.cancel();
 			}
 		}
