@@ -31,7 +31,7 @@ public class OneToteAndOneBin extends CommandBase {
 		raiseToteUp = new ElevateTime(0.75, Constants.upOneToteTime); // Lift up tote
 		driveToPickUpBin = new DrivePID(0.5, Constants.nullX, -1.3); // Drive back with the tote so we can pick up the bin
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto); // Lower arm to position to actually pick up bin
-		driveToHookBin = new DrivePID(0.3, Constants.nullX, 0.75); // Drive forward to hook tote
+		driveToHookBin = new DrivePID(0.3, Constants.nullX, -0.75); // Drive back to hook tote
 		driveBackToHookBin = new DriveTime(-0.3, Constants.nullX, 0.5); 
 		pickUpBin = new RunArmWithPID(Variables.holdBinDistance); // Lift the arm back up
 		driveToClearScoringPlatform = new DrivePID(0.4, Constants.nullX, 8.0);

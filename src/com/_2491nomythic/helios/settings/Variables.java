@@ -36,11 +36,11 @@ public class Variables {
 	public static double pickup2ndBinYDistance;
 	public static double unhookBinXDistance = 0.0;
 	public static double unhookBinYDistance = 0.167;
-	public static double pickUpBinFromStepPosition = 76;
+	public static double pickUpBinFromStepPosition = 69;
 	public static double reverseHookBinPosition = 71;
 	public static double holdBinDistance = 0.0;
 	public static double pickUpBinPosTwoToteAuto = 76.51;
-	public static double putDownBinBackwards = -80; //temporary guess.
+	public static double putDownBinBackwards = -76; //temporary guess.
 	
 	// Autonomous Drive Power Variables
 	public static double pickupBinDrivePower = 0.5;

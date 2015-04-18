@@ -39,6 +39,7 @@ public class RunArmWithPID extends CommandBase {
 			timer.reset();
 			timer.stop();
 			if(startPos == arm.getPosition() || (arm.getRate() > 0 != arm.get() > 0)) {
+				System.out.println("ARM ENCODER MESSED UP");
 				this.cancel(); //arm shouldn't be at same position- cancel
 			}
 			

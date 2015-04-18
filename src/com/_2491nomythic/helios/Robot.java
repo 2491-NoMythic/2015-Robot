@@ -17,6 +17,7 @@ import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZone;
 import com._2491nomythic.helios.commands.autonomous.DriveIntoAutoZoneAndDrop;
 import com._2491nomythic.helios.commands.autonomous.OneToteAndOneBin;
 import com._2491nomythic.helios.commands.autonomous.PickupBinFromStep;
+import com._2491nomythic.helios.commands.autonomous.PickupBinsFromStep;
 import com._2491nomythic.helios.commands.autonomous.TwoTotesAndOneBin;
 import com._2491nomythic.helios.commands.drivetrain.AbsoluteDrive;
 import com._2491nomythic.helios.commands.drivetrain.FixGyroIssues;
@@ -56,6 +57,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
 		autoChooser = new SendableChooser();
 		autoChooser.addObject("Pick up bin from step", new PickupBinFromStep());
+		autoChooser.addObject("Pick up two bins from step", new PickupBinsFromStep());
 		autoChooser.addDefault("Grab two totes and a bin", new TwoTotesAndOneBin(false));
 		autoChooser.addObject("Grab one tote and a bin from center", new OneToteAndOneBin(true));
 		autoChooser.addObject("Grab one tote and a bin from left", new OneToteAndOneBin(false));
@@ -73,6 +75,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Play Driver Joystick Inputs", new TextPlayRobotScript("TestScript"));
 		SmartDashboard.putData("Hold Elevator", new KeepElevatorFromFalling());
 		SmartDashboard.putData("Elevator PID Test", new ElevatePID(1.0));
+		SmartDashboard.putData("Two Bin Auto Test", new PickupBinsFromStep());
 		System.out.println("Robot Init Completed");
 	}
 	
@@ -81,8 +84,8 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void autonomousInit() {
-//		autoCommand = (Command) autoChooser.getSelected();
-		autoCommand = new PickupBinFromStep();
+		autoCommand = (Command) autoChooser.getSelected();
+		//autoCommand = new PickupBinFromStep();
 		autoCommand.start();
 	}
 	

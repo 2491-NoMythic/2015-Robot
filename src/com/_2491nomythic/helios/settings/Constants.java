@@ -52,8 +52,8 @@ public class Constants {
 	public static final double centerMotorMultiplier = 1.17;
 	public static final boolean armEncoderReversed = true;
 	public static final double armEncoderToDegrees = 0.23076923076923076923076923076923; // 0.4 for helios if we don't change the gearing
-	public static final double armMinPosition = 0.0;
-	public static final double armMaxPosition = 180.0;
+	public static final double armMinPosition = -90.0;
+	public static final double armMaxPosition = 90.0;
 	public static final double armLength = 4.833;
 	public static final boolean elevatorEncoderReversed = false;
 	public static final double elevatorEncoderToFeet = 0.00265775786231219618505436443707;

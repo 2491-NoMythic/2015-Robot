@@ -24,15 +24,15 @@ public class PickupBinsFromStep extends CommandBase {
 	 * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
 	 */
 	public PickupBinsFromStep() {
-		arm.setMaxPIDSpeed(1);
+		arm.setMaxPIDSpeed(1.0);
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinFromStepPosition);
 		driveToBin = new DriveTime(0.25, Constants.nullX, 0.8);
 		pickUpBin = new RunArmWithPID(Variables.holdBinDistance);
-		makeBinVertical = new RunGrabberTime(1.0, 3.0);
+		makeBinVertical = new RunGrabberTime(0.5, 1.0);
 		putDownBin = new RunArmWithPID(Variables.putDownBinBackwards);
-		unhookBin = new RunGrabberTime(-1.0, 2.0);
-		driveToNextBin = new DriveTime(0.5, 1, Constants.nullY);
+		unhookBin = new RunGrabberTime(-0.5, 2.0);
+		driveToNextBin = new DriveTime(0.5, -1.7, Constants.nullY); //CHANGE THIS TO -1 TO GO LEFT TO THE NEXT BIN
 		driveToBinAgain = new DriveTime(0.25, Constants.nullX, 0.5);
 		driveIntoAutoZone = new DriveTime(0.5, Constants.nullX, -1.85);
 		timer = new Timer();
@@ -43,10 +43,10 @@ public class PickupBinsFromStep extends CommandBase {
 	}
 
 	protected void execute() {
+		System.out.println(state);
 		switch (state) {
 			case 0:
 				lowerToBin.start();
-//				backUpToStart.start();
 				state = 1;
 				break;
 			case 1:
@@ -128,7 +128,7 @@ public class PickupBinsFromStep extends CommandBase {
 	}
 
 	protected boolean isFinished() {
-		return state == 6 && !makeBinVertical.isRunning() && !pickUpBin.isRunning();
+		return state == 12 && !makeBinVertical.isRunning() && !pickUpBin.isRunning();
 	}
 
 	protected void end() {		
