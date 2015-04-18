@@ -37,6 +37,7 @@ public class Variables {
 	public static double unhookBinXDistance = 0.0;
 	public static double unhookBinYDistance = 0.167;
 	public static double pickUpBinFromStepPosition = 76;
+	public static double reverseHookBinPosition = 71;
 	public static double holdBinDistance = 0.0;
 	public static double pickUpBinPosTwoToteAuto = 76.51;
 	public static double putDownBinBackwards = -80; //temporary guess.
