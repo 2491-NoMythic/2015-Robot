@@ -24,7 +24,6 @@ public class PickupBinsFromStep extends CommandBase {
 	 * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
 	 */
 	public PickupBinsFromStep() {
-		arm.setMaxPIDSpeed(1.0);
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinFromStepPosition);
 		driveToBin = new DriveTime(0.25, Constants.nullX, 0.8);
@@ -39,6 +38,7 @@ public class PickupBinsFromStep extends CommandBase {
 	}
 
 	protected void initialize() {
+		arm.setMaxPIDSpeed(1.0);
 		state = 0;
 	}
 
@@ -63,7 +63,8 @@ public class PickupBinsFromStep extends CommandBase {
 				}
 				break;
 			case 3:
-				if (timer.get() > 0.5) {
+				if (timer.get() > 0.1) {
+					arm.setMaxPIDSpeed(0.5);
 					putDownBin.start();
 					timer.reset();
 					state = 4;
@@ -84,6 +85,7 @@ public class PickupBinsFromStep extends CommandBase {
 				break;
 			case 6:
 				if (!unhookBin.isRunning()) {
+					arm.setMaxPIDSpeed(1.0);
 					lowerToBin.start();
 					timer.reset();
 					state = 7;

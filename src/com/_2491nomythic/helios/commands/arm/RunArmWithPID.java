@@ -35,7 +35,7 @@ public class RunArmWithPID extends CommandBase {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(timer.get() > 0.2) {
+		if(timer.get() > 0.4) {
 			timer.reset();
 			timer.stop();
 			if(startPos == arm.getPosition() || (arm.getRate() > 0 != arm.get() > 0)) {
