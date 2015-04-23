@@ -4,6 +4,7 @@ import com._2491nomythic.helios.commands.CommandBase;
 import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DrivePID;
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
+import com._2491nomythic.helios.commands.elevator.BottomElevator;
 import com._2491nomythic.helios.commands.elevator.ElevateTime;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
@@ -21,6 +22,7 @@ public class OneToteAndOneBin extends CommandBase {
 	private DriveTime driveBackToHookBin;
 	private RunArmWithPID pickUpBin;
 	private ElevateTime raiseToteUp;
+	private BottomElevator placeTote;
 	private DriveTime moveIntoAutozone;
 	private boolean shouldDriveForward;
 	private int state;
@@ -28,14 +30,15 @@ public class OneToteAndOneBin extends CommandBase {
 	public OneToteAndOneBin(boolean shouldDriveForward) {
 		this.shouldDriveForward = shouldDriveForward;
 		lowerNearBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto - 5); // Start lowering the arm before we're done driving back 
-		raiseToteUp = new ElevateTime(0.75, Constants.upOneToteTime); // Lift up tote
+		raiseToteUp = new ElevateTime(0.75, 1.0); // Lift up tote
+		placeTote = new BottomElevator(0.8, 2.0);
 		driveToPickUpBin = new DrivePID(0.5, Constants.nullX, -1.3); // Drive back with the tote so we can pick up the bin
 		lowerToBin = new RunArmWithPID(Variables.pickUpBinPosTwoToteAuto); // Lower arm to position to actually pick up bin
 		driveToHookBin = new DrivePID(0.3, Constants.nullX, -0.75); // Drive back to hook tote
 		driveBackToHookBin = new DriveTime(-0.3, Constants.nullX, 0.5); 
 		pickUpBin = new RunArmWithPID(Variables.holdBinDistance); // Lift the arm back up
 		driveToClearScoringPlatform = new DrivePID(0.4, Constants.nullX, 8.0);
-		moveIntoAutozone = new DriveTime(0.5, 4.0, 0); // Drive into the auto zone
+		moveIntoAutozone = new DriveTime(0.5, 4.0, 0.5		); // Drive into the auto zone
 		timer = new Timer();
 	}
 	
@@ -62,36 +65,37 @@ public class OneToteAndOneBin extends CommandBase {
 					state = 2;
 				}
 				break;
-			case 2: // Once we drive back, we can lower the hook into the bin
+			case 2: // Once we drive back, we can lower the hook into the bin and place the tote down so we don't tip over
 				if (!driveToPickUpBin.isRunning() || timer.get() > 1.8) {
 					timer.stop();
 					lowerToBin.start();
+					placeTote.start();
 					state = 3;
 				}
 				break;
-			case 3: // We used to drive back in case the hook was in front of the bin, but that hasn't been happening.
+			case 3: // Once the hook is in the bin, drive back to hook the bin
 				if (arm.getRate() < 1 && (arm.getPosition() > Variables.pickUpBinPosTwoToteAuto - 20)) {
-					System.out.println(arm.getRate());
-					state = 4;
-				}
-				break;
-			case 4: // Once the hook is in the bin, drive forward to hook the bin
-				if (!driveBackToHookBin.isRunning()) {
 					driveToHookBin.start();
 					timer.start();
 					timer.reset();
-					state = 5;
+					state = 4;
 				}
 				break;
-			case 5: // Then, start picking the bin up
+			case 4: // Then, start picking the bin up
 				if (!driveToHookBin.isRunning() || timer.get() > 0.5) {
 					pickUpBin.start();
 					timer.stop();
+					state = 5;
+				}
+				break;
+			case 5: // Once the arm is fairly high, pick the tote back up
+				if (arm.getPosition() < 30) {
+					raiseToteUp.start();
 					state = 6;
 				}
 				break;
-			case 6: // Once the arm is fairly high, drive to the next tote
-				if (arm.getPosition() < 30) {
+			case 6: // Then, drive into the auto zone
+				if (!raiseToteUp.isRunning()) {
 					if (shouldDriveForward) {
 						driveToClearScoringPlatform.start();
 					}
