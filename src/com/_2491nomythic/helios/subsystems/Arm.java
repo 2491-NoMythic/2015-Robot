@@ -8,13 +8,18 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * The Arm that picks up recycling containers.
  * Does not include the hook
  */
-public class Arm extends PIDSubsystem {
+public class Arm extends Subsystem {
 	private CANTalon motor;
 	private Encoder encoder;
 	private DigitalInput hallEffectSensor;
@@ -23,6 +28,20 @@ public class Arm extends PIDSubsystem {
 	private double currentSpeed = 0.0;
 	private double currentTarget = 0.0;
 	private double maxPIDSpeed = 0.5;
+	private double maxAcceleration = 0.05;
+	private PIDController controller;
+	private PIDOutput output = new PIDOutput() {
+
+        public void pidWrite(double output) {
+            usePIDOutput(output);
+        }
+    };
+    private PIDSource source = new PIDSource() {
+
+        public double pidGet() {
+            return returnPIDInput();
+        }
+    };
 	
 	// Initialize your subsystem here
 	
@@ -38,7 +57,7 @@ public class Arm extends PIDSubsystem {
 	 * Does not include the hook
 	 */
 	private Arm() {
-		super(Variables.armPID_P, Variables.armPID_I, Variables.armPID_D);
+		controller = new PIDController(Variables.armPID_P, Variables.armPID_I, Variables.armPID_D, source, output);
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
@@ -47,8 +66,8 @@ public class Arm extends PIDSubsystem {
 		
 		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
 		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
-		this.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
-		this.setAbsoluteTolerance(1.0);
+		controller.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
+		controller.setAbsoluteTolerance(1.0);
 		
 		hallEffectSensor = new DigitalInput(Constants.armHallEffectSensorChannel);
 	}
@@ -76,12 +95,12 @@ public class Arm extends PIDSubsystem {
 			}
 		}
 		
-		if (Math.abs(output - currentSpeed) > 0.05) {
+		if (Math.abs(output - currentSpeed) > maxAcceleration) {
 			if (output > currentSpeed) {
-				output = currentSpeed + 0.05;
+				output = currentSpeed + maxAcceleration;
 			}
 			else {
-				output = currentSpeed - 0.05;
+				output = currentSpeed - maxAcceleration;
 			}
 		}
 		motor.set(-1.0 * output);
@@ -97,12 +116,12 @@ public class Arm extends PIDSubsystem {
 			this.disable();
 			usingPID = false;
 		}
-		if (Math.abs(speed - currentSpeed) > 0.05) {
+		if (Math.abs(speed - currentSpeed) > maxAcceleration) {
 			if (speed > currentSpeed) {
-				speed = currentSpeed + 0.05;
+				speed = currentSpeed + maxAcceleration;
 			}
 			else {
-				speed = currentSpeed - 0.05;
+				speed = currentSpeed - maxAcceleration;
 			}
 		}
 		motor.set(-1.0 * speed);
@@ -119,7 +138,7 @@ public class Arm extends PIDSubsystem {
 			usingPID = true;
 		}
 		currentTarget = position;
-		this.setSetpoint(position);
+		controller.setSetpoint(position);
 	}
 	
 	/**
@@ -128,6 +147,14 @@ public class Arm extends PIDSubsystem {
 	 */
 	public void setMaxPIDSpeed(double speed) {
 		maxPIDSpeed = speed;
+	}
+	
+	/**
+	 * Set the maximum the arm can accelerate by
+	 * @param max
+	 */
+	public void setMaxAccleration(double max) {
+		maxAcceleration = max;
 	}
 	
 	/**
@@ -187,12 +214,20 @@ public class Arm extends PIDSubsystem {
 	
 	public void enable() {
 		usingPID = true;
-		super.enable();
+		controller.enable();
 	}
 	
 	public void disable() {
+		controller.reset();
 		usingPID = false;
-		super.disable();
+	}
+	
+	public boolean onTarget() {
+		return controller.onTarget();
+	}
+	
+	public double getPosition() {
+		return returnPIDInput();
 	}
 	
 	/**

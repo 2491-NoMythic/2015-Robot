@@ -1,6 +1,7 @@
 package com._2491nomythic.helios.commands.autonomous;
 
 import com._2491nomythic.helios.commands.CommandBase;
+import com._2491nomythic.helios.commands.arm.RunArmPosition;
 import com._2491nomythic.helios.commands.arm.RunArmWithPID;
 import com._2491nomythic.helios.commands.drivetrain.DriveTime;
 import com._2491nomythic.helios.commands.grabber.RunGrabberTime;
@@ -13,9 +14,10 @@ import edu.wpi.first.wpilibj.Timer;
  * An autonomous that picks up two recycling containers from the step and places them into the auto zone.
  */
 public class PickupBinsFromStep extends CommandBase {
-	private DriveTime backUpToStart, driveToBin, driveIntoAutoZone, driveToNextBin, driveToBinAgain;
-	private RunArmWithPID lowerToBin, pickUpBin, putDownBin;
-	private RunGrabberTime makeBinVertical, unhookBin;
+	private DriveTime backUpToStart, driveToBin, driveFirstBinIntoAutoZone, driveToUnhookBin, driveIntoAutoZone, driveToNextBin, driveToBinAgain;
+	private RunArmPosition lowerToBin;
+	private RunArmWithPID pickUpBin, putDownBin;
+	private RunGrabberTime makeBinVertical, unhookBin, hooksBackInPlace;
 	private int state; // 0 = Before start, 1 = lowering arm, 2 = driving forward,3 = waiting to pick up bin
 					   // 4 = picking up bin, 5 = rotating bin, 6 = driving to auto zone
 	private Timer timer;
@@ -25,13 +27,16 @@ public class PickupBinsFromStep extends CommandBase {
 	 */
 	public PickupBinsFromStep() {
 		backUpToStart = new DriveTime(0.25, Constants.nullX, -0.5);
-		lowerToBin = new RunArmWithPID(Variables.pickUpBinFromStepPosition);
+		lowerToBin = new RunArmPosition(1.0, Variables.pickUpBinFromStepPosition - 1);
 		driveToBin = new DriveTime(0.25, Constants.nullX, 0.8);
 		pickUpBin = new RunArmWithPID(Variables.holdBinDistance);
-		makeBinVertical = new RunGrabberTime(0.5, 1.0);
+		makeBinVertical = new RunGrabberTime(0.5, 2.5);
 		putDownBin = new RunArmWithPID(Variables.putDownBinBackwards);
-		unhookBin = new RunGrabberTime(-0.5, 2.0);
-		driveToNextBin = new DriveTime(0.5, -1.7, Constants.nullY); //CHANGE THIS TO -1 TO GO LEFT TO THE NEXT BIN
+		driveFirstBinIntoAutoZone = new DriveTime(0.5, -0.7, -1.0);
+		unhookBin = new RunGrabberTime(-1.0, 1.75);
+		hooksBackInPlace = new RunGrabberTime(0.5, 1.0);
+		driveToUnhookBin = new DriveTime(0.5, Constants.nullX, -0.25);
+		driveToNextBin = new DriveTime(0.5, -1.0, 0.9); //CHANGE THIS TO -1 TO GO LEFT TO THE NEXT BIN
 		driveToBinAgain = new DriveTime(0.25, Constants.nullX, 0.5);
 		driveIntoAutoZone = new DriveTime(0.5, Constants.nullX, -1.85);
 		timer = new Timer();
@@ -39,6 +44,7 @@ public class PickupBinsFromStep extends CommandBase {
 
 	protected void initialize() {
 		arm.setMaxPIDSpeed(1.0);
+		arm.setMaxAccleration(0.25);
 		state = 0;
 	}
 
@@ -50,7 +56,7 @@ public class PickupBinsFromStep extends CommandBase {
 				state = 1;
 				break;
 			case 1:
-				if (!lowerToBin.isRunning() && !backUpToStart.isRunning()) {
+				if ((!lowerToBin.isRunning() || arm.getPosition() > Variables.pickUpBinFromStepPosition - 2) && !backUpToStart.isRunning()) {
 					driveToBin.start();
 					state = 2;
 				}
@@ -64,20 +70,33 @@ public class PickupBinsFromStep extends CommandBase {
 				break;
 			case 3:
 				if (timer.get() > 0.1) {
-					arm.setMaxPIDSpeed(0.5);
+					arm.setMaxPIDSpeed(1.0);
 					putDownBin.start();
 					timer.reset();
 					state = 4;
 				}
 				break;
 			case 4:
+				if (arm.getPosition() < 10) {
+					arm.setMaxPIDSpeed(0.75);
+				}
+				if (arm.getPosition() < -30) {
+					arm.setMaxPIDSpeed(1.0);
+				}
 				if (timer.get() > 1.5) {
 					backUpToStart.start();
 					makeBinVertical.start();
+					driveFirstBinIntoAutoZone.start();
 					state = 5;
 				}
 				break;
 			case 5:
+				if (arm.getPosition() < 10) {
+					arm.setMaxPIDSpeed(0.5);
+				}
+				if (arm.getPosition() < -30) {
+					arm.setMaxPIDSpeed(1.0);
+				}
 				if (!putDownBin.isRunning() && !makeBinVertical.isRunning()) {
 					unhookBin.start();
 					state = 6;
@@ -85,6 +104,7 @@ public class PickupBinsFromStep extends CommandBase {
 				break;
 			case 6:
 				if (!unhookBin.isRunning()) {
+					driveToUnhookBin.start();
 					arm.setMaxPIDSpeed(1.0);
 					lowerToBin.start();
 					timer.reset();
@@ -92,7 +112,8 @@ public class PickupBinsFromStep extends CommandBase {
 				}
 				break;
 			case 7:
-				if (timer.get() > 0.5) {
+				if (timer.get() > 0.5 && !driveToUnhookBin.isRunning()) {
+					hooksBackInPlace.start();
 					driveToNextBin.start();
 					state = 8;
 				}
@@ -133,7 +154,8 @@ public class PickupBinsFromStep extends CommandBase {
 		return state == 12 && !makeBinVertical.isRunning() && !pickUpBin.isRunning();
 	}
 
-	protected void end() {		
+	protected void end() {
+		arm.setMaxAccleration(0.05);
 	}
 
 	protected void interrupted() {
@@ -142,5 +164,6 @@ public class PickupBinsFromStep extends CommandBase {
 		driveToBin.cancel();
 		pickUpBin.cancel();
 		makeBinVertical.cancel();
+		end();
 	}
 }

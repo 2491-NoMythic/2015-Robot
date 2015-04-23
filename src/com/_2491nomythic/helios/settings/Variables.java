@@ -5,7 +5,7 @@ package com._2491nomythic.helios.settings;
  */
 public class Variables {
 	public static double armPID_P = 0.05;
-	public static double armPID_I = 0.0;
+	public static double armPID_I = 0.00002;
 	public static double armPID_D = 0.0;
 	public static double elevatorPID_P = 1.0;
 	public static double elevatorPID_I = 0.0;
@@ -36,7 +36,7 @@ public class Variables {
 	public static double pickup2ndBinYDistance;
 	public static double unhookBinXDistance = 0.0;
 	public static double unhookBinYDistance = 0.167;
-	public static double pickUpBinFromStepPosition = 69;
+	public static double pickUpBinFromStepPosition = 70;
 	public static double reverseHookBinPosition = 71;
 	public static double holdBinDistance = 0.0;
 	public static double pickUpBinPosTwoToteAuto = 76.51;

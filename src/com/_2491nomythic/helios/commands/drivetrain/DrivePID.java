@@ -90,6 +90,7 @@ public class DrivePID extends CommandBase {
 		yController = new PIDController(Variables.driveyPID_P, Variables.driveyPID_I + 0.01, Variables.driveyPID_D, yInput, yOutput);
 //		xController.setAbsoluteTolerance(0.1);
 		yController.setAbsoluteTolerance(0.1);
+		timer = new Timer();
 	}
 	
 	public void updateSettings() {
