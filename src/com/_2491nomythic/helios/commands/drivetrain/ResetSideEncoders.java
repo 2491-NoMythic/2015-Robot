@@ -13,6 +13,7 @@ public class ResetSideEncoders extends CommandBase {
 	public ResetSideEncoders() {
 		// Use requires() here to declare subsystem dependencies
 		requires(drivetrain);
+		setRunWhenDisabled(true);
 	}
 	
 	// Called just before this Command runs the first time

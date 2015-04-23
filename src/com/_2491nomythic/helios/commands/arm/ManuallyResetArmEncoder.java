@@ -11,6 +11,7 @@ public class ManuallyResetArmEncoder extends CommandBase {
 	 * Resets the arm encoder manually.
 	 */
     public ManuallyResetArmEncoder() {
+    	setRunWhenDisabled(true);
     }
 
     // Called just before this Command runs the first time

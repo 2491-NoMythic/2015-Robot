@@ -14,6 +14,7 @@ public class ResetCenterEncoder extends CommandBase {
 	 */
 	public ResetCenterEncoder() {
 		requires(drivetrain);
+		setRunWhenDisabled(true);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}

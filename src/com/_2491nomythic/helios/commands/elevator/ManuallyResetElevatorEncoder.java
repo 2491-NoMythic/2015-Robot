@@ -13,9 +13,8 @@ public class ManuallyResetElevatorEncoder extends CommandBase {
 	 * Resets the elevator encoder manually.
 	 */
     public ManuallyResetElevatorEncoder() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires();
     	requires(elevator);
+    	setRunWhenDisabled(true);
     }
 
     // Called just before this Command runs the first time
