@@ -12,7 +12,7 @@ public class DoNothing extends Command {
 	 */
     public  DoNothing() {
     }
-
+    
 	protected void initialize() {}
 
 	protected void execute() {}
