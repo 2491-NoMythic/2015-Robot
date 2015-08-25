@@ -1,4 +1,4 @@
-package com._2491nomythic.helios.components;
+package com._2491nomythic.util.components;
 
 public interface DistanceSensor {
 	double getDistance();
