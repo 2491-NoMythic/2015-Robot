@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Gyro;
 
 public class HardwareGyro implements Gyroscope {
 	
-	private Gyro gyro;
+	private final Gyro gyro;
 	
 	public HardwareGyro(int channel) {
 		this.gyro = new Gyro(channel);

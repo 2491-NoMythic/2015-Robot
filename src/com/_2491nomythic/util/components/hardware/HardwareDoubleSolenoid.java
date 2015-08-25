@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class HardwareDoubleSolenoid implements Solenoid {
 	
-	private DoubleSolenoid solenoid;
+	private final DoubleSolenoid solenoid;
 	
 	public HardwareDoubleSolenoid(int extendChannel, int retractChannel) {
 		this.solenoid = new DoubleSolenoid(extendChannel, retractChannel);
