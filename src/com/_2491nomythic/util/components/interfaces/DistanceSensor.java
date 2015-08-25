@@ -1,6 +1,8 @@
 package com._2491nomythic.util.components.interfaces;
 
 public interface DistanceSensor {
-	double getDistance();
-	void reset();
+	double getDistanceInFeet();
+	default double getDistanceInInches() {
+		return getDistanceInFeet() * 12;
+	}
 }
