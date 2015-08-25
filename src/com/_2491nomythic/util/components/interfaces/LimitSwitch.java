@@ -1,4 +1,4 @@
-package com._2491nomythic.util.components;
+package com._2491nomythic.util.components.interfaces;
 /* 
  * A list of implemented functions for the future JUnit Testing System
  * Depending on what our robot will be like next year, some of these will be deleted

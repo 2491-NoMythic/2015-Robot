@@ -1,4 +1,4 @@
-package com._2491nomythic.util.components;
+package com._2491nomythic.util.components.interfaces;
 
 public interface Gyroscope {
 	double getAngle();
