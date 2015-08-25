@@ -11,19 +11,16 @@ public class MockSolenoid implements Solenoid {
 	
 	@Override
 	public boolean solenoidExtended() {
-		// TODO Auto-generated method stub
 		return extended;
 	}
 
 	@Override
 	public void extend() {
-		// TODO Auto-generated method stub
 		this.extended = true;
 	}
 
 	@Override
 	public void retract() {
-		// TODO Auto-generated method stub
 		this.extended = false;
 	}
 
