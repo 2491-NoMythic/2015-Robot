@@ -3,30 +3,30 @@ package com._2491nomythic.util.components.mock;
 import com._2491nomythic.util.components.interfaces.Encoder;
 
 public class MockEncoder implements Encoder {
-	private double 
+	private double position;
+	
+	public MockEncoder(double position) {
+		this.position = position;
+	}
+	
+	@Override
+	public double getPosition() {
+		return position;
+	}
 
 	@Override
-	public double setDistancePerPulse() {
-		// TODO Auto-generated method stub
+	public double setDistancePerPulse(double distancePerPulse) { //Not the robot. Does nothing.
 		return 0;
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		position = 0.0;
 	}
 
 	@Override
-	public void resetTo() {
-		// TODO Auto-generated method stub
-		
+	public void resetTo(double position) {
+		reset();
 	}
 
-	@Override
-	public double getPosition() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 }
