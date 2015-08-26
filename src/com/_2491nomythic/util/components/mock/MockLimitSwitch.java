@@ -14,4 +14,8 @@ public class MockLimitSwitch implements LimitSwitch {
 		return isTriggered;
 	}
 	
+	public void setTriggered(boolean triggered) {
+		this.isTriggered = triggered;
+	}
+	
 }

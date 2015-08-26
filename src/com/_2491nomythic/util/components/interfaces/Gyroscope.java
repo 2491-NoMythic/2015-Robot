@@ -2,7 +2,7 @@ package com._2491nomythic.util.components.interfaces;
 
 public interface Gyroscope {
 	double getAngle();
-	double degreesPerSecond(); //Likely not going to be used
+	double getRate();
 	void setSensitivity(double sensitivity);
 	void recalibrate();
 	void reset();

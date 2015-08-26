@@ -18,7 +18,7 @@ public class HardwareGyro implements Gyroscope {
 	}
 
 	@Override
-	public double degreesPerSecond() {
+	public double getRate() {
 		return gyro.getRate();
 	}
 

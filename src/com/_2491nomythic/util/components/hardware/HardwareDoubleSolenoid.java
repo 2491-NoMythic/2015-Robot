@@ -15,17 +15,17 @@ public class HardwareDoubleSolenoid implements Solenoid {
 
 	@Override
 	public boolean solenoidExtended() {
-		return solenoid.get() == Value.kForward ? true : false;
+		return solenoid.get() == DoubleSolenoid.Value.kForward ? true : false;
 	}
 
 	@Override
 	public void extend() {
-		solenoid.set(Value.kForward);
+		solenoid.set(DoubleSolenoid.Value.kForward);
 	}
 
 	@Override
 	public void retract() {
-		solenoid.set(Value.kReverse);
+		solenoid.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 }
