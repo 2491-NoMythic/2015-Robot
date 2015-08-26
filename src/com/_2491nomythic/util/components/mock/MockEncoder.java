@@ -15,8 +15,8 @@ public class MockEncoder implements Encoder {
 	}
 
 	@Override
-	public double setDistancePerPulse(double distancePerPulse) { //Not the robot. Does nothing.
-		return 0;
+	public void setDistancePerPulse(double distancePerPulse) { //Not the robot. Does nothing.
+		
 	}
 
 	@Override
