@@ -4,5 +4,6 @@ public interface Encoder {
 	double getPosition();
 	double setDistancePerPulse(double distancePerPulse);
 	void reset();
-	void resetTo(double position);
+	void resetTo(double newPosition);
 }
+

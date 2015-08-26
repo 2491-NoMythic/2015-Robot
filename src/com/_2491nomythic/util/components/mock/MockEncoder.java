@@ -25,7 +25,7 @@ public class MockEncoder implements Encoder {
 	}
 
 	@Override
-	public void resetTo(double position) {
+	public void resetTo(double newPosition) {
 		reset();
 	}
 
