@@ -32,6 +32,11 @@ public class HardwareEncoder implements Encoder {
 	public double getPosition() {
 		return encoder.getDistance() + offset;
 	}
+	
+	@Override
+	public double getRate() {
+		return encoder.getRate();
+	}
 
 	@Override
 	public void setDistancePerPulse(double distancePerPulse) {

@@ -19,13 +19,17 @@ public class MockGyroscope implements Gyroscope {
 		return angle;
 	}
 	
-	public void setRate(double rate) {
-		this.rate = rate;
+	public void setAngle(double angle) {
+		this.angle = angle;
 	}
 
 	@Override
 	public double getRate() {
 		return rate;
+	}
+	
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 
 	@Override
