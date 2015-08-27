@@ -1,10 +1,19 @@
 package com._2491nomythic.helios.commands;
 
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.OI;
+import com._2491nomythic.helios.settings.Constants;
+import com._2491nomythic.helios.settings.Variables;
 import com._2491nomythic.helios.subsystems.*;
+import com._2491nomythic.util.components.hardware.HardwareEncoder;
+import com._2491nomythic.util.components.hardware.HardwareGyro;
+import com._2491nomythic.util.components.hardware.HardwareMotor;
+import com._2491nomythic.util.components.interfaces.Encoder;
+import com._2491nomythic.util.components.interfaces.Gyroscope;
+import com._2491nomythic.util.components.interfaces.Motor;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -25,7 +34,20 @@ public abstract class CommandBase extends Command {
 	protected static Camera camera;
 	
 	public static void init() {
-		drivetrain = Drivetrain.getInstance();
+		
+		// Set up the drivetrain
+		Motor drivetrainFrontLeftMotor   = HardwareMotor.createWithCANTalon(Constants.driveTalonFrontLeftChannel);
+		Motor drivetrainFrontCenterMotor = HardwareMotor.createWithCANTalon(Constants.driveTalonFrontCenterChannel);
+		Motor drivetrainFrontRightMotor  = HardwareMotor.createWithCANTalon(Constants.driveTalonFrontRightChannel);
+		Motor drivetrainBackLeftMotor    = HardwareMotor.createWithCANTalon(Constants.driveTalonBackLeftChannel);
+		Motor drivetrainBackCenterMotor  = HardwareMotor.createWithCANTalon(Constants.driveTalonBackCenterChannel);
+		Motor drivetrainBackRightMotor   = HardwareMotor.createWithCANTalon(Constants.driveTalonBackRightChannel);
+		Encoder drivetrainLeftEncoder    = new HardwareEncoder(Constants.driveEncoderLeftAChannel, Constants.driveEncoderLeftBChannel, Constants.driveEncoderLeftReversed, CounterBase.EncodingType.k1X, Constants.driveEncoderToFeet);
+		Encoder drivetrainCenterEncoder  = new HardwareEncoder(Constants.driveEncoderCenterAChannel, Constants.driveEncoderCenterBChannel, Constants.driveEncoderCenterReversed, CounterBase.EncodingType.k1X, Constants.driveEncoderToFeet);
+		Encoder drivetrainRightEncoder   = new HardwareEncoder(Constants.driveEncoderRightAChannel, Constants.driveEncoderRightBChannel, Constants.driveEncoderRightReversed, CounterBase.EncodingType.k1X, Constants.driveEncoderToFeet);
+		Gyroscope drivetrainGyro         = new HardwareGyro(Constants.gyroChannel, Variables.gyroToDegrees);
+		drivetrain = new Drivetrain(drivetrainFrontLeftMotor, drivetrainFrontCenterMotor, drivetrainFrontRightMotor, drivetrainBackLeftMotor, drivetrainBackCenterMotor, drivetrainBackRightMotor, drivetrainLeftEncoder, drivetrainCenterEncoder, drivetrainRightEncoder, drivetrainGyro);
+		
 		arm = Arm.getInstance();
 		elevator = Elevator.getInstance();
 		grabber = Grabber.getInstance();
