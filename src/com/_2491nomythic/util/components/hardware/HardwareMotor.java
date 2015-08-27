@@ -11,15 +11,15 @@ public class HardwareMotor implements Motor {
 	
 	private final SpeedController controller;
 	
-	public static HardwareMotor createFromCANTalon(int channel) {
+	public static HardwareMotor createWithCANTalon(int channel) {
 		return new HardwareMotor(new CANTalon(channel));
 	}
 	
-	public static HardwareMotor createFromTalon(int channel) {
+	public static HardwareMotor createWithTalon(int channel) {
 		return new HardwareMotor(new Talon(channel));
 	}
 	
-	public static HardwareMotor createFromJaguar(int channel) {
+	public static HardwareMotor createWithJaguar(int channel) {
 		return new HardwareMotor(new Jaguar(channel));
 	}
 	
