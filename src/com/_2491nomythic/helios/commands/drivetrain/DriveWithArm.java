@@ -19,7 +19,7 @@ public class DriveWithArm extends CommandBase {
 	private double maxSpeed;	
 	private PIDSource yInput = new PIDSource() {
 		public double pidGet() {
-			return drivetrain.getRightEncoder().getDistance();
+			return drivetrain.getRightEncoder().getPosition();
 		}
 	};
 	private PIDOutput yOutput = new PIDOutput() {
@@ -53,7 +53,7 @@ public class DriveWithArm extends CommandBase {
 	protected void initialize() {
 		armStartingPosition = Math.toRadians(arm.getPosition());
 		armStartingHorizontalPosition = Constants.armLength * Math.sin(armStartingPosition);
-		drivetrainStartingPosition = drivetrain.getRightEncoder().getDistance();
+		drivetrainStartingPosition = drivetrain.getRightEncoder().getPosition();
 		yController.setSetpoint(drivetrainStartingPosition);
 		yController.enable();
 	}

@@ -99,8 +99,8 @@ public class UpdateDriverstation extends CommandBase {
 //		}
 //		SmartDashboard.putNumber("Current Elevator Position", elevator.getEncoder().getDistance());
 		SmartDashboard.putNumber("Gyro Positon", drivetrain.getGyro().getAngle());
-		SmartDashboard.putNumber("Right Encoder", drivetrain.getRightEncoder().getDistance());
-		SmartDashboard.putNumber("Center Encoder", drivetrain.getCenterEncoder().getDistance());
+		SmartDashboard.putNumber("Right Encoder", drivetrain.getRightEncoder().getPosition());
+		SmartDashboard.putNumber("Center Encoder", drivetrain.getCenterEncoder().getPosition());
 		SmartDashboard.putBoolean("Top limit switch", elevator.getTopSwitch());
 		SmartDashboard.putBoolean("Bottom limit switch", elevator.getBottomSwitch());
 		SmartDashboard.putNumber("Arm Encoder", arm.getPosition());

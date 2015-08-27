@@ -34,9 +34,9 @@ public class AbsoluteDrive extends CommandBase {
 		}
 		CartesianCoord driveCoord = new CartesianCoord(oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX) * multiplier, -1.0 * oi.getAxisForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisY) * multiplier);
 		drivetrain.driveAbsolute(driveCoord.getPolar(), oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * multiplier);
-		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
-		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
-		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
+		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().getSpeed());
+		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().getSpeed());
+		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().getSpeed());
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

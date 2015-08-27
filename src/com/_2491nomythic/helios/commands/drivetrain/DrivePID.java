@@ -54,7 +54,7 @@ public class DrivePID extends CommandBase {
 	*/
 	private PIDSource yInput = new PIDSource() {
 		public double pidGet() {
-			return drivetrain.getRightEncoder().getDistance();
+			return drivetrain.getRightEncoder().getPosition();
 		}
 	};
 	private PIDOutput yOutput = new PIDOutput() {
@@ -102,11 +102,11 @@ public class DrivePID extends CommandBase {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-//		xController.setSetpoint(xTargetInput + drivetrain.getCenterEncoder().getDistance());
-		yController.setSetpoint(yTargetInput + drivetrain.getRightEncoder().getDistance());
+//		xController.setSetpoint(xTargetInput + drivetrain.getCenterEncoder().getPosition());
+		yController.setSetpoint(yTargetInput + drivetrain.getRightEncoder().getPosition());
 		//xController.enable();
 		yController.enable();
-		rightStartPos = drivetrain.getRightEncoder().getDistance();
+		rightStartPos = drivetrain.getRightEncoder().getPosition();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -114,7 +114,7 @@ public class DrivePID extends CommandBase {
 		if(timer.get() > 0.2) {
 			timer.reset();
 			timer.stop();
-			if(rightStartPos == drivetrain.getRightEncoder().getDistance() || drivetrain.getRightEncoder().getRate() > 0 != drivetrain.getCurrentRightSpeed() > 0) {
+			if(rightStartPos == drivetrain.getRightEncoder().getPosition() || drivetrain.getRightEncoder().getRate() > 0 != drivetrain.getCurrentRightSpeed() > 0) {
 				yController.disable();
 				this.cancel();
 			}
