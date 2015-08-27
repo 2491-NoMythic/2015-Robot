@@ -1,10 +1,18 @@
 package com._2491nomythic.helios.commands;
 
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com._2491nomythic.helios.OI;
+import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.subsystems.*;
+import com._2491nomythic.util.components.hardware.HardwareLimitSwitch;
+import com._2491nomythic.util.components.hardware.HardwareMotor;
+import com._2491nomythic.util.components.hardware.HardwareEncoder;
+import com._2491nomythic.util.components.interfaces.Encoder;
+import com._2491nomythic.util.components.interfaces.LimitSwitch;
+import com._2491nomythic.util.components.interfaces.Motor;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -25,6 +33,12 @@ public abstract class CommandBase extends Command {
 	protected static Camera camera;
 	
 	public static void init() {
+		Motor motorElevatorA = HardwareMotor.createFromCANTalon(Constants.elevatorTalonMotorAChannel);
+		Motor motorElevatorB = HardwareMotor.createFromCANTalon(Constants.elevatorTalonMotorAChannel);
+		Encoder elevatorEncoder = new HardwareEncoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X, Constants.elevatorEncoderToFeet);
+		LimitSwitch topElevatorLimitSwitch = new HardwareLimitSwitch(Constants.elevatorLimitTopChannel);
+		LimitSwitch bottomElevatorLimitSwitch = new HardwareLimitSwitch(Constants.elevatorLimitBottomChannel);
+		
 		drivetrain = Drivetrain.getInstance();
 		arm = Arm.getInstance();
 		elevator = Elevator.getInstance();

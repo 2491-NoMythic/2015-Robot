@@ -10,7 +10,7 @@ package com._2491nomythic.util.components.interfaces;
  * The original code was devised by FRC Team 4931. The team's entire program can be accessed through their 
  * web site (http://www.evilletech.com).
  * @author Original Author (Team 4931): Zach Anderson
- * @author Adapting Author (Team 2491): Dario Connor Alvarez
+ * @author Adapting Authors (Team 2491): Evan Tang, Dario Connor Alvarez
  */
 
 public interface Motor {
