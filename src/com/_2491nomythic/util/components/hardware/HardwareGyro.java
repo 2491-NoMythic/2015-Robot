@@ -8,6 +8,11 @@ public class HardwareGyro implements Gyroscope {
 	
 	private final Gyro gyro;
 	
+	public HardwareGyro(int channel, double sensitivity) {
+		this.gyro = new Gyro(channel);
+		gyro.setSensitivity(sensitivity);
+	}
+	
 	public HardwareGyro(int channel) {
 		this.gyro = new Gyro(channel);
 	}
