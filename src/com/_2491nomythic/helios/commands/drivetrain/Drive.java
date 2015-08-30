@@ -53,10 +53,10 @@ public class Drive extends CommandBase {
 		PolarCoord coord = oi.getPlaneForDrive(ControllerMap.DriveController, ControllerMap.DriveAxisX, ControllerMap.DriveAxisY, false, true);
 		coord.setR(coord.getR() * currentMultiplier);
 		drivetrain.drivePolar(coord, oi.getAxisForDrive(ControllerMap.TurnController, ControllerMap.TurnAxis) * currentMultiplier);
-		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().get());
-		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().get());
-		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().get());
-		SmartDashboard.putNumber("Back Center", drivetrain.getBackCenterMotor().get());
+		SmartDashboard.putNumber("Front Left", drivetrain.getFrontLeftMotor().getSpeed());
+		SmartDashboard.putNumber("Front Right", drivetrain.getFrontRightMotor().getSpeed());
+		SmartDashboard.putNumber("Front Center", drivetrain.getFrontCenterMotor().getSpeed());
+		SmartDashboard.putNumber("Back Center", drivetrain.getBackCenterMotor().getSpeed());
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

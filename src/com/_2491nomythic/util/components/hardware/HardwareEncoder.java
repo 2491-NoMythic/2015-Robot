@@ -12,20 +12,24 @@ public class HardwareEncoder implements Encoder {
 	public HardwareEncoder(int channelA, int channelB, boolean inverted, EncodingType encodingType, double distancePerPulse) {
 		encoder = new edu.wpi.first.wpilibj.Encoder(channelA, channelB, inverted, encodingType);
 		encoder.setDistancePerPulse(distancePerPulse);
+		encoder.reset();
 	}
 	
 	public HardwareEncoder(int channelA, int channelB, boolean inverted, double distancePerPulse) {
 		encoder = new edu.wpi.first.wpilibj.Encoder(channelA, channelB, inverted);
 		encoder.setDistancePerPulse(distancePerPulse);
+		encoder.reset();
 	}
 	
 	public HardwareEncoder(int channelA, int channelB, double distancePerPulse) {
 		encoder = new edu.wpi.first.wpilibj.Encoder(channelA, channelB);
 		encoder.setDistancePerPulse(distancePerPulse);
+		encoder.reset();
 	}
 	
 	public HardwareEncoder(int channelA, int channelB) {
 		encoder = new edu.wpi.first.wpilibj.Encoder(channelA, channelB);
+		encoder.reset();
 	}
 
 	@Override
@@ -52,5 +56,6 @@ public class HardwareEncoder implements Encoder {
 	public void resetTo(double newPosition) {
 		offset = newPosition - encoder.getDistance();
 	}
+	
 	
 }

@@ -44,10 +44,10 @@ public class DriveDistance extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		drivetrain.drive(yDrive, yDrive, xDrive, xDrive);
-		if ((yInput < 0 && drivetrain.getLeftEncoder().get() <= yInput) || (yInput > 0 && drivetrain.getLeftEncoder().get() >= yInput)) {
+		if ((yInput < 0 && drivetrain.getLeftEncoder().getPosition() <= yInput) || (yInput > 0 && drivetrain.getLeftEncoder().getPosition() >= yInput)) {
 			yDrive = 0;
 		}
-		if ((xInput < 0 && drivetrain.getCenterEncoder().get() <= xInput) || (xInput > 0 && drivetrain.getCenterEncoder().get() >= xInput)) {
+		if ((xInput < 0 && drivetrain.getCenterEncoder().getPosition() <= xInput) || (xInput > 0 && drivetrain.getCenterEncoder().getPosition() >= xInput)) {
 			xDrive = 0;
 		}
 	}

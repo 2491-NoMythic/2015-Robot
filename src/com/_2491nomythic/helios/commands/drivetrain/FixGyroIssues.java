@@ -19,7 +19,7 @@ public class FixGyroIssues extends CommandBase {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		drivetrain.getGyro().initGyro();
+		drivetrain.getGyro().recalibrate();
 		drivetrain.getGyro().setSensitivity(Variables.gyroToDegrees);
 	}
 	

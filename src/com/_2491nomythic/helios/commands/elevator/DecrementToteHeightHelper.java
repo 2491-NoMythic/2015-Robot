@@ -20,7 +20,7 @@ public class DecrementToteHeightHelper extends CommandBase {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		if(Variables.manualHasBeenUsed) {
-			manualEncoderDistance = elevator.getEncoder().getDistance();
+			manualEncoderDistance = elevator.getEncoder().getPosition();
 			for(int i = Variables.toteHeight.length - 1; i <= 0; i--) {
 				isSmaller = Variables.toteHeight[i] <= manualEncoderDistance;
 				if(isSmaller) {

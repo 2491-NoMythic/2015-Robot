@@ -20,7 +20,7 @@ public class IncrementToteHeightHelper extends CommandBase {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		if(Variables.manualHasBeenUsed) {
-			manualEncoderDistance = elevator.getEncoder().getDistance();
+			manualEncoderDistance = elevator.getEncoder().getPosition();
 			for(int i = 0; i < Variables.toteHeight.length; i++) {
 				isBigger = Variables.toteHeight[i] >= manualEncoderDistance;
 				if(isBigger) {

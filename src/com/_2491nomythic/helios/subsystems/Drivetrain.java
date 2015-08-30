@@ -2,44 +2,51 @@ package com._2491nomythic.helios.subsystems;
 
 import com._2491nomythic.helios.commands.drivetrain.Drive;
 import com._2491nomythic.helios.settings.Constants;
-import com._2491nomythic.helios.settings.Variables;
 import com._2491nomythic.util.CartesianCoord;
 import com._2491nomythic.util.PolarCoord;
+import com._2491nomythic.util.components.interfaces.Gyroscope;
+import com._2491nomythic.util.components.interfaces.Motor;
+import com._2491nomythic.util.components.interfaces.Encoder;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CounterBase;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * The thing we drive with.
  */
 public class Drivetrain extends Subsystem {
-	CANTalon frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
+	Motor frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
 	Encoder encoderLeft, encoderCenter, encoderRight;
-	Gyro gyro;
+	Gyroscope gyro;
 	double currentLeftSpeed, currentRightSpeed, currentBackSpeed, currentFrontSpeed;
-	private static Drivetrain instance;
-	
-	public static Drivetrain getInstance() {
-		if (instance == null) {
-			instance = new Drivetrain();
-		}
-		return instance;
-	}
 	
 	/**
 	 * The thing we drive with.
 	 */
-	private Drivetrain() {
+	public Drivetrain(Motor frontLeftMotor, Motor frontCenterMotor, Motor frontRightMotor, Motor backLeftMotor, Motor backCenterMotor, Motor backRightMotor, Encoder encoderLeft, Encoder encoderCenter, Encoder encoderRight, Gyroscope gyro) {
+
+		this.frontLeft = frontLeftMotor;
+		this.frontCenter = frontCenterMotor;
+		this.frontRight = frontRightMotor;
+		this.backLeft = backLeftMotor;
+		this.backCenter = backCenterMotor;
+		this.backRight = backRightMotor;
+		
+		
+		/*
 		frontLeft = new CANTalon(Constants.driveTalonFrontLeftChannel);
 		frontCenter = new CANTalon(Constants.driveTalonFrontCenterChannel);
 		frontRight = new CANTalon(Constants.driveTalonFrontRightChannel);
 		backLeft = new CANTalon(Constants.driveTalonBackLeftChannel);
 		backCenter = new CANTalon(Constants.driveTalonBackCenterChannel);
 		backRight = new CANTalon(Constants.driveTalonBackRightChannel);
+		*/
 		
+		this.encoderLeft = encoderLeft;
+		this.encoderCenter = encoderCenter;
+		this.encoderRight = encoderRight;
+		
+		/*
 		encoderLeft = new Encoder(Constants.driveEncoderLeftAChannel, Constants.driveEncoderLeftBChannel, Constants.driveEncoderLeftReversed, CounterBase.EncodingType.k1X);
 		encoderCenter = new Encoder(Constants.driveEncoderCenterAChannel, Constants.driveEncoderCenterBChannel, Constants.driveEncoderCenterReversed, CounterBase.EncodingType.k1X);
 		encoderRight = new Encoder(Constants.driveEncoderRightAChannel, Constants.driveEncoderRightBChannel, Constants.driveEncoderRightReversed, CounterBase.EncodingType.k1X);
@@ -49,10 +56,15 @@ public class Drivetrain extends Subsystem {
 		encoderLeft.reset();
 		encoderCenter.reset();
 		encoderRight.reset();
+		*/
 		
+		this.gyro = gyro;
+		
+		/*
 		gyro = new Gyro(Constants.gyroChannel);
 		gyro.initGyro();
 		gyro.setSensitivity(Variables.gyroToDegrees);
+		*/
 	}
 	
 	
@@ -77,8 +89,8 @@ public class Drivetrain extends Subsystem {
 	 * @param speed The power of the right drive motors.
 	 */
 	public void driveRight(double speed) {
-		frontRight.set(-1.0 * speed);
-		backRight.set(-1.0 * speed);
+		frontRight.setSpeed(-1.0 * speed);
+		backRight.setSpeed(-1.0 * speed);
 		currentRightSpeed = speed;
 	}
 	
@@ -87,8 +99,8 @@ public class Drivetrain extends Subsystem {
 	 * @param speed The power of the left drive motors.
 	 */
 	public void driveLeft(double speed) {
-		frontLeft.set(speed);
-		backLeft.set(speed);
+		frontLeft.setSpeed(speed);
+		backLeft.setSpeed(speed);
 		currentLeftSpeed = speed;
 	}
 	
@@ -98,8 +110,8 @@ public class Drivetrain extends Subsystem {
 	 * @param backSpeed The power of the back center motor.
 	 */
 	public void driveCenter(double frontSpeed, double backSpeed) {
-		frontCenter.set(frontSpeed);
-		backCenter.set(-1.0 * backSpeed);
+		frontCenter.setSpeed(frontSpeed);
+		backCenter.setSpeed(-1.0 * backSpeed);
 		currentFrontSpeed = frontSpeed;
 		currentBackSpeed = backSpeed;
 	}
@@ -185,7 +197,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The value of the gyro.
 	 */
-	public Gyro getGyro() {
+	public Gyroscope getGyro() {
 		return gyro;
 	}
 	
@@ -217,7 +229,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The front left drive motor.
 	 */
-	public CANTalon getFrontLeftMotor() {
+	public Motor getFrontLeftMotor() {
 		return frontLeft;
 	}
 	
@@ -225,7 +237,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The back left drive motor.
 	 */
-	public CANTalon getBackLeftMotor() {
+	public Motor getBackLeftMotor() {
 		return backLeft;
 	}
 	
@@ -233,7 +245,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The front right drive motor.
 	 */
-	public CANTalon getFrontRightMotor() {
+	public Motor getFrontRightMotor() {
 		return frontRight;
 	}
 	
@@ -241,7 +253,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The back right drive motor.
 	 */
-	public CANTalon getBackRightMotor() {
+	public Motor getBackRightMotor() {
 		return backRight;
 	}
 	
@@ -249,7 +261,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The front center drive motor.
 	 */
-	public CANTalon getFrontCenterMotor() {
+	public Motor getFrontCenterMotor() {
 		return frontCenter;
 	}
 	
@@ -257,7 +269,7 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 * @return The back center drive motor.
 	 */
-	public CANTalon getBackCenterMotor() {
+	public Motor getBackCenterMotor() {
 		return backCenter;
 	}
 	

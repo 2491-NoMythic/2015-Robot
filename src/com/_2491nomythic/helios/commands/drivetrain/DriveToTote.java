@@ -38,19 +38,19 @@ public class DriveToTote extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (timer.get() > time) {
-			drivetrain.stop();;
-			finished = true;
-		}
-		else if (elevator.getToteCheckLeft() && elevator.getToteCheckRight()) {
 			drivetrain.stop();
 			finished = true;
 		}
-		else if (elevator.getToteCheckLeft()) {
-			drivetrain.drive(-0.5 * power, power, Constants.nullX, Constants.nullX);
-		}
-		else if (elevator.getToteCheckRight()) {
-			drivetrain.drive(power, -0.5 * power, Constants.nullX, Constants.nullX);
-		}
+//		else if (elevator.getToteCheckLeft() && elevator.getToteCheckRight()) {
+//			drivetrain.stop();
+//			finished = true;
+//		}
+//		else if (elevator.getToteCheckLeft()) {
+//			drivetrain.drive(-0.5 * power, power, Constants.nullX, Constants.nullX);
+//		}
+//		else if (elevator.getToteCheckRight()) {
+//			drivetrain.drive(power, -0.5 * power, Constants.nullX, Constants.nullX);
+//		}
 	}
 	
 	// Make this return true when this Command no longer needs to run execute()

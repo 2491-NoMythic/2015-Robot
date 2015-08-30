@@ -1,24 +1,23 @@
 package com._2491nomythic.helios.subsystems;
 
 import com._2491nomythic.helios.commands.elevator.KeepElevatorFromFalling;
+
 import com._2491nomythic.helios.commands.elevator.RunElevator;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
+import com._2491nomythic.util.components.interfaces.LimitSwitch;
+import com._2491nomythic.util.components.interfaces.Motor;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CounterBase;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
+import com._2491nomythic.util.components.interfaces.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  * The thing that lifts totes.
  */
 public class Elevator extends PIDSubsystem {
-	private CANTalon motorElevatorA, motorElevatorB;
+	private Motor motorElevatorA, motorElevatorB;
 	private Encoder encoder;
-	private DigitalInput limitTop, limitBottom , toteCheckLeft, toteCheckRight;
-	private static Elevator instance;
+	private LimitSwitch limitTop, limitBottom;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
 	private double currentTarget = 0.0;
@@ -26,34 +25,24 @@ public class Elevator extends PIDSubsystem {
 	
 	// Initialize your subsystem here
 	
-	public static Elevator getInstance() {
-		if (instance == null) {
-			instance = new Elevator();
-		}
-		return instance;
-	}
 	
 	/**
 	 * The thing that lifts totes.
 	 */
-	public Elevator() {
+	public Elevator(Motor motorElevatorA, Motor motorElevatorB, Encoder encoder, LimitSwitch limitTop, LimitSwitch limitBottom) {
 		super(Variables.elevatorPID_P, Variables.elevatorPID_I, Variables.elevatorPID_D);
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		motorElevatorA = new CANTalon(Constants.elevatorTalonMotorAChannel);
-		motorElevatorB = new CANTalon(Constants.elevatorTalonMotorBChannel);
+		this.encoder = encoder;
+		this.limitTop = limitTop;
+		this.limitBottom = limitBottom;
+		this.motorElevatorA = motorElevatorA;
+		this.motorElevatorB = motorElevatorB;
 		
-		encoder = new Encoder(Constants.elevatorEncoderAChannel, Constants.elevatorEncoderBChannel, Constants.elevatorEncoderReversed, CounterBase.EncodingType.k4X);
-		encoder.setDistancePerPulse(Constants.elevatorEncoderToFeet);
 		this.setInputRange(Constants.elevatorMinPosition, Constants.elevatorMaxPosition);
 		this.setAbsoluteTolerance(1.0);
-		
-		limitTop = new DigitalInput(Constants.elevatorLimitTopChannel);
-		limitBottom = new DigitalInput(Constants.elevatorLimitBottomChannel);
-		toteCheckLeft = new DigitalInput(Constants.elevatorToteCheckLeftChannel);
-		toteCheckRight = new DigitalInput(Constants.elevatorToteCheckRightChannel);
 		
 		holdElevator = new KeepElevatorFromFalling();
 	}
@@ -67,7 +56,7 @@ public class Elevator extends PIDSubsystem {
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
-		return encoder.getDistance();
+		return encoder.getPosition();
 	}
 	
 	protected void usePIDOutput(double output) {
@@ -134,8 +123,8 @@ public class Elevator extends PIDSubsystem {
 			}
 		}
 		
-		motorElevatorA.set(-1.0 * speed);
-		motorElevatorB.set(speed);
+		motorElevatorA.setSpeed(-1.0 * speed);
+		motorElevatorB.setSpeed(speed);
 	}
 	
 	/**
@@ -181,7 +170,8 @@ public class Elevator extends PIDSubsystem {
 	
 	/**
 	 * 
-	 * @return The current target the elevator is being sent to.
+	 * @return The current target the elevator is being
+	 * sent to.
 	 */
 	public double getPID() {
 		return currentTarget;
@@ -216,7 +206,7 @@ public class Elevator extends PIDSubsystem {
 	 * @return Whether the bottom elevator limit switch is pressed.
 	 */
 	public boolean getBottomSwitch() {
-		return !limitBottom.get();
+		return !limitBottom.isTriggered();
 	}
 	
 	/**
@@ -224,23 +214,7 @@ public class Elevator extends PIDSubsystem {
 	 * @return Whether the top elevator limit switch is pressed.
 	 */
 	public boolean getTopSwitch() {
-		return !limitTop.get();
-	}
-	
-	/**
-	 * 
-	 * @return Whether the left tote check limit switch is pressed.
-	 */
-	public boolean getToteCheckLeft() {
-		return !toteCheckLeft.get();
-	}
-	
-	/**
-	 * 
-	 * @return Whether the right tote check limit switch is pressed.
-	 */
-	public boolean getToteCheckRight() {
-		return !toteCheckRight.get();
+		return !limitTop.isTriggered();
 	}
 	
 	/**

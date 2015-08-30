@@ -21,15 +21,15 @@ public class StopRobot extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	targetY = drivetrain.getRightEncoder().getDistance();
+    	targetY = drivetrain.getRightEncoder().getPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(drivetrain.getFrontRightMotor().getSpeed() == 0) {
-    		if(drivetrain.getRightEncoder().getDistance() > targetY + tolerance) {
-    			drivetrain.driveRight(targetY - drivetrain.getRightEncoder().getDistance() / 10);
-    			drivetrain.driveLeft(targetY - drivetrain.getRightEncoder().getDistance() / 10);
+    		if(drivetrain.getRightEncoder().getPosition() > targetY + tolerance) {
+    			drivetrain.driveRight(targetY - drivetrain.getRightEncoder().getPosition() / 10);
+    			drivetrain.driveLeft(targetY - drivetrain.getRightEncoder().getPosition() / 10);
     		}
     	}
     }
