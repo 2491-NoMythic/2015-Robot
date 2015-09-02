@@ -2,6 +2,7 @@ package com._2491nomythic.helios.commands;
 
 import edu.wpi.first.wpilibj.CounterBase;
 
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -61,8 +62,16 @@ public abstract class CommandBase extends Command {
 		Encoder drivetrainRightEncoder   = new HardwareEncoder(Constants.driveEncoderRightAChannel, Constants.driveEncoderRightBChannel, Constants.driveEncoderRightReversed, CounterBase.EncodingType.k1X, Constants.driveEncoderToFeet);
 		Gyroscope drivetrainGyro         = new HardwareGyro(Constants.gyroChannel, Variables.gyroToDegrees);
 		drivetrain = new Drivetrain(drivetrainFrontLeftMotor, drivetrainFrontCenterMotor, drivetrainFrontRightMotor, drivetrainBackLeftMotor, drivetrainBackCenterMotor, drivetrainBackRightMotor, drivetrainLeftEncoder, drivetrainCenterEncoder, drivetrainRightEncoder, drivetrainGyro);
-		arm = Arm.getInstance();
-		grabber = Grabber.getInstance();
+		
+		//Set up the grabber
+		Motor grabberMotor = HardwareMotor.createWithCANTalon(Constants.grabberTalonMotorChannel);
+		grabber = new Grabber(grabberMotor);
+		
+		//Set up the arm
+		Motor armMotor = HardwareMotor.createWithCANTalon(Constants.armTalonChannel);
+		Encoder armEncoder = new HardwareEncoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X, Constants.armEncoderToDegrees);
+		
+		arm = new Arm(armMotor, armEncoder);
 		extraSensors = ExtraSensors.getInstance();
 		camera = Camera.getInstance();
 		// This MUST be here. If the OI creates Commands (which it very likely

@@ -3,11 +3,12 @@ package com._2491nomythic.helios.subsystems;
 import com._2491nomythic.helios.commands.arm.ArmPositionSet;
 import com._2491nomythic.helios.settings.Constants;
 import com._2491nomythic.helios.settings.Variables;
+import com._2491nomythic.util.components.interfaces.Encoder;
+import com._2491nomythic.util.components.interfaces.Motor;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -20,10 +21,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Does not include the hook
  */
 public class Arm extends Subsystem {
-	private CANTalon motor;
+//	private CANTalon motor;
+//	private Encoder encoder;
+	private Motor motor;
 	private Encoder encoder;
 	private DigitalInput hallEffectSensor;
-	private static Arm instance;
+	//private static Arm instance;
 	private boolean usingPID = false;
 	private double currentSpeed = 0.0;
 	private double currentTarget = 0.0;
@@ -45,27 +48,21 @@ public class Arm extends Subsystem {
 	
 	// Initialize your subsystem here
 	
-	public static Arm getInstance() {
-		if (instance == null) {
-			instance = new Arm();
-		}
-		return instance;
-	}
-	
 	/**
 	 * The Arm that picks up recycling containers.
 	 * Does not include the hook
 	 */
-	private Arm() {
+	public Arm(Motor motor, Encoder encoder) {
 		controller = new PIDController(Variables.armPID_P, Variables.armPID_I, Variables.armPID_D, source, output);
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		motor = new CANTalon(Constants.armTalonChannel);
+		this.motor = motor;
+		this.encoder = encoder;
 		
-		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
-		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
+//		encoder = new Encoder(Constants.armEncoderAChannel, Constants.armEncoderBChannel, Constants.armEncoderReversed, CounterBase.EncodingType.k4X);
+//		encoder.setDistancePerPulse(Constants.armEncoderToDegrees);
 		controller.setInputRange(Constants.armMinPosition, Constants.armMaxPosition);
 		controller.setAbsoluteTolerance(1.0);
 		
@@ -79,7 +76,7 @@ public class Arm extends Subsystem {
 	}
 	
 	protected double returnPIDInput() {
-		return encoder.getDistance();
+		return encoder.getPosition();
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
@@ -103,7 +100,7 @@ public class Arm extends Subsystem {
 				output = currentSpeed - maxAcceleration;
 			}
 		}
-		motor.set(-1.0 * output);
+		motor.setSpeed(-1.0 * output);
 		currentSpeed = output;
 	}
 	
@@ -124,7 +121,7 @@ public class Arm extends Subsystem {
 				speed = currentSpeed - maxAcceleration;
 			}
 		}
-		motor.set(-1.0 * speed);
+		motor.setSpeed(-1.0 * speed);
 		currentSpeed = speed;
 	}
 	
@@ -162,7 +159,7 @@ public class Arm extends Subsystem {
 	 */
 	public void stop() {
 		currentSpeed = 0.0;
-		motor.set(0.0);
+		motor.setSpeed(0.0);
 	}
 	
 	/**

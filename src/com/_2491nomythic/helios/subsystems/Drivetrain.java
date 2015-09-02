@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * The thing we drive with.
  */
 public class Drivetrain extends Subsystem {
-	Motor frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
-	Encoder encoderLeft, encoderCenter, encoderRight;
-	Gyroscope gyro;
-	double currentLeftSpeed, currentRightSpeed, currentBackSpeed, currentFrontSpeed;
+	private Motor frontRight, frontCenter, frontLeft, backRight, backCenter, backLeft;
+	private Encoder encoderLeft, encoderCenter, encoderRight;
+	private Gyroscope gyro;
+	private double currentLeftSpeed, currentRightSpeed, currentBackSpeed, currentFrontSpeed;
 	
 	/**
 	 * The thing we drive with.
