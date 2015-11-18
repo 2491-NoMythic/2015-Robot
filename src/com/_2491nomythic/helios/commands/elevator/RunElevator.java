@@ -23,18 +23,18 @@ public class RunElevator extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	int codriverPOV = oi.getController(ControllerMap.codriverElevatorController).getPOV();
-    	if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorUp)) {
-    		target = -1000;
-    		elevator.set(Variables.elevatorMultiplier);
-    	}
-    	else if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorDown)) {
-    		target = -1000;
-    		elevator.set(-1.0 * Variables.elevatorMultiplier);
-    		if (elevator.getBottomSwitch()) {
-    			elevator.resetEncoder();
-    		}
-    	}
-    	else if (codriverPOV == ControllerMap.codriverElevatorUpPOV[0] || codriverPOV == ControllerMap.codriverElevatorUpPOV[1] || codriverPOV == ControllerMap.codriverElevatorUpPOV[2]) {
+//    	if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorUp)) {
+//    		target = -1000;
+//    		elevator.set(Variables.elevatorMultiplier);
+//    	}
+//    	else if (oi.getButton(ControllerMap.driverElevatorController, ControllerMap.driverElevatorDown)) {
+//    		target = -1000;
+//    		elevator.set(-1.0 * Variables.elevatorMultiplier);
+//    		if (elevator.getBottomSwitch()) {
+//    			elevator.resetEncoder();
+//    		}
+//    	}
+        if (codriverPOV == ControllerMap.codriverElevatorUpPOV[0] || codriverPOV == ControllerMap.codriverElevatorUpPOV[1] || codriverPOV == ControllerMap.codriverElevatorUpPOV[2]) {
     		target = -1000;
     		elevator.set(Variables.elevatorMultiplier);
     	}
