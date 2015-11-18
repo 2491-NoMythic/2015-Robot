@@ -59,7 +59,6 @@ public class RunElevator extends CommandBase {
     		else {
 	    		if (elevator.getPosition() < target) {
 	    			double power = ((target - elevator.getPosition()) * 8);
-	    			System.out.println("Elevator Power: " + power);
 	    			elevator.setWithoutStop(power);
 	    		}
 	    		else {
