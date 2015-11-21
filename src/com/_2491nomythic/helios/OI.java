@@ -41,9 +41,10 @@ public class OI {
 	 * Initiates some joysticks and buttons.
 	 */
 	public void init() {
+	public OI() {
 		controllers[0] = new Joystick(Constants.ControllerOnePort);
 		controllers[1] = new Joystick(Constants.ControllerTwoPort);
-		
+		/*Where any operator interface controls are declared (buttons, joysticks, etc.)*/
 		
 		
 //		moveArmToPoint = new JoystickButton(controllers[ControllerMap.setToTargetController], ControllerMap.setToTargetButton);
@@ -65,6 +66,7 @@ public class OI {
 				ButtonMode.AOrB);
 		driveWithArm = new LogicButton(codriverDriveWithArm, driverBlockDWA, ButtonMode.AAndNotB);
 		driveWithArm.whileHeld(new DriveWithArm());
+	}
 	}
 	;
 	/**
