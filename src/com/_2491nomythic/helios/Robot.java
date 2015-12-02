@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Rescan Gyro", new FixGyroIssues());
 		SmartDashboard.putData("Absolute Drive", new AbsoluteDrive());
 		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Do Nothing", new DoNothing());
 		autoChooser.addObject("Pick up bin from step", new PickupBinFromStep());
 		autoChooser.addObject("Pick up two bins from step", new PickupBinsFromStep());
 		autoChooser.addDefault("Grab two totes and a bin", new TwoTotesAndOneBin(false));
