@@ -32,11 +32,11 @@ public class PickupBinsFromStep extends CommandBase {
 		pickUpBin = new RunArmWithPID(Variables.holdBinDistance);
 		makeBinVertical = new RunGrabberTime(0.5, 2.5);
 		putDownBin = new RunArmWithPID(Variables.putDownBinBackwards);
-		driveFirstBinIntoAutoZone = new DriveTime(0.5, -0.7, -1.0);
-		unhookBin = new RunGrabberTime(-1.0, 1.75);
+		driveFirstBinIntoAutoZone = new DriveTime(0.5, -1.0, -1.0);
+		unhookBin = new RunGrabberTime(-1.0, 1.9);
 		hooksBackInPlace = new RunGrabberTime(0.5, 1.0);
 		driveToUnhookBin = new DriveTime(0.5, Constants.nullX, -0.25);
-		driveToNextBin = new DriveTime(0.5, -1.0, 0.9); //CHANGE THIS TO -1 TO GO LEFT TO THE NEXT BIN
+		driveToNextBin = new DriveTime(0.5, -1.6, 0.9); 
 		driveToBinAgain = new DriveTime(0.25, Constants.nullX, 0.5);
 		driveIntoAutoZone = new DriveTime(0.5, Constants.nullX, -1.85);
 		timer = new Timer();
@@ -52,17 +52,20 @@ public class PickupBinsFromStep extends CommandBase {
 		System.out.println(state);
 		switch (state) {
 			case 0:
+				System.out.println("State:" + "  " + state + " Lowering Arm To Bin");
 				lowerToBin.start();
 				state = 1;
 				break;
 			case 1:
 				if ((!lowerToBin.isRunning() || arm.getPosition() > Variables.pickUpBinFromStepPosition - 2) && !backUpToStart.isRunning()) {
+					System.out.println("Two Bin Auto: Driving To Bin");
 					driveToBin.start();
 					state = 2;
 				}
 				break;
 			case 2:
 				if (!driveToBin.isRunning()) {
+					System.out.println("Two Bin Auto: Reseting the Timer");
 					state = 3;
 					timer.start();
 					timer.reset();
@@ -71,6 +74,7 @@ public class PickupBinsFromStep extends CommandBase {
 			case 3:
 				if (timer.get() > 0.1) {
 					arm.setMaxPIDSpeed(1.0);
+					System.out.println("Two Bin Auto: Setting Bin Down");
 					putDownBin.start();
 					timer.reset();
 					state = 4;
@@ -84,6 +88,7 @@ public class PickupBinsFromStep extends CommandBase {
 					arm.setMaxPIDSpeed(1.0);
 				}
 				if (timer.get() > 1.5) {
+					System.out.println("Two Bin Auto: Backing Up To Starting Position, Running Grabber To Make the Bin Vertical & Driving bthe First Bin Into The Autzone");
 					backUpToStart.start();
 					makeBinVertical.start();
 					driveFirstBinIntoAutoZone.start();
@@ -97,13 +102,15 @@ public class PickupBinsFromStep extends CommandBase {
 				if (arm.getPosition() < -30) {
 					arm.setMaxPIDSpeed(1.0);
 				}
-				if (!putDownBin.isRunning() && !makeBinVertical.isRunning()) {
+				if ((!putDownBin.isRunning() || arm.getPosition() < Variables.putDownBinBackwards + 2) && !makeBinVertical.isRunning()) {
+					System.out.println("Two Bin Auto: Unhooking the Bin");
 					unhookBin.start();
 					state = 6;
 				}
 				break;
 			case 6:
 				if (!unhookBin.isRunning()) {
+					System.out.println("Two Bin Auto: Driving to unhook the bin");
 					driveToUnhookBin.start();
 					arm.setMaxPIDSpeed(1.0);
 					lowerToBin.start();
@@ -113,6 +120,7 @@ public class PickupBinsFromStep extends CommandBase {
 				break;
 			case 7:
 				if (timer.get() > 0.5 && !driveToUnhookBin.isRunning()) {
+					System.out.println("Two Bin Auto: Putting hooks back in place and driving to the next bin");
 					hooksBackInPlace.start();
 					driveToNextBin.start();
 					state = 8;
@@ -120,12 +128,14 @@ public class PickupBinsFromStep extends CommandBase {
 				break;
 			case 8:
 				if (!driveToNextBin.isRunning() && !lowerToBin.isRunning()) {
+					System.out.println("Two Bin Auto: Driving up to the second bin");
 					driveToBinAgain.start();
 					state = 9;
 				}
 				break;
 			case 9:
 				if (!driveToBinAgain.isRunning()) {
+					System.out.println("Two Bin Auto: Picking up the bin");
 					pickUpBin.start();
 					timer.reset();
 					state = 10;
@@ -133,12 +143,14 @@ public class PickupBinsFromStep extends CommandBase {
 				break;
 			case 10:
 				if (timer.get() > 0.25) {
+					System.out.println("Two Bin Auto: Making the bin vertical");
 					makeBinVertical.start();
 					state = 11;
 				}
 				break;
 			case 11:
 				if (arm.getPosition() < 30) {
+					System.out.println("Two Bin Auto: Driving into the autozone");
 					driveIntoAutoZone.start();
 					state = 12;
 				}

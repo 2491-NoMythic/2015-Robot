@@ -5,7 +5,6 @@ import com._2491nomythic.helios.commands.CommandBase;
 public class KeepElevatorFromFalling extends CommandBase {
 	
 	private double target;
-	private boolean isCanceled;
 	
 	/**
 	 * Keeps the elevator from slipping downwards due to bin weight
